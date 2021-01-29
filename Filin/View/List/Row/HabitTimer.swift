@@ -78,6 +78,8 @@ struct HabitTimer: View {
                                 }
                             }
                             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                            clearTimer()
+                            return
                         }
                        toggleTimer()
                     }) {
@@ -124,7 +126,7 @@ struct HabitTimer_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             HabitTimer(date: Date())
-                .environmentObject(FlHabit(name: "Test", color: .blue, requiredSec: 10))
+                .environmentObject(FlHabit(name: "Test", color: .blue, requiredSec: 3))
                 .environmentObject(AppSetting())
         }
     }
