@@ -7,6 +7,3 @@ iOS 목표 관리 앱 'Filin'의 소스 코드입니다.
 ![](https://img.shields.io/badge/Swift-5.3-orange?style=flat-square&logo=swift&labelColor=EEEEEE)
 ![](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square&labelColor=EEEEEE&link=https://gitmoji.dev)
 ![](https://img.shields.io/badge/Xcode-12.4-informational?style=flat-square&logo=xcode&labelColor=EEEEEE)
-
-![](https://img.shields.io/github/languages/code-size/yeolyi/filin?style=flat-square&labelColor=EEEEEE)
-![](https://img.shields.io/github/directory-file-count/yeolyi/filin?style=flat-square&labelColor=EEEEEE)
