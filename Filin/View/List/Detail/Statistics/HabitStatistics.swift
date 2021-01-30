@@ -12,19 +12,19 @@ struct HabitStatistics: View {
     @ObservedObject var habit: FlHabit
     
     var weeklyTrend: Double? {
-        guard habit.firstDay.daysFromToday >= 6 else {
+        guard let firstDay = habit.firstDay, firstDay.diffToToday >= 7 else {
             return nil
         }
-        return habit.weeklyAverage(at: Date()) - habit.yearAverage
+        return habit.recentWeekAvg() - habit.longTermAvg
     }
     
     var monthlyTrend: Double? {
         let lastMonth = Date().addMonth(-1)
-        let requiredDays = lastMonth.daysFromToday - 1
-        guard habit.firstDay.daysFromToday >= requiredDays else {
+        let requiredDays = lastMonth.diffToToday
+        guard let firstDay = habit.firstDay, firstDay.diffToToday >= requiredDays else {
             return nil
         }
-        return habit.monthlyAverage(at: Date()) - habit.yearAverage
+        return habit.recentMonthAvg() - habit.longTermAvg
     }
     
     func textWithChevron(value: Double?) -> AnyView {
@@ -83,17 +83,19 @@ struct HabitStatistics: View {
             }
             
             DayOfWeekChart(habit: habit)
-            VStack(spacing: 0) {
-                HStack {
-                    Text("Since".localized)
-                        .bodyText()
-                    Spacer()
-                }
-                HStack {
-                    Text(habit.firstDay.localizedYearMonthDay)
-                        .foregroundColor(habit.color)
-                        .headline()
-                    Spacer()
+            if habit.firstDay != nil {
+                VStack(spacing: 0) {
+                    HStack {
+                        Text("Since".localized)
+                            .bodyText()
+                        Spacer()
+                    }
+                    HStack {
+                        Text(habit.firstDay!.localizedYearMonthDay)
+                            .foregroundColor(habit.color)
+                            .headline()
+                        Spacer()
+                    }
                 }
             }
             Text("""

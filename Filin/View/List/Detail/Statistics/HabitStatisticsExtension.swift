@@ -7,96 +7,83 @@
 
 import SwiftUI
 
+// 설정의 초기화 시간을 준수하도록 수정해야함!!
 extension FlHabit {
     
-    var firstDayKeyStr: String {
-        Array(achievement.content.keys).sorted(by: <).first ?? Date().dictKey
+    var firstDay: Date? {
+        if let firstDayKey = Array(achievement.content.keys).sorted(by: <).first {
+            return Date(dictKey: firstDayKey)
+        } else {
+            return nil
+        }
     }
     
-    var firstDay: Date {
-        Date(dictKey: firstDayKeyStr)
-    }
-
-    var yearAverage: Double {
-        let yearAchievement = achievement.content.filter {
-            let dateFromtoday = Date(dictKey: $0.key).daysFromToday
-            return dateFromtoday <= 100 && dateFromtoday > 0
+    /// 최근 100일간의 달성량 평균 반환
+    ///
+    /// - Note: 기록 일수가 100일 미만이면 존재하는 기록만의 평균을 반환
+    var longTermAvg: Double {
+        guard let firstDay = firstDay else { return 0 }
+        let yearAchievement: [Int] = achievement.content.compactMap {
+            let diff = Date(dictKey: $0.key).diffToToday
+            return (diff <= 100 && diff >= 1) ? $0.value : nil
         }
-        return
-            yearAchievement.reduce(0, {$0 + Double($1.value)})
-            / max(1, min(Double(abs(firstDay.daysFromToday)), 100))
+        return Double(yearAchievement.reduce(0, +)) / Double(max(1, firstDay.diffToToday))
     }
     
-    func weeklyAverage(at date: Date) -> Double {
-        var weekList: [Date] = []
-        for i in -7 ... -1 {
-            weekList.append(date.addDate(i)!)
-        }
-        let achievementList = weekList.compactMap { date in
-            self.achievement.content[date.dictKey] ?? 0
-        }
-        guard !achievementList.isEmpty else {
-            return 0
-        }
-        return Double(achievementList.reduce(0, {$0 + Int($1)}))/7
+    /// 목표 시작 시기와 무관하게 최근 7일간의 평균값 반환
+    func recentWeekAvg() -> Double {
+        let recentWeekAchieve =
+            Array((-7)...(-1)).map({Date().addDate($0)!}).map({achievement.content[$0.dictKey] ?? 0 })
+        return Double(recentWeekAchieve.reduce(0, +)) / Double(recentWeekAchieve.count)
     }
     
-    func monthlyAverage(at date: Date) -> Double {
-        var weekList: [Date] = []
-        var datePointer = date.addDate(-1)!
-        let targetDateKey = date.addMonth(-1).dictKey
-        while datePointer.dictKey != targetDateKey {
-            weekList.append(datePointer)
-            datePointer = datePointer.addDate(-1)!
-        }
-        let achievementList = weekList.compactMap { date in
-            self.achievement.content[date.dictKey] ?? 0
-        }
-        guard !achievementList.isEmpty else {
-            return 0
-        }
-        return Double(achievementList.reduce(0, {$0 + Int($1)}))
-            / Double(Calendar.current.dateComponents([.day], from: datePointer, to: date).day!)
+    /// 목표 시작 시기와 무관하게 최근 한 달간의 평균값 반환
+    /// - Note: 한 달의 기준은 month 값에서 1을 뺀 기간.
+    func recentMonthAvg() -> Double {
+        let oneMonthDiff = Date().addMonth(-1).diffToToday
+        let recentWeekAchieve =
+            Array((-oneMonthDiff)...(-1)).map({Date().addDate($0)!}).map({achievement.content[$0.dictKey] ?? 0 })
+        return Double(recentWeekAchieve.reduce(0, +)) / Double(recentWeekAchieve.count)
     }
 }
 
 extension FlHabit {
-    var dayOfWeekAchievement: [Int] {
-        var temp = [Int](repeating: 0, count: 7)
-        let achievementFiltered = achievement.content.filter {
-            let dateFromtoday = Date(dictKey: $0.key).daysFromToday
-            return dateFromtoday < 100 && dateFromtoday > 0
+    
+    /// longTermAvg와 같은 기간동안의 요일별 달성량 반환
+    ///
+    /// - Note: 기록 일수가 100일 미만이면 존재하는 기록만의 달성량을 반환
+    private var dayOfWeekAchievement: [Int] {
+        guard firstDay != nil else {
+            return [Int](repeating: 0, count: 7)
         }
-        for (dictKey, value) in achievementFiltered {
-            let date = Date(dictKey: dictKey)
-            let dayOfWeekIndex = date.dayOfTheWeek - 1
-            temp[dayOfWeekIndex] += Int(value)
+        return achievement.content.reduce(into: [Int](repeating: 0, count: 7)) { result, dailyAchievement in
+            let date = Date(dictKey: dailyAchievement.key)
+            let diff = date.diffToToday
+            guard diff <= 100 && diff >= 1 else { return }
+            result[date.dayOfTheWeek - 1] += dailyAchievement.value
         }
-        return temp
     }
-    var dayOfWeekAverage: [Double] {
-        var count = [Int]()
-        if firstDay.daysFromToday < 100 {
-            count = [Int](repeating: 0, count: 7)
-            var datePointer = firstDay
-            while datePointer.dictKey != Date().dictKey {
-                count[datePointer.dayOfTheWeek - 1] += 1
-                datePointer = datePointer.addDate(1)!
-            }
-            count[datePointer.dayOfTheWeek - 1] += 1
-        } else {
-            count = [Int](repeating: 14, count: 7)
-            let firstDayofWeekIndex = firstDay.dayOfTheWeek
-            print(firstDayofWeekIndex)
-            count[firstDayofWeekIndex + 1 > 6 ? 0 : firstDayofWeekIndex + 1] += 1
-            count[firstDayofWeekIndex + 2 > 6 ? firstDayofWeekIndex - 5 : firstDayofWeekIndex + 2] += 1
+    
+    /// longTermAvg와 같은 기간동안의 요일별 평균 반환
+    var dayOfWeekAvg: [Double] {
+        guard let firstDay = firstDay else {
+            return [Double](repeating: 0, count: 7)
         }
-        return dayOfWeekAchievement.enumerated().map { Double($1)/Double(max(1, count[$0])) }
+        let usableDayCount = min(100, firstDay.diffToToday)
+        let dayOfWeekCount = Array(((-usableDayCount)...(-1))).map({Date().addDate($0)!})
+            .reduce(into: [Int](repeating: 0, count: 7)) { result, date in
+                result[date.dayOfTheWeek - 1] += 1
+            }
+        return
+            dayOfWeekAchievement.enumerated().map { index, value in
+                guard dayOfWeekCount[index] != 0 else { return 0 }
+                return Double(value) / Double(dayOfWeekCount[index])
+            }
     }
 }
 
 extension Date {
-    var daysFromToday: Int {
+    var diffToToday: Int {
         return Calendar.current.dateComponents([.day], from: self, to: Date()).day!
     }
 }

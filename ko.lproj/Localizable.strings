@@ -139,6 +139,7 @@
 "Start week on Monday" = "한 주의 시작을 월요일로";
 "The End of the Day" = "하루가 끝나는 시간";
 "Choose time to initialize info." = "정보를 초기화할 시간을 선택하세요";
+"Run Timer in Background" = "타이머를 백그라운드에서도 작동";
 
 //위젯
 "Long press and hold the widget to select your goal." = "위젯을 길게 눌러 \n목표를 선택하세요.";
