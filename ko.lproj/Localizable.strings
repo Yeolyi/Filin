@@ -87,6 +87,9 @@
 "Preview" = "미리보기";
 "Free" = "자유";
 "Square" = "정방형";
+" days" = "일";
+"Continuous Achievement" = "연속 달성일";
+"Continuous Blank" = "연속 공백일";
 
 //목표 수정
 "Name" = "이름";

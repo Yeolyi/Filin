@@ -36,17 +36,17 @@ struct HabitStatistics: View {
                         .bodyText()
                     Spacer()
                 }
-                Text("\(habit.continousAchievementCount)")
+                Text("\(habit.continousAchievementCount)\(" days".localized)")
                     .foregroundColor(habit.color)
                     .headline()
             }
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
-                    Text("Continuous Failure".localized)
+                    Text("Continuous Blank".localized)
                         .bodyText()
                     Spacer()
                 }
-                Text("\(habit.continousInachievementCount)")
+                Text("\(habit.continousInachievementCount)\(" days".localized)")
                     .foregroundColor(habit.color)
                     .headline()
             }
