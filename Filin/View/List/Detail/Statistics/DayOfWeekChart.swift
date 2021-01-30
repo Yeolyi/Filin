@@ -100,6 +100,7 @@ struct DayOfWeekChart: View {
                 }
             }
             .frame(height: 160)
+            .offset(y: 60)
         }
         .frame(height: 180)
     }
