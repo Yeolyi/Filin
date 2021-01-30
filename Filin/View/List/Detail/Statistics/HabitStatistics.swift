@@ -30,6 +30,26 @@ struct HabitStatistics: View {
                 textWithChevron(value: habit.monthlyTrend)
             }
             DayOfWeekChart(habit: habit)
+            VStack(alignment: .leading, spacing: 0) {
+                HStack {
+                    Text("Continuous Achievement".localized)
+                        .bodyText()
+                    Spacer()
+                }
+                Text("\(habit.continousAchievementCount)")
+                    .foregroundColor(habit.color)
+                    .headline()
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                HStack {
+                    Text("Continuous Failure".localized)
+                        .bodyText()
+                    Spacer()
+                }
+                Text("\(habit.continousInachievementCount)")
+                    .foregroundColor(habit.color)
+                    .headline()
+            }
             if habit.firstDay != nil {
                 VStack(spacing: 0) {
                     HStack {
@@ -86,5 +106,12 @@ struct HabitStatistics: View {
                 Spacer()
             }
         }
+    }
+}
+
+struct HabitStatistics_Previews: PreviewProvider {
+    static var previews: some View {
+        HabitStatistics()
+            .environmentObject(FlHabit.habit1)
     }
 }

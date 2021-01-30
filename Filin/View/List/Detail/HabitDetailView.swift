@@ -17,12 +17,14 @@ enum DetailViewActiveSheet: Identifiable {
 struct HabitDetailView: View {
     
     @ObservedObject var emojiManager = EmojiManager()
+    
+    @State var activeSheet: DetailViewActiveSheet?
+    @State var selectedDate = Date()
+    
     @EnvironmentObject var habit: FlHabit
     @EnvironmentObject var habitManager: HabitManager
     @EnvironmentObject var appSetting: AppSetting
     @EnvironmentObject var summaryManager: SummaryManager
-    @State var activeSheet: DetailViewActiveSheet?
-    @State var selectedDate = Date()
     
     init(habit: FlHabit) {
         if !habit.isDaily {
@@ -71,5 +73,16 @@ struct HabitDetailView: View {
         .onAppear {
             selectedDate = appSetting.mainDate
         }
+    }
+}
+
+struct HabitDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        let dataSample = DataSample.shared
+        return HabitDetailView(habit: FlHabit.habit1)
+            .environmentObject(dataSample.habitManager)
+            .environmentObject(dataSample.summaryManager)
+            .environmentObject(FlHabit.habit1)
+            .environmentObject(AppSetting())
     }
 }

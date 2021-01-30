@@ -78,7 +78,6 @@ extension FlHabit {
             guard dayOfWeekCount[index] != 0 else { return 0 }
             return Double(value) / Double(dayOfWeekCount[index])
         }
-        dayOfWeekAvgCash = val
         return val
     }
     
@@ -108,6 +107,37 @@ extension FlHabit {
             Double(value) - dayOfWeekAvg[index]
         }
     }
+    
+    var continousAchievementCount: Int {
+        guard let firstDay = firstDay, firstDay.dictKey != Date().dictKey else { return 0 }
+        let firstDayDiff = min(100, max(1, firstDay.diffToToday))
+        let boolAchievement = Array((-firstDayDiff)...(-1)).map({Date().addDate($0)!.dictKey}).map {
+            achievement.content[$0] == nil ? false : true
+        }
+        var max = 0
+        var count = 0
+        for isValue in boolAchievement {
+            if isValue { count += 1 } else { count = 0 }
+            if max < count { max = count }
+        }
+        return max
+    }
+    
+    var continousInachievementCount: Int {
+        guard let firstDay = firstDay, firstDay.dictKey != Date().dictKey else { return 0 }
+        let firstDayDiff = min(100, max(1, firstDay.diffToToday))
+        let boolAchievement = Array((-firstDayDiff)...(-1)).map({Date().addDate($0)!.dictKey}).map {
+            achievement.content[$0] == nil ? true : false
+        }
+        var max = 0
+        var count = 0
+        for isValue in boolAchievement {
+            if isValue { count += 1 } else { count = 0 }
+            if max < count { max = count }
+        }
+        return max
+    }
+    
 }
 
 extension Date {
