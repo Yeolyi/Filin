@@ -9,59 +9,7 @@ import SwiftUI
 
 struct HabitStatistics: View {
     
-    @ObservedObject var habit: FlHabit
-    
-    var weeklyTrend: Double? {
-        guard let firstDay = habit.firstDay, firstDay.diffToToday >= 7 else {
-            return nil
-        }
-        return habit.recentWeekAvg() - habit.longTermAvg
-    }
-    
-    var monthlyTrend: Double? {
-        let lastMonth = Date().addMonth(-1)
-        let requiredDays = lastMonth.diffToToday
-        guard let firstDay = habit.firstDay, firstDay.diffToToday >= requiredDays else {
-            return nil
-        }
-        return habit.recentMonthAvg() - habit.longTermAvg
-    }
-    
-    func textWithChevron(value: Double?) -> AnyView {
-        func roundAndCut(_ num: Double) -> String {
-            String(format: "%.1f", abs(round(num*10)/10))
-        }
-        guard let value = value else {
-            return AnyView(
-                HStack {
-                    Text("Needs more data".localized)
-                        .subColor()
-                        .headline()
-                    Spacer()
-                }
-            )
-        }
-        var image: Image
-        switch value {
-        case .greatestFiniteMagnitude * -1 ..< 0:
-            image = Image(systemName: "chevron.down")
-        case 0:
-            image = Image(systemName: "minus")
-        default:
-            image = Image(systemName: "chevron.up")
-        }
-        return AnyView(
-            HStack {
-                image
-                    .foregroundColor(habit.color)
-                    .headline()
-                Text(roundAndCut(value) + " times".localized)
-                    .foregroundColor(habit.color)
-                    .headline()
-                Spacer()
-            }
-        )
-    }
+    @EnvironmentObject var habit: FlHabit
     
     var body: some View {
         VStack(spacing: 15) {
@@ -71,7 +19,7 @@ struct HabitStatistics: View {
                         .bodyText()
                     Spacer()
                 }
-                textWithChevron(value: weeklyTrend)
+                textWithChevron(value: habit.weeklyTrend)
             }
             VStack(spacing: 0) {
                 HStack {
@@ -79,9 +27,8 @@ struct HabitStatistics: View {
                         .bodyText()
                     Spacer()
                 }
-                textWithChevron(value: monthlyTrend)
+                textWithChevron(value: habit.monthlyTrend)
             }
-            
             DayOfWeekChart(habit: habit)
             if habit.firstDay != nil {
                 VStack(spacing: 0) {
@@ -105,6 +52,39 @@ struct HabitStatistics: View {
                 .subColor()
                 .bodyText()
                 .padding(.top, 8)
+        }
+    }
+    
+    func imageName(value: Double) -> String {
+        switch value {
+        case _ where value < 0:
+            return "chevron.down"
+        case _ where value > 0:
+            return "chevron.up"
+        default:
+            return "minus"
+        }
+    }
+    
+    @ViewBuilder
+    func textWithChevron(value: Double?) -> some View {
+        if value == nil {
+            HStack {
+                Text("Needs more data".localized)
+                    .subColor()
+                    .headline()
+                Spacer()
+            }
+        } else {
+            HStack {
+                Image(systemName: imageName(value: value!))
+                    .foregroundColor(habit.color)
+                    .headline()
+                Text(String(format: "%.1f", abs(round(value!*10)/10)) + " times".localized)
+                    .foregroundColor(habit.color)
+                    .headline()
+                Spacer()
+            }
         }
     }
 }

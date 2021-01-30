@@ -44,7 +44,7 @@ struct TodayInformation: View {
                 moveButton(isAdd: true)
             }
             if isExpanded {
-                HabitStatistics(habit: habit)
+                HabitStatistics()
                     .padding(.top, 15)
             }
             BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {

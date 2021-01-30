@@ -66,7 +66,7 @@ extension FlHabit {
     
     /// longTermAvg와 같은 기간동안의 요일별 평균 반환
     var dayOfWeekAvg: [Double] {
-        guard let firstDay = firstDay else {
+        guard let firstDay = firstDay, firstDay.dictKey != Date().dictKey else {
             return [Double](repeating: 0, count: 7)
         }
         let usableDayCount = min(100, firstDay.diffToToday)
@@ -74,11 +74,39 @@ extension FlHabit {
             .reduce(into: [Int](repeating: 0, count: 7)) { result, date in
                 result[date.dayOfTheWeek - 1] += 1
             }
-        return
-            dayOfWeekAchievement.enumerated().map { index, value in
-                guard dayOfWeekCount[index] != 0 else { return 0 }
-                return Double(value) / Double(dayOfWeekCount[index])
-            }
+        let val: [Double] = dayOfWeekAchievement.enumerated().map { index, value in
+            guard dayOfWeekCount[index] != 0 else { return 0 }
+            return Double(value) / Double(dayOfWeekCount[index])
+        }
+        dayOfWeekAvgCash = val
+        return val
+    }
+    
+    var weeklyTrend: Double? {
+        guard let firstDay = firstDay, firstDay.diffToToday >= 7 else {
+            return nil
+        }
+        return recentWeekAvg() - longTermAvg
+    }
+    
+    var monthlyTrend: Double? {
+        let lastMonth = Date().addMonth(-1)
+        let requiredDays = lastMonth.diffToToday
+        guard let firstDay = firstDay, firstDay.diffToToday >= requiredDays else {
+            return nil
+        }
+        return recentMonthAvg() - longTermAvg
+    }
+    
+    var dayOfWeekTrend: [Double] {
+        let lastWeekAchievement = Array((-7)...(-1)).reduce(into: [Int](repeating: 0, count: 7)) { result, value in
+            let date = Date().addDate(value)!
+            result[date.dayOfTheWeek - 1] = achievement.content[date.dictKey] ?? 0
+        }
+        let dayOfWeekAvg = self.dayOfWeekAvg
+        return lastWeekAchievement.enumerated().map { index, value in
+            Double(value) - dayOfWeekAvg[index]
+        }
     }
 }
 

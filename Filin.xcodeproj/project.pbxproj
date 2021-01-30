@@ -635,9 +635,9 @@
 		25E6154725A190AA007A469B /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
-				25E6154A25A1968B007A469B /* HabitStatistics.swift */,
-				2578FEED25A1F8C1001884C8 /* DayOfWeekChart.swift */,
 				252A0E5525A9FAEA00A41525 /* HabitStatisticsExtension.swift */,
+				2578FEED25A1F8C1001884C8 /* DayOfWeekChart.swift */,
+				25E6154A25A1968B007A469B /* HabitStatistics.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
