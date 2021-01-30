@@ -34,7 +34,7 @@ struct TimerSection: View {
         Binding(get: {_second},
         set: {
             _second = $0
-            time = $0 * _minute * 60
+            time = $0 + _minute * 60
         })
     }
     
