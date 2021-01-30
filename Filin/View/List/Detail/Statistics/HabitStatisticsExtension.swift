@@ -112,7 +112,7 @@ extension FlHabit {
         guard let firstDay = firstDay, firstDay.dictKey != Date().dictKey else { return 0 }
         let firstDayDiff = min(100, max(1, firstDay.diffToToday))
         let boolAchievement = Array((-firstDayDiff)...(-1)).map({Date().addDate($0)!.dictKey}).map {
-            achievement.content[$0] == nil ? false : true
+            (achievement.content[$0] ?? 0) >= achievement.numberOfTimes ? true : false
         }
         var max = 0
         var count = 0
@@ -127,7 +127,7 @@ extension FlHabit {
         guard let firstDay = firstDay, firstDay.dictKey != Date().dictKey else { return 0 }
         let firstDayDiff = min(100, max(1, firstDay.diffToToday))
         let boolAchievement = Array((-firstDayDiff)...(-1)).map({Date().addDate($0)!.dictKey}).map {
-            achievement.content[$0] == nil ? true : false
+            (achievement.content[$0] == nil || achievement.content[$0] == 0) ? true : false
         }
         var max = 0
         var count = 0
