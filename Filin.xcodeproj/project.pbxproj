@@ -113,6 +113,7 @@
 		25CD88562597CBBC002270E9 /* ColoredToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CD88552597CBBC002270E9 /* ColoredToggle.swift */; };
 		25CD885925987937002270E9 /* Test4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CD885825987937002270E9 /* Test4.swift */; };
 		25CD8C9D258553AC00886F39 /* TodayInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CD8C9C258553AC00886F39 /* TodayInformation.swift */; };
+		25D0405725C4FA66004814B4 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0405625C4FA66004814B4 /* TimerManager.swift */; };
 		25D0C99E259F96C80018273E /* EmojiCalendarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0C99D259F96C80018273E /* EmojiCalendarRow.swift */; };
 		25D0C9A1259F981B0018273E /* SummaryPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0C9A0259F981B0018273E /* SummaryPreview.swift */; };
 		25DEDBDC259FA7D400E39382 /* SummaryStateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DEDBDB259FA7D400E39382 /* SummaryStateRow.swift */; };
@@ -276,6 +277,7 @@
 		25CD88552597CBBC002270E9 /* ColoredToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredToggle.swift; sourceTree = "<group>"; };
 		25CD885825987937002270E9 /* Test4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test4.swift; sourceTree = "<group>"; };
 		25CD8C9C258553AC00886F39 /* TodayInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayInformation.swift; sourceTree = "<group>"; };
+		25D0405625C4FA66004814B4 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		25D0C99D259F96C80018273E /* EmojiCalendarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCalendarRow.swift; sourceTree = "<group>"; };
 		25D0C9A0259F981B0018273E /* SummaryPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryPreview.swift; sourceTree = "<group>"; };
 		25DEDBDB259FA7D400E39382 /* SummaryStateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryStateRow.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 				25F2127F259201E600E259EC /* CheckButton.swift */,
 				258B6B0625828CC70004BFE7 /* HabitRow.swift */,
 				25F212842592074800E259EC /* HabitTimer.swift */,
+				25D0405625C4FA66004814B4 /* TimerManager.swift */,
 			);
 			path = Row;
 			sourceTree = "<group>";
@@ -1107,6 +1110,7 @@
 				25CD8C9D258553AC00886F39 /* TodayInformation.swift in Sources */,
 				258DD4FC25A9ADE300A2C20E /* FlHabit.swift in Sources */,
 				255C1174258F38E200E0F740 /* DayOfWeekSelector.swift in Sources */,
+				25D0405725C4FA66004814B4 /* TimerManager.swift in Sources */,
 				251EFC68259E4DD300748917 /* Routine+CoreDataClass.swift in Sources */,
 				2570A37B25BC7E9300FD1AB4 /* RingGroup.swift in Sources */,
 				252A0E5B25AA504400A41525 /* RingCalendar.swift in Sources */,

@@ -10,12 +10,13 @@ import SwiftUI
 struct HabitTimer: View {
     
     let date: Date
+    let habit: FlHabit
     
     @State var timeRemaining = 0
     @State var isCounting = false
     @State var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    @EnvironmentObject var habit: FlHabit
+    @EnvironmentObject var appSetting: AppSetting
     
     var body: some View {
         ScrollView {
@@ -53,8 +54,14 @@ struct HabitTimer: View {
                                     for: UIApplication.willResignActiveNotification
                                 )
                             ) { _ in
-                                isCounting = false
-                                self.timer.upstream.connect().cancel()
+                                TimerManager.save(isCounting: isCounting, timeRemaining: timeRemaining)
+                            }
+                            .onReceive(
+                                NotificationCenter.default.publisher(
+                                    for: UIApplication.willEnterForegroundNotification
+                                )
+                            ) { _ in
+                                (timeRemaining, isCounting) = TimerManager.sceneBack(appSetting)
                             }
                         Text("Sec".localized)
                             .headline()
@@ -94,7 +101,14 @@ struct HabitTimer: View {
         }
         .navigationBarTitle(Text(habit.name))
         .onAppear {
-            timeRemaining = habit.requiredSec
+            if TimerManager.isRunning {
+                (timeRemaining, isCounting) = TimerManager.sceneBack(appSetting)
+            } else {
+                timeRemaining = habit.requiredSec
+            }
+        }
+        .onDisappear {
+            TimerManager.clear()
         }
     }
     
@@ -125,8 +139,7 @@ struct HabitTimer: View {
 struct HabitTimer_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            HabitTimer(date: Date())
-                .environmentObject(FlHabit(name: "Test", color: .blue, requiredSec: 3))
+            HabitTimer(date: Date(), habit: FlHabit(name: "Test", color: .blue, requiredSec: 3), timeRemaining: 3)
                 .environmentObject(AppSetting())
         }
     }

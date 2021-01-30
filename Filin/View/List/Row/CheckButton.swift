@@ -20,7 +20,7 @@ struct CheckButton: View {
         if habit.isTimer {
             NavigationLink(
                 destination:
-                    HabitTimer(date: date).environmentObject(habit)
+                    HabitTimer(date: date, habit: habit)
             ) {
                 Image(systemName: showCheck ? "clock.fill" : "clock")
                     .font(.system(size: 24, weight: .semibold))
