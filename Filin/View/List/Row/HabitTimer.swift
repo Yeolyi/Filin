@@ -101,6 +101,7 @@ struct HabitTimer: View {
         }
         .navigationBarTitle(Text(habit.name))
         .onAppear {
+            TimerManager.set(id: habit.id)
             if TimerManager.isRunning {
                 (timeRemaining, isCounting) = TimerManager.sceneBack(appSetting)
             } else {
