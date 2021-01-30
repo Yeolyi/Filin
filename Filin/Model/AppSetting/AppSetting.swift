@@ -58,6 +58,13 @@ class AppSetting: ObservableObject {
     @AutoSave("sceneBackgroundTime", defaultValue: nil)
     var sceneBackgroundTime: Date?
     
+    @AutoSave("backgroundTimer", defaultValue: true)
+    var backgroundTimer: Bool {
+        didSet {
+            objectWillChange.send()
+        }
+    }
+    
     var mainDate: Date {
         if Date().hour >= dayResetTime {
             return Date()

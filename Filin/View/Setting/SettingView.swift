@@ -83,6 +83,13 @@ struct SettingView: View {
                         PaperToggle($appSetting.isMondayStart)
                     }
                     .flatRowBackground()
+                    HStack {
+                        Text("Background Timer".localized)
+                            .bodyText()
+                        Spacer()
+                        PaperToggle($appSetting.backgroundTimer)
+                    }
+                    .flatRowBackground()
                     #if DEBUG
                     Button(action: {
                         _ = DataSample.shared
