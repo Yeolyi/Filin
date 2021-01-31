@@ -65,10 +65,10 @@ struct CalendarWithLogo: View {
                 isExpanded: isExpanded, selectedDate: selectedDate, habit1: habit
             )
             .environmentObject(appSetting)
+            .rowBackground()
             .if(imageAspect != .free) {
                 $0.frame(width: imageAspect.sizeTuple.width, height: imageAspect.sizeTuple.height)
             }
-            .rowBackground()
             HStack(spacing: 4) {
                 Spacer()
                 Image("Icon1024")

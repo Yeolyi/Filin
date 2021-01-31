@@ -133,17 +133,13 @@ struct HabitShare: View {
                     Spacer()
                 }
                 .padding(.leading, 10)
-                Group {
-                    Divider()
-                        .padding(.top, 20)
-                    if calendarImage != nil {
-                        Image(uiImage: calendarImage!)
-                            .resizable()
-                            .scaledToFit()
-                            .animation(nil)
-                    }
-                    Divider()
-                        .padding(.bottom, 20)
+                if calendarImage != nil {
+                    Image(uiImage: calendarImage!)
+                        .resizable()
+                        .scaledToFit()
+                        .animation(nil)
+                        .rowBackground()
+                        .padding(.vertical, 20)
                 }
                 Button(action: {
                     if let image = calendarImage {
