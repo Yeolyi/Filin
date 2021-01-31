@@ -13,9 +13,9 @@ struct DayOfWeekChart: View {
     var trendToGraphHeight: [CGFloat] = []
     var dayOfWeekTrend: [Double] = []
     
-    init(habit: FlHabit) {
+    init(habit: FlHabit, mainDate: Date) {
         self.habit = habit
-        self.dayOfWeekTrend = habit.dayOfWeekTrend
+        self.dayOfWeekTrend = habit.dayOfWeekTrend(settingDate: mainDate)
         trendToGraphHeight = dayOfWeekTrend.map {
             let realValue = CGFloat($0 * 120 / Double(habit.achievement.numberOfTimes))
             return min(60, max(-60, realValue))
@@ -23,6 +23,7 @@ struct DayOfWeekChart: View {
     }
     
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var appSetting: AppSetting
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -69,7 +70,7 @@ struct DayOfWeekChart: View {
                 ForEach(0..<7) { index in
                     Text(Date.dayOfTheWeekShortStr(index + 1))
                         .foregroundColor(
-                            Date().dayOfTheWeek == index + 1 ?
+                            appSetting.mainDate.dayOfTheWeek == index + 1 ?
                                 habit.color : ThemeColor.subColor(colorScheme)
                         )
                         .bodyText()
@@ -82,6 +83,6 @@ struct DayOfWeekChart: View {
 
 struct DayOfWeekChart_Previews: PreviewProvider {
     static var previews: some View {
-        DayOfWeekChart(habit: DataSample.shared.habitManager.contents[0])
+        DayOfWeekChart(habit: DataSample.shared.habitManager.contents[0], mainDate: Date())
     }
 }

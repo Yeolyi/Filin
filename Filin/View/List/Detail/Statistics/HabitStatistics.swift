@@ -10,6 +10,7 @@ import SwiftUI
 struct HabitStatistics: View {
     
     @EnvironmentObject var habit: FlHabit
+    @EnvironmentObject var appSetting: AppSetting
     
     var body: some View {
         VStack(spacing: 15) {
@@ -19,7 +20,7 @@ struct HabitStatistics: View {
                         .bodyText()
                     Spacer()
                 }
-                textWithChevron(value: habit.weeklyTrend)
+                textWithChevron(value: habit.weeklyTrend(mainDate: appSetting.mainDate))
             }
             VStack(spacing: 0) {
                 HStack {
@@ -27,16 +28,16 @@ struct HabitStatistics: View {
                         .bodyText()
                     Spacer()
                 }
-                textWithChevron(value: habit.monthlyTrend)
+                textWithChevron(value: habit.monthlyTrend(mainDate: appSetting.mainDate))
             }
-            DayOfWeekChart(habit: habit)
+            DayOfWeekChart(habit: habit, mainDate: appSetting.mainDate)
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     Text("Continuous Achievement".localized)
                         .bodyText()
                     Spacer()
                 }
-                Text("\(habit.continousAchievementCount)\(" days".localized)")
+                Text("\(habit.continousAchievementCount(appSetting.mainDate))\(" days".localized)")
                     .foregroundColor(habit.color)
                     .headline()
             }
@@ -46,7 +47,7 @@ struct HabitStatistics: View {
                         .bodyText()
                     Spacer()
                 }
-                Text("\(habit.continousInachievementCount)\(" days".localized)")
+                Text("\(habit.continousInachievementCount(appSetting.mainDate))\(" days".localized)")
                     .foregroundColor(habit.color)
                     .headline()
             }
