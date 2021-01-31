@@ -31,7 +31,7 @@ struct CheckButton: View {
         } else {
             Button(action: {
                 withAnimation {
-                    habit.achievement.set(at: Date(), using: { current, addUnit in
+                    habit.achievement.set(at: appSetting.mainDate, using: { current, addUnit in
                         current + addUnit
                     })
                 }
