@@ -29,8 +29,20 @@ struct HabitShare: View {
     }
     
     let habit: FlHabit
-
-    @State var isExpanded = false
+    
+    @State var _isExpanded = false
+    var isExpanded: Binding<Bool> {
+        Binding(
+            get: {_isExpanded},
+            set: {
+                _isExpanded = $0
+                if $0 && (imageAspect == .square || imageAspect == .fourThree) {
+                    imageAspect = .fourFive
+                }
+            }
+        )
+    }
+    
     @State var selectedDate = Date()
     @State var showCalendarSelect = false
     @State var isEmojiView = false
@@ -47,7 +59,7 @@ struct HabitShare: View {
     var calendarImage: UIImage {
         VStack(spacing: 0) {
             CaptureCalendar(showCalendarSelect: $showCalendarSelect, isEmojiView: $isEmojiView,
-                            isExpanded: $isExpanded, selectedDate: $selectedDate, habit1: habit)
+                            isExpanded: isExpanded, selectedDate: $selectedDate, habit1: habit)
                 .environmentObject(appSetting)
                 .if(imageAspect != .free) {
                     $0.frame(width: imageAspect.sizeTuple.width, height: imageAspect.sizeTuple.height)
@@ -70,117 +82,120 @@ struct HabitShare: View {
     
     var body: some View {
         ScrollView {
-            Text("Preview".localized)
-                .sectionText()
-            CaptureCalendar(showCalendarSelect: $showCalendarSelect, isEmojiView: $isEmojiView,
-                            isExpanded: $isExpanded, selectedDate: $selectedDate, habit1: habit)
-                .environmentObject(appSetting)
-                .if(imageAspect != .free) {
-                    $0.frame(width: imageAspect.sizeTuple.width, height: imageAspect.sizeTuple.height)
+            VStack(spacing: 0) {
+                Text("Image Share")
+                    .sectionText()
+                    .padding(.bottom, 20)
+                HStack {
+                    Text("Expand".localized)
+                        .bodyText()
+                    Spacer()
+                    PaperToggle(isExpanded)
                 }
-                .padding(20)
-                .rowBackground()
-            Divider()
-            HStack(spacing: 0) {
-                Button(action: {
-                    withAnimation {
-                        isExpanded.toggle()
-                        if isExpanded && (imageAspect == .square || imageAspect == .fourThree) {
-                            imageAspect = .fourFive
-                        }
-                    }
-                }) {
-                    HStack {
-                        Spacer()
-                        VStack(spacing: 5) {
-                            BasicImage(
-                                imageName: isExpanded ?
-                                    "arrow.down.right.and.arrow.up.left" :
-                                    "arrow.up.left.and.arrow.down.right"
+                .flatRowBackground()
+                HStack {
+                    Text("Calendar Mode".localized)
+                        .bodyText()
+                    Spacer()
+                    Button(action: {isEmojiView = false}) {
+                        Image(systemName: "calendar")
+                            .font(.system(size: 25))
+                            .frame(width: 44, height: 44)
+                            .foregroundColor(
+                                isEmojiView ? ThemeColor.subColor(colorScheme) : ThemeColor.mainColor(colorScheme)
                             )
-                            Text(isExpanded ? "Fold".localized : "Expand".localized)
-                                .subColor()
-                                .bodyText()
-                        }
-                        Spacer()
                     }
-                    .rowBackground(8)
+                    Button(action: {isEmojiView = true}) {
+                        Image(systemName: "face.smiling")
+                            .font(.system(size: 25))
+                            .frame(width: 44, height: 44)
+                            .foregroundColor(
+                                !isEmojiView ? ThemeColor.subColor(colorScheme) : ThemeColor.mainColor(colorScheme)
+                            )
+                    }
                 }
-                Button(action: {
-                    withAnimation {
-                        isEmojiView.toggle()
-                    }
-                }) {
+                .flatRowBackground(innerBottomPadding: true, 5)
+                VStack {
                     HStack {
+                        Text("Set Date".localized)
+                            .bodyText()
                         Spacer()
-                        VStack(spacing: 5) {
-                            BasicImage(imageName: isEmojiView ? "percent" : "face.smiling")
-                            Text(isEmojiView ? "Progress".localized : "Emoji".localized)
-                                .subColor()
-                                .bodyText()
+                        Button(action: {
+                            withAnimation {
+                                showCalendarSelect.toggle()
+                            }
+                        }) {
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 20))
+                                .frame(width: 44, height: 44)
+                                .mainColor()
+                                .rotationEffect(showCalendarSelect ? .degrees(90) : .degrees(0))
                         }
-                        Spacer()
                     }
-                    .rowBackground(8)
+                    if showCalendarSelect {
+                        DatePicker("", selection: $selectedDate, displayedComponents: [.date])
+                            .datePickerStyle(WheelDatePickerStyle())
+                            .labelsHidden()
+                    }
                 }
-                Button(action: {
-                    withAnimation {
-                        showCalendarSelect.toggle()
-                    }
-                }) {
-                    HStack {
-                        Spacer()
-                        VStack(spacing: 7) {
-                            BasicImage(imageName: showCalendarSelect ? "checkmark" : "calendar")
-                            Text("Date".localized)
-                                .subColor()
-                                .bodyText()
-                        }
-                        Spacer()
-                    }
-                    .rowBackground(8)
-                }
+                .flatRowBackground(innerBottomPadding: true, 5)
             }
-            .padding(.horizontal, 10)
-            HStack(spacing: 0) {
-                HStack(spacing: 3) {
-                    Image(systemName: imageAspect == .free ? "square.dashed.inset.fill" : "square.dashed")
-                        .subColor()
-                    BasicTextButton("Free".localized) {
-                        imageAspect = .free
+            HStack(spacing: 10) {
+                Button(action: {imageAspect = .free}) {
+                    Text("  \("Free".localized)  ")
+                        .foregroundColor(
+                            imageAspect == .free ?
+                                ThemeColor.mainColor(colorScheme) : ThemeColor.subColor(colorScheme)
+                        )
+                        .bodyText()
+                        .flatRowBackground(innerBottomPadding: true, 10, 0, 0)
+                }
+                if isExpanded.wrappedValue == false {
+                    Button(action: {imageAspect = .square}) {
+                        Text("  \("Square".localized)  ")
+                            .foregroundColor(
+                                imageAspect == .square ?
+                                    ThemeColor.mainColor(colorScheme) : ThemeColor.subColor(colorScheme)
+                            )
+                            .bodyText()
+                            .flatRowBackground(innerBottomPadding: true, 10, 0, 0)
+                    }
+                    Button(action: {imageAspect = .fourThree}) {
+                        Text("  \("4:3".localized)  ")
+                            .foregroundColor(
+                                imageAspect == .fourThree ?
+                                    ThemeColor.mainColor(colorScheme) : ThemeColor.subColor(colorScheme)
+                            )
+                            .bodyText()
+                            .flatRowBackground(innerBottomPadding: true, 10, 0, 0)
                     }
                 }
-                .rowBackground(5, 0, 5)
-                if isExpanded == false {
-                HStack(spacing: 3) {
-                    Image(systemName: imageAspect == .square ? "square.fill" : "square")
-                        .subColor()
-                    BasicTextButton("Square".localized) {
-                        imageAspect = .square
-                    }
+                Button(action: {imageAspect = .fourFive}) {
+                    Text("  \("4:5".localized)  ")
+                        .foregroundColor(
+                            imageAspect == .fourFive ?
+                                ThemeColor.mainColor(colorScheme) : ThemeColor.subColor(colorScheme)
+                        )
+                        .bodyText()
+                        .flatRowBackground(innerBottomPadding: true, 10, 0, 0)
                 }
-                .rowBackground(5, 0, 5)
-                HStack(spacing: 3) {
-                    Image(systemName: imageAspect == .fourThree ? "rectangle.fill" : "rectangle")
-                        .subColor()
-                    BasicTextButton("4:3".localized) {
-                        imageAspect = .fourThree
-                    }
-                }
-                .rowBackground(5, 0, 5)
-                }
-                HStack(spacing: 3) {
-                    Image(systemName: imageAspect == .fourFive ? "rectangle.portrait.fill" : "rectangle.portrait")
-                        .subColor()
-                    BasicTextButton("4:5".localized) {
-                        imageAspect = .fourFive
-                    }
-                }
-                .rowBackground(5, 0, 5)
+                Spacer()
             }
-            .padding(.bottom, 8)
-            .padding(.horizontal, 5)
+            .padding(.leading, 10)
             Divider()
+                .padding(.vertical, 15)
+            CaptureCalendar(
+                showCalendarSelect: .constant(false), isEmojiView: $isEmojiView,
+                isExpanded: isExpanded, selectedDate: $selectedDate, habit1: habit
+            )
+            .environmentObject(appSetting)
+            .if(imageAspect != .free) {
+                $0.frame(width: imageAspect.sizeTuple.width, height: imageAspect.sizeTuple.height)
+            }
+            .padding(20)
+            .rowBackground()
+            Divider()
+                .padding(.vertical, 15)
             VStack(spacing: 0) {
                 Button(action: {
                     share(items: [calendarImage])
@@ -191,7 +206,7 @@ struct HabitShare: View {
                             .bodyText()
                         Spacer()
                     }
-                    .rowBackground(innerBottomPadding: true, 15)
+                    .flatRowBackground(innerBottomPadding: true, 15)
                 }
                 Button(action: {
                     SharingHandler.instagramStory(imageData: calendarImage.pngData()!, colorScheme: colorScheme)
@@ -202,14 +217,15 @@ struct HabitShare: View {
                             .bodyText()
                         Spacer()
                     }
-                    .rowBackground(innerBottomPadding: true, 15)
+                    .flatRowBackground(innerBottomPadding: true, 15)
                 }
             }
             .padding(.top, 1)
+            .padding(.bottom, 20)
         }
         .onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification)) { _ in
             presentationMode.wrappedValue.dismiss()
-         }
+        }
     }
 }
 

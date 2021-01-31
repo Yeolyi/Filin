@@ -15,6 +15,7 @@ struct CheckButton: View {
     }
     let date: Date
     @EnvironmentObject var habit: FlHabit
+    @EnvironmentObject var appSetting: AppSetting
     
     var body: some View {
         if habit.isTimer {
