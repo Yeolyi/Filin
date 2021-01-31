@@ -47,6 +47,17 @@ struct CalendarWithLogo: View {
     let selectedDate: Date
     let appSetting: AppSetting
     
+    var paddingSize: (horizontal: CGFloat, vertical: CGFloat) {
+        switch imageAspect {
+        case .free, .square:
+            return (20, 20)
+        case .fourFive:
+            return (16, 20)
+        case .fourThree:
+            return (20, 15)
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             CaptureCalendar(
@@ -69,6 +80,8 @@ struct CalendarWithLogo: View {
                     .padding(.trailing, 20)
             }
         }
+        .padding(.horizontal, paddingSize.horizontal)
+        .padding(.vertical, paddingSize.vertical)
     }
 }
 

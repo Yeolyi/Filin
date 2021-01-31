@@ -20,25 +20,34 @@ struct HabitShare: View {
                 if $0 && (imageAspect == .square || imageAspect == .fourThree) {
                     imageAspect = .fourFive
                 }
+                updateImage()
             }
         )
     }
     
-    @State var selectedDate = Date()
+    var selectedDate: Binding<Date> {
+        Binding(
+            get: {_selectedDate},
+            set: {_selectedDate = $0; updateImage()}
+        )
+    }
+    
+    @State var _selectedDate = Date()
     @State var showCalendarSelect = false
     @State var isEmojiView = false
     @State private var imageAspect: ImageSize = .free
+    @State var calendarImage: UIImage?
     
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var appSetting: AppSetting
     @Environment(\.presentationMode) var presentationMode
     
-    var calendarImage: UIImage {
-        CalendarWithLogo(
+    func updateImage() {
+        calendarImage = CalendarWithLogo(
             isExpanded: _isExpanded, habit: habit,
-            imageAspect: imageAspect, isEmojiView: isEmojiView, selectedDate: selectedDate, appSetting: appSetting
+            imageAspect: imageAspect, isEmojiView: isEmojiView,
+            selectedDate: selectedDate.wrappedValue, appSetting: appSetting
         )
-        .padding(20) // 비율 맞게 패딩값 조절하기
         .asImage()
     }
     
@@ -54,7 +63,10 @@ struct HabitShare: View {
     
     @ViewBuilder
     func imageSizeSelectButton(_ imageAspect: ImageSize) -> some View {
-        Button(action: {self.imageAspect = imageAspect}) {
+        Button(action: {
+            self.imageAspect = imageAspect
+            updateImage()
+        }) {
             Text("  \(imageAspect.localized)  ")
                 .foregroundColor(
                     self.imageAspect == imageAspect ?
@@ -68,7 +80,7 @@ struct HabitShare: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
-                Text("Image Share")
+                Text("Calendar Share".localized)
                     .sectionText()
                     .padding(.bottom, 15)
                 settingRow("Expand".localized) {
@@ -76,7 +88,7 @@ struct HabitShare: View {
                         .padding(.vertical, 10)
                 }
                 settingRow("Calendar Mode".localized) {
-                    Button(action: {isEmojiView = false}) {
+                    Button(action: {isEmojiView = false; updateImage()}) {
                         Image(systemName: "calendar")
                             .font(.system(size: 25))
                             .frame(width: 44, height: 44)
@@ -84,7 +96,7 @@ struct HabitShare: View {
                                 isEmojiView ? ThemeColor.subColor(colorScheme) : ThemeColor.mainColor(colorScheme)
                             )
                     }
-                    Button(action: {isEmojiView = true}) {
+                    Button(action: {isEmojiView = true; updateImage()}) {
                         Image(systemName: "face.smiling")
                             .font(.system(size: 25))
                             .frame(width: 44, height: 44)
@@ -93,12 +105,12 @@ struct HabitShare: View {
                             )
                     }
                 }
-                settingRow("Set Date".localized) {
-                    Button(action: {
-                        withAnimation {
-                            showCalendarSelect.toggle()
-                        }
-                    }) {
+                Button(action: {
+                    withAnimation {
+                        showCalendarSelect.toggle()
+                    }
+                }) {
+                    settingRow("Set Date".localized) {
                         Image(systemName: "chevron.right")
                             .font(.system(size: 20))
                             .frame(width: 44, height: 44)
@@ -107,7 +119,7 @@ struct HabitShare: View {
                     }
                 }
                 if showCalendarSelect {
-                    DatePicker("", selection: $selectedDate, displayedComponents: [.date])
+                    DatePicker("", selection: selectedDate, displayedComponents: [.date])
                         .datePickerStyle(WheelDatePickerStyle())
                         .labelsHidden()
                 }
@@ -124,39 +136,48 @@ struct HabitShare: View {
                 Group {
                     Divider()
                         .padding(.top, 20)
-                    CalendarWithLogo(
-                        isExpanded: _isExpanded, habit: habit,
-                        imageAspect: imageAspect, isEmojiView: isEmojiView, selectedDate: selectedDate, appSetting: appSetting
-                    )
+                    if calendarImage != nil {
+                        Image(uiImage: calendarImage!)
+                            .resizable()
+                            .scaledToFit()
+                            .animation(nil)
+                    }
                     Divider()
                         .padding(.bottom, 20)
                 }
-                settingRow("Save/Share".localized) {
-                    Button(action: {
-                        share(items: [calendarImage])
-                    }) {
+                Button(action: {
+                    if let image = calendarImage {
+                        share(items: [image])
+                    }
+                }) {
+                    settingRow("Save/Share".localized) {
                         Image(systemName: "square.and.arrow.down")
                             .font(.system(size: 25))
                             .frame(width: 44, height: 44)
                             .mainColor()
                     }
                 }
-                settingRow("Instagram Story".localized) {
-                    Button(action: {
-                        SharingHandler.instagramStory(imageData: calendarImage.pngData()!, colorScheme: colorScheme)
-                    }) {
+                Button(action: {
+                    if let image = calendarImage {
+                        SharingHandler.instagramStory(imageData: image.pngData()!, colorScheme: colorScheme)
+                    }
+                }) {
+                    settingRow("Instagram Story".localized) {
                         Image("Instagram_AppIcon")
                             .resizable()
                             .frame(width: 25, height: 25)
                             .padding(.trailing, 10)
+                            .frame(height: 44)
                     }
-                    .frame(height: 44)
                 }
             }
             .padding(.bottom, 20)
         }
         .onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification)) { _ in
             presentationMode.wrappedValue.dismiss()
+        }
+        .onAppear {
+            updateImage()
         }
     }
 }
