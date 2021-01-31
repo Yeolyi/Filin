@@ -9,10 +9,9 @@ import SwiftUI
 
 struct CaptureCalendar: View {
     
-    @Binding var showCalendarSelect: Bool
-    @Binding var isEmojiView: Bool
-    @Binding var selectedDate: Date
-    @Binding var isExpanded: Bool
+    let isEmojiView: Bool
+    let selectedDate: Date
+    let isExpanded: Bool
     let habit1: FlHabit
     let habit2: FlHabit
     let habit3: FlHabit
@@ -36,14 +35,13 @@ struct CaptureCalendar: View {
         }
     }
     
-    init(showCalendarSelect: Binding<Bool>, isEmojiView: Binding<Bool>,
-         isExpanded: Binding<Bool>, selectedDate: Binding<Date>,
+    init(isEmojiView: Bool,
+         isExpanded: Bool, selectedDate: Date,
          habit1: FlHabit, habit2: FlHabit? = nil, habit3: FlHabit? = nil
     ) {
-        self._showCalendarSelect = showCalendarSelect
-        self._isEmojiView = isEmojiView
-        self._isExpanded = isExpanded
-        self._selectedDate = selectedDate
+        self.isEmojiView = isEmojiView
+        self.isExpanded = isExpanded
+        self.selectedDate = selectedDate
         let nilHabit = FlHabit(name: "Nil")
         nilHabit.requiredSec = -1
         self.habit1 = habit1
@@ -53,78 +51,60 @@ struct CaptureCalendar: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            if showCalendarSelect {
-                DatePicker("", selection: $selectedDate, displayedComponents: .date)
-                    .datePickerStyle(WheelDatePickerStyle())
-                    .labelsHidden()
-                    .frame(maxWidth: .infinity)
-            } else {
-                HStack {
-                    VStack {
-                        HStack(alignment: .bottom, spacing: 3) {
-                            Text(habit1.name)
-                                .foregroundColor(color)
-                                .headline()
-                            Spacer()
-                            Text(selectedDate.localizedYearMonth)
-                                .foregroundColor(color)
-                                .bodyText()
-                        }
+            HStack {
+                VStack {
+                    HStack(alignment: .bottom, spacing: 3) {
+                        Text(habit1.name)
+                            .foregroundColor(color)
+                            .headline()
+                        Spacer()
+                        Text(selectedDate.localizedYearMonth)
+                            .foregroundColor(color)
+                            .bodyText()
                     }
-                    Spacer()
                 }
-                .padding(.bottom, 15)
-                VStack(spacing: 0) {
-                    if isExpanded {
-                        ForEach(
-                            1..<selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart) + 1,
-                            id: \.self
-                        ) { week in
-                            if isEmojiView {
-                                EmojiCalendarRow(
-                                    week: week,
-                                    isExpanded: isExpanded,
-                                    selectedDate: $selectedDate,
-                                    habit: habitsWrapped.compactMap({$0})[0]
-                                )
-                            } else {
-                                WeekendRow(
-                                    selectedDate: $selectedDate,
-                                    habit1: habit1, habit2: habit2, habit3: habit3,
-                                    week: week,
-                                    isExpanded: isExpanded
-                                )
-                            }
-                        }
-                    } else {
-                        if isEmojiView {
-                            EmojiCalendarRow(
-                                week: selectedDate.weekNum(startFromMon: appSetting.isMondayStart),
-                                isExpanded: isExpanded,
-                                selectedDate: $selectedDate,
-                                habit: habitsWrapped.compactMap({$0})[0]
-                            )
-                        } else {
-                            WeekendRow(
-                                selectedDate: $selectedDate,
-                                habit1: habit1, habit2: habit2, habit3: habit3,
-                                week: selectedDate.weekNum(startFromMon: appSetting.isMondayStart),
-                                isExpanded: isExpanded
-                            )
-                        }
-                    }
-                   
-                }
+                Spacer()
             }
+            .padding(.bottom, 15)
+            if isExpanded {
+                VStack(spacing: 0) {
+                    ForEach(
+                        1..<selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart) + 1, id: \.self
+                    ) { week in
+                        calendarContent(week: week)
+                    }
+                }
+            } else {
+                calendarContent(week: selectedDate.weekNum(startFromMon: appSetting.isMondayStart))
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func calendarContent(week: Int) -> some View {
+        if isEmojiView {
+            EmojiCalendarRow(
+                week: week,
+                isExpanded: isExpanded,
+                selectedDate: .constant(selectedDate),
+                habit: habitsWrapped.compactMap({$0})[0]
+            )
+        } else {
+            WeekendRow(
+                selectedDate: .constant(selectedDate),
+                habit1: habit1, habit2: habit2, habit3: habit3,
+                week: week,
+                isExpanded: isExpanded
+            )
         }
     }
 }
 
 struct CaptureCalendar_Previews: PreviewProvider {
     static var previews: some View {
-        CaptureCalendar(showCalendarSelect: .constant(false),
-                        isEmojiView: .constant(false), isExpanded: .constant(true),
-                        selectedDate: .constant(Date()), habit1: FlHabit.habit1
+        CaptureCalendar(
+            isEmojiView: false, isExpanded: true,
+            selectedDate: Date(), habit1: FlHabit.habit1
         )
         .environmentObject(AppSetting())
         .rowBackground()
