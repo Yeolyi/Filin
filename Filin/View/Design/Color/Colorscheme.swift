@@ -34,3 +34,17 @@ extension View {
         return modifier(SubColor())
     }
 }
+
+struct InactiveColor: ViewModifier {
+    @Environment(\.colorScheme) var colorScheme
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(ThemeColor.inActive(colorScheme: colorScheme))
+    }
+}
+
+extension View {
+    func inactiveColor() -> some View {
+        return modifier(InactiveColor())
+    }
+}

@@ -36,32 +36,36 @@ struct DayOfWeekChart: View {
             HStack(alignment: .bottom, spacing: 8) {
                 ForEach(0..<7) { index in
                     ZStack {
+                        Rectangle()
+                            .inactiveColor()
+                            .frame(width: 24, height: 120)
+                            .cornerRadius(3)
+                            .zIndex(0)
                         VStack(spacing: 0) {
-                            Rectangle()
+                            Spacer()
+                            Text(String(round(dayOfWeekTrend[index]*10)/10))
                                 .subColor()
-                                .opacity(0.1)
-                                .frame(width: 24, height: 120)
-                                .zIndex(0)
+                                .bodyText()
+                            Rectangle()
+                                .foregroundColor(habit.color)
+                                .frame(
+                                    width: 24,
+                                    height: abs(trendToGraphHeight[index]) == 0 ? 3 : abs(trendToGraphHeight[index])
+                                )
+                                .if(trendToGraphHeight[index] > 5) {
+                                    $0.cornerRadius(3, corners: [.topLeft, .topRight])
+                                }
+                                .if(trendToGraphHeight[index] < 5) {
+                                    $0.cornerRadius(3, corners: [.bottomLeft, .bottomRight])
+                                }
                         }
-                            VStack(spacing: 0) {
-                                Spacer()
-                                Text(String(round(dayOfWeekTrend[index]*10)/10))
-                                    .subColor()
-                                    .bodyText()
-                                Rectangle()
-                                    .foregroundColor(habit.color)
-                                    .frame(
-                                        width: 24,
-                                        height: abs(trendToGraphHeight[index]) == 0 ? 3 : abs(trendToGraphHeight[index])
-                                    )
-                            }
-                            .animation(.default)
-                            .frame(width: 40)
-                            .offset(y: trendToGraphHeight[index] == 0 ? -57 :
-                                        (trendToGraphHeight[index] > 0 ? -60 : -60 - trendToGraphHeight[index])
-                            )
-                            .zIndex(1)
-                            .opacity(habit.dayOfWeek.contains(index + 1) ? 1 : 0)
+                        .animation(.default)
+                        .frame(width: 40)
+                        .offset(y: trendToGraphHeight[index] == 0 ? -57 :
+                                    (trendToGraphHeight[index] > 0 ? -60 : -60 - trendToGraphHeight[index])
+                        )
+                        .zIndex(1)
+                        .opacity(habit.dayOfWeek.contains(index + 1) ? 1 : 0)
                     }
                 }
             }
@@ -84,5 +88,22 @@ struct DayOfWeekChart: View {
 struct DayOfWeekChart_Previews: PreviewProvider {
     static var previews: some View {
         DayOfWeekChart(habit: DataSample.shared.habitManager.contents[0], mainDate: Date())
+            .environmentObject(AppSetting())
+    }
+}
+
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
+}
+struct RoundedCorner: Shape {
+
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
     }
 }

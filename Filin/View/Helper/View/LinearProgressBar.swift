@@ -21,16 +21,17 @@ struct LinearProgressBar: View {
             Rectangle()
                 .foregroundColor(color)
                 .frame(width: CGFloat(progress) * geo.size.width + (progress == 0 ? 5 : 0), height: 24)
-                .offset(x: 2, y: 4)
                 .if(isAnimation) {
                     $0.animation(.default)
                 }
         }
         .frame(height: 24)
-        .overlay(
+        .background(
             Rectangle()
-                .stroke(ThemeColor.mainColor(colorScheme), lineWidth: 1.5)
+                .frame(height: 24)
+                .foregroundColor(ThemeColor.inActive(colorScheme: colorScheme))
         )
+        .cornerRadius(5)
         .onAppear {
             self.isAnimation = true
         }

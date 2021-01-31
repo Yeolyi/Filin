@@ -16,6 +16,10 @@ class ThemeColor: ObservableObject {
         colorScheme == .light ? subLight : subDark
     }
     
+    static func inActive(colorScheme: ColorScheme) -> Color {
+        subColor(colorScheme).opacity(0.25)
+    }
+    
     static var colorList: [Color] = Palette.Default.allCases.map(\.color)
     
     private static var mainLight = Color(hex: "#404040")
