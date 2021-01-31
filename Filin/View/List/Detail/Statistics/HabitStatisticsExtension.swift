@@ -98,13 +98,8 @@ extension FlHabit {
     }
     
     func dayOfWeekTrend(settingDate: Date) -> [Double] {
-        let lastWeekAchievement = Array((-7)...(-1)).reduce(into: [Int](repeating: 0, count: 7)) { result, value in
-            let date = settingDate.addDate(value)!
-            result[date.dayOfTheWeek - 1] = achievement.content[date.dictKey] ?? 0
-        }
-        let dayOfWeekAvg = self.dayOfWeekAvg
-        return lastWeekAchievement.enumerated().map { index, value in
-            Double(value) - dayOfWeekAvg(settingDate)[index]
+        dayOfWeekAvg(settingDate).map {
+            $0 - longTermAvg(settingDate)
         }
     }
     
