@@ -24,19 +24,14 @@ struct FlatRowBackground: ViewModifier {
     }
     
     func body(content: Content) -> some View {
-        content
-            .padding(.top, innerVerticalPadding)
-            .padding(.bottom, isInnerBottomPadding ? innerVerticalPadding : 0)
-            .padding(.horizontal, 10)
-            .background(
-                Rectangle()
-                    .foregroundColor(colorScheme == .light ? .white : Color(hex: "#151515"))
-                    .cornerRadius(3)
-                    .shadow(
-                        color: (colorScheme == .light ? Color.gray.opacity(0.6) : .clear),
-                        radius: 1.5, x: 1, y: 1
-                    )
-            )
+        VStack(spacing: 0) {
+            content
+                .padding(.top, innerVerticalPadding)
+                .padding(.bottom, isInnerBottomPadding ? innerVerticalPadding : 0)
+                .padding(.horizontal, 10)
+                .background(ThemeColor.inActive(colorScheme: colorScheme).opacity(0.5))
+        }
+        .cornerRadius(5)
             .padding(.horizontal, horizontalPadding)
             .padding(.vertical, outerVerticalPadding)
     }

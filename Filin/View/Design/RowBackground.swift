@@ -31,10 +31,10 @@ struct RowBackground: ViewModifier {
             .background(
                 Rectangle()
                     .foregroundColor(colorScheme == .light ? .white : Color(hex: "#151515"))
-                    .cornerRadius(10)
+                    .cornerRadius(8)
                     .shadow(
                         color: (colorScheme == .light ? Color.gray.opacity(0.6) : .clear),
-                        radius: 4, x: 2.5, y: 2.5
+                        radius: 1.8, y: 1.28
                     )
             )
             .padding(.horizontal, horizontalPadding)
@@ -43,8 +43,8 @@ struct RowBackground: ViewModifier {
 }
 
 extension View {
-    func rowBackground(innerBottomPadding: Bool = true, _ verticalPadding: CGFloat = 20,
-                       _ outerVerticalPadding: CGFloat = 10, _ horizontalPadding: CGFloat = 10) -> some View {
+    func rowBackground(innerBottomPadding: Bool = true, _ verticalPadding: CGFloat = 18,
+                       _ outerVerticalPadding: CGFloat = 8, _ horizontalPadding: CGFloat = 10) -> some View {
         modifier(RowBackground(innerBottomPadding, verticalPadding, outerVerticalPadding, horizontalPadding))
     }
 }
@@ -55,6 +55,6 @@ struct RowBackground_Previews: PreviewProvider {
             HabitRow(habit: FlHabit(name: "Text"), showAdd: true)
         }
         .environmentObject(AppSetting())
-        .environment(\.colorScheme, .dark)
+        // .environment(\.colorScheme, .dark)
     }
 }
