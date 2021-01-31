@@ -9,13 +9,16 @@ import SwiftUI
 
 struct HabitRow: View {
     
+    let showAdd: Bool
+    var date: Date?
+    
     @ObservedObject var habit: FlHabit
-    @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var appSetting: AppSetting
+    
     @State var isTapping = false
     @State var activeSheet: DetailViewActiveSheet?
-    var date: Date?
-    let showAdd: Bool
+    
+    @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var appSetting: AppSetting
     
     init(habit: FlHabit, showAdd: Bool, date: Date? = nil) {
         self.habit = habit
@@ -51,6 +54,7 @@ struct HabitRow: View {
                     VStack {
                         HStack {
                             Text(subTitle)
+                                .subColor()
                                 .bodyText()
                             Spacer()
                         }
@@ -62,25 +66,28 @@ struct HabitRow: View {
                         }
                     }
                     if habit.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek) {
-                        ZStack {
+                        VStack(spacing: 3) {
+                            ZStack {
+                                Text("\(habit.achievement.content[date?.dictKey ?? appSetting.mainDate.dictKey] ?? 0)")
+                                    .foregroundColor(habit.color)
+                                    .bodyText()
+                                    .offset(
+                                        x: min(
+                                            75.0, -75.0 +
+                                            150.0 / CGFloat(habit.achievement.numberOfTimes) *
+                                            CGFloat(habit.achievement.content[date?.dictKey ?? appSetting.mainDate.dictKey] ?? 0)
+                                            ),
+                                        y: -23
+                                    )
                             LinearProgressBar(
                                 color: habit.color,
                                 progress: habit.achievement.progress(at: date ?? appSetting.mainDate) ?? 0
                             )
-                            HStack {
-                                Spacer()
-                                Text("""
-                                    \(habit.achievement.content[date?.dictKey ?? appSetting.mainDate.dictKey] ?? 0)/ \
-                                    \(habit.achievement.numberOfTimes)
-                                    """)
-                                    .mainColor()
-                                    .opacity(0.8)
-                                    .bodyText()
-                                    .padding(.trailing, 5)
                             }
-                            .zIndex(1)
                         }
-                        .frame(width: 150, height: 20)
+                        .frame(width: 150)
+                        .offset(y: 5)
+                        .padding(.trailing, 10)
                     }
                 }
             }
@@ -95,5 +102,6 @@ struct HabitRow_Previews: PreviewProvider {
         let coredataPreview = DataSample.shared
         HabitRow(habit: FlHabit(name: "Test"), showAdd: true)
             .environmentObject(coredataPreview.habitManager)
+            .environmentObject(AppSetting())
     }
 }
