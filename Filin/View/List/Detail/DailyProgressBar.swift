@@ -1,20 +1,18 @@
 //
-//  TodayHabit.swift
-//  habitdiary
+//  DailyProgressBar.swift
+//  Filin
 //
-//  Created by SEONG YEOL YI on 2020/12/13.
+//  Created by SEONG YEOL YI on 2021/02/01.
 //
 
 import SwiftUI
 
-struct TodayInformation: View {
+struct DailyProgressBar: View {
+    
+    let selectedDate: Date
+    @State var isSetMode = true
     
     @EnvironmentObject var habit: FlHabit
-    @Binding var selectedDate: Date
-    @State var tappingMinus = false
-    @State var tappingPlus = false
-    @State var isSetMode = true
-    @State var isExpanded = false
     
     var setAvailable: Bool {
         return habit.achievement.addUnit != 1
@@ -24,7 +22,7 @@ struct TodayInformation: View {
         VStack(spacing: 0) {
             HStack {
                 Text("""
-                    \(habit.achievement.content[selectedDate.dictKey] ?? 0)\(" times".localized)/ \
+                    \(habit.achievement.content[selectedDate.dictKey] ?? 0)\(" times".localized)/\
                     \(habit.achievement.numberOfTimes)\(" times".localized)
                     """)
                     .foregroundColor(habit.color)
@@ -43,18 +41,10 @@ struct TodayInformation: View {
                 moveButton(isAdd: false)
                 moveButton(isAdd: true)
             }
-            if isExpanded {
-                HabitStatistics()
-                    .padding(.top, 15)
-            }
-            BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
-                withAnimation {
-                    self.isExpanded.toggle()
-                }
-            }
         }
-        .rowBackground(innerBottomPadding: false)
+        .rowBackground()
     }
+    
     func moveButton(isAdd: Bool) -> some View {
         BasicButton(isAdd ? "plus" : "minus") {
             withAnimation {

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HabitStatistics: View {
     
+    @State var isExpanded = false
+    
     @EnvironmentObject var habit: FlHabit
     @EnvironmentObject var appSetting: AppSetting
     
@@ -30,7 +32,6 @@ struct HabitStatistics: View {
                 }
                 textWithChevron(value: habit.monthlyTrend(mainDate: appSetting.mainDate))
             }
-            DayOfWeekChart(habit: habit, mainDate: appSetting.mainDate)
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     Text("Continuous Achievement".localized)
@@ -41,28 +42,31 @@ struct HabitStatistics: View {
                     .foregroundColor(habit.color)
                     .headline()
             }
-            VStack(alignment: .leading, spacing: 0) {
-                HStack {
-                    Text("Continuous Blank".localized)
-                        .bodyText()
-                    Spacer()
-                }
-                Text("\(habit.continousInachievementCount(appSetting.mainDate))\(" days".localized)")
-                    .foregroundColor(habit.color)
-                    .headline()
-            }
-            if habit.firstDay != nil {
-                VStack(spacing: 0) {
+            if isExpanded {
+                VStack(alignment: .leading, spacing: 0) {
                     HStack {
-                        Text("Since".localized)
+                        Text("Continuous Blank".localized)
                             .bodyText()
                         Spacer()
                     }
-                    HStack {
-                        Text(habit.firstDay!.localizedYearMonthDay)
-                            .foregroundColor(habit.color)
-                            .headline()
-                        Spacer()
+                    Text("\(habit.continousInachievementCount(appSetting.mainDate))\(" days".localized)")
+                        .foregroundColor(habit.color)
+                        .headline()
+                }
+                DayOfWeekChart(habit: habit, mainDate: appSetting.mainDate)
+                if habit.firstDay != nil {
+                    VStack(spacing: 0) {
+                        HStack {
+                            Text("Since".localized)
+                                .bodyText()
+                            Spacer()
+                        }
+                        HStack {
+                            Text(habit.firstDay!.localizedYearMonthDay)
+                                .foregroundColor(habit.color)
+                                .headline()
+                            Spacer()
+                        }
                     }
                 }
             }
@@ -73,7 +77,13 @@ struct HabitStatistics: View {
                 .subColor()
                 .bodyText()
                 .padding(.top, 8)
+            BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
+                withAnimation {
+                    self.isExpanded.toggle()
+                }
+            }
         }
+        .rowBackground(innerBottomPadding: false)
     }
     
     func imageName(value: Double) -> String {
@@ -99,8 +109,8 @@ struct HabitStatistics: View {
         } else {
             HStack {
                 Image(systemName: imageName(value: value!))
+                    .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(habit.color)
-                    .headline()
                 Text(String(format: "%.1f", abs(round(value!*10)/10)) + " times".localized)
                     .foregroundColor(habit.color)
                     .headline()
