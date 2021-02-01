@@ -58,4 +58,13 @@ extension Date {
         dateFormatter.dateFormat = "EEEEE"
         return dateFormatter.string(from: dateCursor)
     }
+    static func dayOfTheWeekShortEngStr(_ num: Int) -> String {
+        var dateCursor = Date()
+        let currentDayOfWeek = dateCursor.dayOfTheWeek
+        dateCursor = dateCursor.addDate(num-currentDayOfWeek)!
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .init(identifier: "en")
+        dateFormatter.dateFormat = "EEEEE"
+        return dateFormatter.string(from: dateCursor)
+    }
 }

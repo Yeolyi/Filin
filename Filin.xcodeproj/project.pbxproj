@@ -12,7 +12,6 @@
 		2511363325B5DF3600BE5F10 /* lottiePlus.json in Resources */ = {isa = PBXBuildFile; fileRef = 2511363225B5DF3600BE5F10 /* lottiePlus.json */; };
 		2514EF6625C1030F00633146 /* FlatRowBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514EF6525C1030F00633146 /* FlatRowBackground.swift */; };
 		2519664F25BC52530054BAF4 /* RowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519664E25BC52530054BAF4 /* RowData.swift */; };
-		2519665525BC78350054BAF4 /* CalendarRingDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519665425BC78350054BAF4 /* CalendarRingDesign.swift */; };
 		251EFC67259E4DD300748917 /* Summary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251EFC63259E4DD300748917 /* Summary+CoreDataClass.swift */; };
 		251EFC68259E4DD300748917 /* Routine+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251EFC64259E4DD300748917 /* Routine+CoreDataClass.swift */; };
 		251EFC69259E4DD300748917 /* Routine+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251EFC65259E4DD300748917 /* Routine+CoreDataProperties.swift */; };
@@ -56,9 +55,7 @@
 		2563B5012582826B00731635 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2563B5002582826B00731635 /* Preview Assets.xcassets */; };
 		2563B5042582826B00731635 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2563B5022582826B00731635 /* LaunchScreen.storyboard */; };
 		256D8642259E5B30007AA256 /* ListPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D8641259E5B30007AA256 /* ListPreview.swift */; };
-		2570A37B25BC7E9300FD1AB4 /* RingGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2570A37A25BC7E9300FD1AB4 /* RingGroup.swift */; };
 		2578FEEE25A1F8C1001884C8 /* DayOfWeekChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578FEED25A1F8C1001884C8 /* DayOfWeekChart.swift */; };
-		257D94A925852154007D4CF1 /* CircleProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257D94A825852154007D4CF1 /* CircleProgress.swift */; };
 		257D94AD25852EA6007D4CF1 /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257D94AC25852EA6007D4CF1 /* ConditionalModifier.swift */; };
 		257F7CE625A3284B00F846A1 /* TagCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F7CE525A3284B00F846A1 /* TagCloud.swift */; };
 		258388332597241F008A8F99 /* RunRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258388322597241F008A8F99 /* RunRoutine.swift */; };
@@ -147,6 +144,9 @@
 		25FDE07825C1BA5400548212 /* HabitWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FDE07725C1BA5400548212 /* HabitWidget.swift */; };
 		25FDE07B25C1BA5600548212 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25FDE07A25C1BA5600548212 /* Assets.xcassets */; };
 		25FDE08125C1BA5600548212 /* HabitWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25FDE07325C1BA5400548212 /* HabitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		25FE74E625C82E410030EB0A /* Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FE74E525C82E410030EB0A /* Ring.swift */; };
+		25FE74EE25C82F590030EB0A /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FE74ED25C82F590030EB0A /* Tile.swift */; };
+		25FE74FB25C830370030EB0A /* HabitGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FE74FA25C830370030EB0A /* HabitGroup.swift */; };
 		B49899B64E1F53F2A2E50847 /* Pods_Filin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7AB074C2B284E2C7D270C65 /* Pods_Filin.framework */; };
 /* End PBXBuildFile section */
 
@@ -189,7 +189,6 @@
 		2511363225B5DF3600BE5F10 /* lottiePlus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottiePlus.json; sourceTree = "<group>"; };
 		2514EF6525C1030F00633146 /* FlatRowBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatRowBackground.swift; sourceTree = "<group>"; };
 		2519664E25BC52530054BAF4 /* RowData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowData.swift; sourceTree = "<group>"; };
-		2519665425BC78350054BAF4 /* CalendarRingDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRingDesign.swift; sourceTree = "<group>"; };
 		251EFC63259E4DD300748917 /* Summary+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Summary+CoreDataClass.swift"; sourceTree = "<group>"; };
 		251EFC64259E4DD300748917 /* Routine+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Routine+CoreDataClass.swift"; sourceTree = "<group>"; };
 		251EFC65259E4DD300748917 /* Routine+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Routine+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -229,9 +228,7 @@
 		2563B5032582826B00731635 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2563B5052582826B00731635 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		256D8641259E5B30007AA256 /* ListPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPreview.swift; sourceTree = "<group>"; };
-		2570A37A25BC7E9300FD1AB4 /* RingGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingGroup.swift; sourceTree = "<group>"; };
 		2578FEED25A1F8C1001884C8 /* DayOfWeekChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekChart.swift; sourceTree = "<group>"; };
-		257D94A825852154007D4CF1 /* CircleProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgress.swift; sourceTree = "<group>"; };
 		257D94AC25852EA6007D4CF1 /* ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifier.swift; sourceTree = "<group>"; };
 		257F7CE525A3284B00F846A1 /* TagCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCloud.swift; sourceTree = "<group>"; };
 		258388322597241F008A8F99 /* RunRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunRoutine.swift; sourceTree = "<group>"; };
@@ -316,6 +313,9 @@
 		25FDE07725C1BA5400548212 /* HabitWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidget.swift; sourceTree = "<group>"; };
 		25FDE07A25C1BA5600548212 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25FDE07C25C1BA5600548212 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25FE74E525C82E410030EB0A /* Ring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ring.swift; sourceTree = "<group>"; };
+		25FE74ED25C82F590030EB0A /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		25FE74FA25C830370030EB0A /* HabitGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitGroup.swift; sourceTree = "<group>"; };
 		68F2C734650349B742CC96AA /* Pods-Filin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filin.debug.xcconfig"; path = "Target Support Files/Pods-Filin/Pods-Filin.debug.xcconfig"; sourceTree = "<group>"; };
 		F7AB074C2B284E2C7D270C65 /* Pods_Filin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Filin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -361,9 +361,10 @@
 		2526686B259E53CF00C435D6 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				25FE74F925C830260030EB0A /* Model */,
+				25FE74F825C8300A0030EB0A /* Helper */,
 				258B6AF7258289C80004BFE7 /* DateExtension.swift */,
-				2570A37D25BC7EC000FD1AB4 /* Ring */,
-				2570A37E25BC7ED300FD1AB4 /* Frame */,
+				252A0E5A25AA504400A41525 /* RingCalendar.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -491,25 +492,6 @@
 				2563B5002582826B00731635 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		2570A37D25BC7EC000FD1AB4 /* Ring */ = {
-			isa = PBXGroup;
-			children = (
-				2570A37A25BC7E9300FD1AB4 /* RingGroup.swift */,
-				257D94A825852154007D4CF1 /* CircleProgress.swift */,
-			);
-			path = Ring;
-			sourceTree = "<group>";
-		};
-		2570A37E25BC7ED300FD1AB4 /* Frame */ = {
-			isa = PBXGroup;
-			children = (
-				252A0E5A25AA504400A41525 /* RingCalendar.swift */,
-				25E16353259920990082A87A /* CalendarInterface.swift */,
-				2519665425BC78350054BAF4 /* CalendarRingDesign.swift */,
-			);
-			path = Frame;
 			sourceTree = "<group>";
 		};
 		2586FD1225B6F0F100416868 /* Share */ = {
@@ -806,6 +788,24 @@
 			path = HabitWidget;
 			sourceTree = "<group>";
 		};
+		25FE74F825C8300A0030EB0A /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				25E16353259920990082A87A /* CalendarInterface.swift */,
+				25FE74E525C82E410030EB0A /* Ring.swift */,
+				25FE74ED25C82F590030EB0A /* Tile.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		25FE74F925C830260030EB0A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				25FE74FA25C830370030EB0A /* HabitGroup.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		2BAF220B6E9E4FD444D8592C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1028,7 +1028,6 @@
 				255C116B258F2E2500E0F740 /* HabitAddBadgeView.swift in Sources */,
 				25FC34F325A04559000B5844 /* PaperToggle.swift in Sources */,
 				2563B4FC2582826900731635 /* habitdiary.xcdatamodeld in Sources */,
-				2519665525BC78350054BAF4 /* CalendarRingDesign.swift in Sources */,
 				25C5A56725837A0200E864A5 /* AppSetting.swift in Sources */,
 				25498A5125BC048800283E71 /* PaletteProtocol.swift in Sources */,
 				25C574FE2583D3BD004BF07D /* Habit+CoreDataProperties.swift in Sources */,
@@ -1038,6 +1037,7 @@
 				258B6B12258295660004BFE7 /* EditHabit.swift in Sources */,
 				2522916D258384A900869C51 /* ThemeColor.swift in Sources */,
 				25B73282258B460A003D9FD8 /* BodyText.swift in Sources */,
+				25FE74FB25C830370030EB0A /* HabitGroup.swift in Sources */,
 				25C5DF8E25B830FD00A55951 /* CaptureCalendar.swift in Sources */,
 				25DEDBDC259FA7D400E39382 /* SummaryStateRow.swift in Sources */,
 				25D0C9A1259F981B0018273E /* SummaryPreview.swift in Sources */,
@@ -1047,10 +1047,10 @@
 				25E163672599CBAA0082A87A /* EmojiListEdit.swift in Sources */,
 				25CD885925987937002270E9 /* Test4.swift in Sources */,
 				25498A4D25BC045700283E71 /* Palette.swift in Sources */,
+				25FE74E625C82E410030EB0A /* Ring.swift in Sources */,
 				25FC602C258615CE006BCFBA /* Test1.swift in Sources */,
 				25A564D9258F972C00239CF6 /* ContentView.swift in Sources */,
 				2530711925BBE57D002AC0C6 /* Achievement.swift in Sources */,
-				257D94A925852154007D4CF1 /* CircleProgress.swift in Sources */,
 				25E1635A259929E70082A87A /* EmojiPicker.swift in Sources */,
 				2563B4F52582826900731635 /* AppDelegate.swift in Sources */,
 				25E6154B25A1968B007A469B /* HabitStatistics.swift in Sources */,
@@ -1105,6 +1105,7 @@
 				258E02F1258E111E006DAFAC /* Title.swift in Sources */,
 				2553522525BB4D2400255045 /* RoutineManager.swift in Sources */,
 				258B6B0725828CC70004BFE7 /* HabitRow.swift in Sources */,
+				25FE74EE25C82F590030EB0A /* Tile.swift in Sources */,
 				25F4F4882597030D007E5BCF /* RoutineRow.swift in Sources */,
 				257D94AD25852EA6007D4CF1 /* ConditionalModifier.swift in Sources */,
 				25E16354259920990082A87A /* CalendarInterface.swift in Sources */,
@@ -1116,7 +1117,6 @@
 				255C1174258F38E200E0F740 /* DayOfWeekSelector.swift in Sources */,
 				25D0405725C4FA66004814B4 /* TimerManager.swift in Sources */,
 				251EFC68259E4DD300748917 /* Routine+CoreDataClass.swift in Sources */,
-				2570A37B25BC7E9300FD1AB4 /* RingGroup.swift in Sources */,
 				252A0E5B25AA504400A41525 /* RingCalendar.swift in Sources */,
 				258B6B232583573B0004BFE7 /* ColorHorizontalPicker.swift in Sources */,
 				25C9FA2625907C4F0046C523 /* ViewToImage.swift in Sources */,

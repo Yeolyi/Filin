@@ -90,12 +90,7 @@ struct CaptureCalendar: View {
                 habit: habitsWrapped.compactMap({$0})[0]
             )
         } else {
-            WeekendRow(
-                selectedDate: .constant(selectedDate),
-                habit1: habit1, habit2: habit2, habit3: habit3,
-                week: week,
-                isExpanded: isExpanded
-            )
+            EmptyView()
         }
     }
 }

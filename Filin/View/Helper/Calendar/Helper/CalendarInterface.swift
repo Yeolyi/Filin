@@ -34,48 +34,65 @@ struct CalendarInterface<Content: View>: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Text(isExpanded ? selectedDate.localizedYearMonth : selectedDate.localizedMonthDay)
-                    .foregroundColor(color)
-                    .headline()
-                Spacer()
-                controller
+            ZStack {
+                HStack(spacing: 15) {
+                    Button(action: {
+                        if isExpanded { selectedDate = selectedDate.addMonth(-1)
+                        } else { selectedDate = selectedDate.addDate(-7)! }
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 20, weight: .semibold))
+                            .subColor()
+                    }
+                    Text(isExpanded ? selectedDate.localizedYearMonth : selectedDate.localizedMonthDay)
+                        .foregroundColor(color)
+                        .headline()
+                    Button(action: {
+                        if isExpanded { selectedDate = selectedDate.addMonth(1)
+                        } else { selectedDate = selectedDate.addDate(7)! }
+                    }) {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 20, weight: .semibold))
+                            .subColor()
+                    }
+                }
+                HStack {
+                    Spacer()
+                    BasicButton(isEmojiView ? "percent" : "face.smiling") {
+                        withAnimation { isEmojiView.toggle() }
+                    }
+                    .padding(.trailing, 10)
+                }
             }
             .padding(.bottom, 15)
-            .padding(.horizontal, 10)
             VStack(spacing: 0) {
                 if showCalendarSelect {
                     DatePicker("", selection: $selectedDate, displayedComponents: .date)
                         .datePickerStyle(WheelDatePickerStyle())
                         .labelsHidden()
-                        .frame(maxWidth: .infinity)
                 } else {
-                    VStack(spacing: 0) {
-                        HStack(spacing: 8) {
+                    VStack(spacing: 8) {
+                        HStack(spacing: 4) {
                             ForEach(
                                 appSetting.isMondayStart ? [2, 3, 4, 5, 6, 7, 1] : [1, 2, 3, 4, 5, 6, 7],
                                 id: \.self
                             ) { dayOfWeek in
-                                Text(Date.dayOfTheWeekStr(dayOfWeek))
+                                Text(Date.dayOfTheWeekShortEngStr(dayOfWeek))
+                                    .subColor()
                                     .bodyText()
-                                    .foregroundColor(.gray)
-                                    .frame(width: 40)
+                                    .frame(width: 44)
                             }
                         }
-                        .padding(.bottom, 8)
-                        VStack {
-                            if isExpanded {
-                                ForEach(
-                                    1..<selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart) + 1,
-                                    id: \.self
-                                ) { week in
-                                    content(week, true)
-                                }
-                            } else {
-                                content(selectedDate.weekNum(startFromMon: appSetting.isMondayStart), false)
+                        if isExpanded {
+                            ForEach(
+                                1..<selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart) + 1,
+                                id: \.self
+                            ) { week in
+                                content(week, true)
                             }
+                        } else {
+                            content(selectedDate.weekNum(startFromMon: appSetting.isMondayStart), false)
                         }
-                        .animation(nil)
                         BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
                             withAnimation {
                                 self.isExpanded.toggle()
@@ -105,7 +122,8 @@ struct CustomCalendar_Previews: PreviewProvider {
     struct StateWrapper: View {
         @State var selectedDate = Date()
         var body: some View {
-            RingCalendar(selectedDate: $selectedDate, isExpanded: true, habit1: FlHabit.habit1)
+            RingCalendar(selectedDate: $selectedDate, isExpanded: false, isEmojiView: false,
+                         habits: .init(contents: [DataSample.shared.habitManager.contents[0]]))
                 .environmentObject(AppSetting())
         }
     }

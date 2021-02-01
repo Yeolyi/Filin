@@ -25,12 +25,9 @@ struct SummaryView: View {
                     if summaryManager.contents.isEmpty || summaryManager.contents[0].isEmpty {
                         SummaryPreview(isSettingSheet: $isSettingSheet)
                     } else {
-                        RingCalendar(
-                            selectedDate: $selectedDate,
-                            habit1: habitManager.contents.first(where: {$0.id == summaryManager.contents[0].first}),
-                            habit2: habitManager.contents.first(where: {$0.id == summaryManager.contents[0].second}),
-                            habit3: habitManager.contents.first(where: {$0.id == summaryManager.contents[0].third})
-                        )
+                        RingCalendar(selectedDate: $selectedDate, habits: .init(contents: summaryManager.contents[0].habitArray.compactMap { id in
+                            habitManager.contents.first(where: { $0.id == id })
+                        }))
                         ForEach(summaryManager.contents[0].habitArray.compactMap({ id in
                             habitManager.contents.first(where: {
                                 $0.id == id

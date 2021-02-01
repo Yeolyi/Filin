@@ -65,6 +65,7 @@ struct TodayInformation: View {
                         return max(0, val - (isSetMode ? addUnit : 1))
                     }
                 })
+                habit.objectWillChange.send()
             }
             if habit.achievement.content[selectedDate.dictKey] == 0 {
                 habit.achievement.content[selectedDate.dictKey] = nil
