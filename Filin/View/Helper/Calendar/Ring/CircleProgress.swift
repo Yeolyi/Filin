@@ -13,6 +13,7 @@ struct CircleProgress<Content: View>: View {
     let content: Content
     let expanded: Bool
     @State var isAnimation = false
+    @EnvironmentObject var appSetting: AppSetting
     
     init(_ ringGroup: RingGroup, @ViewBuilder content: @escaping () -> Content) {
         self.ringGroup = ringGroup
@@ -26,30 +27,46 @@ struct CircleProgress<Content: View>: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            if expanded {
+            if appSetting.useRing && !expanded {
                 content
                     .padding(.bottom, 5)
                     .padding(.top, 8)
-            }
-            ZStack {
-                ForEach(0..<3) { index in
-                    Circle()
-                        .trim(from: 0.0, to: CGFloat(ringGroup[index].progress))
-                        .stroke(style: StrokeStyle(lineWidth: 5.0 - CGFloat(index) * 0.5))
-                        .foregroundColor(ringGroup[index].color)
-                        .rotationEffect(Angle(degrees: -90))
-                        .animation(isAnimation ? .linear : nil)
-                        .frame(width: 40 - CGFloat(index * 12), height: 40 - CGFloat(index * 12))
+                Group {
+                Circle()
+                    .foregroundColor(ringGroup[0].color.opacity(ringGroup[0].progress))
+                    .frame(
+                        width: 40 * CGFloat(ringGroup[0].progress),
+                        height: 40 * CGFloat(ringGroup[0].progress)
+                    )
+                    .animation(.default)
                 }
-                .zIndex(0)
-                if !expanded {
+                .frame(width: 40, height: 40)
+            } else {
+                if expanded {
                     content
+                        .padding(.bottom, 5)
+                        .padding(.top, 8)
                 }
-                if ringGroup.isEmpty && expanded {
-                    Circle()
-                        .subColor()
-                        .opacity(0.3)
-                        .frame(width: 16, height: 16)
+                ZStack {
+                    ForEach(0..<3) { index in
+                        Circle()
+                            .trim(from: 0.0, to: CGFloat(ringGroup[index].progress))
+                            .stroke(style: StrokeStyle(lineWidth: 5.0 - CGFloat(index) * 0.5))
+                            .foregroundColor(ringGroup[index].color)
+                            .rotationEffect(Angle(degrees: -90))
+                            .animation(isAnimation ? .linear : nil)
+                            .frame(width: 40 - CGFloat(index * 12), height: 40 - CGFloat(index * 12))
+                    }
+                    .zIndex(0)
+                    if !expanded {
+                        content
+                    }
+                    if ringGroup.isEmpty && expanded {
+                        Circle()
+                            .subColor()
+                            .opacity(0.3)
+                            .frame(width: 16, height: 16)
+                    }
                 }
             }
         }

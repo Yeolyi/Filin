@@ -55,6 +55,13 @@ class AppSetting: ObservableObject {
         runCount == 1
     }
     
+    @AutoSave("useRing", defaultValue: true)
+    var useRing: Bool {
+        didSet {
+            objectWillChange.send()
+        }
+    }
+    
     @AutoSave("sceneBackgroundTime", defaultValue: nil)
     var sceneBackgroundTime: Date?
     
