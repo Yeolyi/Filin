@@ -11,6 +11,7 @@ struct DailyProgressBar: View {
     
     let selectedDate: Date
     @State var isSetMode = true
+    @Binding var isEmojiMode: Bool
     
     @EnvironmentObject var habit: FlHabit
     
@@ -48,6 +49,7 @@ struct DailyProgressBar: View {
     func moveButton(isAdd: Bool) -> some View {
         BasicButton(isAdd ? "plus" : "minus") {
             withAnimation {
+                isEmojiMode = false
                 habit.achievement.set(at: selectedDate, using: { val, addUnit in
                     if isAdd {
                         return val + (isSetMode ? addUnit : 1)

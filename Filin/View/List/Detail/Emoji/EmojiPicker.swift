@@ -42,8 +42,10 @@ struct EmojiPicker: View {
                 HStack(spacing: 20) {
                     ForEach(emojiManager.emojiList, id: \.self) { emoji in
                         Button(action: {
-                            habit.dailyEmoji[selectedDate.dictKey] = emoji
-                            isEmojiView = true
+                            withAnimation {
+                                habit.dailyEmoji[selectedDate.dictKey] = emoji
+                                isEmojiView = true
+                            }
                             save()
                         }) {
                             Text(emoji)
@@ -52,7 +54,10 @@ struct EmojiPicker: View {
                         }
                     }
                     Button(action: {
-                        habit.dailyEmoji[selectedDate.dictKey] = nil
+                        withAnimation {
+                            isEmojiView = true
+                            habit.dailyEmoji[selectedDate.dictKey] = nil
+                        }
                         save()
                     }) {
                         Image(systemName: "xmark.circle")

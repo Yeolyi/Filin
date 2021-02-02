@@ -36,7 +36,7 @@ struct HabitDetailView: View {
         ScrollView {
             VStack(spacing: 0) {
                 RingCalendar(selectedDate: $selectedDate, isEmojiView: $isEmojiView, habits: .init(contents: [habit]))
-                DailyProgressBar(selectedDate: selectedDate)
+                DailyProgressBar(selectedDate: selectedDate, isEmojiMode: $isEmojiView)
                 EmojiPicker(
                     selectedDate: $selectedDate, isEmojiView: $isEmojiView, habit: habit, emojiManager: emojiManager, activeSheet: $activeSheet
                 )
