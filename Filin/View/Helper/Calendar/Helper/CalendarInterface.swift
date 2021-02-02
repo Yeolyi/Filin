@@ -58,8 +58,22 @@ struct CalendarInterface<Content: View>: View {
                 }
                 HStack {
                     Spacer()
-                    BasicButton(isEmojiView ? "percent" : "face.smiling") {
-                        withAnimation { isEmojiView.toggle() }
+                    Button(action: { isEmojiView.toggle() }) {
+                        Group {
+                            if !isEmojiView {
+                                Circle()
+                                    .trim(from: 0.0, to: 0.7)
+                                    .stroke(style: StrokeStyle(lineWidth: 5.0, lineCap: .round))
+                                    .foregroundColor(color)
+                                    .rotationEffect(Angle(degrees: -90))
+                                    .frame(width: 20, height: 20)
+                            } else {
+                                Image(systemName: "face.smiling")
+                                    .font(.system(size: 24, weight: .bold))
+                                    .foregroundColor(color)
+                            }
+                        }
+                        .frame(width: 44, height: 44)
                     }
                     .padding(.trailing, 10)
                 }
@@ -104,18 +118,6 @@ struct CalendarInterface<Content: View>: View {
         }
         .rowBackground(innerBottomPadding: false)
     }
-    
-    var controller: some View {
-        HStack(spacing: 15) {
-            BasicButton(isEmojiView ? "percent" : "face.smiling") {
-                withAnimation { isEmojiView.toggle() }
-            }
-            BasicButton(showCalendarSelect ? "checkmark" : "calendar") {
-                withAnimation { showCalendarSelect.toggle() }
-            }
-        }
-        .padding(.trailing, 10)
-    }
 }
 
 struct CustomCalendar_Previews: PreviewProvider {
@@ -123,7 +125,7 @@ struct CustomCalendar_Previews: PreviewProvider {
         @State var selectedDate = Date()
         var body: some View {
             RingCalendar(
-                selectedDate: $selectedDate, isEmojiView: .constant(false),
+                selectedDate: $selectedDate, isEmojiView: .constant(true),
                  isCalendarExpanded: .constant(false),
                  habits: .init(contents: [DataSample.shared.habitManager.contents[0]])
             )
