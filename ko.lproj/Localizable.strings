@@ -37,7 +37,7 @@
 "Previous" = "이전";
 "Next" = "다음";
 "Repeat" = "반복";
-"Choose the day of the week to proceed with the goal." = "📅 매주 무슨 요일에 목표를 이루시겠어요?";
+"Choose the day of the week to proceed with the goal." = "📅 매주 무슨 요일에 하실건가요?";
 "Number of times" = "횟수";
 "How many times do you want to achieve your goal in a day?" = "🔢 하루 몇 회가 목표이신가요?";
 "Timer" = "타이머";
@@ -145,6 +145,7 @@
 "The End of the Day" = "하루가 끝나는 시간";
 "Choose time to initialize info." = "정보를 초기화할 시간을 선택하세요";
 "Run Timer in Background" = "타이머를 백그라운드에서도 작동";
+"Calendar Theme" = "달력 테마";
 
 //위젯
 "Long press and hold the widget to select your goal." = "위젯을 길게 눌러 \n목표를 선택하세요.";

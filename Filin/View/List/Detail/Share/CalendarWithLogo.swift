@@ -50,11 +50,11 @@ struct CalendarWithLogo: View {
     var paddingSize: (horizontal: CGFloat, vertical: CGFloat) {
         switch imageAspect {
         case .free, .square:
-            return (20, 20)
+            return (30, 30)
         case .fourFive:
-            return (16, 20)
+            return (32, 40)
         case .fourThree:
-            return (20, 15)
+            return (40, 30)
         }
     }
     
@@ -66,9 +66,6 @@ struct CalendarWithLogo: View {
             )
             .environmentObject(appSetting)
             .rowBackground()
-            .if(imageAspect != .free) {
-                $0.frame(width: imageAspect.sizeTuple.width, height: imageAspect.sizeTuple.height)
-            }
             HStack(spacing: 4) {
                 Spacer()
                 Image("Icon1024")
@@ -77,8 +74,10 @@ struct CalendarWithLogo: View {
                     .cornerRadius(4)
                 Text("FILIN")
                     .font(.system(size: 14, weight: .semibold))
-                    .padding(.trailing, 20)
             }
+        }
+        .if(imageAspect != .free) {
+            $0.frame(width: imageAspect.sizeTuple.width, height: imageAspect.sizeTuple.height)
         }
         .padding(.horizontal, paddingSize.horizontal)
         .padding(.vertical, paddingSize.vertical)

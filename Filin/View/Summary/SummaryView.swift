@@ -35,7 +35,10 @@ struct SummaryView: View {
                     if summaryManager.contents.isEmpty || summaryManager.contents[0].isEmpty {
                         SummaryPreview(isSettingSheet: $isSettingSheet)
                     } else {
-                        RingCalendar(selectedDate: $selectedDate, isEmojiView: $isEmojiView, isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: habits))
+                        RingCalendar(
+                            selectedDate: $selectedDate, isEmojiView: $isEmojiView,
+                            isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: habits)
+                        )
                         ForEach(habits, id: \.id) { habit in
                             HabitRow(habit: habit, showAdd: false, date: selectedDate)
                         }

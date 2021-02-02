@@ -54,8 +54,7 @@ struct SingleRing_Previews: PreviewProvider {
         let dataSample = DataSample.shared
         return Ring(
             habits: .init(contents: [dataSample.habitManager.contents[0]]),
-            date: Date(), selectedDate: Date()
-            ,isExpanded: false
+            date: Date(), selectedDate: Date(), isExpanded: false
         )
     }
 }

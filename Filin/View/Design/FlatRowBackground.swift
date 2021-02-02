@@ -40,7 +40,7 @@ struct FlatRowBackground: ViewModifier {
 extension View {
     func flatRowBackground(
         innerBottomPadding: Bool = true, _ verticalPadding: CGFloat = 20,
-        _ outerVerticalPadding: CGFloat = 8, _ horizontalPadding: CGFloat = 10
+        _ outerVerticalPadding: CGFloat = 4, _ horizontalPadding: CGFloat = 10
     ) -> some View {
         modifier(FlatRowBackground(innerBottomPadding, verticalPadding, outerVerticalPadding, horizontalPadding))
     }

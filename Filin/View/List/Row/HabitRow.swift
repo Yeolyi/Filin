@@ -72,10 +72,10 @@ struct HabitRow: View {
                                     .foregroundColor(habit.color)
                                     .bodyText()
                                     .offset(
-                                        x: min(
-                                            75.0, -75.0 +
-                                            150.0 / CGFloat(habit.achievement.numberOfTimes) *
-                                            CGFloat(habit.achievement.content[date?.dictKey ?? appSetting.mainDate.dictKey] ?? 0)
+                                        x: min(75.0, -75.0 + 150.0 / CGFloat(habit.achievement.numberOfTimes) *
+                                            CGFloat(
+                                                habit.achievement.content[date?.dictKey ?? appSetting.mainDate.dictKey]
+                                                    ?? 0)
                                             ),
                                         y: -23
                                     )

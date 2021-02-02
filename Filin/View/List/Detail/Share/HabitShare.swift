@@ -50,14 +50,11 @@ struct HabitShare: View {
                     self.imageAspect == imageAspect ?
                         ThemeColor.mainColor(colorScheme) : ThemeColor.subColor(colorScheme)
                 )
-                .strikethrough(
-                    (imageAspect == .fourThree || imageAspect == .square) && isExpanded,
-                    color: ThemeColor.subColor(colorScheme)
-                )
+                .strikethrough(isExpanded && imageAspect == .fourThree, color: ThemeColor.subColor(colorScheme))
                 .bodyText()
                 .flatRowBackground(innerBottomPadding: true, 10, 0, 0)
         }
-        .disabled((imageAspect == .fourThree || imageAspect == .square) && isExpanded)
+        .disabled((imageAspect == .fourThree) && isExpanded)
     }
     
     var body: some View {
@@ -65,6 +62,7 @@ struct HabitShare: View {
             VStack(spacing: 10) {
                 Text("Share".localized)
                     .sectionText()
+                Divider()
                     .padding(.bottom, 15)
                 if calendarImage != nil {
                     Image(uiImage: calendarImage!)
@@ -115,6 +113,16 @@ struct HabitShare: View {
         .onAppear {
             updateImage()
         }
+    }
+}
+
+struct HabitShare_Previews: PreviewProvider {
+    static var previews: some View {
+        let dataSample = DataSample.shared
+        return HabitShare(
+            habit: dataSample.habitManager.contents[0],
+                          selectedDate: Date(), isEmojiView: false, isExpanded: true
+        ).environmentObject(AppSetting())
     }
 }
 

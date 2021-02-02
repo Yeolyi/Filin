@@ -19,7 +19,6 @@ struct EditHabit: View {
     @EnvironmentObject var habitManager: HabitManager
     @EnvironmentObject var summaryManager: SummaryManager
     
-    
     var isSaveAvailable: Bool {
         tempHabit.name != "" && !tempHabit.dayOfWeek.isEmpty && tempHabit.achievement.numberOfTimes > 0
     }
