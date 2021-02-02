@@ -22,7 +22,7 @@ struct Ring: View {
                     .bodyText()
             }
             ZStack {
-                ForEach(0..<habits.count) { index in
+                ForEach(0..<habits.count, id: \.self) { index in
                     Circle()
                         .trim(from: 0.0, to: CGFloat(habits[index].achievement.progress(at: date) ?? 0))
                         .stroke(style: StrokeStyle(lineWidth: 5.0 - CGFloat(index) * 0.5, lineCap: .round))

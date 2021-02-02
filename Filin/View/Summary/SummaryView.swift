@@ -19,6 +19,14 @@ struct SummaryView: View {
     @EnvironmentObject var habitManager: HabitManager
     @EnvironmentObject var appSetting: AppSetting
     
+    var habits: [FlHabit] {
+        summaryManager.contents[0].habitArray.compactMap { id in
+            habitManager.contents.first(where: {
+                $0.id == id
+            })
+        }
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -26,14 +34,8 @@ struct SummaryView: View {
                     if summaryManager.contents.isEmpty || summaryManager.contents[0].isEmpty {
                         SummaryPreview(isSettingSheet: $isSettingSheet)
                     } else {
-                        RingCalendar(selectedDate: $selectedDate, isEmojiView: $isEmojiView, habits: .init(contents: summaryManager.contents[0].habitArray.compactMap { id in
-                            habitManager.contents.first(where: { $0.id == id })
-                        }))
-                        ForEach(summaryManager.contents[0].habitArray.compactMap({ id in
-                            habitManager.contents.first(where: {
-                                $0.id == id
-                            })
-                        }), id: \.id) { habit in
+                        RingCalendar(selectedDate: $selectedDate, isEmojiView: $isEmojiView, habits: .init(contents: habits))
+                        ForEach(habits, id: \.id) { habit in
                             HabitRow(habit: habit, showAdd: false, date: selectedDate)
                         }
                     }
