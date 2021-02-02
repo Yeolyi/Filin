@@ -15,6 +15,11 @@ struct Ring: View {
     let selectedDate: Date
     let isExpanded: Bool
     
+    var isProgressEmpty: Bool {
+        habits.count != 1 &&
+        habits.contents.filter({($0.achievement.progress(at: date) ?? 0) != 0}).isEmpty
+    }
+    
     var body: some View {
         VStack(spacing: 2) {
             if habits.count != 1 {
@@ -22,6 +27,12 @@ struct Ring: View {
                     .bodyText()
             }
             ZStack {
+                if isProgressEmpty {
+                    Circle()
+                        .stroke(style: StrokeStyle(lineWidth: 5.0))
+                        .inactiveColor()
+                        .frame(width: 16, height: 16)
+                }
                 ForEach(0..<habits.count, id: \.self) { index in
                     Circle()
                         .trim(from: 0.0, to: CGFloat(habits[index].achievement.progress(at: date) ?? 0))
