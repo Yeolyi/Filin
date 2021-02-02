@@ -90,7 +90,6 @@ struct SettingView: View {
                         PaperToggle($appSetting.backgroundTimer)
                     }
                     .flatRowBackground()
-                    /*
                     HStack {
                         Text("Use Ring".localized)
                             .bodyText()
@@ -98,7 +97,6 @@ struct SettingView: View {
                         PaperToggle($appSetting.useRing)
                     }
                     .flatRowBackground()
- */
                     #if DEBUG
                     Button(action: {
                         _ = DataSample.shared

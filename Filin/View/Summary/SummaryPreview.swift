@@ -13,7 +13,7 @@ struct SummaryPreview: View {
     
     var body: some View {
         Group {
-            RingCalendar(selectedDate: .constant(Date()), habits: .init(contents: [FlHabit.habit1, FlHabit.habit2]))
+            RingCalendar(selectedDate: .constant(Date()), isEmojiView: .constant(false), habits: .init(contents: [FlHabit.habit1, FlHabit.habit2]))
             HabitRow(habit: FlHabit.habit1, showAdd: false)
             HabitRow(habit: FlHabit.habit2, showAdd: false)
         }

@@ -122,7 +122,7 @@ struct CustomCalendar_Previews: PreviewProvider {
     struct StateWrapper: View {
         @State var selectedDate = Date()
         var body: some View {
-            RingCalendar(selectedDate: $selectedDate, isExpanded: false, isEmojiView: false,
+            RingCalendar(selectedDate: $selectedDate, isExpanded: false, isEmojiView: .constant(false),
                          habits: .init(contents: [DataSample.shared.habitManager.contents[0]]))
                 .environmentObject(AppSetting())
         }

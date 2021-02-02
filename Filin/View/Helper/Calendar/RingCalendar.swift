@@ -12,7 +12,7 @@ struct RingCalendar: View {
     @Binding var selectedDate: Date
     
     @State var isExpanded = false
-    @State var isEmojiView = false
+    @Binding var isEmojiView: Bool
     
     @ObservedObject var habits: HabitGroup
     

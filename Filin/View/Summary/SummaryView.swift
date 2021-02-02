@@ -12,6 +12,7 @@ struct SummaryView: View {
     @State var updated = false
     @State var selectedDate = Date()
     @State var isSettingSheet = false
+    @State var isEmojiView = false
     
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var summaryManager: SummaryManager
@@ -25,7 +26,7 @@ struct SummaryView: View {
                     if summaryManager.contents.isEmpty || summaryManager.contents[0].isEmpty {
                         SummaryPreview(isSettingSheet: $isSettingSheet)
                     } else {
-                        RingCalendar(selectedDate: $selectedDate, habits: .init(contents: summaryManager.contents[0].habitArray.compactMap { id in
+                        RingCalendar(selectedDate: $selectedDate, isEmojiView: $isEmojiView, habits: .init(contents: summaryManager.contents[0].habitArray.compactMap { id in
                             habitManager.contents.first(where: { $0.id == id })
                         }))
                         ForEach(summaryManager.contents[0].habitArray.compactMap({ id in

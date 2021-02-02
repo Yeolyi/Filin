@@ -22,18 +22,36 @@ struct EmojiCalendarRow: View {
                 selectedDate.daysInSameWeek(week: week, from: appSetting.isMondayStart ? 2 : 1), id: \.self
             ) { date in
                 Button(action: { self.selectedDate = date }) {
-                    VStack {
+                    VStack(spacing: 3) {
                         Text(String(date.day))
                             .foregroundColor(
-                                selectedDate.dictKey == date.dictKey ? habit.color : ThemeColor.mainColor(colorScheme)
+                                selectedDate.dictKey == date.dictKey ? habit.color :
+                                    (
+                                        date.month == selectedDate.month ?
+                                            ThemeColor.mainColor(colorScheme) :
+                                            ThemeColor.inActive(colorScheme: colorScheme)
+                                    )
                             )
                             .bodyText()
-                        Text(habit.dailyEmoji[date.dictKey] ?? "")
-                            .headline()
-                            .frame(width: 40, height: 40)
+                        Group {
+                            if habit.dailyEmoji[date.dictKey] != nil {
+                                Text(habit.dailyEmoji[date.dictKey]!)
+                                    .headline()
+                            } else {
+                                ZStack {
+                                    Circle()
+                                        .inactiveColor()
+                                        .frame(width: 24, height: 24)
+                                    Text("😀")
+                                        .headline()
+                                        .hidden()
+                                }
+                            }
+                        }
+                        .opacity(selectedDate.month == date.month ? 1 : 0.3)
                     }
                 }
-                .opacity(selectedDate.month == date.month ? 1 : 0.5)
+                .frame(width: 40)
             }
         }
     }
@@ -42,9 +60,9 @@ struct EmojiCalendarRow: View {
     
 }
 /*
-struct EmojiCalendarRow_Previews: PreviewProvider {
-    static var previews: some View {
-        EmojiCalendarRow()
-    }
-}
-*/
+ struct EmojiCalendarRow_Previews: PreviewProvider {
+ static var previews: some View {
+ EmojiCalendarRow()
+ }
+ }
+ */

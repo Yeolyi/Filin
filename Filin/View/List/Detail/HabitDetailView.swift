@@ -20,6 +20,7 @@ struct HabitDetailView: View {
     
     @State var activeSheet: DetailViewActiveSheet?
     @State var selectedDate = Date()
+    @State var isEmojiView = false
     
     @EnvironmentObject var habit: FlHabit
     @EnvironmentObject var habitManager: HabitManager
@@ -34,10 +35,10 @@ struct HabitDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                RingCalendar(selectedDate: $selectedDate, habits: .init(contents: [habit]))
+                RingCalendar(selectedDate: $selectedDate, isEmojiView: $isEmojiView, habits: .init(contents: [habit]))
                 DailyProgressBar(selectedDate: selectedDate)
                 EmojiPicker(
-                    selectedDate: $selectedDate, habit: habit, emojiManager: emojiManager, activeSheet: $activeSheet
+                    selectedDate: $selectedDate, isEmojiView: $isEmojiView, habit: habit, emojiManager: emojiManager, activeSheet: $activeSheet
                 )
                 HabitStatistics()
                 Text("")

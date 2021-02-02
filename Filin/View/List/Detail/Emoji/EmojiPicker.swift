@@ -11,6 +11,7 @@ import CoreData
 struct EmojiPicker: View {
     
     @Binding var selectedDate: Date
+    @Binding var isEmojiView: Bool
     @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject var habit: FlHabit
     @ObservedObject var emojiManager: EmojiManager
@@ -42,6 +43,7 @@ struct EmojiPicker: View {
                     ForEach(emojiManager.emojiList, id: \.self) { emoji in
                         Button(action: {
                             habit.dailyEmoji[selectedDate.dictKey] = emoji
+                            isEmojiView = true
                             save()
                         }) {
                             Text(emoji)
