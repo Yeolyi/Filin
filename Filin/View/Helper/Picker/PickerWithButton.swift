@@ -15,34 +15,17 @@ struct PickerWithButton: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Text(str.localized)
-                    .bodyText()
-                Spacer()
-            }
-            HStack {
+            VStack {
                 Picker(selection: $number, label: Text(""), content: {
                     ForEach(1..<size + 1, id: \.self) { num in
                         Text(String(num))
                             .bodyText()
                     }
                 })
-                .frame(width: 200, height: 150)
+                .frame(width: 150, height: 150)
                 .clipped()
-                VStack(spacing: 48) {
-                    BasicButton("chevron.left.2") {
-                        withAnimation {
-                            number = max(1, number - 25)
-                        }
-                    }
-                    .rotationEffect(.init(degrees: 90))
-                    BasicButton("chevron.right.2") {
-                        withAnimation {
-                            number = min(size, number + 25)
-                        }
-                    }
-                    .rotationEffect(.init(degrees: 90))
-                }
+                Text(str.localized)
+                    .bodyText()
             }
         }
     }

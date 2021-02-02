@@ -11,24 +11,34 @@ struct DayOfWeekSelector: View {
     
     @Binding var dayOfTheWeek: Set<Int>
     
+    @Environment(\.colorScheme) var colorScheme
+    
+    init(dayOfTheWeek: Binding<Set<Int>>) {
+        self._dayOfTheWeek = dayOfTheWeek
+    }
+    
     func isNextChecked(_ index: Int) -> Bool {
         dayOfTheWeek.contains(index) && dayOfTheWeek.contains(index + 1)
     }
     
     var body: some View {
-        HStack(spacing: 0) {
+        HStack(spacing: 5) {
             ForEach(1..<8) { dayOfTheWeekInt in
                 ZStack {
                     if dayOfTheWeek.contains(dayOfTheWeekInt) {
-                        Rectangle()
+                        Circle()
                             .mainColor()
+                            .frame(width: 40, height: 40)
                     }
                     Text(Date.dayOfTheWeekShortStr(dayOfTheWeekInt))
-                        .foregroundColor(dayOfTheWeek.contains(dayOfTheWeekInt) ? .white : .black)
+                        .foregroundColor(
+                            dayOfTheWeek.contains(dayOfTheWeekInt) ?
+                            Color.white :
+                                ThemeColor.mainColor(colorScheme)
+                        )
                         .bodyText()
                 }
                 .frame(width: 44, height: 44)
-                .zIndex(0)
                 .onTapGesture {
                     if dayOfTheWeek.contains(dayOfTheWeekInt) {
                         dayOfTheWeek.remove(at: dayOfTheWeek.firstIndex(of: dayOfTheWeekInt)!)

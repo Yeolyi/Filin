@@ -13,37 +13,32 @@ struct TimerPicker: View {
     @Binding var second: Int
     
     var body: some View {
-        GeometryReader { geo in
-            HStack {
-                VStack {
-                    Picker(selection: $minute, label: EmptyView(), content: {
-                        ForEach(0...500, id: \.self) { minute in
-                            Text(String(minute))
-                                .bodyText()
-                        }
-                    })
-                    .frame(height: 170)
-                    .frame(maxWidth: geo.size.width/2 - 10)
-                    .clipped()
-                    Text("Minute")
-                        .bodyText()
-                }
-                VStack {
-                    Picker(selection: $second, label: EmptyView(), content: {
-                        ForEach(0...59, id: \.self) { second in
-                            Text(String(second))
-                                .bodyText()
-                        }
-                    })
-                    .frame(height: 170)
-                    .frame(maxWidth: geo.size.width/2 - 10)
-                    .clipped()
-                    Text("Second")
-                        .bodyText()
-                }
+        HStack {
+            VStack {
+                Picker(selection: $minute, label: EmptyView(), content: {
+                    ForEach(0...500, id: \.self) { minute in
+                        Text(String(minute))
+                            .bodyText()
+                    }
+                })
+                .frame(width: 150, height: 150)
+                .clipped()
+                Text("Minute")
+                    .bodyText()
+            }
+            VStack {
+                Picker(selection: $second, label: EmptyView(), content: {
+                    ForEach(0...59, id: \.self) { second in
+                        Text(String(second))
+                            .bodyText()
+                    }
+                })
+                .frame(width: 150, height: 150)
+                .clipped()
+                Text("Second")
+                    .bodyText()
             }
         }
-        .frame(height: 200)
         .padding(.bottom, 5)
     }
 }
