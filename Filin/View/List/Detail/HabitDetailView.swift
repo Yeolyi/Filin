@@ -21,6 +21,7 @@ struct HabitDetailView: View {
     @State var activeSheet: DetailViewActiveSheet?
     @State var selectedDate = Date()
     @State var isEmojiView = false
+    @State var isCalendarExpanded = false
     
     @EnvironmentObject var habit: FlHabit
     @EnvironmentObject var habitManager: HabitManager
@@ -35,7 +36,7 @@ struct HabitDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                RingCalendar(selectedDate: $selectedDate, isEmojiView: $isEmojiView, habits: .init(contents: [habit]))
+                RingCalendar(selectedDate: $selectedDate, isEmojiView: $isEmojiView, isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: [habit]))
                 DailyProgressBar(selectedDate: selectedDate, isEmojiMode: $isEmojiView)
                 EmojiPicker(
                     selectedDate: $selectedDate, isEmojiView: $isEmojiView, habit: habit, emojiManager: emojiManager, activeSheet: $activeSheet
@@ -68,7 +69,7 @@ struct HabitDetailView: View {
                 EmojiListEdit()
                     .environmentObject(emojiManager)
             case .share:
-                HabitShare(habit: habit)
+                HabitShare(habit: habit, selectedDate: selectedDate, isEmojiView: isEmojiView, isExpanded: isCalendarExpanded)
                     .environmentObject(appSetting)
             }
         }

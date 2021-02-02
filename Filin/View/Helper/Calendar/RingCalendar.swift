@@ -11,8 +11,8 @@ struct RingCalendar: View {
     
     @Binding var selectedDate: Date
     
-    @State var isExpanded = false
     @Binding var isEmojiView: Bool
+    @Binding var isCalendarExpanded: Bool
     
     @ObservedObject var habits: HabitGroup
     
@@ -24,12 +24,12 @@ struct RingCalendar: View {
         CalendarInterface(
             selectedDate: $selectedDate,
             color: habits.contents[0].color,
-            isExpanded: $isExpanded,
+            isExpanded: $isCalendarExpanded,
             isEmojiView: $isEmojiView
         ) { week, isExpanded in
             if isEmojiView {
                 EmojiCalendarRow(
-                    week: week, isExpanded: isExpanded, selectedDate: $selectedDate,
+                    week: week, isExpanded: isCalendarExpanded, selectedDate: $selectedDate,
                     habit: habits.contents[0]
                 )
             } else {

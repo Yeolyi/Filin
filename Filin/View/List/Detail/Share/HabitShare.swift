@@ -10,31 +10,9 @@ import SwiftUI
 struct HabitShare: View {
     
     let habit: FlHabit
-    
-    @State var _isExpanded = false
-    var isExpanded: Binding<Bool> {
-        Binding(
-            get: {_isExpanded},
-            set: {
-                _isExpanded = $0
-                if $0 && (imageAspect == .square || imageAspect == .fourThree) {
-                    imageAspect = .fourFive
-                }
-                updateImage()
-            }
-        )
-    }
-    
-    var selectedDate: Binding<Date> {
-        Binding(
-            get: {_selectedDate},
-            set: {_selectedDate = $0; updateImage()}
-        )
-    }
-    
-    @State var _selectedDate = Date()
-    @State var showCalendarSelect = false
-    @State var isEmojiView = false
+    let selectedDate: Date
+    let isEmojiView: Bool
+    let isExpanded: Bool
     @State private var imageAspect: ImageSize = .free
     @State var calendarImage: UIImage?
     
@@ -44,9 +22,9 @@ struct HabitShare: View {
     
     func updateImage() {
         calendarImage = CalendarWithLogo(
-            isExpanded: _isExpanded, habit: habit,
+            isExpanded: isExpanded, habit: habit,
             imageAspect: imageAspect, isEmojiView: isEmojiView,
-            selectedDate: selectedDate.wrappedValue, appSetting: appSetting
+            selectedDate: selectedDate, appSetting: appSetting
         )
         .asImage()
     }
@@ -72,9 +50,14 @@ struct HabitShare: View {
                     self.imageAspect == imageAspect ?
                         ThemeColor.mainColor(colorScheme) : ThemeColor.subColor(colorScheme)
                 )
+                .strikethrough(
+                    (imageAspect == .fourThree || imageAspect == .square) && isExpanded,
+                    color: ThemeColor.subColor(colorScheme)
+                )
                 .bodyText()
                 .flatRowBackground(innerBottomPadding: true, 10, 0, 0)
         }
+        .disabled((imageAspect == .fourThree || imageAspect == .square) && isExpanded)
     }
     
     var body: some View {
@@ -83,64 +66,21 @@ struct HabitShare: View {
                 Text("Calendar Share".localized)
                     .sectionText()
                     .padding(.bottom, 15)
-                settingRow("Expand".localized) {
-                    PaperToggle(isExpanded)
-                        .padding(.vertical, 10)
-                }
-                settingRow("Calendar Mode".localized) {
-                    Button(action: {isEmojiView = false; updateImage()}) {
-                        Image(systemName: "calendar")
-                            .font(.system(size: 25))
-                            .frame(width: 44, height: 44)
-                            .foregroundColor(
-                                isEmojiView ? ThemeColor.subColor(colorScheme) : ThemeColor.mainColor(colorScheme)
-                            )
-                    }
-                    Button(action: {isEmojiView = true; updateImage()}) {
-                        Image(systemName: "face.smiling")
-                            .font(.system(size: 25))
-                            .frame(width: 44, height: 44)
-                            .foregroundColor(
-                                !isEmojiView ? ThemeColor.subColor(colorScheme) : ThemeColor.mainColor(colorScheme)
-                            )
-                    }
-                }
-                Button(action: {
-                    withAnimation {
-                        showCalendarSelect.toggle()
-                    }
-                }) {
-                    settingRow("Set Date".localized) {
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 20))
-                            .frame(width: 44, height: 44)
-                            .mainColor()
-                            .rotationEffect(showCalendarSelect ? .degrees(90) : .degrees(0))
-                    }
-                }
-                if showCalendarSelect {
-                    DatePicker("", selection: selectedDate, displayedComponents: [.date])
-                        .datePickerStyle(WheelDatePickerStyle())
-                        .labelsHidden()
-                }
-                HStack(spacing: 10) {
-                    imageSizeSelectButton(.free)
-                    if isExpanded.wrappedValue == false {
-                        imageSizeSelectButton(.square)
-                        imageSizeSelectButton(.fourThree)
-                    }
-                    imageSizeSelectButton(.fourFive)
-                    Spacer()
-                }
-                .padding(.leading, 10)
                 if calendarImage != nil {
                     Image(uiImage: calendarImage!)
                         .resizable()
                         .scaledToFit()
                         .animation(nil)
                         .rowBackground()
-                        .padding(.vertical, 20)
                 }
+                HStack(spacing: 10) {
+                    imageSizeSelectButton(.free)
+                    imageSizeSelectButton(.square)
+                    imageSizeSelectButton(.fourThree)
+                    imageSizeSelectButton(.fourFive)
+                    Spacer()
+                }
+                .padding(.leading, 10)
                 Button(action: {
                     if let image = calendarImage {
                         share(items: [image])
@@ -194,11 +134,4 @@ func share(
     vc.popoverPresentationController?.sourceView = source.view
     source.present(vc, animated: true)
     return true
-}
-
-struct HabitShare_Previews: PreviewProvider {
-    static var previews: some View {
-        HabitShare(habit: FlHabit.habit1)
-            .environmentObject(AppSetting())
-    }
 }
