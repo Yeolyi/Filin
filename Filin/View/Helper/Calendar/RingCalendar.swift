@@ -39,14 +39,11 @@ struct RingCalendar: View {
                         id: \.self
                     ) { date in
                         Button(action: {selectedDate = date}) {
-                            Ring(habits: habits, date: date, selectedDate: selectedDate, isExpanded: isExpanded)
-                            /*
-                            if appSetting.useRing {
-                                Ring(habits: habits, date: date)
+                            if appSetting.calendarMode == .ring {
+                                Ring(habits: habits, date: date, selectedDate: selectedDate, isExpanded: isExpanded)
                             } else {
                                 Tile(date: date, selectedDate: selectedDate, isExpanded: isExpanded, habits: habits)
                             }
- */
                         }
                         .frame(width: 44)
                     }

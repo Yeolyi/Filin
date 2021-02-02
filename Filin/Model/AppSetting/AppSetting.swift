@@ -55,8 +55,8 @@ class AppSetting: ObservableObject {
         runCount == 1
     }
     
-    @AutoSave("useRing", defaultValue: true)
-    var useRing: Bool {
+    @AutoSave("calendarMode", defaultValue: .ring)
+    var calendarMode: CalendarMode {
         didSet {
             objectWillChange.send()
         }

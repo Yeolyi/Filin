@@ -11,6 +11,8 @@
 		250823E42584E33A0005D7CE /* LinearProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250823E32584E33A0005D7CE /* LinearProgressBar.swift */; };
 		2511363325B5DF3600BE5F10 /* lottiePlus.json in Resources */ = {isa = PBXBuildFile; fileRef = 2511363225B5DF3600BE5F10 /* lottiePlus.json */; };
 		2512767725C84A08000466B4 /* DailyProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512767625C84A08000466B4 /* DailyProgressBar.swift */; };
+		2512767F25C8F27C000466B4 /* CalendarMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512767E25C8F27C000466B4 /* CalendarMode.swift */; };
+		2512768325C8F46A000466B4 /* lottieStack.json in Resources */ = {isa = PBXBuildFile; fileRef = 25FC34EA25A03A66000B5844 /* lottieStack.json */; };
 		2514EF6625C1030F00633146 /* FlatRowBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514EF6525C1030F00633146 /* FlatRowBackground.swift */; };
 		2519664F25BC52530054BAF4 /* RowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519664E25BC52530054BAF4 /* RowData.swift */; };
 		251EFC67259E4DD300748917 /* Summary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251EFC63259E4DD300748917 /* Summary+CoreDataClass.swift */; };
@@ -37,7 +39,6 @@
 		2530711925BBE57D002AC0C6 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530711825BBE57D002AC0C6 /* Achievement.swift */; };
 		2532DC762598F49D006DBA25 /* RoutineDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2532DC752598F49D006DBA25 /* RoutineDate.swift */; };
 		2532DC7F2598F70B006DBA25 /* RoutineNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2532DC7E2598F70B006DBA25 /* RoutineNotification.swift */; };
-		253F65C125C306D1009213C8 /* lottieStack.json in Resources */ = {isa = PBXBuildFile; fileRef = 253F65B925C306AF009213C8 /* lottieStack.json */; };
 		25498A4D25BC045700283E71 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25498A4C25BC045700283E71 /* Palette.swift */; };
 		25498A5125BC048800283E71 /* PaletteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25498A5025BC048800283E71 /* PaletteProtocol.swift */; };
 		25522D5625BC117900243C18 /* RowPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25522D5525BC117900243C18 /* RowPadding.swift */; };
@@ -188,6 +189,7 @@
 		250823E32584E33A0005D7CE /* LinearProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressBar.swift; sourceTree = "<group>"; };
 		2511363225B5DF3600BE5F10 /* lottiePlus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottiePlus.json; sourceTree = "<group>"; };
 		2512767625C84A08000466B4 /* DailyProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyProgressBar.swift; sourceTree = "<group>"; };
+		2512767E25C8F27C000466B4 /* CalendarMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMode.swift; sourceTree = "<group>"; };
 		2514EF6525C1030F00633146 /* FlatRowBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatRowBackground.swift; sourceTree = "<group>"; };
 		2519664E25BC52530054BAF4 /* RowData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowData.swift; sourceTree = "<group>"; };
 		251EFC63259E4DD300748917 /* Summary+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Summary+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -802,6 +804,7 @@
 			isa = PBXGroup;
 			children = (
 				25FE74FA25C830370030EB0A /* HabitGroup.swift */,
+				2512767E25C8F27C000466B4 /* CalendarMode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -926,11 +929,11 @@
 				25C0F38725AB3FCE00235560 /* GodoB.ttf in Resources */,
 				2563B5042582826B00731635 /* LaunchScreen.storyboard in Resources */,
 				2563B5012582826B00731635 /* Preview Assets.xcassets in Resources */,
+				2512768325C8F46A000466B4 /* lottieStack.json in Resources */,
 				25277CE5258E1BB70026B8F3 /* .swiftlint.yml in Resources */,
 				2511363325B5DF3600BE5F10 /* lottiePlus.json in Resources */,
 				25A564E725904F9D00239CF6 /* Localizable.strings in Resources */,
 				2563B4FE2582826B00731635 /* Assets.xcassets in Resources */,
-				253F65C125C306D1009213C8 /* lottieStack.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1115,6 +1118,7 @@
 				25C9FA2925907CEA0046C523 /* ImageSaver.swift in Sources */,
 				258DD4FC25A9ADE300A2C20E /* FlHabit.swift in Sources */,
 				255C1174258F38E200E0F740 /* DayOfWeekSelector.swift in Sources */,
+				2512767F25C8F27C000466B4 /* CalendarMode.swift in Sources */,
 				25D0405725C4FA66004814B4 /* TimerManager.swift in Sources */,
 				251EFC68259E4DD300748917 /* Routine+CoreDataClass.swift in Sources */,
 				252A0E5B25AA504400A41525 /* RingCalendar.swift in Sources */,

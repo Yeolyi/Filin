@@ -90,11 +90,29 @@ struct SettingView: View {
                         PaperToggle($appSetting.backgroundTimer)
                     }
                     .flatRowBackground()
-                    HStack {
-                        Text("Use Ring".localized)
+                    HStack(spacing: 20) {
+                        Text("Calendar Mode".localized)
                             .bodyText()
                         Spacer()
-                        PaperToggle($appSetting.useRing)
+                        Button(action: { appSetting.calendarMode = .ring }) {
+                            Circle()
+                                .trim(from: 0.0, to: 0.7)
+                                .stroke(style: StrokeStyle(lineWidth: 5.0, lineCap: .round))
+                                .foregroundColor(
+                                    appSetting.calendarMode == .ring ?
+                                        ThemeColor.colorList[0] : ThemeColor.inActive(colorScheme: colorScheme)
+                                )
+                                .rotationEffect(Angle(degrees: -90))
+                                .frame(width: 25, height: 25)
+                        }
+                        Button(action: { appSetting.calendarMode = .tile }) {
+                            Circle()
+                                .foregroundColor(
+                                    appSetting.calendarMode == .tile ?
+                                        ThemeColor.colorList[0].opacity(0.8) : ThemeColor.inActive(colorScheme: colorScheme)
+                                )
+                                .frame(width: 30, height: 30)
+                        }
                     }
                     .flatRowBackground()
                     #if DEBUG
