@@ -30,37 +30,36 @@ struct DayOfWeekSelector: View {
     }
     
     var body: some View {
-        VStack(spacing: 15) {
-            HStack(spacing: 5) {
-                ForEach(1..<8) { dayOfTheWeekInt in
-                    ZStack {
-                        if dayOfTheWeek
-                            .contains(dayOfTheWeekInt) {
-                            Circle()
-                                .mainColor()
-                                .frame(width: 40, height: 40)
-                        }
-                        Text(Date.dayOfTheWeekShortStr(dayOfTheWeekInt))
-                            .foregroundColor(
-                                dayOfTheWeek.contains(dayOfTheWeekInt) ?
-                                    Color.white :
-                                    ThemeColor.mainColor(colorScheme)
-                            )
-                            .bodyText()
+        HStack(spacing: 5) {
+            ForEach(1..<8) { dayOfTheWeekInt in
+                ZStack {
+                    if dayOfTheWeek
+                        .contains(dayOfTheWeekInt) {
+                        Circle()
+                            .mainColor()
+                            .frame(width: 40, height: 40)
+                    } else {
+                        Circle()
+                            .inactiveColor()
+                            .frame(width: 40, height: 40)
                     }
-                    .frame(width: 44, height: 44)
-                    .onTapGesture {
-                        if dayOfTheWeek.contains(dayOfTheWeekInt) {
-                            dayOfTheWeek.remove(at: dayOfTheWeek.firstIndex(of: dayOfTheWeekInt)!)
-                        } else {
-                            dayOfTheWeek.insert(dayOfTheWeekInt)
-                        }
+                    Text(Date.dayOfTheWeekShortStr(dayOfTheWeekInt))
+                        .foregroundColor(
+                            dayOfTheWeek.contains(dayOfTheWeekInt) ?
+                                Color.white :
+                                ThemeColor.subColor(colorScheme)
+                        )
+                        .bodyText()
+                }
+                .frame(width: 44, height: 44)
+                .onTapGesture {
+                    if dayOfTheWeek.contains(dayOfTheWeekInt) {
+                        dayOfTheWeek.remove(at: dayOfTheWeek.firstIndex(of: dayOfTheWeekInt)!)
+                    } else {
+                        dayOfTheWeek.insert(dayOfTheWeekInt)
                     }
                 }
             }
-            Divider()
-            Text(guideStr)
-                .bodyText()
         }
     }
 }

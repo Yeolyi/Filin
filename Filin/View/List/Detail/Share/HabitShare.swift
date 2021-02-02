@@ -79,6 +79,8 @@ struct HabitShare: View {
                     Spacer()
                 }
                 .padding(.leading, 10)
+                Divider()
+                    .padding(.top, 20)
                 Button(action: {
                     if let image = calendarImage {
                         share(items: [image])

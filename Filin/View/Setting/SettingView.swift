@@ -27,6 +27,13 @@ struct SettingView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 0) {
+                    HStack {
+                        Text("General".localized)
+                            .bodyText()
+                        Spacer()
+                    }
+                    .padding(.leading, 20)
+                    .padding(.top, 20)
                     Button(action: {isTapSetting = true}) {
                         VStack {
                             HStack {
@@ -77,17 +84,24 @@ struct SettingView: View {
                         )
                     }
                     HStack {
-                        Text("Start week on Monday".localized)
-                            .bodyText()
-                        Spacer()
-                        PaperToggle($appSetting.isMondayStart)
-                    }
-                    .flatRowBackground()
-                    HStack {
                         Text("Run Timer in Background".localized)
                             .bodyText()
                         Spacer()
                         PaperToggle($appSetting.backgroundTimer)
+                    }
+                    .flatRowBackground()
+                    HStack {
+                        Text("Calendar".localized)
+                            .bodyText()
+                        Spacer()
+                    }
+                    .padding(.leading, 20)
+                    .padding(.top, 20)
+                    HStack {
+                        Text("Start week on Monday".localized)
+                            .bodyText()
+                        Spacer()
+                        PaperToggle($appSetting.isMondayStart)
                     }
                     .flatRowBackground()
                     HStack(spacing: 20) {
@@ -117,6 +131,13 @@ struct SettingView: View {
                     }
                     .flatRowBackground()
                     #if DEBUG
+                    HStack {
+                        Text("DEBUG".localized)
+                            .bodyText()
+                        Spacer()
+                    }
+                    .padding(.leading, 20)
+                    .padding(.top, 20)
                     Button(action: {
                         _ = DataSample.shared
                     }) {
