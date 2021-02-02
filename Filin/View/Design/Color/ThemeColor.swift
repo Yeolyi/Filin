@@ -16,7 +16,7 @@ class ThemeColor: ObservableObject {
         colorScheme == .light ? subLight : subDark
     }
     
-    static func inActive(colorScheme: ColorScheme) -> Color {
+    static func inActive(_ colorScheme: ColorScheme) -> Color {
         subColor(colorScheme).opacity(0.25)
     }
     

@@ -29,7 +29,7 @@ struct FlatRowBackground: ViewModifier {
                 .padding(.top, innerVerticalPadding)
                 .padding(.bottom, isInnerBottomPadding ? innerVerticalPadding : 0)
                 .padding(.horizontal, 10)
-                .background(ThemeColor.inActive(colorScheme: colorScheme).opacity(0.5))
+                .background(ThemeColor.inActive(colorScheme).opacity(0.5))
         }
         .cornerRadius(5)
             .padding(.horizontal, horizontalPadding)

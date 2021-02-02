@@ -62,7 +62,7 @@ struct CalendarWithLogo: View {
         VStack(spacing: 0) {
             CaptureCalendar(
                 isEmojiView: isEmojiView,
-                isExpanded: isExpanded, selectedDate: selectedDate, habit1: habit
+                selectedDate: selectedDate, isExpanded: isExpanded, habits: .init(contents: [habit])
             )
             .environmentObject(appSetting)
             .rowBackground()

@@ -29,7 +29,7 @@ struct EmojiCalendarRow: View {
                                     (
                                         date.month == selectedDate.month ?
                                             ThemeColor.mainColor(colorScheme) :
-                                            ThemeColor.inActive(colorScheme: colorScheme)
+                                            ThemeColor.inActive(colorScheme)
                                     )
                             )
                             .bodyText()

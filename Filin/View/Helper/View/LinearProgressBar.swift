@@ -29,7 +29,7 @@ struct LinearProgressBar: View {
         .background(
             Rectangle()
                 .frame(height: 24)
-                .foregroundColor(ThemeColor.inActive(colorScheme: colorScheme))
+                .foregroundColor(ThemeColor.inActive(colorScheme))
         )
         .cornerRadius(5)
         .onAppear {

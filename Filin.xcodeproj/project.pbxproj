@@ -365,6 +365,7 @@
 			children = (
 				25FE74F925C830260030EB0A /* Model */,
 				25FE74F825C8300A0030EB0A /* Helper */,
+				25D0C99D259F96C80018273E /* EmojiCalendarRow.swift */,
 				258B6AF7258289C80004BFE7 /* DateExtension.swift */,
 				252A0E5A25AA504400A41525 /* RingCalendar.swift */,
 			);
@@ -604,7 +605,6 @@
 				25E163622599C0F80082A87A /* EmojiManager.swift */,
 				25E16359259929E70082A87A /* EmojiPicker.swift */,
 				25E163662599CBAA0082A87A /* EmojiListEdit.swift */,
-				25D0C99D259F96C80018273E /* EmojiCalendarRow.swift */,
 			);
 			path = Emoji;
 			sourceTree = "<group>";

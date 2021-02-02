@@ -100,7 +100,7 @@ struct SettingView: View {
                                 .stroke(style: StrokeStyle(lineWidth: 5.0, lineCap: .round))
                                 .foregroundColor(
                                     appSetting.calendarMode == .ring ?
-                                        ThemeColor.colorList[0] : ThemeColor.inActive(colorScheme: colorScheme)
+                                        ThemeColor.colorList[0] : ThemeColor.inActive(colorScheme)
                                 )
                                 .rotationEffect(Angle(degrees: -90))
                                 .frame(width: 25, height: 25)
@@ -109,7 +109,7 @@ struct SettingView: View {
                             Circle()
                                 .foregroundColor(
                                     appSetting.calendarMode == .tile ?
-                                        ThemeColor.colorList[0].opacity(0.8) : ThemeColor.inActive(colorScheme: colorScheme)
+                                        ThemeColor.colorList[0].opacity(0.8) : ThemeColor.inActive(colorScheme)
                                 )
                                 .frame(width: 30, height: 30)
                         }

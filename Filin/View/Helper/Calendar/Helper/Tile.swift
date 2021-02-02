@@ -21,7 +21,7 @@ struct Tile: View {
                 Circle()
                     .foregroundColor(
                         (date.month == selectedDate.month) || !isExpanded ?
-                            habits[0].color : ThemeColor.inActive(colorScheme: colorScheme)
+                            habits[0].color : ThemeColor.inActive(colorScheme)
                     )
                     .opacity(habits[0].achievement.progress(at: date) ?? 0)
                 if date.month != selectedDate.month && isExpanded {

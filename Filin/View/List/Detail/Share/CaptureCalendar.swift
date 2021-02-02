@@ -12,41 +12,13 @@ struct CaptureCalendar: View {
     let isEmojiView: Bool
     let selectedDate: Date
     let isExpanded: Bool
-    let habit1: FlHabit
-    let habit2: FlHabit
-    let habit3: FlHabit
+    @ObservedObject var habits: HabitGroup
     
     @EnvironmentObject var appSetting: AppSetting
     @Environment(\.colorScheme) var colorScheme
     
-    var habitsWrapped: [FlHabit?] {
-        [
-            habit1.requiredSec == -1 ? nil : habit1,
-            habit2.requiredSec == -1 ? nil : habit2,
-            habit3.requiredSec == -1 ? nil : habit3
-        ]
-    }
-    
     var color: Color {
-        if habitsWrapped.compactMap({$0}).isEmpty {
-            return ThemeColor.mainColor(colorScheme)
-        } else {
-            return habitsWrapped.compactMap({$0})[0].color
-        }
-    }
-    
-    init(isEmojiView: Bool,
-         isExpanded: Bool, selectedDate: Date,
-         habit1: FlHabit, habit2: FlHabit? = nil, habit3: FlHabit? = nil
-    ) {
-        self.isEmojiView = isEmojiView
-        self.isExpanded = isExpanded
-        self.selectedDate = selectedDate
-        let nilHabit = FlHabit(name: "Nil")
-        nilHabit.requiredSec = -1
-        self.habit1 = habit1
-        self.habit2 = habit2 == nil ? nilHabit : habit2!
-        self.habit3 = habit3 == nil ? nilHabit : habit3!
+        habits[0].color
     }
     
     var body: some View {
@@ -54,7 +26,7 @@ struct CaptureCalendar: View {
             HStack {
                 VStack {
                     HStack(alignment: .bottom, spacing: 3) {
-                        Text(habit1.name)
+                        Text(habits[0].name)
                             .foregroundColor(color)
                             .headline()
                         Spacer()
@@ -67,7 +39,7 @@ struct CaptureCalendar: View {
             }
             .padding(.bottom, 15)
             if isExpanded {
-                VStack(spacing: 0) {
+                VStack(spacing: 8) {
                     ForEach(
                         1..<selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart) + 1, id: \.self
                     ) { week in
@@ -84,13 +56,25 @@ struct CaptureCalendar: View {
     func calendarContent(week: Int) -> some View {
         if isEmojiView {
             EmojiCalendarRow(
-                week: week,
-                isExpanded: isExpanded,
-                selectedDate: .constant(selectedDate),
-                habit: habitsWrapped.compactMap({$0})[0]
+                week: week, isExpanded: isExpanded,
+                selectedDate: .constant(selectedDate), habit: habits[0]
             )
         } else {
-            EmptyView()
+            HStack(spacing: 4) {
+                ForEach(
+                    selectedDate.daysInSameWeek(week: week, from: appSetting.isMondayStart ? 2 : 1),
+                    id: \.self
+                ) { date in
+                    Group {
+                        if appSetting.calendarMode == .ring {
+                            Ring(habits: habits, date: date, selectedDate: selectedDate, isExpanded: isExpanded)
+                        } else {
+                            Tile(date: date, selectedDate: selectedDate, isExpanded: isExpanded, habits: habits)
+                        }
+                    }
+                    .frame(width: 44)
+                }
+            }
         }
     }
 }
@@ -98,8 +82,7 @@ struct CaptureCalendar: View {
 struct CaptureCalendar_Previews: PreviewProvider {
     static var previews: some View {
         CaptureCalendar(
-            isEmojiView: false, isExpanded: true,
-            selectedDate: Date(), habit1: FlHabit.habit1
+            isEmojiView: false, selectedDate: Date(), isExpanded: true, habits: .init(contents: [FlHabit.habit1])
         )
         .environmentObject(AppSetting())
         .rowBackground()

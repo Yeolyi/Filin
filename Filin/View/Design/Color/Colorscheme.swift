@@ -39,7 +39,7 @@ struct InactiveColor: ViewModifier {
     @Environment(\.colorScheme) var colorScheme
     func body(content: Content) -> some View {
         content
-            .foregroundColor(ThemeColor.inActive(colorScheme: colorScheme))
+            .foregroundColor(ThemeColor.inActive(colorScheme))
     }
 }
 
