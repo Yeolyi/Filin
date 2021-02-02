@@ -18,18 +18,23 @@ struct Tile: View {
     var body: some View {
         if habits.count == 1 {
             ZStack {
-                Circle()
-                    .foregroundColor(
-                        (date.month == selectedDate.month) || !isExpanded ?
-                            habits[0].color : ThemeColor.inActive(colorScheme)
-                    )
-                    .opacity(habits[0].achievement.progress(at: date) ?? 0)
+                ZStack {
+                    Circle()
+                        .foregroundColor(
+                            (date.month == selectedDate.month) || !isExpanded ?
+                                habits[0].color : ThemeColor.inActive(colorScheme)
+                        )
+                        .opacity(habits[0].achievement.progress(at: date) ?? 0)
+                }
                 if date.month != selectedDate.month && isExpanded {
                     Text("\(date.day)")
                         .inactiveColor()
                         .bodyText()
                 } else {
                     Text("\(date.day)")
+                        .if(date.dictKey == selectedDate.dictKey) {
+                            $0.underline()
+                        }
                         .bodyText()
                         .opacity(0.8)
                 }
