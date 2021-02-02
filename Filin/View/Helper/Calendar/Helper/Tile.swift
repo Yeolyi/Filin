@@ -33,7 +33,7 @@ struct Tile: View {
                 } else {
                     Text("\(date.day)")
                         .if(date.dictKey == selectedDate.dictKey) {
-                            $0.underline()
+                            $0.font(.system(size: 16, weight: .heavy))
                         }
                         .bodyText()
                         .opacity(0.8)

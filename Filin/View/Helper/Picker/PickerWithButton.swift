@@ -24,8 +24,10 @@ struct PickerWithButton: View {
                 })
                 .frame(width: 150, height: 150)
                 .clipped()
-                Text(str.localized)
-                    .bodyText()
+                if str != "" {
+                    Text(str.localized)
+                        .bodyText()
+                }
             }
         }
     }

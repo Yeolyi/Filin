@@ -63,7 +63,7 @@ struct HabitShare: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
-                Text("Calendar Share".localized)
+                Text("Share".localized)
                     .sectionText()
                     .padding(.bottom, 15)
                 if calendarImage != nil {

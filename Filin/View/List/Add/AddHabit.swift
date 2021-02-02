@@ -10,79 +10,99 @@ import SwiftUI
 struct AddHabit: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @State var currentPage = 1
-    let totalPage = 5
     @ObservedObject var tempHabit = FlHabit(name: "")
-    var isNextAvailable: Bool {
-        switch currentPage {
-        case 1:
-            return tempHabit.name != ""
-        case 2: return !tempHabit.dayOfWeek.isEmpty
-        case 3: return tempHabit.achievement.numberOfTimes > 0
-        case 4: return !tempHabit.isTimer || tempHabit.requiredSec > 0
-        case 5: return true
-        default:
-            assertionFailure()
-            return true
-        }
+    @EnvironmentObject var habitManager: HabitManager
+    @EnvironmentObject var appSetting: AppSetting
+    @Environment(\.colorScheme) var colorScheme
+    
+    var isSaveAvailable: Bool {
+        #if DEBUG
+        return true
+        #else
+        return tempHabit.name != "" && !tempHabit.dayOfWeek.isEmpty
+            && tempHabit.achievement.numberOfTimes != 0
+        #endif
     }
     
     var body: some View {
-        ZStack {
-            if currentPage == 1 {
-                NameSection(name: $tempHabit.name)
-            }
-            if currentPage == 2 {
-                DateSection(dayOfTheWeek: $tempHabit.dayOfWeek)
-            }
-            if currentPage == 3 {
-                TimesSection(
-                    numberOfTimes: $tempHabit.achievement.numberOfTimes,
-                    addUnit: $tempHabit.achievement.addUnit
-                )
-            }
-            if currentPage == 4 {
-                TimerSection(time: $tempHabit.requiredSec)
-            }
-            if currentPage == 5 {
-                ThemeSection(color: $tempHabit.color)
-            }
-            VStack {
-                Spacer()
-                HStack {
-                    previousButton
-                    Spacer()
+        ScrollView {
+            VStack(spacing: 30) {
+                VStack(spacing: 0) {
+                    LottieView(filename: "lottiePlus")
+                        .frame(width: 120, height: 120)
+                        .if(colorScheme == .dark) {
+                            $0.colorInvert()
+                        }
+                    Text(appSetting.isFirstRun && habitManager.contents.isEmpty ?
+                            "Make first goal".localized : "Make new goal".localized)
+                        .title()
                 }
-                nextButton
-            }
-        }
-        .padding(.bottom, 20)
-    }
-    var previousButton: some View {
-        BasicTextButton("Previous".localized) {
-            self.currentPage = max(self.currentPage - 1, 1)
-        }
-        .padding(.leading, 20)
-        .padding(.bottom, 5)
-        .if(currentPage == 1) {
-            $0.hidden()
-        }
-    }
-    var nextButton: some View {
-        MainRectButton(
-            action: {
-                if isNextAvailable == false { return }
-                if currentPage == totalPage {
-                    saveAndQuit()
-                    return
+                .padding(.top, 21)
+                .padding(.bottom, 35)
+                VStack(spacing: 3) {
+                    HStack {
+                        Text("What is the name of the goal?".localized)
+                            .bodyText()
+                        Spacer()
+                    }
+                    .padding(.leading, 20)
+                    TextFieldWithEndButton("Drink water".localized, text: $tempHabit.name)
+                        .flatRowBackground()
                 }
-                self.currentPage += 1
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            },
-            str: currentPage == totalPage ? "Done".localized: "\("Next".localized) (\(currentPage)/\(totalPage))"
-        )
-        .opacity(isNextAvailable ? 1.0 : 0.5)
+                VStack(spacing: 8) {
+                    HStack {
+                        Text("Choose the day of the week to proceed with the goal.".localized)
+                            .bodyText()
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer()
+                    }
+                    .padding(.leading, 20)
+                    DayOfWeekSelector(dayOfTheWeek: $tempHabit.dayOfWeek)
+                        .frame(maxWidth: .infinity)
+                        .flatRowBackground()
+                }
+                VStack(spacing: 8) {
+                    HStack {
+                        Text("How many times do you want to achieve your goal in a day?".localized)
+                            .bodyText()
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer()
+                    }
+                    .padding(.leading, 20)
+                    HabitNumberSetting(tempHabit)
+                }
+                VStack(spacing: 8) {
+                    HStack {
+                        Text("""
+                            Use a timer if you need a specific time to \
+                            achieve your goal.\nE.g. two-minute plank.
+                            """.localized)
+                            .bodyText()
+                        Spacer()
+                    }
+                    .padding(.leading, 20)
+                    HabitTimerSetting(requiredSec: $tempHabit.requiredSec)
+                }
+                VStack(spacing: 8) {
+                    HStack {
+                        Text("Select theme color.".localized)
+                            .bodyText()
+                        Spacer()
+                    }
+                    .padding(.leading, 20)
+                    ColorHorizontalPicker(selectedColor: $tempHabit.color)
+                        .frame(maxWidth: .infinity)
+                        .flatRowBackground(innerBottomPadding: true, 20, 0)
+                }
+                MainRectButton(action: saveAndQuit, str: "Done".localized)
+                    .padding(.vertical, 30)
+                    .opacity(isSaveAvailable ? 1 : 0.3)
+                    .disabled(!isSaveAvailable)
+            }
+            .padding(.top, 1)
+        }
     }
+    
     func saveAndQuit() {
         HabitManager.shared.append(tempHabit)
         self.presentationMode.wrappedValue.dismiss()
@@ -94,5 +114,6 @@ struct AddHabit_Previews: PreviewProvider {
     static var previews: some View {
         return AddHabit()
             .environmentObject(AppSetting())
+            .environmentObject(DataSample.shared.habitManager)
     }
 }

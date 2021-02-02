@@ -13,12 +13,14 @@
 "Save" = "저장";
 "Cancel" = "취소";
 "Delete %@?" = "%@를 삭제하시겠습니까?";
-"On" = "켜기";
-"Off" = "끄기";
+"On" = "켜짐";
+"Off" = "꺼짐";
 "Share" = "공유하기";
 "Instagram Story" = "인스타그램 스토리";
 "Emoji" = "이모지";
 "Date" = "날짜";
+"Day of the week" = "요일";
+"Total" = "총";
 
 // 리스트 탭
 "List" = "목록";
@@ -28,18 +30,18 @@
 "Every day" = "매일";
 
 // 목표 추가
-"Make first goal" = "첫번째 목표 만들기";
-"Make new goal" = "새로운 목표 만들기";
-"What is the name of the goal?" = "이름을 입력하세요.";
+"Make first goal" = "첫번째 목표 추가";
+"Make new goal" = "목표 추가하기";
+"What is the name of the goal?" = "🖊 목표의 이름을 알려주세요.";
 "Drink water" = "물 마시기";
 "Previous" = "이전";
 "Next" = "다음";
 "Repeat" = "반복";
-"Choose the day of the week to proceed with the goal." = "목표를 진행할 요일을 설정합니다.";
+"Choose the day of the week to proceed with the goal." = "📅 매주 무슨 요일에 목표를 이루시겠어요?";
 "Number of times" = "횟수";
-"How many times do you want to achieve your goal in a day?" = "하루에 몇 번 목표를 달성하시겠습니까?";
+"How many times do you want to achieve your goal in a day?" = "🔢 하루 몇 회가 목표이신가요?";
 "Timer" = "타이머";
-"Use a timer if you need a specific time to achieve your goal. E.g. two-minute plank." = "목표 달성에 특정 시간이 필요하다면 타이머를 사용하세요. 예) 2분 플랭크.";
+"Use a timer if you need a specific time to achieve your goal.\nE.g. two-minute plank." = "⏱ 타이머가 필요하신가요?";
 "Use timer" = "타이머 사용";
 "Minute" = "분";
 "Second" = "초";
@@ -49,7 +51,7 @@
 "Stretching" = "스트레칭";
 "Set goals and execute them." = "목표를 세우고 실행하세요.";
 "Add new goal" = "새로운 목표 추가";
-"Select theme color." = "테마색을 선택하세요.";
+"Select theme color." = "🎨 마지막으로, 테마색을 선택해주세요!";
 "Split into sets" = "세트로 나누기";
 "How many times do you proceed in one set?" = "한 세트 당 몇 회씩 진행하실건가요?";
 "How many sets are there?" = "세트는 몇 개인가요?";
