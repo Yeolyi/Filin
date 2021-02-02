@@ -15,7 +15,7 @@ struct Palette {
         case green = "#83d378"
         case blue = "#5996f8"
         case purple = "#b57ddf"
-        case pink = "#fcafc0"
+        case pink = "#FE7F9C"
     }
     
 }

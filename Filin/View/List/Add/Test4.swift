@@ -18,6 +18,8 @@ struct TimerSection: View {
             _isRequiredTime = $0
             if $0 == false {
                 time = 0
+            } else {
+                time = _second + _minute * 60
             }
         })
     }

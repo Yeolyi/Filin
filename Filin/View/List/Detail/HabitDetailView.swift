@@ -47,7 +47,7 @@ struct HabitDetailView: View {
             }
         }
         .padding(.top, 1)
-        .navigationBarTitle(habit.name)
+        .navigationBarTitle(Text(habit.name))
         .navigationBarItems(
             trailing:
                 HStack {

@@ -39,7 +39,7 @@ extension Color {
     var hue: CGFloat {
         self.uiColor().hue
     }
-    private func uiColor() -> UIColor {
+    func uiColor() -> UIColor {
         if #available(iOS 14.0, *) {
             return UIColor(self)
         }
