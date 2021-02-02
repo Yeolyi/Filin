@@ -27,9 +27,9 @@ struct EmojiCalendarRow: View {
                             .foregroundColor(
                                 selectedDate.dictKey == date.dictKey ? habit.color :
                                     (
-                                        date.month == selectedDate.month ?
-                                            ThemeColor.mainColor(colorScheme) :
-                                            ThemeColor.inActive(colorScheme)
+                                        (date.month != selectedDate.month && isExpanded) ?
+                                            ThemeColor.inActive(colorScheme) :
+                                            ThemeColor.mainColor(colorScheme)
                                     )
                             )
                             .bodyText()
@@ -48,7 +48,7 @@ struct EmojiCalendarRow: View {
                                 }
                             }
                         }
-                        .opacity(selectedDate.month == date.month ? 1 : 0.3)
+                        .opacity((date.month != selectedDate.month && isExpanded) ? 0.3 : 1)
                     }
                 }
                 .frame(width: 40)
