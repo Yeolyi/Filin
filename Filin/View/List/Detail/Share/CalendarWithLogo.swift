@@ -57,6 +57,8 @@ struct CalendarWithLogo: View {
     let selectedDate: Date
     let appSetting: AppSetting
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         VStack(spacing: 0) {
             CaptureCalendar(
@@ -67,7 +69,7 @@ struct CalendarWithLogo: View {
             .rowBackground()
             HStack(spacing: 4) {
                 Spacer()
-                Image("Icon1024")
+                Image(colorScheme == .light ? "Icon1024" : "icon_dark")
                     .resizable()
                     .frame(width: 16, height: 16)
                     .cornerRadius(4)
@@ -93,5 +95,6 @@ struct CalendarImage_Previews: PreviewProvider {
             isExpanded: false, habits: .init(contents: [FlHabit.habit1]),
             imageAspect: .free, isEmojiView: false, selectedDate: Date(), appSetting: AppSetting()
         )
+        .environment(\.colorScheme, .dark)
     }
 }

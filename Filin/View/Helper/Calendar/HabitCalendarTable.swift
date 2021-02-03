@@ -81,7 +81,7 @@ struct HabitCalendarTable: View {
             if imageAspect != nil {
                 HStack(spacing: 4) {
                     Spacer()
-                    Image("Icon1024")
+                    Image(colorScheme == .light ? "Icon1024" : "icon_dark")
                         .resizable()
                         .frame(width: 16, height: 16)
                         .cornerRadius(4)
