@@ -15,22 +15,23 @@ struct CheckButton: View {
     }
     let date: Date
     @EnvironmentObject var habit: FlHabit
+    @EnvironmentObject var appSetting: AppSetting
     
     var body: some View {
         if habit.isTimer {
             NavigationLink(
                 destination:
-                    HabitTimer(date: date).environmentObject(habit)
+                    HabitTimer(date: date, habit: habit)
             ) {
                 Image(systemName: showCheck ? "clock.fill" : "clock")
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(habit.color)
-                    .frame(width: 44, height: 44)
+                    .frame(height: 44)
             }
         } else {
             Button(action: {
                 withAnimation {
-                    habit.achievement.set(at: Date(), using: { current, addUnit in
+                    habit.achievement.set(at: appSetting.mainDate, using: { current, addUnit in
                         current + addUnit
                     })
                 }
@@ -39,7 +40,7 @@ struct CheckButton: View {
                 Image(systemName: showCheck ? "checkmark.circle.fill" : "plus.circle")
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(habit.color)
-                    .frame(width: 44, height: 44)
+                    .frame(height: 44)
             }
         }
     }
@@ -49,5 +50,6 @@ struct HabitCheckButton_Previews: PreviewProvider {
     static var previews: some View {
         CheckButton(date: Date())
             .environmentObject(FlHabit(name: "Test"))
+            .previewDevice(.init(stringLiteral: "iPhone 12 Pro"))
     }
 }

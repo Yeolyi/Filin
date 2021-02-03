@@ -8,7 +8,6 @@
 import SwiftUI
 
 protocol PaletteComponent: RawRepresentable, CaseIterable where RawValue == String {
-    
     var color: Color { get }
 }
 

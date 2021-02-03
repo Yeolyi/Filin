@@ -9,13 +9,16 @@ import SwiftUI
 
 struct HabitRow: View {
     
+    let showAdd: Bool
+    var date: Date?
+    
     @ObservedObject var habit: FlHabit
-    @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var appSetting: AppSetting
+    
     @State var isTapping = false
     @State var activeSheet: DetailViewActiveSheet?
-    var date: Date?
-    let showAdd: Bool
+    
+    @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var appSetting: AppSetting
     
     init(habit: FlHabit, showAdd: Bool, date: Date? = nil) {
         self.habit = habit
@@ -38,7 +41,7 @@ struct HabitRow: View {
     }
     
     var body: some View {
-        HStack(spacing: 0) {
+        HStack(spacing: 10) {
             if showAdd {
                 CheckButton(date: date ?? appSetting.mainDate)
                     .environmentObject(habit)
@@ -51,40 +54,43 @@ struct HabitRow: View {
                     VStack {
                         HStack {
                             Text(subTitle)
+                                .subColor()
                                 .bodyText()
                             Spacer()
                         }
                         HStack {
                             Text(habit.name)
                                 .foregroundColor(habit.color)
-                                .headline()
+                                .font(.custom("GodoB", size: 20))
                             Spacer()
                         }
                     }
                     if habit.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek) {
-                        ZStack {
+                        VStack(spacing: 3) {
+                            ZStack {
+                                Text("\(habit.achievement.content[date?.dictKey ?? appSetting.mainDate.dictKey] ?? 0)")
+                                    .foregroundColor(habit.color)
+                                    .bodyText()
+                                    .offset(
+                                        x: min(75.0, -75.0 + 150.0 / CGFloat(habit.achievement.numberOfTimes) *
+                                            CGFloat(
+                                                habit.achievement.content[date?.dictKey ?? appSetting.mainDate.dictKey]
+                                                    ?? 0)
+                                            ),
+                                        y: -23
+                                    )
                             LinearProgressBar(
                                 color: habit.color,
                                 progress: habit.achievement.progress(at: date ?? appSetting.mainDate) ?? 0
                             )
-                            HStack {
-                                Spacer()
-                                Text("""
-                                    \(habit.achievement.content[date?.dictKey ?? appSetting.mainDate.dictKey] ?? 0)/ \
-                                    \(habit.achievement.numberOfTimes)
-                                    """)
-                                    .mainColor()
-                                    .opacity(0.8)
-                                    .bodyText()
-                                    .padding(.trailing, 5)
                             }
-                            .zIndex(1)
                         }
-                        .frame(width: 150, height: 20)
+                        .frame(width: 150)
+                        .offset(y: 5)
+                        .padding(.trailing, 5)
                     }
                 }
             }
-            .padding(.leading, 5)
         }
         .rowBackground()
     }
@@ -93,7 +99,8 @@ struct HabitRow: View {
 struct HabitRow_Previews: PreviewProvider {
     static var previews: some View {
         let coredataPreview = DataSample.shared
-        HabitRow(habit: FlHabit(name: "Test"), showAdd: true)
+        HabitRow(habit: FlHabit(name: "10분 걷기"), showAdd: true)
             .environmentObject(coredataPreview.habitManager)
+            .environmentObject(AppSetting())
     }
 }

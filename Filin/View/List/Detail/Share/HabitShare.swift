@@ -9,207 +9,127 @@ import SwiftUI
 
 struct HabitShare: View {
     
-    private enum ImageSize {
-        case fourThree
-        case fourFive
-        case free
-        case square
-        var sizeTuple: (width: CGFloat, height: CGFloat) {
-            switch self {
-            case .fourThree:
-                return (340, 255)
-            case .fourFive:
-                return (340, 425)
-            case .free:
-                return (0, 0)
-            case .square:
-                return (340, 340)
-            }
-        }
-    }
-    
     let habit: FlHabit
-
-    @State var isExpanded = false
-    @State var selectedDate = Date()
-    @State var showCalendarSelect = false
-    @State var isEmojiView = false
+    let selectedDate: Date
+    let isEmojiView: Bool
+    let isExpanded: Bool
     @State private var imageAspect: ImageSize = .free
+    @State var calendarImage: UIImage?
     
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var appSetting: AppSetting
     @Environment(\.presentationMode) var presentationMode
     
-    init(habit: FlHabit) {
-        self.habit = habit
+    func updateImage() {
+        calendarImage = CalendarWithLogo(
+            isExpanded: isExpanded, habit: habit,
+            imageAspect: imageAspect, isEmojiView: isEmojiView,
+            selectedDate: selectedDate, appSetting: appSetting
+        )
+        .asImage()
     }
     
-    var calendarImage: UIImage {
-        VStack(spacing: 0) {
-            CaptureCalendar(showCalendarSelect: $showCalendarSelect, isEmojiView: $isEmojiView,
-                            isExpanded: $isExpanded, selectedDate: $selectedDate, habit1: habit)
-                .environmentObject(appSetting)
-                .if(imageAspect != .free) {
-                    $0.frame(width: imageAspect.sizeTuple.width, height: imageAspect.sizeTuple.height)
-                }
-                .rowBackground()
-            HStack(spacing: 4) {
-                Spacer()
-                Image("Icon1024")
-                    .resizable()
-                    .frame(width: 15, height: 15)
-                    .cornerRadius(4)
-                Text("FILIN")
-                    .font(.system(size: 12, weight: .semibold))
-                    .padding(.trailing, 10)
-            }
+    func settingRow<Content: View>(_ label: String, @ViewBuilder content: @escaping () -> Content) -> some View {
+        HStack {
+            Text(label)
+                .bodyText()
+            Spacer()
+            content()
         }
-        .padding(20) // 비율 맞게 패딩값 조절하기
-        .asImage()
+        .flatRowBackground()
+    }
+    
+    @ViewBuilder
+    func imageSizeSelectButton(_ imageAspect: ImageSize) -> some View {
+        Button(action: {
+            self.imageAspect = imageAspect
+            updateImage()
+        }) {
+            Group {
+                Text("  \(imageAspect.localized)  ")
+                    .foregroundColor(
+                        self.imageAspect == imageAspect ?
+                            ThemeColor.mainColor(colorScheme) : ThemeColor.subColor(colorScheme)
+                    )
+                    .strikethrough(isExpanded && imageAspect == .fourThree, color: ThemeColor.subColor(colorScheme))
+                    .bodyText()
+                    .padding(.vertical, 15)
+                    .padding(.horizontal, 10)
+                    .background(ThemeColor.inActive(colorScheme).opacity(0.5))
+            }
+            .cornerRadius(5)
+            
+        }
+        .disabled((imageAspect == .fourThree) && isExpanded)
     }
     
     var body: some View {
         ScrollView {
-            Text("Preview".localized)
-                .sectionText()
-            CaptureCalendar(showCalendarSelect: $showCalendarSelect, isEmojiView: $isEmojiView,
-                            isExpanded: $isExpanded, selectedDate: $selectedDate, habit1: habit)
-                .environmentObject(appSetting)
-                .if(imageAspect != .free) {
-                    $0.frame(width: imageAspect.sizeTuple.width, height: imageAspect.sizeTuple.height)
+            VStack(spacing: 10) {
+                Text("Share".localized)
+                    .sectionText()
+                Divider()
+                    .padding(.bottom, 15)
+                if calendarImage != nil {
+                    Image(uiImage: calendarImage!)
+                        .resizable()
+                        .scaledToFit()
+                        .animation(nil)
+                        .rowBackground()
                 }
-                .padding(20)
-                .rowBackground()
-            Divider()
-            HStack(spacing: 0) {
+                HStack(spacing: 10) {
+                    imageSizeSelectButton(.free)
+                    imageSizeSelectButton(.square)
+                    imageSizeSelectButton(.fourThree)
+                    imageSizeSelectButton(.fourFive)
+                    Spacer()
+                }
+                .padding(.leading, 10)
+                Divider()
+                    .padding(.top, 20)
                 Button(action: {
-                    withAnimation {
-                        isExpanded.toggle()
-                        if isExpanded && (imageAspect == .square || imageAspect == .fourThree) {
-                            imageAspect = .fourFive
-                        }
+                    if let image = calendarImage {
+                        share(items: [image])
                     }
                 }) {
-                    HStack {
-                        Spacer()
-                        VStack(spacing: 5) {
-                            BasicImage(
-                                imageName: isExpanded ?
-                                    "arrow.down.right.and.arrow.up.left" :
-                                    "arrow.up.left.and.arrow.down.right"
-                            )
-                            Text(isExpanded ? "Fold".localized : "Expand".localized)
-                                .subColor()
-                                .bodyText()
-                        }
-                        Spacer()
+                    settingRow("Save/Share".localized) {
+                        Image(systemName: "square.and.arrow.down")
+                            .font(.system(size: 25))
+                            .padding(.trailing, 10)
+                            .mainColor()
                     }
-                    .rowBackground(8)
                 }
                 Button(action: {
-                    withAnimation {
-                        isEmojiView.toggle()
+                    if let image = calendarImage {
+                        SharingHandler.instagramStory(imageData: image.pngData()!, colorScheme: colorScheme)
                     }
                 }) {
-                    HStack {
-                        Spacer()
-                        VStack(spacing: 5) {
-                            BasicImage(imageName: isEmojiView ? "percent" : "face.smiling")
-                            Text(isEmojiView ? "Progress".localized : "Emoji".localized)
-                                .subColor()
-                                .bodyText()
-                        }
-                        Spacer()
+                    settingRow("Instagram Story".localized) {
+                        Image("Instagram_AppIcon")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .padding(.trailing, 10)
                     }
-                    .rowBackground(8)
-                }
-                Button(action: {
-                    withAnimation {
-                        showCalendarSelect.toggle()
-                    }
-                }) {
-                    HStack {
-                        Spacer()
-                        VStack(spacing: 7) {
-                            BasicImage(imageName: showCalendarSelect ? "checkmark" : "calendar")
-                            Text("Date".localized)
-                                .subColor()
-                                .bodyText()
-                        }
-                        Spacer()
-                    }
-                    .rowBackground(8)
                 }
             }
-            .padding(.horizontal, 10)
-            HStack(spacing: 0) {
-                HStack(spacing: 3) {
-                    Image(systemName: imageAspect == .free ? "square.dashed.inset.fill" : "square.dashed")
-                        .subColor()
-                    BasicTextButton("Free".localized) {
-                        imageAspect = .free
-                    }
-                }
-                .rowBackground(5, 0, 5)
-                if isExpanded == false {
-                HStack(spacing: 3) {
-                    Image(systemName: imageAspect == .square ? "square.fill" : "square")
-                        .subColor()
-                    BasicTextButton("Square".localized) {
-                        imageAspect = .square
-                    }
-                }
-                .rowBackground(5, 0, 5)
-                HStack(spacing: 3) {
-                    Image(systemName: imageAspect == .fourThree ? "rectangle.fill" : "rectangle")
-                        .subColor()
-                    BasicTextButton("4:3".localized) {
-                        imageAspect = .fourThree
-                    }
-                }
-                .rowBackground(5, 0, 5)
-                }
-                HStack(spacing: 3) {
-                    Image(systemName: imageAspect == .fourFive ? "rectangle.portrait.fill" : "rectangle.portrait")
-                        .subColor()
-                    BasicTextButton("4:5".localized) {
-                        imageAspect = .fourFive
-                    }
-                }
-                .rowBackground(5, 0, 5)
-            }
-            .padding(.bottom, 8)
-            .padding(.horizontal, 5)
-            Divider()
-            VStack(spacing: 0) {
-                Button(action: {
-                    share(items: [calendarImage])
-                }) {
-                    HStack {
-                        Spacer()
-                        Text("Image Save/Share".localized)
-                            .bodyText()
-                        Spacer()
-                    }
-                    .rowBackground(innerBottomPadding: true, 15)
-                }
-                Button(action: {
-                    SharingHandler.instagramStory(imageData: calendarImage.pngData()!, colorScheme: colorScheme)
-                }) {
-                    HStack {
-                        Spacer()
-                        Text("Instagram Story".localized)
-                            .bodyText()
-                        Spacer()
-                    }
-                    .rowBackground(innerBottomPadding: true, 15)
-                }
-            }
-            .padding(.top, 1)
+            .padding(.bottom, 20)
         }
         .onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification)) { _ in
             presentationMode.wrappedValue.dismiss()
-         }
+        }
+        .onAppear {
+            updateImage()
+        }
+    }
+}
+
+struct HabitShare_Previews: PreviewProvider {
+    static var previews: some View {
+        let dataSample = DataSample.shared
+        return HabitShare(
+            habit: dataSample.habitManager.contents[0],
+            selectedDate: Date(), isEmojiView: false, isExpanded: true
+        ).environmentObject(AppSetting())
     }
 }
 
@@ -229,11 +149,4 @@ func share(
     vc.popoverPresentationController?.sourceView = source.view
     source.present(vc, animated: true)
     return true
-}
-
-struct HabitShare_Previews: PreviewProvider {
-    static var previews: some View {
-        HabitShare(habit: FlHabit.habit1)
-            .environmentObject(AppSetting())
-    }
 }

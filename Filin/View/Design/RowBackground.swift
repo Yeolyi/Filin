@@ -11,50 +11,57 @@ struct RowBackground: ViewModifier {
     
     @Environment(\.colorScheme) var colorScheme
     let isInnerBottomPadding: Bool
-    let innerVerticalPadding: CGFloat
-    let outerVerticalPadding: CGFloat
-    let horizontalPadding: CGFloat
     
-    init(_ isInnerBottomPadding: Bool, _ verticalPadding: CGFloat,
-         _ outerVerticalPadding: CGFloat, _ horizontalPadding: CGFloat) {
+    init(_ isInnerBottomPadding: Bool) {
         self.isInnerBottomPadding = isInnerBottomPadding
-        self.innerVerticalPadding = verticalPadding
-        self.outerVerticalPadding = outerVerticalPadding
-        self.horizontalPadding = horizontalPadding
     }
     
     func body(content: Content) -> some View {
         content
-            .padding(.top, innerVerticalPadding)
-            .padding(.bottom, isInnerBottomPadding ? innerVerticalPadding : 0)
-            .padding(.horizontal, 10)
+            .padding(.top, 18)
+            .padding(.bottom, isInnerBottomPadding ? 18 : 0)
+            .padding(.horizontal, 15)
             .background(
                 Rectangle()
                     .foregroundColor(colorScheme == .light ? .white : Color(hex: "#151515"))
-                    .cornerRadius(10)
+                    .cornerRadius(8)
                     .shadow(
                         color: (colorScheme == .light ? Color.gray.opacity(0.6) : .clear),
-                        radius: 4, x: 2.5, y: 2.5
+                        radius: 1.8, y: 1.28
                     )
             )
-            .padding(.horizontal, horizontalPadding)
-            .padding(.vertical, outerVerticalPadding)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 8)
     }
 }
 
 extension View {
-    func rowBackground(innerBottomPadding: Bool = true, _ verticalPadding: CGFloat = 20,
-                       _ outerVerticalPadding: CGFloat = 10, _ horizontalPadding: CGFloat = 10) -> some View {
-        modifier(RowBackground(innerBottomPadding, verticalPadding, outerVerticalPadding, horizontalPadding))
+    func rowBackground(innerBottomPadding: Bool = true) -> some View {
+        modifier(RowBackground(innerBottomPadding))
     }
 }
 
 struct RowBackground_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            HabitRow(habit: FlHabit(name: "Text"), showAdd: true)
+            VStack(spacing: 0) {
+                ForEach(0...4, id: \.self) { _ in
+                    HabitRow(habit: FlHabit(name: "Text"), showAdd: true)
+                }
+            }
+        }
+        .environmentObject(AppSetting())
+        .environment(\.colorScheme, .light)
+        .previewDevice(.init(stringLiteral: "iPhone 12 Pro"))
+        NavigationView {
+            VStack(spacing: 0) {
+                ForEach(0...4, id: \.self) { _ in
+                    HabitRow(habit: FlHabit(name: "Text"), showAdd: true)
+                }
+            }
         }
         .environmentObject(AppSetting())
         .environment(\.colorScheme, .dark)
+        .previewDevice(.init(stringLiteral: "iPhone 12 Pro"))
     }
 }

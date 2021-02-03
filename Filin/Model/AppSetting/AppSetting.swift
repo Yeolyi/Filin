@@ -55,6 +55,23 @@ class AppSetting: ObservableObject {
         runCount == 1
     }
     
+    @AutoSave("calendarMode", defaultValue: .ring)
+    var calendarMode: CalendarMode {
+        didSet {
+            objectWillChange.send()
+        }
+    }
+    
+    @AutoSave("sceneBackgroundTime", defaultValue: nil)
+    var sceneBackgroundTime: Date?
+    
+    @AutoSave("backgroundTimer", defaultValue: true)
+    var backgroundTimer: Bool {
+        didSet {
+            objectWillChange.send()
+        }
+    }
+    
     var mainDate: Date {
         if Date().hour >= dayResetTime {
             return Date()

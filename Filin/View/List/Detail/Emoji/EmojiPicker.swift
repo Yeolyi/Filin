@@ -11,6 +11,7 @@ import CoreData
 struct EmojiPicker: View {
     
     @Binding var selectedDate: Date
+    @Binding var isEmojiView: Bool
     @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject var habit: FlHabit
     @ObservedObject var emojiManager: EmojiManager
@@ -41,7 +42,10 @@ struct EmojiPicker: View {
                 HStack(spacing: 20) {
                     ForEach(emojiManager.emojiList, id: \.self) { emoji in
                         Button(action: {
-                            habit.dailyEmoji[selectedDate.dictKey] = emoji
+                            withAnimation {
+                                habit.dailyEmoji[selectedDate.dictKey] = emoji
+                                isEmojiView = true
+                            }
                             save()
                         }) {
                             Text(emoji)
@@ -50,7 +54,10 @@ struct EmojiPicker: View {
                         }
                     }
                     Button(action: {
-                        habit.dailyEmoji[selectedDate.dictKey] = nil
+                        withAnimation {
+                            isEmojiView = true
+                            habit.dailyEmoji[selectedDate.dictKey] = nil
+                        }
                         save()
                     }) {
                         Image(systemName: "xmark.circle")

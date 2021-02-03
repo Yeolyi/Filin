@@ -10,14 +10,13 @@ import SwiftUI
 struct SummaryPreview: View {
     
     @Binding var isSettingSheet: Bool
+    @State var isCalendarExpanded = false
     
     var body: some View {
         Group {
             RingCalendar(
-                selectedDate: .constant(Date()),
-                habit1: FlHabit.habit1,
-                habit2: FlHabit.habit2,
-                habit3: nil
+                selectedDate: .constant(Date()), isEmojiView: .constant(false),
+                isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
             )
             HabitRow(habit: FlHabit.habit1, showAdd: false)
             HabitRow(habit: FlHabit.habit2, showAdd: false)

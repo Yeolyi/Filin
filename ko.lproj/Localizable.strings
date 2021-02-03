@@ -13,12 +13,14 @@
 "Save" = "저장";
 "Cancel" = "취소";
 "Delete %@?" = "%@를 삭제하시겠습니까?";
-"On" = "켜기";
-"Off" = "끄기";
+"On" = "켜짐";
+"Off" = "꺼짐";
 "Share" = "공유하기";
 "Instagram Story" = "인스타그램 스토리";
 "Emoji" = "이모지";
 "Date" = "날짜";
+"Day of the week" = "요일";
+"Total" = "총";
 
 // 리스트 탭
 "List" = "목록";
@@ -28,18 +30,18 @@
 "Every day" = "매일";
 
 // 목표 추가
-"Make first goal" = "첫번째 목표 만들기";
-"Make new goal" = "새로운 목표 만들기";
-"What is the name of the goal?" = "이름을 입력하세요.";
+"Make first goal" = "첫번째 목표 추가";
+"Make new goal" = "목표 추가하기";
+"What is the name of the goal?" = "🖊 목표의 이름을 알려주세요.";
 "Drink water" = "물 마시기";
 "Previous" = "이전";
 "Next" = "다음";
 "Repeat" = "반복";
-"Choose the day of the week to proceed with the goal." = "목표를 진행할 요일을 설정합니다.";
+"Choose the day of the week to proceed with the goal." = "📅 매주 무슨 요일에 하실건가요?";
 "Number of times" = "횟수";
-"How many times do you want to achieve your goal in a day?" = "하루에 몇 번 목표를 달성하시겠습니까?";
+"How many times do you want to achieve your goal in a day?" = "🔢 하루 몇 회가 목표이신가요?";
 "Timer" = "타이머";
-"Use a timer if you need a specific time to achieve your goal. E.g. two-minute plank." = "목표 달성에 특정 시간이 필요하다면 타이머를 사용하세요. 예) 2분 플랭크.";
+"Use a timer if you need a specific time to achieve your goal.\nE.g. two-minute plank." = "⏱ 타이머가 필요하신가요?";
 "Use timer" = "타이머 사용";
 "Minute" = "분";
 "Second" = "초";
@@ -49,7 +51,7 @@
 "Stretching" = "스트레칭";
 "Set goals and execute them." = "목표를 세우고 실행하세요.";
 "Add new goal" = "새로운 목표 추가";
-"Select theme color." = "테마색을 선택하세요.";
+"Select theme color." = "🎨 마지막으로, 테마색을 선택해주세요!";
 "Split into sets" = "세트로 나누기";
 "How many times do you proceed in one set?" = "한 세트 당 몇 회씩 진행하실건가요?";
 "How many sets are there?" = "세트는 몇 개인가요?";
@@ -73,7 +75,7 @@
 "Feeling" = "느낌";
 "Edit emoji" = "이모지 설정";
 "Enter a emoji to add" = "추가할 이모지를 입력";
-"Summarize day." = "오늘 하루를 요약하세요";
+"Summarize day." = "오늘 하루는 어떠셨나요?";
 "Trend(week)" = "추세(주)";
 "Trend(month)" = "추세(월)";
 "Trend(day of the week)" = "추세(요일)";
@@ -87,6 +89,10 @@
 "Preview" = "미리보기";
 "Free" = "자유";
 "Square" = "정방형";
+" days" = "일";
+"Continuous Achievement" = "연속 달성일";
+"Continuous Blank" = "연속 공백일";
+"Save/Share" = "저장/공유";
 
 //목표 수정
 "Name" = "이름";
@@ -139,6 +145,8 @@
 "Start week on Monday" = "한 주의 시작을 월요일로";
 "The End of the Day" = "하루가 끝나는 시간";
 "Choose time to initialize info." = "정보를 초기화할 시간을 선택하세요";
+"Run Timer in Background" = "타이머를 백그라운드에서도 작동";
+"Calendar Theme" = "달력 테마";
 
 //위젯
 "Long press and hold the widget to select your goal." = "위젯을 길게 눌러 \n목표를 선택하세요.";

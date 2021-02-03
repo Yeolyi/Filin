@@ -16,6 +16,10 @@ class ThemeColor: ObservableObject {
         colorScheme == .light ? subLight : subDark
     }
     
+    static func inActive(_ colorScheme: ColorScheme) -> Color {
+        subColor(colorScheme).opacity(0.25)
+    }
+    
     static var colorList: [Color] = Palette.Default.allCases.map(\.color)
     
     private static var mainLight = Color(hex: "#404040")
@@ -35,7 +39,7 @@ extension Color {
     var hue: CGFloat {
         self.uiColor().hue
     }
-    private func uiColor() -> UIColor {
+    func uiColor() -> UIColor {
         if #available(iOS 14.0, *) {
             return UIColor(self)
         }

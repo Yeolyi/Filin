@@ -59,10 +59,10 @@ final class DataSample {
 
     private init() {
         let habitDatas: [(name: String, color: Color, numberOfTimes: Int, requiredSec: Int)] = [
-            ("Stretching".localized, Palette.Default.red.color, 10, 10),
-            ("Drink water".localized, Palette.Default.blue.color, 8, 0),
-            ("A ten-minute walk".localized, Palette.Default.orange.color, 3, 0),
-            ("Vitamins".localized, Palette.Default.purple.color, 3, 0)
+            ("유산균 챙겨먹기🥛".localized, Palette.Default.green.color, 2, 0),
+            ("물 2L 마시기💧".localized, Palette.Default.blue.color, 8, 0),
+            ("10분 걷기🚶".localized, Palette.Default.red.color, 3, 600),
+            ("중간 스트레칭🙆‍♀️".localized, Palette.Default.pink.color, 8, 10)
         ]
         var usedIds: [UUID] = []
         let habits: [FlHabit] = habitDatas.map { data in

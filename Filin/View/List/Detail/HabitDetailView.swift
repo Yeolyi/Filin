@@ -17,12 +17,16 @@ enum DetailViewActiveSheet: Identifiable {
 struct HabitDetailView: View {
     
     @ObservedObject var emojiManager = EmojiManager()
+    
+    @State var activeSheet: DetailViewActiveSheet?
+    @State var selectedDate = Date()
+    @State var isEmojiView = false
+    @State var isCalendarExpanded = false
+    
     @EnvironmentObject var habit: FlHabit
     @EnvironmentObject var habitManager: HabitManager
     @EnvironmentObject var appSetting: AppSetting
     @EnvironmentObject var summaryManager: SummaryManager
-    @State var activeSheet: DetailViewActiveSheet?
-    @State var selectedDate = Date()
     
     init(habit: FlHabit) {
         if !habit.isDaily {
@@ -31,18 +35,23 @@ struct HabitDetailView: View {
     }
     var body: some View {
         ScrollView {
-            VStack(spacing: 10) {
-                RingCalendar(selectedDate: $selectedDate, habit1: habit)
-                TodayInformation(selectedDate: $selectedDate)
-                EmojiPicker(
-                    selectedDate: $selectedDate, habit: habit, emojiManager: emojiManager, activeSheet: $activeSheet
+            VStack(spacing: 0) {
+                RingCalendar(
+                    selectedDate: $selectedDate, isEmojiView: $isEmojiView,
+                    isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: [habit])
                 )
+                DailyProgressBar(selectedDate: selectedDate, isEmojiMode: $isEmojiView)
+                EmojiPicker(
+                    selectedDate: $selectedDate, isEmojiView: $isEmojiView,
+                    habit: habit, emojiManager: emojiManager, activeSheet: $activeSheet
+                )
+                HabitStatistics()
                 Text("")
                     .font(.system(size: 30))
             }
         }
         .padding(.top, 1)
-        .navigationBarTitle(habit.name)
+        .navigationBarTitle(Text(habit.name))
         .navigationBarItems(
             trailing:
                 HStack {
@@ -64,12 +73,25 @@ struct HabitDetailView: View {
                 EmojiListEdit()
                     .environmentObject(emojiManager)
             case .share:
-                HabitShare(habit: habit)
+                HabitShare(
+                    habit: habit, selectedDate: selectedDate, isEmojiView: isEmojiView, isExpanded: isCalendarExpanded
+                )
                     .environmentObject(appSetting)
             }
         }
         .onAppear {
             selectedDate = appSetting.mainDate
         }
+    }
+}
+
+struct HabitDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        let dataSample = DataSample.shared
+        return HabitDetailView(habit: FlHabit.habit1)
+            .environmentObject(dataSample.habitManager)
+            .environmentObject(dataSample.summaryManager)
+            .environmentObject(FlHabit.habit1)
+            .environmentObject(AppSetting())
     }
 }

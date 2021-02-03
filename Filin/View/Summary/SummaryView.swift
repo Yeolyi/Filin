@@ -12,11 +12,21 @@ struct SummaryView: View {
     @State var updated = false
     @State var selectedDate = Date()
     @State var isSettingSheet = false
+    @State var isEmojiView = false
+    @State var isCalendarExpanded = false
     
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var summaryManager: SummaryManager
     @EnvironmentObject var habitManager: HabitManager
     @EnvironmentObject var appSetting: AppSetting
+    
+    var habits: [FlHabit] {
+        summaryManager.contents[0].habitArray.compactMap { id in
+            habitManager.contents.first(where: {
+                $0.id == id
+            })
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -26,16 +36,10 @@ struct SummaryView: View {
                         SummaryPreview(isSettingSheet: $isSettingSheet)
                     } else {
                         RingCalendar(
-                            selectedDate: $selectedDate,
-                            habit1: habitManager.contents.first(where: {$0.id == summaryManager.contents[0].first}),
-                            habit2: habitManager.contents.first(where: {$0.id == summaryManager.contents[0].second}),
-                            habit3: habitManager.contents.first(where: {$0.id == summaryManager.contents[0].third})
+                            selectedDate: $selectedDate, isEmojiView: $isEmojiView,
+                            isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: habits)
                         )
-                        ForEach(summaryManager.contents[0].habitArray.compactMap({ id in
-                            habitManager.contents.first(where: {
-                                $0.id == id
-                            })
-                        }), id: \.id) { habit in
+                        ForEach(habits, id: \.id) { habit in
                             HabitRow(habit: habit, showAdd: false, date: selectedDate)
                         }
                     }
@@ -63,11 +67,13 @@ struct SummaryView: View {
     }
 }
 
-/*
- struct CalendarSummaryView_Previews: PreviewProvider {
- static var previews: some View {
- _ = CoreDataPreview.shared
- return SummaryView()
- }
- }
- */
+struct CalendarSummaryView_Previews: PreviewProvider {
+    static var previews: some View {
+        let dataSample = DataSample.shared
+        return SummaryView()
+            .environmentObject(dataSample.habitManager)
+            .environmentObject(dataSample.summaryManager)
+            .environmentObject(AppSetting())
+            .previewDevice(.init(stringLiteral: "iPhone 12 Pro"))
+    }
+}
