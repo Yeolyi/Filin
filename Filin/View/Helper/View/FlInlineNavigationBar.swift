@@ -53,5 +53,6 @@ struct FlInlineNavigationBar_Previews: PreviewProvider {
                 }
             }
         }
+        .environment(\.colorScheme, .dark)
     }
 }

@@ -16,7 +16,7 @@ struct FlatRowBackground: ViewModifier {
             content
                 .padding(.vertical, 20)
                 .padding(.horizontal, 10)
-                .background(ThemeColor.inActive(colorScheme).opacity(0.5))
+                .background(ThemeColor.inActive(colorScheme).opacity(colorScheme == .light ? 0.5 : 1))
         }
         .cornerRadius(5)
             .padding(.horizontal, 10)
@@ -32,16 +32,17 @@ extension View {
 
 struct FlatRowBackground_Previews: PreviewProvider {
     static var previews: some View {
-        ScrollView {
-            ForEach(0..<4) {_ in
-                HStack {
-                    Text("기본 탭 변경")
-                    Spacer()
+        NavigationView {
+            ScrollView {
+                ForEach(0..<4) {_ in
+                    HStack {
+                        Text("기본 탭 변경")
+                        Spacer()
+                    }
+                    .flatRowBackground()
                 }
-                .flatRowBackground()
             }
         }
-        .environmentObject(AppSetting())
-        .previewDevice(.init(stringLiteral: "iPhone 12 Pro"))
+        .environment(\.colorScheme, .dark)
     }
 }

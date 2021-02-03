@@ -30,21 +30,15 @@ struct EditHabit: View {
     }
     
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                HStack {
-                    Text("\(tempHabit.name)")
-                        .headline()
-                    Spacer()
-                    saveButton
-                }
-                .compositingGroup()
-                .padding(20)
-                .background(Color.white)
-                Divider()
+        FlInlineNavigationBar(bar: {
+            HStack {
+                Text("\(tempHabit.name)")
+                    .headline()
                 Spacer()
+                saveButton
             }
-            .zIndex(1)
+            .padding(.horizontal, 20)
+        }) {
             ScrollView {
                 VStack(spacing: 30) {
                     VStack(spacing: 5) {
@@ -100,8 +94,8 @@ struct EditHabit: View {
                     Divider()
                     deleteButton
                 }
+                .padding(.top, 10)
             }
-            .padding(.top, 90)
         }
         .onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification)) { _ in
             presentationMode.wrappedValue.dismiss()
@@ -146,5 +140,6 @@ struct EditHabit: View {
 struct EditHabit_Previews: PreviewProvider {
     static var previews: some View {
         EditHabit(targetHabit: FlHabit(name: "Asd"))
+            .environment(\.colorScheme, .dark)
     }
 }
