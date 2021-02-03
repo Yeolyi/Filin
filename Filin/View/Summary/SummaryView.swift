@@ -7,11 +7,18 @@
 
 import SwiftUI
 
+enum SummaryViewActiveSheet: Identifiable {
+    case edit, share
+    var id: UUID {
+        UUID()
+    }
+}
+
 struct SummaryView: View {
     
     @State var updated = false
     @State var selectedDate = Date()
-    @State var isSettingSheet = false
+    @State var activeSheet: SummaryViewActiveSheet?
     @State var isEmojiView = false
     @State var isCalendarExpanded = false
     
@@ -29,14 +36,18 @@ struct SummaryView: View {
         return temp
     }
     
+    var isRing: Bool {
+        habits.count <= 3 && appSetting.calendarMode == .ring
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 0) {
                     if summaryManager.contents.isEmpty || summaryManager.contents[0].list.isEmpty {
-                        SummaryPreview(isSettingSheet: $isSettingSheet)
+                        
                     } else {
-                        if habits.count <= 3 && appSetting.calendarMode == .ring {
+                        if isRing {
                             HabitCalendar(
                                 selectedDate: $selectedDate, isEmojiView: $isEmojiView,
                                 isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: habits)
@@ -44,7 +55,7 @@ struct SummaryView: View {
                         } else {
                             HabitCalendarTable(
                                 isExpanded: $isCalendarExpanded, isEmojiView: $isEmojiView,
-                                               selectedDate: $selectedDate, habits: .init(contents: habits)
+                                selectedDate: $selectedDate, habits: .init(contents: habits)
                             )
                         }
                     }
@@ -53,16 +64,49 @@ struct SummaryView: View {
             .padding(.top, 1)
             .navigationBarTitle("Summary".localized)
             .navigationBarItems(
-                trailing: HeaderText("Edit".localized) {
-                    isSettingSheet = true
-                }
+                trailing:
+                    HStack {
+                        HeaderButton("square.and.arrow.up") {
+                            activeSheet = SummaryViewActiveSheet.share
+                        }
+                        HeaderText("Edit".localized) {
+                            activeSheet = SummaryViewActiveSheet.edit
+                        }
+                    }
             )
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .sheet(isPresented: $isSettingSheet) {
-            EditSummary(habits: habitManager.contents, current: habits)
-                .accentColor(ThemeColor.mainColor(colorScheme))
-                .environmentObject(summaryManager)
+        .sheet(item: $activeSheet) { item in
+            switch item {
+            case .edit:
+                EditSummary(habits: habitManager.contents, current: habits)
+                    .accentColor(ThemeColor.mainColor(colorScheme))
+                    .environmentObject(summaryManager)
+            case .share:
+                HabitShare(target: { imageAspect in
+                    if isRing {
+                        CalendarWithLogo(
+                            isExpanded: isCalendarExpanded, habits: .init(contents: habits),
+                            imageAspect: imageAspect, isEmojiView: isEmojiView,
+                            selectedDate: selectedDate, appSetting: appSetting
+                        )
+                    } else {
+                        HabitCalendarTable(
+                            isExpanded: $isCalendarExpanded, isEmojiView: $isEmojiView,
+                            selectedDate: $selectedDate, habits: .init(contents: habits),
+                            imageSize: imageAspect
+                        )
+                        .environmentObject(appSetting)
+                    }
+                }, aspectPolicy: { imageSize in
+                    switch imageSize {
+                    case .free:
+                        return true
+                    default:
+                        return !isCalendarExpanded
+                    }
+                })
+            }
         }
         .accentColor(ThemeColor.mainColor(colorScheme))
         .onAppear {

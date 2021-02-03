@@ -12,58 +12,95 @@ struct HabitCalendarTable: View {
     @Binding var isExpanded: Bool
     @Binding var isEmojiView: Bool
     @Binding var selectedDate: Date
+    let imageAspect: ImageSize?
+    
+    init(isExpanded: Binding<Bool>, isEmojiView: Binding<Bool>,
+         selectedDate: Binding<Date>, habits: HabitGroup, imageSize: ImageSize? = nil) {
+        self._isExpanded = isExpanded
+        self._isEmojiView = isEmojiView
+        self._selectedDate = selectedDate
+        self.imageAspect = imageSize
+        self.habits = habits
+    }
     
     @ObservedObject var habits: HabitGroup
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var appSetting: AppSetting
     
     var body: some View {
-        VStack(spacing: 20) {
-            HStack(spacing: 15) {
-                Button(action: {
-                    if isExpanded { selectedDate = selectedDate.addMonth(-1)
-                    } else { selectedDate = selectedDate.addDate(-7)! }
-                }) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 20, weight: .semibold))
-                        .subColor()
-                }
-                Text(selectedDate.localizedYearMonth)
-                    .foregroundColor(habits.count == 1 ? habits.contents[0].color : ThemeColor.subColor(colorScheme))
-                    .headline()
-                Button(action: {
-                    if isExpanded { selectedDate = selectedDate.addMonth(1)
-                    } else { selectedDate = selectedDate.addDate(7)! }
-                }) {
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 20, weight: .semibold))
-                        .subColor()
-                }
-            }
-            VStack(spacing: 15) {
-                if isExpanded {
-                    ForEach(1...selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart), id: \.self
-                    ) { week in
-                        WeekTable(habits: habits, week: week, selectedDate: selectedDate, isEmojiView: isEmojiView)
-                        if week != selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart) {
-                            Divider()
+        VStack(spacing: 0) {
+            VStack(spacing: 20) {
+                if imageAspect == nil {
+                    HStack(spacing: 15) {
+                        Button(action: {
+                            if isExpanded { selectedDate = selectedDate.addMonth(-1)
+                            } else { selectedDate = selectedDate.addDate(-7)! }
+                        }) {
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 20, weight: .semibold))
+                                .subColor()
+                        }
+                        Text(selectedDate.localizedYearMonth)
+                            .foregroundColor(habits.count == 1 ? habits.contents[0].color : ThemeColor.subColor(colorScheme))
+                            .headline()
+                        Button(action: {
+                            if isExpanded { selectedDate = selectedDate.addMonth(1)
+                            } else { selectedDate = selectedDate.addDate(7)! }
+                        }) {
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 20, weight: .semibold))
+                                .subColor()
                         }
                     }
-                } else {
-                    WeekTable(
-                        habits: habits,
-                        week: selectedDate.weekNum(startFromMon: appSetting.isMondayStart),
-                        selectedDate: selectedDate, isEmojiView: isEmojiView
-                    )
                 }
-                
+                VStack(spacing: 15) {
+                    if isExpanded {
+                        ForEach(1...selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart), id: \.self
+                        ) { week in
+                            WeekTable(habits: habits, week: week, selectedDate: selectedDate, isEmojiView: isEmojiView)
+                            if week != selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart) {
+                                Divider()
+                            }
+                        }
+                    } else {
+                        WeekTable(
+                            habits: habits,
+                            week: selectedDate.weekNum(startFromMon: appSetting.isMondayStart),
+                            selectedDate: selectedDate, isEmojiView: isEmojiView
+                        )
+                    }
+                    
+                }
+                if imageAspect == nil {
+                    BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
+                        withAnimation { self.isExpanded.toggle() }
+                    }
+                }
             }
-            BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
-                withAnimation { self.isExpanded.toggle() }
+            .rowBackground(innerBottomPadding: imageAspect == nil ? false : true)
+            if imageAspect != nil {
+                HStack(spacing: 4) {
+                    Spacer()
+                    Image("Icon1024")
+                        .resizable()
+                        .frame(width: 16, height: 16)
+                        .cornerRadius(4)
+                    Text("FILIN")
+                        .font(.system(size: 14, weight: .semibold))
+                }
+                .padding(.trailing, 10)
             }
         }
-        .frame(maxWidth: .infinity)
-        .rowBackground(innerBottomPadding: false)
+        .if(imageAspect != nil && imageAspect! != .free) {
+            $0.frame(width: imageAspect!.sizeTuple.width, height: imageAspect!.sizeTuple.height)
+        }
+        .if(imageAspect != nil && imageAspect! == .free) {
+            $0.frame(width: 400)
+        }
+        .if(imageAspect != nil) {
+            $0.padding(.horizontal, imageAspect!.paddingSize.horizontal)
+                .padding(.vertical, imageAspect!.paddingSize.vertical)
+        }
     }
     
     struct WeekTable: View {

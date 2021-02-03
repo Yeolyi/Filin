@@ -74,7 +74,16 @@ struct HabitDetailView: View {
                     .environmentObject(emojiManager)
             case .share:
                 HabitShare(
-                    habit: habit, selectedDate: selectedDate, isEmojiView: isEmojiView, isExpanded: isCalendarExpanded
+                    target: { imageAspect in
+                        CalendarWithLogo(
+                            isExpanded: isCalendarExpanded, habits: .init(contents: [habit]),
+                            imageAspect: imageAspect, isEmojiView: isEmojiView,
+                            selectedDate: selectedDate, appSetting: appSetting
+                        )
+                    },
+                    aspectPolicy: {
+                        !($0 == .fourThree && isCalendarExpanded)
+                    }
                 )
                     .environmentObject(appSetting)
             }

@@ -7,26 +7,24 @@
 
 import SwiftUI
 
-struct HabitShare: View {
+struct HabitShare<TargetView: View>: View {
     
-    let habit: FlHabit
-    let selectedDate: Date
-    let isEmojiView: Bool
-    let isExpanded: Bool
     @State private var imageAspect: ImageSize = .free
     @State var calendarImage: UIImage?
     
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var appSetting: AppSetting
     @Environment(\.presentationMode) var presentationMode
     
+    let target: (ImageSize) -> TargetView
+    let aspectPolicy: (ImageSize) -> Bool
+    
+    init(@ViewBuilder target: @escaping (ImageSize) -> TargetView, aspectPolicy: @escaping (ImageSize) -> Bool) {
+        self.target = target
+        self.aspectPolicy = aspectPolicy
+    }
+    
     func updateImage() {
-        calendarImage = CalendarWithLogo(
-            isExpanded: isExpanded, habit: habit,
-            imageAspect: imageAspect, isEmojiView: isEmojiView,
-            selectedDate: selectedDate, appSetting: appSetting
-        )
-        .asImage()
+        calendarImage = target(imageAspect).asImage()
     }
     
     func settingRow<Content: View>(_ label: String, @ViewBuilder content: @escaping () -> Content) -> some View {
@@ -51,7 +49,7 @@ struct HabitShare: View {
                         self.imageAspect == imageAspect ?
                             ThemeColor.mainColor(colorScheme) : ThemeColor.subColor(colorScheme)
                     )
-                    .strikethrough(isExpanded && imageAspect == .fourThree, color: ThemeColor.subColor(colorScheme))
+                    .strikethrough(!aspectPolicy(imageAspect), color: ThemeColor.subColor(colorScheme))
                     .bodyText()
                     .padding(.vertical, 15)
                     .padding(.horizontal, 10)
@@ -60,7 +58,7 @@ struct HabitShare: View {
             .cornerRadius(5)
             
         }
-        .disabled((imageAspect == .fourThree) && isExpanded)
+        .disabled(!aspectPolicy(imageAspect))
     }
     
     var body: some View {
@@ -123,15 +121,14 @@ struct HabitShare: View {
     }
 }
 
+/*
 struct HabitShare_Previews: PreviewProvider {
     static var previews: some View {
         let dataSample = DataSample.shared
-        return HabitShare(
-            habit: dataSample.habitManager.contents[0],
-            selectedDate: Date(), isEmojiView: false, isExpanded: true
-        ).environmentObject(AppSetting())
+        return HabitShare(target: <#T##_#>, aspectPolicy: <#T##(ImageSize) -> Bool#>)
     }
 }
+*/
 
 @discardableResult
 func share(
