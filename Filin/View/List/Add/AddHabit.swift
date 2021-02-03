@@ -92,7 +92,7 @@ struct AddHabit: View {
                     .padding(.leading, 20)
                     ColorHorizontalPicker(selectedColor: $tempHabit.color)
                         .frame(maxWidth: .infinity)
-                        .flatRowBackground(innerBottomPadding: true, 20, 0)
+                        .flatRowBackground()
                 }
                 MainRectButton(action: saveAndQuit, str: "Done".localized)
                     .padding(.vertical, 30)

@@ -10,39 +10,23 @@ import SwiftUI
 struct FlatRowBackground: ViewModifier {
     
     @Environment(\.colorScheme) var colorScheme
-    let isInnerBottomPadding: Bool
-    let innerVerticalPadding: CGFloat
-    let outerVerticalPadding: CGFloat
-    let horizontalPadding: CGFloat
-    
-    init(_ isInnerBottomPadding: Bool, _ verticalPadding: CGFloat,
-         _ outerVerticalPadding: CGFloat, _ horizontalPadding: CGFloat) {
-        self.isInnerBottomPadding = isInnerBottomPadding
-        self.innerVerticalPadding = verticalPadding
-        self.outerVerticalPadding = outerVerticalPadding
-        self.horizontalPadding = horizontalPadding
-    }
     
     func body(content: Content) -> some View {
         VStack(spacing: 0) {
             content
-                .padding(.top, innerVerticalPadding)
-                .padding(.bottom, isInnerBottomPadding ? innerVerticalPadding : 0)
+                .padding(.vertical, 20)
                 .padding(.horizontal, 10)
                 .background(ThemeColor.inActive(colorScheme).opacity(0.5))
         }
         .cornerRadius(5)
-            .padding(.horizontal, horizontalPadding)
-            .padding(.vertical, outerVerticalPadding)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 4)
     }
 }
 
 extension View {
-    func flatRowBackground(
-        innerBottomPadding: Bool = true, _ verticalPadding: CGFloat = 20,
-        _ outerVerticalPadding: CGFloat = 4, _ horizontalPadding: CGFloat = 10
-    ) -> some View {
-        modifier(FlatRowBackground(innerBottomPadding, verticalPadding, outerVerticalPadding, horizontalPadding))
+    func flatRowBackground() -> some View {
+        modifier(FlatRowBackground())
     }
 }
 
@@ -58,5 +42,6 @@ struct FlatRowBackground_Previews: PreviewProvider {
             }
         }
         .environmentObject(AppSetting())
+        .previewDevice(.init(stringLiteral: "iPhone 12 Pro"))
     }
 }

@@ -54,11 +54,11 @@ struct HabitTimerSetting: View {
                 Spacer()
                 PaperToggle(isRequiredTime)
             }
-            .flatRowBackground(innerBottomPadding: true, 20, 0)
+            .flatRowBackground()
             if isRequiredTime.wrappedValue {
                 TimerPicker(minute: minute, second: second)
                 .frame(maxWidth: .infinity)
-                .flatRowBackground(innerBottomPadding: true, 20, 0)
+                    .flatRowBackground()
             }
         }
     }

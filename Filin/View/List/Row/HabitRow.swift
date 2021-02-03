@@ -41,7 +41,7 @@ struct HabitRow: View {
     }
     
     var body: some View {
-        HStack(spacing: 0) {
+        HStack(spacing: 10) {
             if showAdd {
                 CheckButton(date: date ?? appSetting.mainDate)
                     .environmentObject(habit)
@@ -61,7 +61,7 @@ struct HabitRow: View {
                         HStack {
                             Text(habit.name)
                                 .foregroundColor(habit.color)
-                                .headline()
+                                .font(.custom("GodoB", size: 20))
                             Spacer()
                         }
                     }
@@ -87,11 +87,10 @@ struct HabitRow: View {
                         }
                         .frame(width: 150)
                         .offset(y: 5)
-                        .padding(.trailing, 10)
+                        .padding(.trailing, 5)
                     }
                 }
             }
-            .padding(.leading, 5)
         }
         .rowBackground()
     }
@@ -100,7 +99,7 @@ struct HabitRow: View {
 struct HabitRow_Previews: PreviewProvider {
     static var previews: some View {
         let coredataPreview = DataSample.shared
-        HabitRow(habit: FlHabit(name: "Test"), showAdd: true)
+        HabitRow(habit: FlHabit(name: "10분 걷기"), showAdd: true)
             .environmentObject(coredataPreview.habitManager)
             .environmentObject(AppSetting())
     }

@@ -72,7 +72,7 @@ struct HabitNumberSetting: View {
                 }
             }
         }
-        .flatRowBackground(innerBottomPadding: true, 20, 0)
+        .flatRowBackground()
     }
 }
 

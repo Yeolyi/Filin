@@ -26,7 +26,7 @@ struct CheckButton: View {
                 Image(systemName: showCheck ? "clock.fill" : "clock")
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(habit.color)
-                    .frame(width: 44, height: 44)
+                    .frame(height: 44)
             }
         } else {
             Button(action: {
@@ -40,7 +40,7 @@ struct CheckButton: View {
                 Image(systemName: showCheck ? "checkmark.circle.fill" : "plus.circle")
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundColor(habit.color)
-                    .frame(width: 44, height: 44)
+                    .frame(height: 44)
             }
         }
     }
@@ -50,5 +50,6 @@ struct HabitCheckButton_Previews: PreviewProvider {
     static var previews: some View {
         CheckButton(date: Date())
             .environmentObject(FlHabit(name: "Test"))
+            .previewDevice(.init(stringLiteral: "iPhone 12 Pro"))
     }
 }

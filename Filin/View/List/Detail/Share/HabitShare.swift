@@ -36,7 +36,7 @@ struct HabitShare: View {
             Spacer()
             content()
         }
-        .flatRowBackground(innerBottomPadding: true, 8, 0, 10)
+        .flatRowBackground()
     }
     
     @ViewBuilder
@@ -45,14 +45,20 @@ struct HabitShare: View {
             self.imageAspect = imageAspect
             updateImage()
         }) {
-            Text("  \(imageAspect.localized)  ")
-                .foregroundColor(
-                    self.imageAspect == imageAspect ?
-                        ThemeColor.mainColor(colorScheme) : ThemeColor.subColor(colorScheme)
-                )
-                .strikethrough(isExpanded && imageAspect == .fourThree, color: ThemeColor.subColor(colorScheme))
-                .bodyText()
-                .flatRowBackground(innerBottomPadding: true, 10, 0, 0)
+            Group {
+                Text("  \(imageAspect.localized)  ")
+                    .foregroundColor(
+                        self.imageAspect == imageAspect ?
+                            ThemeColor.mainColor(colorScheme) : ThemeColor.subColor(colorScheme)
+                    )
+                    .strikethrough(isExpanded && imageAspect == .fourThree, color: ThemeColor.subColor(colorScheme))
+                    .bodyText()
+                    .padding(.vertical, 15)
+                    .padding(.horizontal, 10)
+                    .background(ThemeColor.inActive(colorScheme).opacity(0.5))
+            }
+            .cornerRadius(5)
+            
         }
         .disabled((imageAspect == .fourThree) && isExpanded)
     }
@@ -89,7 +95,7 @@ struct HabitShare: View {
                     settingRow("Save/Share".localized) {
                         Image(systemName: "square.and.arrow.down")
                             .font(.system(size: 25))
-                            .frame(width: 44, height: 44)
+                            .padding(.trailing, 10)
                             .mainColor()
                     }
                 }
@@ -103,7 +109,6 @@ struct HabitShare: View {
                             .resizable()
                             .frame(width: 25, height: 25)
                             .padding(.trailing, 10)
-                            .frame(height: 44)
                     }
                 }
             }
@@ -123,7 +128,7 @@ struct HabitShare_Previews: PreviewProvider {
         let dataSample = DataSample.shared
         return HabitShare(
             habit: dataSample.habitManager.contents[0],
-                          selectedDate: Date(), isEmojiView: false, isExpanded: true
+            selectedDate: Date(), isEmojiView: false, isExpanded: true
         ).environmentObject(AppSetting())
     }
 }

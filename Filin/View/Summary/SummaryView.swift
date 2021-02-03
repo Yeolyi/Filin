@@ -67,11 +67,13 @@ struct SummaryView: View {
     }
 }
 
-/*
- struct CalendarSummaryView_Previews: PreviewProvider {
- static var previews: some View {
- _ = CoreDataPreview.shared
- return SummaryView()
- }
- }
- */
+struct CalendarSummaryView_Previews: PreviewProvider {
+    static var previews: some View {
+        let dataSample = DataSample.shared
+        return SummaryView()
+            .environmentObject(dataSample.habitManager)
+            .environmentObject(dataSample.summaryManager)
+            .environmentObject(AppSetting())
+            .previewDevice(.init(stringLiteral: "iPhone 12 Pro"))
+    }
+}

@@ -55,7 +55,7 @@ struct EditHabit: View {
                         }
                         .padding(.leading, 20)
                         TextFieldWithEndButton("Drink water".localized, text: $tempHabit.name)
-                            .flatRowBackground(innerBottomPadding: true, 20, 0)
+                            .flatRowBackground()
                     }
                     VStack(spacing: 5) {
                         HStack {
@@ -66,7 +66,7 @@ struct EditHabit: View {
                         .padding(.leading, 20)
                         ColorHorizontalPicker(selectedColor: $tempHabit.color)
                             .frame(maxWidth: .infinity)
-                            .flatRowBackground(innerBottomPadding: true, 20, 0)
+                            .flatRowBackground()
                     }
                     VStack(spacing: 5) {
                         HStack {
@@ -77,7 +77,7 @@ struct EditHabit: View {
                         .padding(.leading, 20)
                         DayOfWeekSelector(dayOfTheWeek: $tempHabit.dayOfWeek)
                             .frame(maxWidth: .infinity)
-                            .flatRowBackground(innerBottomPadding: true, 20, 0)
+                            .flatRowBackground()
                     }
                     VStack(spacing: 5) {
                         HStack {
