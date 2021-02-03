@@ -21,26 +21,28 @@ struct SummaryView: View {
     @EnvironmentObject var appSetting: AppSetting
     
     var habits: [FlHabit] {
-        summaryManager.contents[0].habitArray.compactMap { id in
+        let temp = summaryManager.contents[0].list.compactMap { id in
             habitManager.contents.first(where: {
                 $0.id == id
             })
         }
+        return temp
     }
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 0) {
-                    if summaryManager.contents.isEmpty || summaryManager.contents[0].isEmpty {
+                    if summaryManager.contents.isEmpty || summaryManager.contents[0].list.isEmpty {
                         SummaryPreview(isSettingSheet: $isSettingSheet)
                     } else {
                         RingCalendar(
                             selectedDate: $selectedDate, isEmojiView: $isEmojiView,
                             isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: habits)
                         )
-                        ForEach(habits, id: \.id) { habit in
-                            HabitRow(habit: habit, showAdd: false, date: selectedDate)
+                        HStack {
+                            SummaryLegend()
+                            Spacer()
                         }
                     }
                 }
@@ -55,10 +57,9 @@ struct SummaryView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .sheet(isPresented: $isSettingSheet) {
-            ProfileSettingView()
+            EditSummary(habits: habitManager.contents, current: habits)
                 .accentColor(ThemeColor.mainColor(colorScheme))
                 .environmentObject(summaryManager)
-                .environmentObject(habitManager)
         }
         .accentColor(ThemeColor.mainColor(colorScheme))
         .onAppear {
@@ -74,6 +75,5 @@ struct CalendarSummaryView_Previews: PreviewProvider {
             .environmentObject(dataSample.habitManager)
             .environmentObject(dataSample.summaryManager)
             .environmentObject(AppSetting())
-            .previewDevice(.init(stringLiteral: "iPhone 12 Pro"))
     }
 }

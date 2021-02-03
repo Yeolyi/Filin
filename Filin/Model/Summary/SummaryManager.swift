@@ -9,17 +9,17 @@ import SwiftUI
 
 final class SummaryManager: DataBridge {
     
-    typealias Converted = FlSummary
-    typealias Target = Summary
+    typealias Converted = TempSummary
+    typealias Target = FlSummary
     
-    @Published var contents: [FlSummary] = []
+    @Published var contents: [TempSummary] = []
     
     static var shared = SummaryManager()
     
     private init() {
-        contents = fetched.map { FlSummary.init($0) }
+        contents = fetched.map { TempSummary($0) }
         if contents.isEmpty {
-            contents.append(.init(id: UUID(), name: "Default"))
+            contents.append(.init(name: "Default", list: []))
         }
     }
     
@@ -28,7 +28,7 @@ final class SummaryManager: DataBridge {
             if let index = fetched.firstIndex(where: {$0.id == flSummary.id}) {
                 flSummary.copyValues(to: fetched[index])
             } else {
-                let newHabit = Summary(context: moc)
+                let newHabit = FlSummary(context: moc)
                 newHabit.id = flSummary.id
                 flSummary.copyValues(to: newHabit)
             }

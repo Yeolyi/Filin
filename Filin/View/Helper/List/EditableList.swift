@@ -13,8 +13,9 @@ class EditableList<Value: Hashable>: ObservableObject {
     @Published private var dragGestureLength: CGFloat = 0
     @Published private var unclippedContentPosition: CGFloat = 0
     
-    let rowHeight: CGFloat = 50
-    let padding: CGFloat = 5
+    let rowHeight: CGFloat = 65
+    let padding: CGFloat = 10
+    
     var totalHeight: CGFloat {
         CGFloat(list.count) * (padding + rowHeight)
     }
@@ -49,7 +50,7 @@ class EditableList<Value: Hashable>: ObservableObject {
     func rowScrollGesture(maxHeight: CGFloat) -> some Gesture {
         DragGesture()
             .onChanged { value in
-                self.dragGestureLength = value.translation.height / 2
+                self.dragGestureLength += value.translation.height / 2
             }
             .onEnded { _ in
                 withAnimation {
@@ -105,6 +106,8 @@ class EditableList<Value: Hashable>: ObservableObject {
                 rowData.offset = rowHeight + padding
             } else if currentIndex > newIndex {
                 rowData.offset = -(rowHeight + padding)
+            } else {
+                rowData.offset = 0
             }
         }
     }

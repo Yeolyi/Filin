@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 class AppSetting: ObservableObject {
     
@@ -23,8 +24,36 @@ class AppSetting: ObservableObject {
         }
     }
     
+    func summaryConvert(moc: NSManagedObjectContext) {
+        guard summaryUpdated else {
+            let entityName = String(describing: Summary.self)
+            let fetchRequest = NSFetchRequest<Summary>(entityName: entityName)
+            if let fetched = try? moc.fetch(fetchRequest) {
+                guard !fetched.isEmpty else {
+                    return
+                }
+                let summaryManager = SummaryManager.shared
+                if summaryManager.contents.isEmpty {
+                    summaryManager.contents.append(.init(name: "Default", list: fetched.map(\.id)))
+                } else {
+                    var seen: Set<UUID> = []
+                    let legacyFiltered = [fetched[0].first, fetched[0].second, fetched[0].third]
+                        .compactMap({$0}).filter {
+                        seen.insert($0).inserted
+                    }
+                    summaryManager.contents[0].list = legacyFiltered
+                }
+            }
+            summaryUpdated = true
+            return
+        }
+    }
+    
     @AutoSave("appGroupUpdated", defaultValue: false)
     var appGroupUpdated: Bool
+    
+    @AutoSave("summaryUpdated", defaultValue: false)
+    var summaryUpdated: Bool
     
     @AutoSave("runCount", defaultValue: 0)
     var runCount: Int
@@ -55,7 +84,7 @@ class AppSetting: ObservableObject {
         runCount == 1
     }
     
-    @AutoSave("calendarMode", defaultValue: .ring)
+    @AutoSave("calendarMode", defaultValue: .tile)
     var calendarMode: CalendarMode {
         didSet {
             objectWillChange.send()

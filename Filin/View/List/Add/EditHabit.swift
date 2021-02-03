@@ -132,8 +132,8 @@ struct EditHabit: View {
             primaryButton: .default(Text("Cancel".localized)),
             secondaryButton: .destructive(Text("Delete".localized), action: {
                 for profile in summaryManager.contents {
-                    if let index = profile.habitArray.firstIndex(where: {$0 == tempHabit.id}) {
-                        profile[index + 1] = nil
+                    if let index = profile.list.firstIndex(where: {$0 == tempHabit.id}) {
+                        profile.list.remove(at: index)
                     }
                 }
                 habitManager.remove(withID: targetHabit.id, summary: summaryManager.contents[0])

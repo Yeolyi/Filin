@@ -25,7 +25,7 @@ class ThemeColor: ObservableObject {
     private static var mainLight = Color(hex: "#404040")
     private static var mainDark = Color(hex: "#BFBFBF")
     private static var subLight = Color(hex: "#BEBEBE")
-    private static var subDark = Color(hex: "#414141")
+    private static var subDark = Color(hex: "#505050")
 }
 
 extension UIColor {

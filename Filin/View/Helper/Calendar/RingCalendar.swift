@@ -39,7 +39,7 @@ struct RingCalendar: View {
                         id: \.self
                     ) { date in
                         Button(action: {selectedDate = date}) {
-                            if appSetting.calendarMode == .ring || habits.count > 1 {
+                            if appSetting.calendarMode == .ring && habits.count <= 3 {
                                 Ring(habits: habits, date: date, selectedDate: selectedDate, isExpanded: isExpanded)
                             } else {
                                 Tile(date: date, selectedDate: selectedDate, isExpanded: isExpanded, habits: habits)

@@ -81,9 +81,7 @@ final class DataSample {
             habitManager.append(habit)
         }
         
-        summaryManager.append(.init(id: UUID(), name: "Default"))
-        summaryManager.contents[0].first = usedIds[0]
-        summaryManager.contents[0].second = usedIds[1]
+        summaryManager.append(.init(name: "Default", list: habitManager.contents.map(\.id)))
         
         let routine1 = FlRoutine(UUID(), name: "After wake up".localized)
         routine1.list = Array(habits[0...1])

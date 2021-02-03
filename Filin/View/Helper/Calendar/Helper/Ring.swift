@@ -33,7 +33,7 @@ struct Ring: View {
                         .inactiveColor()
                         .frame(width: 16, height: 16)
                 }
-                ForEach(0..<habits.count, id: \.self) { index in
+                ForEach(0..<min(3, habits.count), id: \.self) { index in
                     Circle()
                         .trim(from: 0.0, to: CGFloat(habits[index].achievement.progress(at: date) ?? 0))
                         .stroke(style: StrokeStyle(lineWidth: 5.0 - CGFloat(index) * 0.5, lineCap: .round))

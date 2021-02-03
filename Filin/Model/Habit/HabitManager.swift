@@ -69,21 +69,15 @@ final class HabitManager: DataBridge {
     }
     
     // 의존성 주입!!?!
-    func remove(withID: UUID, summary: FlSummary) {
+    func remove(withID: UUID, summary: TempSummary) {
         guard let index = contents.firstIndex(where: {$0.id == withID}) else {
             assertionFailure("ID와 매칭되는 \(type(of: Converted.self)) 인스턴스가 없습니다.")
             return
         }
         contents.remove(at: index)
         deletedIDs.append(withID)
-        if summary.first == withID {
-            summary.first = nil
-        }
-        if summary.second == withID {
-            summary.second = nil
-        }
-        if summary.third == withID {
-            summary.third = nil
+        if let index = summary.list.firstIndex(where: {$0 == withID}) {
+            summary.list.remove(at: index)
         }
     }
     
