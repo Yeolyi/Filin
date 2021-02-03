@@ -1,7 +1,7 @@
 # Filin
 iOS 목표 관리 앱 'Filin'의 소스 코드입니다.
 
-![](https://img.shields.io/badge/AppStore-v1.2-blue?style=flat-square&logo=App-Store&labelColor=EEEEEE)
+![](https://img.shields.io/badge/AppStore-v1.3-blue?style=flat-square&logo=App-Store&labelColor=EEEEEE)
 
 ![](https://img.shields.io/badge/iOS-13.0+-lightgrey?style=flat-square&logo=apple&labelColor=000000)
 ![](https://img.shields.io/badge/iPadOS-13.0+-lightgrey?style=flat-square&logo=apple&labelColor=000000)
