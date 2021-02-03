@@ -29,7 +29,7 @@ struct SummaryLegend: View {
                         .frame(width: 20, height: 20)
                         .foregroundColor(habit.color)
                     Text(habit.name)
-                        .bodyText()
+                        .font(.custom("GodoB", size: 16))
                 }
             }
         }

@@ -14,7 +14,7 @@ struct SummaryPreview: View {
     
     var body: some View {
         Group {
-            RingCalendar(
+            HabitCalendar(
                 selectedDate: .constant(Date()), isEmojiView: .constant(false),
                 isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
             )

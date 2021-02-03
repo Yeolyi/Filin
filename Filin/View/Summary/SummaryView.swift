@@ -36,13 +36,16 @@ struct SummaryView: View {
                     if summaryManager.contents.isEmpty || summaryManager.contents[0].list.isEmpty {
                         SummaryPreview(isSettingSheet: $isSettingSheet)
                     } else {
-                        RingCalendar(
-                            selectedDate: $selectedDate, isEmojiView: $isEmojiView,
-                            isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: habits)
-                        )
-                        HStack {
-                            SummaryLegend()
-                            Spacer()
+                        if habits.count <= 3 && appSetting.calendarMode == .ring {
+                            HabitCalendar(
+                                selectedDate: $selectedDate, isEmojiView: $isEmojiView,
+                                isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: habits)
+                            )
+                        } else {
+                            HabitCalendarTable(
+                                isExpanded: $isCalendarExpanded, isEmojiView: $isEmojiView,
+                                               selectedDate: $selectedDate, habits: .init(contents: habits)
+                            )
                         }
                     }
                 }

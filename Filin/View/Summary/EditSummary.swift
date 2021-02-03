@@ -52,11 +52,6 @@ struct EditSummary: View {
                 Text("Edit Summary".localized)
                     .headline()
                 Spacer()
-                BasicTextButton("Save".localized) {
-                    summaryManager.contents[0].list = orderedHabit.map(\.id)
-                    summaryManager.objectWillChange.send()
-                    presentationMode.wrappedValue.dismiss()
-                }
             }
             .padding(.horizontal, 20)
         }) {
@@ -83,6 +78,10 @@ struct EditSummary: View {
  */
                 Spacer()
             }
+        }
+        .onDisappear {
+            summaryManager.contents[0].list = orderedHabit.map(\.id)
+            summaryManager.objectWillChange.send()
         }
     }
 }

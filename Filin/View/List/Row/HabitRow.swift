@@ -14,9 +14,6 @@ struct HabitRow: View {
     
     @ObservedObject var habit: FlHabit
     
-    @State var isTapping = false
-    @State var activeSheet: DetailViewActiveSheet?
-    
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var appSetting: AppSetting
     

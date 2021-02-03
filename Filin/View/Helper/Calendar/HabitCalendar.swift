@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RingCalendar: View {
+struct HabitCalendar: View {
     
     @Binding var selectedDate: Date
     
@@ -18,12 +18,11 @@ struct RingCalendar: View {
     
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var appSetting: AppSetting
-    @EnvironmentObject var habitManager: HabitManager
     
     var body: some View {
         CalendarInterface(
             selectedDate: $selectedDate,
-            color: habits.contents[0].color,
+            color: habits.count == 1 ? habits.contents[0].color : ThemeColor.subColor(colorScheme),
             isExpanded: $isCalendarExpanded,
             isEmojiView: $isEmojiView
         ) { week, isExpanded in
@@ -39,10 +38,10 @@ struct RingCalendar: View {
                         id: \.self
                     ) { date in
                         Button(action: {selectedDate = date}) {
-                            if appSetting.calendarMode == .ring && habits.count <= 3 {
-                                Ring(habits: habits, date: date, selectedDate: selectedDate, isExpanded: isExpanded)
-                            } else {
+                            if appSetting.calendarMode == .tile {
                                 Tile(date: date, selectedDate: selectedDate, isExpanded: isExpanded, habits: habits)
+                            } else {
+                                Ring(habits: habits, date: date, selectedDate: selectedDate, isExpanded: isExpanded)
                             }
                         }
                         .frame(width: 44)

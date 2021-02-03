@@ -30,7 +30,7 @@ struct HabitScrollView: View {
                 .subColor()
             Spacer()
         }
-        .rowBackground()
+        .flatRowBackground()
     }
     
     var body: some View {
