@@ -81,7 +81,12 @@ final class HabitManager: DataBridge {
         }
     }
     
-    func append(_ object: FlHabit) {
+    func append(_ object: FlHabit, summaryManager: SummaryManager) {
         contents.append(object)
+        guard !summaryManager.contents.isEmpty else {
+            assertionFailure()
+            return
+        }
+        summaryManager.contents[0].list.append(object.id)
     }
 }

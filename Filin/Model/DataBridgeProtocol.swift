@@ -20,7 +20,6 @@ protocol DataBridge: ObservableObject {
     var fetched: [Target] { get }
     var moc: NSManagedObjectContext { get }
     
-    func append(_ object: Converted)
     func mocSave()
 }
 

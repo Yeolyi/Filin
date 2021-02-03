@@ -75,6 +75,7 @@ struct HabitCalendarTable: View {
                     BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
                         withAnimation { self.isExpanded.toggle() }
                     }
+                    .padding(.bottom, 10)
                 }
             }
             .rowBackground(innerBottomPadding: imageAspect == nil ? false : true)

@@ -9,33 +9,29 @@ import SwiftUI
 
 struct SummaryPreview: View {
     
-    @Binding var isSettingSheet: Bool
-    @State var isCalendarExpanded = false
+    let isRing: Bool
     
     var body: some View {
         Group {
-            HabitCalendar(
-                selectedDate: .constant(Date()), isEmojiView: .constant(false),
-                isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
-            )
-            HabitRow(habit: FlHabit.habit1, showAdd: false)
-            HabitRow(habit: FlHabit.habit2, showAdd: false)
+            if isRing {
+                HabitCalendar(
+                    selectedDate: .constant(Date()), isEmojiView: .constant(false),
+                    isCalendarExpanded: .constant(false), habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
+                )
+            } else {
+                HabitCalendarTable(
+                    isExpanded: .constant(false), isEmojiView: .constant(false),
+                    selectedDate: .constant(Date()), habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
+                )
+            }
         }
         .opacity(0.5)
         .disabled(true)
-        Text("See information of goals at once.")
-            .bodyText()
-            .padding(.top, 34)
-        MainRectButton(
-            action: { isSettingSheet = true },
-            str: "Select goals".localized
-        )
-        .padding(.top, 13)
     }
 }
 
 struct SummaryPreview_Previews: PreviewProvider {
     static var previews: some View {
-        SummaryPreview(isSettingSheet: .constant(false))
+        SummaryPreview(isRing: false)
     }
 }

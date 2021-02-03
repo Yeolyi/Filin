@@ -10,8 +10,10 @@ import SwiftUI
 struct HabitList: View {
     
     @State var isSheet = false
+    
     @EnvironmentObject var habitManager: HabitManager
     @EnvironmentObject var appSetting: AppSetting
+    @EnvironmentObject var summaryManager: SummaryManager
     @Environment(\.colorScheme) var colorScheme
     @State var timerReopen = false
     
@@ -50,6 +52,7 @@ struct HabitList: View {
                 AddHabit()
                     .environmentObject(appSetting)
                     .environmentObject(habitManager)
+                    .environmentObject(summaryManager)
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())

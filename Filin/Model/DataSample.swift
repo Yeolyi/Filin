@@ -13,7 +13,7 @@ extension FlHabit {
     typealias HabitData = (name: String, color: Color, numberOfTimes: Int, requiredSec: Int)
     
     static var habit1: FlHabit {
-        let habitData: HabitData =  ("Stretching".localized, Palette.Default.red.color, 10, 10)
+        let habitData: HabitData =  ("중간 스트레칭🙆‍♀️".localized, Palette.Default.pink.color, 10, 10)
         return .init(
             name: habitData.name, color: habitData.color, numberOfTimes:
                 habitData.numberOfTimes, requiredSec: habitData.requiredSec
@@ -21,7 +21,7 @@ extension FlHabit {
     }
     
     static var habit2: FlHabit {
-        let habitData: HabitData =  ("Drink water".localized, Palette.Default.blue.color, 8, 0)
+        let habitData: HabitData =  ("물 2L 마시기💧".localized, Palette.Default.blue.color, 8, 0)
         return .init(
             name: habitData.name, color: habitData.color, numberOfTimes:
                 habitData.numberOfTimes, requiredSec: habitData.requiredSec
@@ -78,7 +78,7 @@ final class DataSample {
                 let newDateKey = Date().addDate(num)!.dictKey
                 result[newDateKey] = Int.random(in: 0...habit.achievement.numberOfTimes)
             })
-            habitManager.append(habit)
+            habitManager.append(habit, summaryManager: summaryManager)
         }
         
         summaryManager.append(.init(name: "Default", list: habitManager.contents.map(\.id)))

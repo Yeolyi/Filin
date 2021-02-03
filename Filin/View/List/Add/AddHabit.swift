@@ -11,6 +11,8 @@ struct AddHabit: View {
     
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var tempHabit = FlHabit(name: "")
+    
+    @EnvironmentObject var summaryManager: SummaryManager
     @EnvironmentObject var habitManager: HabitManager
     @EnvironmentObject var appSetting: AppSetting
     @Environment(\.colorScheme) var colorScheme
@@ -104,7 +106,7 @@ struct AddHabit: View {
     }
     
     func saveAndQuit() {
-        HabitManager.shared.append(tempHabit)
+        HabitManager.shared.append(tempHabit, summaryManager: summaryManager)
         self.presentationMode.wrappedValue.dismiss()
     }
     

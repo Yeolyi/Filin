@@ -79,6 +79,11 @@ struct EditSummary: View {
                 Spacer()
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification)) { _ in
+            summaryManager.contents[0].list = orderedHabit.map(\.id)
+            summaryManager.objectWillChange.send()
+            presentationMode.wrappedValue.dismiss()
+        }
         .onDisappear {
             summaryManager.contents[0].list = orderedHabit.map(\.id)
             summaryManager.objectWillChange.send()

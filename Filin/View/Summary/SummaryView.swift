@@ -40,12 +40,16 @@ struct SummaryView: View {
         habits.count <= 3 && appSetting.calendarMode == .ring
     }
     
+    var isEmpty: Bool {
+        summaryManager.contents.isEmpty || summaryManager.contents[0].list.isEmpty
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 0) {
-                    if summaryManager.contents.isEmpty || summaryManager.contents[0].list.isEmpty {
-                        
+                    if isEmpty {
+                        SummaryPreview(isRing: isRing)
                     } else {
                         if isRing {
                             HabitCalendar(
@@ -69,6 +73,8 @@ struct SummaryView: View {
                         HeaderButton("square.and.arrow.up") {
                             activeSheet = SummaryViewActiveSheet.share
                         }
+                        .opacity(isEmpty ? 0.5 : 1)
+                        .disabled(isEmpty)
                         HeaderText("Edit".localized) {
                             activeSheet = SummaryViewActiveSheet.edit
                         }
