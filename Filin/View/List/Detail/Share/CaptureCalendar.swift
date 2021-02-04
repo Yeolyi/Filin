@@ -23,19 +23,33 @@ struct CaptureCalendar: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                VStack {
-                    HStack(alignment: .bottom, spacing: 3) {
-                        Text(habits[0].name)
-                            .foregroundColor(color)
-                            .headline()
+            HStack(alignment: .bottom, spacing: 3) {
+                if habits.contents.count > 1 {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            ForEach(habits.contents) { habit in
+                                HStack(spacing: 5) {
+                                    Circle()
+                                        .frame(width: 15, height: 15)
+                                        .foregroundColor(habit.color)
+                                    Text(habit.name)
+                                        .foregroundColor(habit.color)
+                                        .font(.system(size: 16, weight: .bold))
+                                }
+                            }
+                        }
+                        .padding(.vertical)
                         Spacer()
-                        Text(selectedDate.localizedYearMonth)
-                            .foregroundColor(color)
-                            .bodyText()
                     }
+                } else {
+                    Text(habits[0].name)
+                        .foregroundColor(color)
+                        .headline()
                 }
                 Spacer()
+                Text(selectedDate.localizedYearMonth)
+                    .foregroundColor(color)
+                    .bodyText()
             }
             .padding(.bottom, 15)
             if isExpanded {
@@ -82,7 +96,8 @@ struct CaptureCalendar: View {
 struct CaptureCalendar_Previews: PreviewProvider {
     static var previews: some View {
         CaptureCalendar(
-            isEmojiView: false, selectedDate: Date(), isExpanded: true, habits: .init(contents: [FlHabit.habit1])
+            isEmojiView: false, selectedDate: Date(),
+            isExpanded: false, habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
         )
         .environmentObject(AppSetting())
         .rowBackground()

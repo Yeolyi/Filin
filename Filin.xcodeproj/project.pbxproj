@@ -122,7 +122,6 @@
 		25E163632599C0F80082A87A /* EmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E163622599C0F80082A87A /* EmojiManager.swift */; };
 		25E163672599CBAA0082A87A /* EmojiListEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E163662599CBAA0082A87A /* EmojiListEdit.swift */; };
 		25E6154B25A1968B007A469B /* HabitStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E6154A25A1968B007A469B /* HabitStatistics.swift */; };
-		25EBBFFC25CA4EA200D4FF97 /* SummaryLegend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EBBFFB25CA4EA200D4FF97 /* SummaryLegend.swift */; };
 		25EBC00425CA522B00D4FF97 /* EditSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EBC00325CA522B00D4FF97 /* EditSummary.swift */; };
 		25F04EF42594995C000BA9C5 /* EditableListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F04EF32594995C000BA9C5 /* EditableListView.swift */; };
 		25F212762591B97400E259EC /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F212752591B97400E259EC /* SettingView.swift */; };
@@ -287,7 +286,6 @@
 		25E163622599C0F80082A87A /* EmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiManager.swift; sourceTree = "<group>"; };
 		25E163662599CBAA0082A87A /* EmojiListEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiListEdit.swift; sourceTree = "<group>"; };
 		25E6154A25A1968B007A469B /* HabitStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatistics.swift; sourceTree = "<group>"; };
-		25EBBFFB25CA4EA200D4FF97 /* SummaryLegend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryLegend.swift; sourceTree = "<group>"; };
 		25EBC00325CA522B00D4FF97 /* EditSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSummary.swift; sourceTree = "<group>"; };
 		25F04EF32594995C000BA9C5 /* EditableListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableListView.swift; sourceTree = "<group>"; };
 		25F212752591B97400E259EC /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -548,7 +546,6 @@
 			children = (
 				25A564DE258F982200239CF6 /* SummaryView.swift */,
 				25D0C9A0259F981B0018273E /* SummaryPreview.swift */,
-				25EBBFFB25CA4EA200D4FF97 /* SummaryLegend.swift */,
 				25EBC00325CA522B00D4FF97 /* EditSummary.swift */,
 			);
 			path = Summary;
@@ -1059,7 +1056,6 @@
 				25A564DF258F982200239CF6 /* SummaryView.swift in Sources */,
 				2514EF6625C1030F00633146 /* FlatRowBackground.swift in Sources */,
 				25F212852592074800E259EC /* HabitTimer.swift in Sources */,
-				25EBBFFC25CA4EA200D4FF97 /* SummaryLegend.swift in Sources */,
 				25FAA533259F7DEF0042E8A5 /* EditableList.swift in Sources */,
 				25F4F48B2597062C007E5BCF /* EditRoutine.swift in Sources */,
 				25F887FA259509B300BC2D6A /* AddRoutine.swift in Sources */,

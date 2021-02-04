@@ -10,7 +10,6 @@ import SwiftUI
 /// - Note: AppSetting이 전달되어야함. 근데 왜 body 변수는 연산 프로퍼티일까?
 struct CalendarInterface<Content: View>: View {
     
-    @State var showCalendarSelect = false
     @State var isAnimation = false
     
     @Binding var selectedDate: Date
@@ -20,9 +19,12 @@ struct CalendarInterface<Content: View>: View {
     let content: (_ week: Int, _ isExpanded: Bool) -> Content
     let color: Color
     
+    @ObservedObject var habits: HabitGroup
+    
     @EnvironmentObject var appSetting: AppSetting
     
     init(selectedDate: Binding<Date>, color: Color, isExpanded: Binding<Bool>, isEmojiView: Binding<Bool>,
+         habits: HabitGroup,
          @ViewBuilder content: @escaping (_ week: Int, _ isExpanded: Bool) -> Content
     ) {
         self._selectedDate = selectedDate
@@ -30,12 +32,13 @@ struct CalendarInterface<Content: View>: View {
         self._isEmojiView = isEmojiView
         self.content = content
         self.color = color
+        self.habits = habits
     }
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 5) {
             ZStack {
-                HStack(spacing: 15) {
+                HStack(spacing: 10) {
                     Button(action: {
                         if isExpanded { selectedDate = selectedDate.addMonth(-1)
                         } else { selectedDate = selectedDate.addDate(-7)! }
@@ -46,19 +49,22 @@ struct CalendarInterface<Content: View>: View {
                     }
                     Text(isExpanded ? selectedDate.localizedYearMonth : selectedDate.localizedMonthDay)
                         .foregroundColor(color)
-                        .headline()
+                        .font(.system(size: 20, weight: .semibold))
                     Button(action: {
                         if isExpanded { selectedDate = selectedDate.addMonth(1)
                         } else { selectedDate = selectedDate.addDate(7)! }
                     }) {
                         Image(systemName: "chevron.right")
-                            .font(.system(size: 20, weight: .semibold))
+                            .font(.system(size: 20, weight: .bold))
                             .subColor()
                     }
+                    Spacer()
                 }
                 HStack {
                     Spacer()
-                    Button(action: { isEmojiView.toggle() }) {
+                    Button(action: {
+                        withAnimation { isEmojiView.toggle() }
+                    }) {
                         Group {
                             if !isEmojiView {
                                 Circle()
@@ -71,46 +77,60 @@ struct CalendarInterface<Content: View>: View {
                                 Image(systemName: "face.smiling")
                                     .font(.system(size: 24, weight: .bold))
                                     .foregroundColor(color)
+                                    .mainColor()
                             }
                         }
                         .frame(width: 44, height: 44)
                     }
-                    .padding(.trailing, 10)
                 }
             }
-            .padding(.bottom, 15)
-            VStack(spacing: 0) {
-                if showCalendarSelect {
-                    DatePicker("", selection: $selectedDate, displayedComponents: .date)
-                        .datePickerStyle(WheelDatePickerStyle())
-                        .labelsHidden()
+            VStack(spacing: 8) {
+                HStack(spacing: 4) {
+                    ForEach(
+                        appSetting.isMondayStart ? [2, 3, 4, 5, 6, 7, 1] : [1, 2, 3, 4, 5, 6, 7],
+                        id: \.self
+                    ) { dayOfWeek in
+                        Text(Date.dayOfTheWeekShortEngStr(dayOfWeek))
+                            .subColor()
+                            .bodyText()
+                            .frame(width: 44)
+                    }
+                }
+                if isExpanded {
+                    ForEach(
+                        1..<selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart) + 1,
+                        id: \.self
+                    ) { week in
+                        content(week, true)
+                    }
                 } else {
-                    VStack(spacing: 8) {
-                        HStack(spacing: 4) {
-                            ForEach(
-                                appSetting.isMondayStart ? [2, 3, 4, 5, 6, 7, 1] : [1, 2, 3, 4, 5, 6, 7],
-                                id: \.self
-                            ) { dayOfWeek in
-                                Text(Date.dayOfTheWeekShortEngStr(dayOfWeek))
-                                    .subColor()
-                                    .bodyText()
-                                    .frame(width: 44)
-                            }
-                        }
-                        if isExpanded {
-                            ForEach(
-                                1..<selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart) + 1,
-                                id: \.self
-                            ) { week in
-                                content(week, true)
-                            }
-                        } else {
-                            content(selectedDate.weekNum(startFromMon: appSetting.isMondayStart), false)
-                        }
+                    content(selectedDate.weekNum(startFromMon: appSetting.isMondayStart), false)
+                }
+                ZStack {
+                    VStack {
+                        Spacer()
                         BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
                             withAnimation {
                                 self.isExpanded.toggle()
                             }
+                        }
+                    }
+                    if habits.contents.count > 1 {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                ForEach(habits.contents) { habit in
+                                    HStack(spacing: 5) {
+                                        Circle()
+                                            .frame(width: 15, height: 15)
+                                            .foregroundColor(habit.color)
+                                        Text(habit.name)
+                                            .foregroundColor(habit.color)
+                                            .font(.system(size: 12, weight: .bold))
+                                    }
+                                }
+                            }
+                            .padding(.vertical)
+                            Spacer()
                         }
                     }
                 }
@@ -123,13 +143,15 @@ struct CalendarInterface<Content: View>: View {
 struct CustomCalendar_Previews: PreviewProvider {
     struct StateWrapper: View {
         @State var selectedDate = Date()
+        @State var isExpanded = false
+        @State var isEmojiView = false
         var body: some View {
             HabitCalendar(
-                selectedDate: $selectedDate, isEmojiView: .constant(true),
-                 isCalendarExpanded: .constant(false),
-                 habits: .init(contents: [DataSample.shared.habitManager.contents[0]])
+                selectedDate: $selectedDate, isEmojiView: $isEmojiView,
+                isCalendarExpanded: $isExpanded,
+                habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
             )
-                .environmentObject(AppSetting())
+            .environmentObject(AppSetting())
         }
     }
     static var previews: some View {

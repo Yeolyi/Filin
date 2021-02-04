@@ -22,9 +22,9 @@ struct HabitCalendar: View {
     var body: some View {
         CalendarInterface(
             selectedDate: $selectedDate,
-            color: habits.count == 1 ? habits.contents[0].color : ThemeColor.subColor(colorScheme),
+            color: habits[0].color,
             isExpanded: $isCalendarExpanded,
-            isEmojiView: $isEmojiView
+            isEmojiView: $isEmojiView, habits: habits
         ) { week, isExpanded in
             if isEmojiView {
                 EmojiCalendarRow(
@@ -49,5 +49,14 @@ struct HabitCalendar: View {
                 }
             }
         }
+    }
+}
+
+struct HabitCalendar_Previews: PreviewProvider {
+    static var previews: some View {
+        HabitCalendar(selectedDate: .constant(Date()), isEmojiView: .constant(false),
+                      isCalendarExpanded: .constant(false), habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
+        )
+        .environmentObject(AppSetting())
     }
 }

@@ -30,14 +30,14 @@ struct HabitTimer: View {
                                         - CGFloat(timeRemaining))/CGFloat(habit.requiredSec)
                             )
                             .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round))
-                            .frame(width: 200, height: 200)
+                            .frame(width: 250)
                             .foregroundColor(habit.color)
                             .rotationEffect(Angle(degrees: 270.0))
                             .animation(.linear)
                             .zIndex(1)
                         Circle()
                             .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .square, lineJoin: .bevel))
-                            .frame(width: 200, height: 200)
+                            .frame(width: 250)
                             .subColor()
                             .zIndex(0)
                     }
@@ -68,7 +68,7 @@ struct HabitTimer: View {
                             (timeRemaining, isCounting) = TimerManager.sceneBack(appSetting)
                         }
                 }
-                .frame(width: 250, height: 250)
+                .frame(width: 300, height: 300)
                 .rowBackground()
                 .padding(.bottom, 30)
                 HStack(alignment: .center, spacing: 60) {
@@ -101,6 +101,7 @@ struct HabitTimer: View {
             }
             .padding(.top, 20)
         }
+        .padding(.top, 1)
         .navigationBarTitle(Text(habit.name))
         .onAppear {
             if TimerManager.isRunning {

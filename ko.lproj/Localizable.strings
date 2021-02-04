@@ -32,16 +32,16 @@
 // 목표 추가
 "Make first goal" = "첫번째 목표 추가";
 "Make new goal" = "목표 추가하기";
-"What is the name of the goal?" = "🖊 목표의 이름을 알려주세요.";
+"What is the name of the goal?" = "목표의 이름을 알려주세요.";
 "Drink water" = "물 마시기";
 "Previous" = "이전";
 "Next" = "다음";
 "Repeat" = "반복";
-"Choose the day of the week to proceed with the goal." = "📅 매주 무슨 요일에 하실건가요?";
+"Choose the day of the week to proceed with the goal." = "매주 무슨 요일에 하실건가요?";
 "Number of times" = "횟수";
-"How many times do you want to achieve your goal in a day?" = "🔢 하루 몇 회가 목표이신가요?";
+"How many times do you want to achieve your goal in a day?" = "하루 몇 회가 목표이신가요?";
 "Timer" = "타이머";
-"Use a timer if you need a specific time to achieve your goal.\nE.g. two-minute plank." = "⏱ 타이머가 필요하신가요?";
+"Use a timer if you need a specific time to achieve your goal.\nE.g. two-minute plank." = "타이머가 필요하신가요?";
 "Use timer" = "타이머 사용";
 "Minute" = "분";
 "Second" = "초";
@@ -51,7 +51,7 @@
 "Stretching" = "스트레칭";
 "Set goals and execute them." = "목표를 세우고 실행하세요.";
 "Add new goal" = "새로운 목표 추가";
-"Select theme color." = "🎨 마지막으로, 테마색을 선택해주세요!";
+"Select theme color." = "마지막으로, 테마색을 선택해주세요!";
 "Split into sets" = "세트로 나누기";
 "How many times do you proceed in one set?" = "한 세트 당 몇 회씩 진행하실건가요?";
 "How many sets are there?" = "세트는 몇 개인가요?";

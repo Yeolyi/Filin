@@ -16,6 +16,15 @@ struct HabitCalendarTable: View {
     
     init(isExpanded: Binding<Bool>, isEmojiView: Binding<Bool>,
          selectedDate: Binding<Date>, habits: HabitGroup, imageSize: ImageSize? = nil) {
+        guard !habits.isEmpty else {
+            assertionFailure()
+            _isExpanded = .constant(false)
+            _isEmojiView = .constant(false)
+            _selectedDate = .constant(Date())
+            self.habits  = habits
+            imageAspect = nil
+            return
+        }
         self._isExpanded = isExpanded
         self._isEmojiView = isEmojiView
         self._selectedDate = selectedDate
@@ -29,27 +38,53 @@ struct HabitCalendarTable: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            VStack(spacing: 20) {
+            VStack(spacing: 5) {
                 if imageAspect == nil {
-                    HStack(spacing: 15) {
-                        Button(action: {
-                            if isExpanded { selectedDate = selectedDate.addMonth(-1)
-                            } else { selectedDate = selectedDate.addDate(-7)! }
-                        }) {
-                            Image(systemName: "chevron.left")
+                    ZStack {
+                        HStack(spacing: 10) {
+                            Button(action: {
+                                if isExpanded { selectedDate = selectedDate.addMonth(-1)
+                                } else { selectedDate = selectedDate.addDate(-7)! }
+                            }) {
+                                Image(systemName: "chevron.left")
+                                    .font(.system(size: 20, weight: .semibold))
+                                    .subColor()
+                            }
+                            Text(isExpanded ? selectedDate.localizedYearMonth : selectedDate.localizedMonthDay)
+                                .foregroundColor(habits[0].color)
                                 .font(.system(size: 20, weight: .semibold))
-                                .subColor()
+                            Button(action: {
+                                if isExpanded { selectedDate = selectedDate.addMonth(1)
+                                } else { selectedDate = selectedDate.addDate(7)! }
+                            }) {
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .subColor()
+                            }
+                            Spacer()
                         }
-                        Text(selectedDate.localizedYearMonth)
-                            .foregroundColor(habits.count == 1 ? habits.contents[0].color : ThemeColor.subColor(colorScheme))
-                            .headline()
-                        Button(action: {
-                            if isExpanded { selectedDate = selectedDate.addMonth(1)
-                            } else { selectedDate = selectedDate.addDate(7)! }
-                        }) {
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 20, weight: .semibold))
-                                .subColor()
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                withAnimation { isEmojiView.toggle() }
+                            }) {
+                                Group {
+                                    if !isEmojiView {
+                                        Circle()
+                                            .trim(from: 0.0, to: 0.7)
+                                            .stroke(style: StrokeStyle(lineWidth: 5.0, lineCap: .round))
+                                            .foregroundColor(habits[0].color)
+                                            .rotationEffect(Angle(degrees: -90))
+                                            .frame(width: 20, height: 20)
+                                    } else {
+                                        Image(systemName: "face.smiling")
+                                            .font(.system(size: 24, weight: .bold))
+                                            .foregroundColor(habits[0].color)
+                                            .mainColor()
+                                    }
+                                }
+                                .frame(width: 44, height: 44)
+                            }
                         }
                     }
                 }
@@ -151,7 +186,8 @@ struct HabitCalendarTable: View {
                                         if isEmojiView {
                                             if habit.dailyEmoji[date.dictKey] != nil {
                                                 Text(habit.dailyEmoji[date.dictKey]!)
-                                                    .bodyText()
+                                                    .font(.system(size: 16))
+                                                    .frame(width: 20, height: 20)
                                             } else {
                                                 Circle()
                                                     .frame(width: 20, height: 20)
