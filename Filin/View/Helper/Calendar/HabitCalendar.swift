@@ -12,40 +12,131 @@ struct HabitCalendar: View {
     @Binding var selectedDate: Date
     
     @Binding var isEmojiView: Bool
-    @Binding var isCalendarExpanded: Bool
+    @Binding var isExpanded: Bool
     
     @ObservedObject var habits: HabitGroup
     
+    let isCapture: Bool
+    
+    init(
+        selectedDate: Binding<Date>, isEmojiView: Binding<Bool>,
+        isExpanded: Binding<Bool>, habits: HabitGroup, isCapture: Bool = false
+    ) {
+        self._selectedDate = selectedDate
+        self._isEmojiView = isEmojiView
+        self._isExpanded = isExpanded
+        self.habits = habits
+        self.isCapture = isCapture
+    }
+    
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var appSetting: AppSetting
+    
+    var isRing: Bool {
+        appSetting.calendarMode == .ring && habits.count <= 3
+    }
+    
+    var week: Int {
+        appSetting.mainDate.weekNum(startFromMon: appSetting.isMondayStart)
+    }
+    
+    var dayOfWeekIndicator: some View {
+        HStack(spacing: 4) {
+            ForEach(
+                appSetting.isMondayStart ? [2, 3, 4, 5, 6, 7, 1] : [1, 2, 3, 4, 5, 6, 7],
+                id: \.self
+            ) { dayOfWeek in
+                Text(Date.dayOfTheWeekShortEngStr(dayOfWeek))
+                    .subColor()
+                    .bodyText()
+                    .frame(width: 44)
+            }
+        }
+    }
     
     var body: some View {
         CalendarInterface(
             selectedDate: $selectedDate,
             color: habits[0].color,
-            isExpanded: $isCalendarExpanded,
-            isEmojiView: $isEmojiView, habits: habits
-        ) { week, isExpanded in
-            if isEmojiView {
-                EmojiCalendarRow(
-                    week: week, isExpanded: isCalendarExpanded, selectedDate: $selectedDate,
-                    habit: habits.contents[0]
+            isExpanded: $isExpanded,
+            isEmojiView: $isEmojiView, habits: habits, isCapture: isCapture
+        ) {
+            if !isRing && habits.count > 1 {
+                TableCalendar(
+                    isExpanded: isExpanded, habits: habits,
+                    selectedDate: selectedDate, isEmojiView: isEmojiView
                 )
             } else {
-                HStack(spacing: 4) {
-                    ForEach(
-                        selectedDate.daysInSameWeek(week: week, from: appSetting.isMondayStart ? 2 : 1),
-                        id: \.self
-                    ) { date in
-                        Button(action: {selectedDate = date}) {
-                            if appSetting.calendarMode == .tile {
-                                Tile(date: date, selectedDate: selectedDate, isExpanded: isExpanded, habits: habits)
-                            } else {
-                                Ring(habits: habits, date: date, selectedDate: selectedDate, isExpanded: isExpanded)
-                            }
+                dayOfWeekIndicator
+                if isRing {
+                    if isEmojiView {
+                        weekExpandWrapper { week in
+                            EmojiCalendarRow(
+                                week: week, isExpanded: isExpanded,
+                                selectedDate: $selectedDate, habit: habits[0]
+                            )
                         }
-                        .frame(width: 44)
+                    } else {
+                        expandWrapper { date in
+                            Ring(habits: habits, date: date, selectedDate: selectedDate, isExpanded: isExpanded)
+                        }
                     }
+                } else {
+                    if habits.count == 1 {
+                        expandWrapper { date in
+                            Tile(date: date, selectedDate: selectedDate, isExpanded: isExpanded, habits: habits)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func weekExpandWrapper<Content: View>(content: @escaping (Int) -> Content) -> some View {
+        if isExpanded {
+            VStack(spacing: 8) {
+                ForEach(1...appSetting.mainDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart),
+                        id: \.self
+                ) { week in
+                    content(week)
+                }
+            }
+        } else {
+            content(appSetting.mainDate.weekNum(startFromMon: appSetting.isMondayStart))
+        }
+    }
+    
+    @ViewBuilder
+    func expandWrapper<Content: View>(content: @escaping (Date) -> Content) -> some View {
+        if isExpanded {
+            VStack(spacing: 8) {
+                ForEach(1...appSetting.mainDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart),
+                        id: \.self
+                ) { week in
+                    HStack(spacing: 4) {
+                        ForEach(
+                            selectedDate.daysInSameWeek(week: week, from: appSetting.isMondayStart ? 2 : 1),
+                            id: \.self
+                        ) { date in
+                            Button(action: {selectedDate = date}) {
+                                content(date)
+                            }
+                            .frame(width: 44)
+                        }
+                    }
+                }
+            }
+        } else {
+            HStack(spacing: 4) {
+                ForEach(
+                    selectedDate.daysInSameWeek(week: week, from: appSetting.isMondayStart ? 2 : 1),
+                    id: \.self
+                ) { date in
+                    Button(action: {selectedDate = date}) {
+                        content(date)
+                    }
+                    .frame(width: 44)
                 }
             }
         }
@@ -55,7 +146,7 @@ struct HabitCalendar: View {
 struct HabitCalendar_Previews: PreviewProvider {
     static var previews: some View {
         HabitCalendar(selectedDate: .constant(Date()), isEmojiView: .constant(false),
-                      isCalendarExpanded: .constant(false), habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
+                      isExpanded: .constant(false), habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
         )
         .environmentObject(AppSetting())
     }

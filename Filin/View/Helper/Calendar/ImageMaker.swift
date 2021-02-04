@@ -1,8 +1,8 @@
 //
-//  CalendarImage.swift
+//  ImageMaker.swift
 //  Filin
 //
-//  Created by SEONG YEOL YI on 2021/01/31.
+//  Created by SEONG YEOL YI on 2021/02/04.
 //
 
 import SwiftUI
@@ -48,25 +48,21 @@ enum ImageSize {
     }
 }
 
-struct CalendarWithLogo: View {
+struct ImageMaker<Content: View>: View {
     
-    let isExpanded: Bool
-    let habits: HabitGroup
-    let imageAspect: ImageSize
-    let isEmojiView: Bool
-    let selectedDate: Date
-    let appSetting: AppSetting
+    var content: Content
+    let imageSize: ImageSize
     
     @Environment(\.colorScheme) var colorScheme
     
+    init(imageSize: ImageSize, @ViewBuilder _ content: @escaping () -> Content) {
+        self.imageSize = imageSize
+        self.content = content()
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
-            CaptureCalendar(
-                isEmojiView: isEmojiView,
-                selectedDate: selectedDate, isExpanded: isExpanded, habits: habits
-            )
-            .environmentObject(appSetting)
-            .rowBackground()
+            content
             HStack(spacing: 4) {
                 Spacer()
                 Image(colorScheme == .light ? "Icon1024" : "icon_dark")
@@ -78,23 +74,22 @@ struct CalendarWithLogo: View {
             }
             .padding(.trailing, 10)
         }
-        .if(imageAspect != .free) {
-            $0.frame(width: imageAspect.sizeTuple.width, height: imageAspect.sizeTuple.height)
+        .if(imageSize != .free) {
+            $0.frame(width: imageSize.sizeTuple.width, height: imageSize.sizeTuple.height)
         }
-        .if(imageAspect == .free) {
+        .if(imageSize == .free) {
             $0.frame(width: 400)
         }
-        .padding(.horizontal, imageAspect.paddingSize.horizontal)
-        .padding(.vertical, imageAspect.paddingSize.vertical)
+        .padding(.horizontal, imageSize.paddingSize.horizontal)
+        .padding(.vertical, imageSize.paddingSize.vertical)
     }
 }
 
-struct CalendarImage_Previews: PreviewProvider {
+struct ImageMaker_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarWithLogo(
-            isExpanded: false, habits: .init(contents: [FlHabit.habit1]),
-            imageAspect: .free, isEmojiView: false, selectedDate: Date(), appSetting: AppSetting()
-        )
-        .environment(\.colorScheme, .dark)
+        ImageMaker(imageSize: .square) {
+            Text("Hello")
+        }
+        .border(Color.black)
     }
 }

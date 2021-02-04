@@ -51,17 +51,10 @@ struct SummaryView: View {
                     if isEmpty {
                         SummaryPreview(isRing: isRing)
                     } else {
-                        if isRing {
-                            HabitCalendar(
-                                selectedDate: $selectedDate, isEmojiView: $isEmojiView,
-                                isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: habits)
-                            )
-                        } else {
-                            HabitCalendarTable(
-                                isExpanded: $isCalendarExpanded, isEmojiView: $isEmojiView,
-                                selectedDate: $selectedDate, habits: .init(contents: habits)
-                            )
-                        }
+                        HabitCalendar(
+                            selectedDate: $selectedDate, isEmojiView: $isEmojiView,
+                            isExpanded: $isCalendarExpanded, habits: .init(contents: habits)
+                        )
                     }
                 }
             }
@@ -89,29 +82,25 @@ struct SummaryView: View {
                     .accentColor(ThemeColor.mainColor(colorScheme))
                     .environmentObject(summaryManager)
             case .share:
-                HabitShare(target: { imageAspect in
-                    if isRing {
-                        CalendarWithLogo(
-                            isExpanded: isCalendarExpanded, habits: .init(contents: habits),
-                            imageAspect: imageAspect, isEmojiView: isEmojiView,
-                            selectedDate: selectedDate, appSetting: appSetting
-                        )
-                    } else {
-                        HabitCalendarTable(
-                            isExpanded: $isCalendarExpanded, isEmojiView: $isEmojiView,
-                            selectedDate: $selectedDate, habits: .init(contents: habits),
-                            imageSize: imageAspect
-                        )
-                        .environmentObject(appSetting)
+                HabitShare(
+                    target: { imageAspect in
+                        ImageMaker(imageSize: imageAspect) {
+                            HabitCalendar(
+                                selectedDate: $selectedDate, isEmojiView: $isEmojiView,
+                                isExpanded: $isCalendarExpanded, habits: .init(contents: habits), isCapture: true
+                            )
+                            .environmentObject(appSetting)
+                        }
+                    },
+                    aspectPolicy: { imageSize in
+                        switch imageSize {
+                        case .free:
+                            return true
+                        default:
+                            return !isCalendarExpanded
+                        }
                     }
-                }, aspectPolicy: { imageSize in
-                    switch imageSize {
-                    case .free:
-                        return true
-                    default:
-                        return !isCalendarExpanded
-                    }
-                })
+                )
             }
         }
         .accentColor(ThemeColor.mainColor(colorScheme))

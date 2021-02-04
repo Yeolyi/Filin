@@ -108,15 +108,13 @@
 		25C574FE2583D3BD004BF07D /* Habit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C574FC2583D3BD004BF07D /* Habit+CoreDataProperties.swift */; };
 		25C5A564258376BE00E864A5 /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C5A563258376BE00E864A5 /* HabitDetailView.swift */; };
 		25C5A56725837A0200E864A5 /* AppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C5A56625837A0200E864A5 /* AppSetting.swift */; };
-		25C5DF8E25B830FD00A55951 /* CaptureCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C5DF8D25B830FD00A55951 /* CaptureCalendar.swift */; };
 		25C9FA2625907C4F0046C523 /* ViewToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C9FA2525907C4F0046C523 /* ViewToImage.swift */; };
 		25C9FA2925907CEA0046C523 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C9FA2825907CE90046C523 /* ImageSaver.swift */; };
 		25CD88562597CBBC002270E9 /* ColoredToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CD88552597CBBC002270E9 /* ColoredToggle.swift */; };
 		25D0405725C4FA66004814B4 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0405625C4FA66004814B4 /* TimerManager.swift */; };
-		25D040C925C669A6004814B4 /* CalendarWithLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D040C825C669A5004814B4 /* CalendarWithLogo.swift */; };
 		25D0C99E259F96C80018273E /* EmojiCalendarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0C99D259F96C80018273E /* EmojiCalendarRow.swift */; };
 		25D0C9A1259F981B0018273E /* SummaryPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0C9A0259F981B0018273E /* SummaryPreview.swift */; };
-		25D39BC725CA98EC0023E504 /* HabitCalendarTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D39BC625CA98EC0023E504 /* HabitCalendarTable.swift */; };
+		25D39BC725CA98EC0023E504 /* TableCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D39BC625CA98EC0023E504 /* TableCalendar.swift */; };
 		25E16354259920990082A87A /* CalendarInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E16353259920990082A87A /* CalendarInterface.swift */; };
 		25E1635A259929E70082A87A /* EmojiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E16359259929E70082A87A /* EmojiPicker.swift */; };
 		25E163632599C0F80082A87A /* EmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E163622599C0F80082A87A /* EmojiManager.swift */; };
@@ -134,6 +132,7 @@
 		25F887F62595091B00BC2D6A /* RoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F887F52595091B00BC2D6A /* RoutineView.swift */; };
 		25F887FA259509B300BC2D6A /* AddRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F887F9259509B300BC2D6A /* AddRoutine.swift */; };
 		25F888252596201600BC2D6A /* RoutineListSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F888242596201600BC2D6A /* RoutineListSet.swift */; };
+		25F92F4325CC0F4F0071B6F0 /* ImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F92F4225CC0F4F0071B6F0 /* ImageMaker.swift */; };
 		25FAA533259F7DEF0042E8A5 /* EditableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FAA532259F7DEF0042E8A5 /* EditableList.swift */; };
 		25FC34F325A04559000B5844 /* PaperToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FC34F225A04559000B5844 /* PaperToggle.swift */; };
 		25FC34FA25A067C9000B5844 /* TimerPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FC34F925A067C9000B5844 /* TimerPicker.swift */; };
@@ -272,15 +271,13 @@
 		25C574FC2583D3BD004BF07D /* Habit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Habit+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		25C5A563258376BE00E864A5 /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
 		25C5A56625837A0200E864A5 /* AppSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetting.swift; sourceTree = "<group>"; };
-		25C5DF8D25B830FD00A55951 /* CaptureCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureCalendar.swift; sourceTree = "<group>"; };
 		25C9FA2525907C4F0046C523 /* ViewToImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewToImage.swift; sourceTree = "<group>"; };
 		25C9FA2825907CE90046C523 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		25CD88552597CBBC002270E9 /* ColoredToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredToggle.swift; sourceTree = "<group>"; };
 		25D0405625C4FA66004814B4 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
-		25D040C825C669A5004814B4 /* CalendarWithLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWithLogo.swift; sourceTree = "<group>"; };
 		25D0C99D259F96C80018273E /* EmojiCalendarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCalendarRow.swift; sourceTree = "<group>"; };
 		25D0C9A0259F981B0018273E /* SummaryPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryPreview.swift; sourceTree = "<group>"; };
-		25D39BC625CA98EC0023E504 /* HabitCalendarTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCalendarTable.swift; sourceTree = "<group>"; };
+		25D39BC625CA98EC0023E504 /* TableCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCalendar.swift; sourceTree = "<group>"; };
 		25E16353259920990082A87A /* CalendarInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInterface.swift; sourceTree = "<group>"; };
 		25E16359259929E70082A87A /* EmojiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPicker.swift; sourceTree = "<group>"; };
 		25E163622599C0F80082A87A /* EmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiManager.swift; sourceTree = "<group>"; };
@@ -299,6 +296,7 @@
 		25F887F52595091B00BC2D6A /* RoutineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineView.swift; sourceTree = "<group>"; };
 		25F887F9259509B300BC2D6A /* AddRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoutine.swift; sourceTree = "<group>"; };
 		25F888242596201600BC2D6A /* RoutineListSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListSet.swift; sourceTree = "<group>"; };
+		25F92F4225CC0F4F0071B6F0 /* ImageMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMaker.swift; sourceTree = "<group>"; };
 		25FAA532259F7DEF0042E8A5 /* EditableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableList.swift; sourceTree = "<group>"; };
 		25FC34EA25A03A66000B5844 /* lottieStack.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = lottieStack.json; path = /Users/seongyeolyi/Desktop/Filin/Filin/Filin/View/Helper/View/lottieStack.json; sourceTree = "<absolute>"; };
 		25FC34F225A04559000B5844 /* PaperToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperToggle.swift; sourceTree = "<group>"; };
@@ -360,12 +358,12 @@
 		2526686B259E53CF00C435D6 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				25F92F4225CC0F4F0071B6F0 /* ImageMaker.swift */,
 				25FE74F925C830260030EB0A /* Model */,
 				25FE74F825C8300A0030EB0A /* Helper */,
 				25D0C99D259F96C80018273E /* EmojiCalendarRow.swift */,
-				258B6AF7258289C80004BFE7 /* DateExtension.swift */,
+				25D39BC625CA98EC0023E504 /* TableCalendar.swift */,
 				252A0E5A25AA504400A41525 /* HabitCalendar.swift */,
-				25D39BC625CA98EC0023E504 /* HabitCalendarTable.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -499,8 +497,6 @@
 			isa = PBXGroup;
 			children = (
 				2586FD1325B6F10800416868 /* HabitShare.swift */,
-				25C5DF8D25B830FD00A55951 /* CaptureCalendar.swift */,
-				25D040C825C669A5004814B4 /* CalendarWithLogo.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -780,6 +776,7 @@
 		25FE74F825C8300A0030EB0A /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				258B6AF7258289C80004BFE7 /* DateExtension.swift */,
 				25E16353259920990082A87A /* CalendarInterface.swift */,
 				25FE74E525C82E410030EB0A /* Ring.swift */,
 				25FE74ED25C82F590030EB0A /* Tile.swift */,
@@ -1017,6 +1014,7 @@
 				25AF7E8C25975F090097BF4D /* MainRectButton.swift in Sources */,
 				255C116B258F2E2500E0F740 /* HabitAddBadgeView.swift in Sources */,
 				25FC34F325A04559000B5844 /* PaperToggle.swift in Sources */,
+				25F92F4325CC0F4F0071B6F0 /* ImageMaker.swift in Sources */,
 				2563B4FC2582826900731635 /* habitdiary.xcdatamodeld in Sources */,
 				259F7DE025CA720100408A1D /* FlSummary+CoreDataProperties.swift in Sources */,
 				25C5A56725837A0200E864A5 /* AppSetting.swift in Sources */,
@@ -1029,7 +1027,6 @@
 				2522916D258384A900869C51 /* ThemeColor.swift in Sources */,
 				25B73282258B460A003D9FD8 /* BodyText.swift in Sources */,
 				25FE74FB25C830370030EB0A /* HabitGroup.swift in Sources */,
-				25C5DF8E25B830FD00A55951 /* CaptureCalendar.swift in Sources */,
 				25D0C9A1259F981B0018273E /* SummaryPreview.swift in Sources */,
 				2553522825BB4D3200255045 /* SummaryManager.swift in Sources */,
 				25D0C99E259F96C80018273E /* EmojiCalendarRow.swift in Sources */,
@@ -1044,7 +1041,6 @@
 				259F7DEA25CA723000408A1D /* TempSummary.swift in Sources */,
 				25F4F47E2596FD44007E5BCF /* RoutineTime.swift in Sources */,
 				25F2127A2591E90B00E259EC /* SharingHandler.swift in Sources */,
-				25D040C925C669A6004814B4 /* CalendarWithLogo.swift in Sources */,
 				2563B4F72582826900731635 /* SceneDelegate.swift in Sources */,
 				25C574FD2583D3BD004BF07D /* Habit+CoreDataClass.swift in Sources */,
 				25F887F62595091B00BC2D6A /* RoutineView.swift in Sources */,
@@ -1059,7 +1055,7 @@
 				25FAA533259F7DEF0042E8A5 /* EditableList.swift in Sources */,
 				25F4F48B2597062C007E5BCF /* EditRoutine.swift in Sources */,
 				25F887FA259509B300BC2D6A /* AddRoutine.swift in Sources */,
-				25D39BC725CA98EC0023E504 /* HabitCalendarTable.swift in Sources */,
+				25D39BC725CA98EC0023E504 /* TableCalendar.swift in Sources */,
 				2553522125BB4CFA00255045 /* HabitManager.swift in Sources */,
 				250823C52583F93A0005D7CE /* KeyboardController.swift in Sources */,
 				251EFC71259E4E4B00748917 /* Summary+CoreDataProperties.swift in Sources */,

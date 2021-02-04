@@ -38,7 +38,7 @@ struct HabitDetailView: View {
             VStack(spacing: 0) {
                 HabitCalendar(
                     selectedDate: $selectedDate, isEmojiView: $isEmojiView,
-                    isCalendarExpanded: $isCalendarExpanded, habits: .init(contents: [habit])
+                    isExpanded: $isCalendarExpanded, habits: .init(contents: [habit])
                 )
                 DailyProgressBar(selectedDate: selectedDate, isEmojiMode: $isEmojiView)
                 EmojiPicker(
@@ -75,11 +75,13 @@ struct HabitDetailView: View {
             case .share:
                 HabitShare(
                     target: { imageAspect in
-                        CalendarWithLogo(
-                            isExpanded: isCalendarExpanded, habits: .init(contents: [habit]),
-                            imageAspect: imageAspect, isEmojiView: isEmojiView,
-                            selectedDate: selectedDate, appSetting: appSetting
-                        )
+                        ImageMaker(imageSize: imageAspect) {
+                            HabitCalendar(
+                                selectedDate: $selectedDate, isEmojiView: $isEmojiView,
+                                isExpanded: $isCalendarExpanded, habits: .init(contents: [habit]), isCapture: true
+                            )
+                            .environmentObject(appSetting)
+                        }
                     },
                     aspectPolicy: {
                         !($0 == .fourThree && isCalendarExpanded)

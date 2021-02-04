@@ -16,128 +16,143 @@ struct CalendarInterface<Content: View>: View {
     @Binding var isExpanded: Bool
     @Binding var isEmojiView: Bool
     
-    let content: (_ week: Int, _ isExpanded: Bool) -> Content
+    let content: Content
     let color: Color
+    let isCapture: Bool
+    var isRing: Bool {
+        appSetting.calendarMode == .ring && habits.count <= 3
+    }
     
     @ObservedObject var habits: HabitGroup
     
     @EnvironmentObject var appSetting: AppSetting
     
     init(selectedDate: Binding<Date>, color: Color, isExpanded: Binding<Bool>, isEmojiView: Binding<Bool>,
-         habits: HabitGroup,
-         @ViewBuilder content: @escaping (_ week: Int, _ isExpanded: Bool) -> Content
+         habits: HabitGroup, isCapture: Bool = false,
+         @ViewBuilder content: @escaping () -> Content
     ) {
         self._selectedDate = selectedDate
         self._isExpanded = isExpanded
         self._isEmojiView = isEmojiView
-        self.content = content
+        self.content = content()
         self.color = color
         self.habits = habits
+        self.isCapture = isCapture
     }
     
     var body: some View {
         VStack(spacing: 5) {
             ZStack {
-                HStack(spacing: 10) {
-                    Button(action: {
-                        if isExpanded { selectedDate = selectedDate.addMonth(-1)
-                        } else { selectedDate = selectedDate.addDate(-7)! }
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .semibold))
-                            .subColor()
-                    }
-                    Text(isExpanded ? selectedDate.localizedYearMonth : selectedDate.localizedMonthDay)
-                        .foregroundColor(color)
-                        .font(.system(size: 20, weight: .semibold))
-                    Button(action: {
-                        if isExpanded { selectedDate = selectedDate.addMonth(1)
-                        } else { selectedDate = selectedDate.addDate(7)! }
-                    }) {
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 20, weight: .bold))
-                            .subColor()
-                    }
-                    Spacer()
-                }
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        withAnimation { isEmojiView.toggle() }
-                    }) {
-                        Group {
-                            if !isEmojiView {
-                                Circle()
-                                    .trim(from: 0.0, to: 0.7)
-                                    .stroke(style: StrokeStyle(lineWidth: 5.0, lineCap: .round))
-                                    .foregroundColor(color)
-                                    .rotationEffect(Angle(degrees: -90))
-                                    .frame(width: 20, height: 20)
+                if isCapture {
+                    if isRing || habits.count == 1 {
+                        HStack(alignment: .bottom, spacing: 3) {
+                            if habits.contents.count > 1  && isRing {
+                                habitLegend
                             } else {
-                                Image(systemName: "face.smiling")
-                                    .font(.system(size: 24, weight: .bold))
+                                Text(habits[0].name)
                                     .foregroundColor(color)
-                                    .mainColor()
+                                    .headline()
                             }
+                            Spacer()
+                            Text(selectedDate.localizedYearMonth)
+                                .foregroundColor(color)
+                                .bodyText()
                         }
-                        .frame(width: 44, height: 44)
+                        .padding(.bottom, 20)
+                    }
+                } else {
+                    HStack {
+                        dateIndicator
+                        Spacer()
+                        calendarModeButton
                     }
                 }
             }
             VStack(spacing: 8) {
-                HStack(spacing: 4) {
-                    ForEach(
-                        appSetting.isMondayStart ? [2, 3, 4, 5, 6, 7, 1] : [1, 2, 3, 4, 5, 6, 7],
-                        id: \.self
-                    ) { dayOfWeek in
-                        Text(Date.dayOfTheWeekShortEngStr(dayOfWeek))
-                            .subColor()
-                            .bodyText()
-                            .frame(width: 44)
-                    }
-                }
-                if isExpanded {
-                    ForEach(
-                        1..<selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart) + 1,
-                        id: \.self
-                    ) { week in
-                        content(week, true)
-                    }
-                } else {
-                    content(selectedDate.weekNum(startFromMon: appSetting.isMondayStart), false)
-                }
+                content
                 ZStack {
-                    VStack {
-                        Spacer()
-                        BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
-                            withAnimation {
-                                self.isExpanded.toggle()
+                    if !isCapture {
+                        VStack {
+                            Spacer()
+                            BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
+                                withAnimation { self.isExpanded.toggle() }
                             }
                         }
                     }
-                    if habits.contents.count > 1 {
+                    if habits.contents.count > 1 && isRing && !isCapture {
                         HStack {
-                            VStack(alignment: .leading, spacing: 4) {
-                                ForEach(habits.contents) { habit in
-                                    HStack(spacing: 5) {
-                                        Circle()
-                                            .frame(width: 15, height: 15)
-                                            .foregroundColor(habit.color)
-                                        Text(habit.name)
-                                            .foregroundColor(habit.color)
-                                            .font(.system(size: 12, weight: .bold))
-                                    }
-                                }
-                            }
-                            .padding(.vertical)
+                            habitLegend
+                                .padding(.vertical)
                             Spacer()
                         }
                     }
                 }
             }
         }
-        .rowBackground(innerBottomPadding: false)
+        .rowBackground(innerBottomPadding: isCapture ? true : false)
     }
+    
+    var habitLegend: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            ForEach(habits.contents) { habit in
+                HStack(spacing: 5) {
+                    Circle()
+                        .frame(width: 15, height: 15)
+                        .foregroundColor(habit.color)
+                    Text(habit.name)
+                        .foregroundColor(habit.color)
+                        .font(.system(size: 16, weight: .bold))
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var dateIndicator: some View {
+        Button(action: {
+            if isExpanded { selectedDate = selectedDate.addMonth(-1)
+            } else { selectedDate = selectedDate.addDate(-7)! }
+        }) {
+            Image(systemName: "chevron.left")
+                .font(.system(size: 20, weight: .semibold))
+                .subColor()
+        }
+        Text(isExpanded ? selectedDate.localizedYearMonth : selectedDate.localizedMonthDay)
+            .foregroundColor(color)
+            .font(.system(size: 20, weight: .semibold))
+        Button(action: {
+            if isExpanded { selectedDate = selectedDate.addMonth(1)
+            } else { selectedDate = selectedDate.addDate(7)! }
+        }) {
+            Image(systemName: "chevron.right")
+                .font(.system(size: 20, weight: .bold))
+                .subColor()
+        }
+    }
+    
+    var calendarModeButton: some View {
+        Button(action: {
+            withAnimation { isEmojiView.toggle() }
+        }) {
+            Group {
+                if !isEmojiView {
+                    Circle()
+                        .trim(from: 0.0, to: 0.7)
+                        .stroke(style: StrokeStyle(lineWidth: 5.0, lineCap: .round))
+                        .foregroundColor(color)
+                        .rotationEffect(Angle(degrees: -90))
+                        .frame(width: 20, height: 20)
+                } else {
+                    Image(systemName: "face.smiling")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(color)
+                        .mainColor()
+                }
+            }
+            .frame(width: 44, height: 44)
+        }
+    }
+    
 }
 
 struct CustomCalendar_Previews: PreviewProvider {
@@ -148,7 +163,7 @@ struct CustomCalendar_Previews: PreviewProvider {
         var body: some View {
             HabitCalendar(
                 selectedDate: $selectedDate, isEmojiView: $isEmojiView,
-                isCalendarExpanded: $isExpanded,
+                isExpanded: $isExpanded,
                 habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
             )
             .environmentObject(AppSetting())
