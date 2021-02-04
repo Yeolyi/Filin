@@ -25,21 +25,17 @@ struct CaptureCalendar: View {
         VStack(spacing: 0) {
             HStack(alignment: .bottom, spacing: 3) {
                 if habits.contents.count > 1 {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            ForEach(habits.contents) { habit in
-                                HStack(spacing: 5) {
-                                    Circle()
-                                        .frame(width: 15, height: 15)
-                                        .foregroundColor(habit.color)
-                                    Text(habit.name)
-                                        .foregroundColor(habit.color)
-                                        .font(.system(size: 16, weight: .bold))
-                                }
+                    VStack(alignment: .leading, spacing: 4) {
+                        ForEach(habits.contents) { habit in
+                            HStack(spacing: 5) {
+                                Circle()
+                                    .frame(width: 15, height: 15)
+                                    .foregroundColor(habit.color)
+                                Text(habit.name)
+                                    .foregroundColor(habit.color)
+                                    .font(.system(size: 16, weight: .bold))
                             }
                         }
-                        .padding(.vertical)
-                        Spacer()
                     }
                 } else {
                     Text(habits[0].name)
@@ -51,7 +47,7 @@ struct CaptureCalendar: View {
                     .foregroundColor(color)
                     .bodyText()
             }
-            .padding(.bottom, 15)
+            .padding(.bottom, 20)
             if isExpanded {
                 VStack(spacing: 8) {
                     ForEach(

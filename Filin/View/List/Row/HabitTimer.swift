@@ -18,10 +18,27 @@ struct HabitTimer: View {
     
     @EnvironmentObject var appSetting: AppSetting
     
+    var hour: Int {
+        Int(
+            (timeRemaining - Double(minute*60 + second)) / 3600
+        )
+    }
+    
+    var minute: Int {
+        Int(
+            (timeRemaining - Double(second))
+                .truncatingRemainder(dividingBy: 3600) / 60
+        )
+    }
+    
+    var second: Int {
+        Int(timeRemaining.truncatingRemainder(dividingBy: 60))
+    }
+    
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                ZStack {
+        GeometryReader { geo in
+            ScrollView {
+                VStack(spacing: 40) {
                     ZStack {
                         Circle()
                             .trim(
@@ -29,80 +46,84 @@ struct HabitTimer: View {
                                 to: (CGFloat(habit.requiredSec)
                                         - CGFloat(timeRemaining))/CGFloat(habit.requiredSec)
                             )
-                            .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round))
-                            .frame(width: 250)
+                            .stroke(style: StrokeStyle(lineWidth: 25, lineCap: .round))
+                            .frame(width: geo.size.width - 100, height: geo.size.width - 100)
                             .foregroundColor(habit.color)
                             .rotationEffect(Angle(degrees: 270.0))
                             .animation(.linear)
                             .zIndex(1)
                         Circle()
-                            .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .square, lineJoin: .bevel))
-                            .frame(width: 250)
+                            .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .square, lineJoin: .bevel))
+                            .frame(width: geo.size.width - 100, height: geo.size.width - 100)
                             .subColor()
                             .zIndex(0)
-                    }
-                    Text("\(Int(timeRemaining))")
-                        .foregroundColor(habit.color)
-                        .title()
-                        .onReceive(timer) { _ in
-                            guard isCounting else { return }
-                            if self.timeRemaining > 0 {
-                                self.timeRemaining -= 0.1
+                        Text(
+                            (hour != 0 ? "\(String(format: "%02d", hour)) : " : "")
+                            +
+                            String(format: "%02d", minute) +
+                            " : " +
+                            String(format: "%02d", second)
+                        )
+                            .foregroundColor(habit.color)
+                            .title()
+                            .onReceive(timer) { _ in
+                                guard isCounting else { return }
+                                self.timeRemaining = max(0, self.timeRemaining - 0.1)
                             }
-                        }
-                        .onReceive(
-                            NotificationCenter.default.publisher(
-                                for: UIApplication.willResignActiveNotification
-                            )
-                        ) { _ in
-                            if !appSetting.backgroundTimer {
-                                isCounting = false
-                            }
-                            TimerManager.save(isCounting: isCounting, timeRemaining: timeRemaining)
-                        }
-                        .onReceive(
-                            NotificationCenter.default.publisher(
-                                for: UIApplication.willEnterForegroundNotification
-                            )
-                        ) { _ in
-                            (timeRemaining, isCounting) = TimerManager.sceneBack(appSetting)
-                        }
-                }
-                .frame(width: 300, height: 300)
-                .rowBackground()
-                .padding(.bottom, 30)
-                HStack(alignment: .center, spacing: 60) {
-                    Button(action: clearTimer) {
-                        Image(systemName: "arrow.triangle.2.circlepath")
-                            .mainColor()
-                            .headline()
-                    }
-                    .frame(width: 50)
-                    Button(action: {
-                        if timeRemaining == 0 {
-                            withAnimation {
-                                habit.achievement.set(at: date) { current, addUnit in
-                                    current + addUnit
+                            .onReceive(
+                                NotificationCenter.default.publisher(
+                                    for: UIApplication.willResignActiveNotification
+                                )
+                            ) { _ in
+                                if !appSetting.backgroundTimer {
+                                    isCounting = false
                                 }
+                                TimerManager.save(isCounting: isCounting, timeRemaining: timeRemaining)
                             }
-                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                            clearTimer()
-                            return
-                        }
-                       toggleTimer()
-                    }) {
-                        Image(systemName: timeRemaining == 0 ? "plus" : (isCounting ? "pause" : "play"))
-                            .mainColor()
-                            .headline()
+                            .onReceive(
+                                NotificationCenter.default.publisher(
+                                    for: UIApplication.willEnterForegroundNotification
+                                )
+                            ) { _ in
+                                (timeRemaining, isCounting) = TimerManager.sceneBack(appSetting)
+                            }
                     }
-                    .frame(width: 50)
+                    .padding(20)
+                    .rowBackground()
+                    HStack(alignment: .center, spacing: 60) {
+                        Button(action: clearTimer) {
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                                .mainColor()
+                                .headline()
+                        }
+                        .frame(width: 50)
+                        Button(action: {
+                            if timeRemaining == 0 {
+                                withAnimation {
+                                    habit.achievement.set(at: date) { current, addUnit in
+                                        current + addUnit
+                                    }
+                                }
+                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                                clearTimer()
+                                return
+                            }
+                            toggleTimer()
+                        }) {
+                            Image(systemName: timeRemaining <= 0 ? "plus" : (isCounting ? "pause" : "play"))
+                                .mainColor()
+                                .headline()
+                        }
+                        .frame(width: 50)
+                    }
+                    .flatRowBackground()
                 }
-                .flatRowBackground()
+                .padding(.top, 20)
             }
-            .padding(.top, 20)
+            .padding(.top, 1)
+            .offset(x: 5)
+            .navigationBarTitle(Text(habit.name))
         }
-        .padding(.top, 1)
-        .navigationBarTitle(Text(habit.name))
         .onAppear {
             if TimerManager.isRunning {
                 (timeRemaining, isCounting) = TimerManager.sceneBack(appSetting)
@@ -143,7 +164,7 @@ struct HabitTimer: View {
 struct HabitTimer_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            HabitTimer(date: Date(), habit: FlHabit(name: "Test", color: .blue, requiredSec: 3), timeRemaining: 3)
+            HabitTimer(date: Date(), habit: FlHabit(name: "Test", color: .blue, requiredSec: 10000), timeRemaining: 3)
                 .environmentObject(AppSetting())
         }
     }
