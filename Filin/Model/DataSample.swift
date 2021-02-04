@@ -14,18 +14,28 @@ extension FlHabit {
     
     static var habit1: FlHabit {
         let habitData: HabitData =  ("중간 스트레칭🙆‍♀️".localized, Palette.Default.pink.color, 10, 10)
-        return .init(
+        let habit = FlHabit(
             name: habitData.name, color: habitData.color, numberOfTimes:
                 habitData.numberOfTimes, requiredSec: habitData.requiredSec
         )
+        habit.achievement.content = (-60...0).reduce(into: [:], { result, num in
+            let newDateKey = Date().addDate(num)!.dictKey
+            result[newDateKey] = Int.random(in: 0...habit.achievement.numberOfTimes)
+        })
+        return habit
     }
     
     static var habit2: FlHabit {
         let habitData: HabitData =  ("물 2L 마시기💧".localized, Palette.Default.blue.color, 8, 0)
-        return .init(
+        let habit = FlHabit(
             name: habitData.name, color: habitData.color, numberOfTimes:
                 habitData.numberOfTimes, requiredSec: habitData.requiredSec
         )
+        habit.achievement.content = (-60...0).reduce(into: [:], { result, num in
+            let newDateKey = Date().addDate(num)!.dictKey
+            result[newDateKey] = Int.random(in: 0...habit.achievement.numberOfTimes)
+        })
+        return habit
     }
 }
 

@@ -10,10 +10,8 @@ import SwiftUI
 struct HabitCalendar: View {
     
     @Binding var selectedDate: Date
-    
     @Binding var isEmojiView: Bool
     @Binding var isExpanded: Bool
-    
     @ObservedObject var habits: HabitGroup
     
     let isCapture: Bool
@@ -37,7 +35,7 @@ struct HabitCalendar: View {
     }
     
     var week: Int {
-        appSetting.mainDate.weekNum(startFromMon: appSetting.isMondayStart)
+        selectedDate.weekNum(startFromMon: appSetting.isMondayStart)
     }
     
     var dayOfWeekIndicator: some View {
@@ -68,21 +66,19 @@ struct HabitCalendar: View {
                 )
             } else {
                 dayOfWeekIndicator
-                if isRing {
-                    if isEmojiView {
-                        weekExpandWrapper { week in
-                            EmojiCalendarRow(
-                                week: week, isExpanded: isExpanded,
-                                selectedDate: $selectedDate, habit: habits[0]
-                            )
-                        }
-                    } else {
+                if isEmojiView {
+                    weekExpandWrapper { week in
+                        EmojiCalendarRow(
+                            week: week, isExpanded: isExpanded,
+                            selectedDate: $selectedDate, habit: habits[0]
+                        )
+                    }
+                } else {
+                    if isRing {
                         expandWrapper { date in
                             Ring(habits: habits, date: date, selectedDate: selectedDate, isExpanded: isExpanded)
                         }
-                    }
-                } else {
-                    if habits.count == 1 {
+                    } else {
                         expandWrapper { date in
                             Tile(date: date, selectedDate: selectedDate, isExpanded: isExpanded, habits: habits)
                         }
@@ -96,14 +92,14 @@ struct HabitCalendar: View {
     func weekExpandWrapper<Content: View>(content: @escaping (Int) -> Content) -> some View {
         if isExpanded {
             VStack(spacing: 8) {
-                ForEach(1...appSetting.mainDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart),
+                ForEach(1...selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart),
                         id: \.self
                 ) { week in
                     content(week)
                 }
             }
         } else {
-            content(appSetting.mainDate.weekNum(startFromMon: appSetting.isMondayStart))
+            content(week)
         }
     }
     
@@ -111,7 +107,7 @@ struct HabitCalendar: View {
     func expandWrapper<Content: View>(content: @escaping (Date) -> Content) -> some View {
         if isExpanded {
             VStack(spacing: 8) {
-                ForEach(1...appSetting.mainDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart),
+                ForEach(1...selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart),
                         id: \.self
                 ) { week in
                     HStack(spacing: 4) {

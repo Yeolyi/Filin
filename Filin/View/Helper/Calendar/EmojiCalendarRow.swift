@@ -38,16 +38,11 @@ struct EmojiCalendarRow: View {
                                 Text(habit.dailyEmoji[date.dictKey]!)
                                     .headline()
                             } else {
-                                ZStack {
-                                    Circle()
-                                        .inactiveColor()
-                                        .frame(width: 24, height: 24)
-                                    Text("😀")
-                                        .headline()
-                                        .hidden()
-                                }
+                                Circle()
+                                    .inactiveColor()
                             }
                         }
+                        .frame(width: 24, height: 30)
                         .opacity((date.month != selectedDate.month && isExpanded) ? 0.3 : 1)
                     }
                 }

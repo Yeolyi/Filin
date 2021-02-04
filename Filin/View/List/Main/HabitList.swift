@@ -32,13 +32,7 @@ struct HabitList: View {
                 }
                 .hidden()
                 .zIndex(0)
-                Group {
-                    if habitManager.contents.isEmpty {
-                        ListPreview(isAddSheet: $isSheet)
-                    } else {
-                        HabitScrollView()
-                    }
-                }
+                HabitScrollView()
                 .zIndex(1)
             }
             .navigationBarTitle(appSetting.mainDate.localizedMonthDay)

@@ -37,61 +37,46 @@ struct RoutineView: View {
                 .subColor()
             Spacer()
         }
-        .rowBackground()
+        .flatRowBackground()
     }
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 0) {
-                    if !routineManager.contents.isEmpty {
-                        Text("Today".localized)
-                            .sectionText()
-                        if !routineManager.contents.filter({
-                            $0.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek)
-                        }).isEmpty {
-                            VStack(spacing: 0) {
-                                ForEach(
-                                    routineManager.contents.filter {
-                                        $0.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek)
-                                    }
-                                ) { routine in
-                                    RoutineRow(routine: routine, isSheet: $isAddSheet)
+                    Text("Today".localized)
+                        .sectionText()
+                    if !routineManager.contents.filter({
+                        $0.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek)
+                    }).isEmpty {
+                        VStack(spacing: 0) {
+                            ForEach(
+                                routineManager.contents.filter {
+                                    $0.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek)
                                 }
+                            ) { routine in
+                                RoutineRow(routine: routine, isSheet: $isAddSheet)
                             }
-                        } else {
-                            emptyIndicatingRow
-                        }
-                        Text("Others".localized)
-                            .sectionText()
-                        if !routineManager.contents.filter({
-                            !$0.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek)
-                        }).isEmpty {
-                            VStack(spacing: 0) {
-                                ForEach(
-                                    routineManager.contents.filter {
-                                        !$0.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek)
-                                    }
-                                ) { routine in
-                                    RoutineRow(routine: routine, isSheet: $isAddSheet)
-                                }
-                            }
-                        } else {
-                            emptyIndicatingRow
                         }
                     } else {
-                        ForEach([FlRoutine.routine1, FlRoutine.routine2], id: \.self) { routine in
-                            RoutineRow(routine: routine, isSheet: $isAddSheet)
+                        emptyIndicatingRow
+                    }
+                    Text("Others".localized)
+                        .sectionText()
+                    if !routineManager.contents.filter({
+                        !$0.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek)
+                    }).isEmpty {
+                        VStack(spacing: 0) {
+                            ForEach(
+                                routineManager.contents.filter {
+                                    !$0.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek)
+                                }
+                            ) { routine in
+                                RoutineRow(routine: routine, isSheet: $isAddSheet)
+                            }
                         }
-                        .opacity(0.5)
-                        .disabled(true)
-                        Text("Group and repeat goals to make them a habit.".localized)
-                            .bodyText()
-                            .padding(.top, 34)
-                        MainRectButton(action: {
-                            isAddSheet = .add
-                        }, str: "Add routine".localized)
-                        .padding(.top, 13)
+                    } else {
+                        emptyIndicatingRow
                     }
                 }
                 .padding(.top, 1)

@@ -19,18 +19,18 @@ struct TableCalendar: View {
         if isExpanded {
             VStack(spacing: 8) {
                 ForEach(
-                    1...appSetting.mainDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart),
+                    1...selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart),
                     id: \.self
                 ) { week in
                     WeekTable(habits: habits, week: week, selectedDate: selectedDate, isEmojiView: isEmojiView)
-                    if week != appSetting.mainDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart) {
+                    if week != selectedDate.weekNuminMonth(isMondayStart: appSetting.isMondayStart) {
                         Divider()
                     }
                 }
             }
         } else {
             WeekTable(
-                habits: habits, week: appSetting.mainDate.weekNum(startFromMon: appSetting.isMondayStart),
+                habits: habits, week: selectedDate.weekNum(startFromMon: appSetting.isMondayStart),
                 selectedDate: selectedDate, isEmojiView: isEmojiView
             )
         }
