@@ -72,11 +72,8 @@ struct CalendarInterface<Content: View>: View {
                 content
                 ZStack {
                     if !isCapture {
-                        VStack {
-                            Spacer()
-                            BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
-                                withAnimation { self.isExpanded.toggle() }
-                            }
+                        BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
+                            withAnimation { self.isExpanded.toggle() }
                         }
                     }
                     if habits.contents.count > 1 && isRing && !isCapture {
