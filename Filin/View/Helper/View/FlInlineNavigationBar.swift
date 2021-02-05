@@ -29,7 +29,7 @@ struct FlInlineNavigationBar<Bar: View, Content: View>: View {
                 }
                 .compositingGroup()
                 .background(
-                    (colorScheme == .light ? Color.white : Color.black)
+                    (colorScheme == .light ? Color.white : Color(hex: "#0E0E10"))
                         .edgesIgnoringSafeArea(.all)
                 )
                 Spacer()

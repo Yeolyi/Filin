@@ -104,25 +104,29 @@
 "Summary" = "요약";
 "See information of goals at once." = "여러 목표들의 정보를 한눈에 보기.";
 "Select goals" = "목표 선택";
-"Summary Setting" = "요약 설정";
+"Edit Summary" = "요약 편집";
 "Habit 1(Outermost ring)" = "목표 1(바깥쪽 링)";
 "Habit 2" = "목표 2";
 "Habit 3(Innermost ring)" = "목표 3(안쪽 링)";
 "Empty" = "비어있음";
 "Habit List" = "습관 목록";
+"⬆️ Goals to be displayed ⬆️" = "⬆️ 표시할 목표들 ⬆️";
 
 // 루틴 추가
 "Routine" = "루틴";
+"Add Routine" = "루틴 추가하기";
+"What is the name of the routine?" = "루틴의 이름을 알려주세요.";
 "After wake up" = "기상 후";
 "Before bed" = "자기 전";
 "%d goals" = "%d개의 목표";
+"%d selected" = "%d개 선택됨";
 "Group and repeat goals to make them a habit." = "목표들을 모으고 반복해 습관으로 만드세요.";
 "Add routine" = "루틴 추가";
 "Added" = "추가됨";
 "Choose the day of the week to proceed with the routine." = "루틴을 진행할 요일을 설정합니다.";
 "Reminder" = "리마인더";
 "Receive notifications at a specific time." = "특정 시간에 알림을 받으세요.";
-"Use reminder" = "리마인더 사용";
+"Use Reminder" = "리마인더 사용";
 "Reminder time" = "리마인더 시간";
 "Add the desired goal to the routine. Duplicates are also possible." = "원하는 목표를 루틴에 추가하세요. 중복도 괜찮습니다.";
 "Routine List" = "루틴 목록";
@@ -132,6 +136,7 @@
 //루틴 수정
 "Change habit list" = "목표 목록 변경";
 "Consists of %d goals" = "%d개 목표로 구성됨";
+"⬆️ Goals to be added ⬆️" = "⬆️ 추가할 목표들 ⬆️";
 
 //설정
 "Setting" = "설정";

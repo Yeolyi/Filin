@@ -34,30 +34,6 @@ struct SettingView: View {
                     }
                     .padding(.leading, 20)
                     .padding(.top, 20)
-                    Button(action: {isTapSetting = true}) {
-                        VStack {
-                            HStack {
-                                Text("Change Default Tab".localized)
-                                    .bodyText()
-                                Spacer()
-                                Text(DefaultTap(rawValue: appSetting.defaultTap)!.description)
-                                    .subColor()
-                                    .bodyText()
-                            }
-                        }
-                    }
-                    .flatRowBackground()
-                    .actionSheet(isPresented: $isTapSetting) {
-                        ActionSheet(
-                            title: Text("Choose Tab".localized),
-                            message: nil,
-                            buttons: [DefaultTap.list, .summary, .routine].map { tap in
-                                Alert.Button.default(Text(tap.description)) {
-                                    appSetting.defaultTap = tap.rawValue
-                                }
-                            } + [Alert.Button.cancel()]
-                        )
-                    }
                     HStack {
                         Text("The End of the Day".localized)
                             .bodyText()

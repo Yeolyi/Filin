@@ -31,14 +31,14 @@ struct RoutineRow: View {
                     }
                 } else {
                     HStack {
-                        Text("\(routine.list.count)")
+                        Text(String(format: NSLocalizedString("%d goals", comment: ""), routine.list.count))
                             .bodyText()
                         Spacer()
                     }
                 }
                 HStack {
                     Text(routine.name)
-                        .headline()
+                        .font(.custom("GodoB", size: 20))
                     Spacer()
                 }
             }

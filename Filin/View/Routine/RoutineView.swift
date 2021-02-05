@@ -79,7 +79,6 @@ struct RoutineView: View {
                         emptyIndicatingRow
                     }
                 }
-                .padding(.top, 1)
                 .navigationBarTitle("Routine".localized)
                 .navigationBarItems(
                     trailing: HeaderButton("plus") {
@@ -100,6 +99,7 @@ struct RoutineView: View {
                     }
                 }
             }
+            .padding(.top, 1)
         }
         .accentColor(ThemeColor.mainColor(colorScheme))
         .navigationViewStyle(StackNavigationViewStyle())

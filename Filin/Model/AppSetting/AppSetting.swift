@@ -58,13 +58,6 @@ class AppSetting: ObservableObject {
     @AutoSave("runCount", defaultValue: 0)
     var runCount: Int
     
-    @AutoSave("defaultTap", defaultValue: 0)
-    var defaultTap: Int {
-        didSet {
-            objectWillChange.send()
-        }
-    }
-    
     @AutoSave("mondayCalendar", defaultValue: false)
     var isMondayStart: Bool {
         didSet {
@@ -93,16 +86,7 @@ class AppSetting: ObservableObject {
     
     @AutoSave("sceneBackgroundTime", defaultValue: nil)
     var sceneBackgroundTime: Date?
-    
-    /*
-    @AutoSave("backgroundTimer", defaultValue: true)
-    var backgroundTimer: Bool {
-        didSet {
-            objectWillChange.send()
-        }
-    }
-    */
-    
+
     var mainDate: Date {
         if Date().hour >= dayResetTime {
             return Date()

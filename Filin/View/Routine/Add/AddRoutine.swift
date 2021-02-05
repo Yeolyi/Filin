@@ -38,7 +38,7 @@ struct AddRoutine: View {
     init(habits: [FlHabit]) {
         dividerID = UUID()
         var list = habits
-        list.insert(.init(id: dividerID, name: "----------", color: .gray), at: 0)
+        list.insert(.init(id: dividerID, name: "⬆️ Goals to be displayed ⬆️".localized, color: .gray), at: 0)
         listData = .init(values: list) { _ in }
     }
     
@@ -97,11 +97,11 @@ struct AddRoutine: View {
                         }
                         .padding(.leading, 20)
                         NavigationLink(destination:
-                            SelectRoutineList()
+                                        SelectRoutineList(cursorID: dividerID)
                             .environmentObject(listData)
                         ) {
                             HStack {
-                                Text("\(dataFiltered.count) selected")
+                                Text(String(format: NSLocalizedString("%d selected", comment: ""), dataFiltered.count))
                                     .bodyText()
                                 Spacer()
                                 Image(systemName: "chevron.right")

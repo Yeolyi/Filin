@@ -69,7 +69,7 @@ struct EditRoutine: View {
         }
         dividerID = UUID()
         var tempListData = routine.list
-        tempListData.append(.init(id: dividerID, name: "-----"))
+        tempListData.append(.init(id: dividerID, name: "⬆️ Goals to be added ⬆️".localized, color: .gray))
         tempListData.append(contentsOf: habits.filter {
             !(tempListData.contains($0))
         })
@@ -125,22 +125,16 @@ struct EditRoutine: View {
                             }
                             .padding(.leading, 20)
                             NavigationLink(destination:
-                                SelectRoutineList()
+                                            SelectRoutineList(cursorID: dividerID)
                                     .environmentObject(listData)
                             ) {
                                 HStack {
-                                    Text(
-                                        String(
-                                            format: NSLocalizedString("Consists of %d goals", comment: ""),
-                                            filteredList.count
-                                        )
-                                    )
+                                    Text(String(format: NSLocalizedString("%d selected", comment: ""), filteredList.count))
                                         .bodyText()
                                     Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .mainColor()
                                 }
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .mainColor()
                             }
                             .flatRowBackground()
                         }
