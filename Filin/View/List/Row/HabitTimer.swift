@@ -75,9 +75,6 @@ struct HabitTimer: View {
                                     for: UIApplication.willResignActiveNotification
                                 )
                             ) { _ in
-                                if !appSetting.backgroundTimer {
-                                    isCounting = false
-                                }
                                 TimerManager.save(isCounting: isCounting, timeRemaining: timeRemaining)
                             }
                             .onReceive(

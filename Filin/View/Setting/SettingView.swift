@@ -84,13 +84,6 @@ struct SettingView: View {
                         )
                     }
                     HStack {
-                        Text("Run Timer in Background".localized)
-                            .bodyText()
-                        Spacer()
-                        PaperToggle($appSetting.backgroundTimer)
-                    }
-                    .flatRowBackground()
-                    HStack {
                         Text("Calendar".localized)
                             .bodyText()
                         Spacer()

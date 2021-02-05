@@ -48,7 +48,12 @@ struct HabitScrollView: View {
                         .sectionText()
                     if !isTodayEmpty {
                         ForEach(
-                            habitManager.contents.filter { $0.isTodo(at: appSetting.mainDate.dayOfTheWeek) }
+                            habitManager.contents.filter {
+                                $0.isTodo(at: appSetting.mainDate.dayOfTheWeek)
+                            }.sorted(by: { habit1, habit2 in
+                                (habit1.achievement.progress(at: appSetting.mainDate) ?? 0) <
+                                    (habit2.achievement.progress(at: appSetting.mainDate) ?? 0)
+                            })
                         ) { habitInfo in
                             HabitRow(habit: habitInfo, showAdd: true)
                                 .environmentObject(habitInfo)
