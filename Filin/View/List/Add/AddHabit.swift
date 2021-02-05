@@ -48,7 +48,7 @@ struct AddHabit: View {
                         Spacer()
                     }
                     .padding(.leading, 20)
-                    TextFieldWithEndButton("Drink water".localized, text: $tempHabit.name)
+                    TextFieldWithEndButton([FlHabit.habit1, FlHabit.habit2].randomElement()!.name, text: $tempHabit.name)
                         .flatRowBackground()
                 }
                 VStack(spacing: 8) {

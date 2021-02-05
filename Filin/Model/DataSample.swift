@@ -13,7 +13,7 @@ extension FlHabit {
     typealias HabitData = (name: String, color: Color, numberOfTimes: Int, requiredSec: Int)
     
     static var habit1: FlHabit {
-        let habitData: HabitData =  ("중간 스트레칭🙆‍♀️".localized, Palette.Default.pink.color, 10, 10)
+        let habitData: HabitData =  habitDatas[0]
         let habit = FlHabit(
             name: habitData.name, color: habitData.color, numberOfTimes:
                 habitData.numberOfTimes, requiredSec: habitData.requiredSec
@@ -26,7 +26,7 @@ extension FlHabit {
     }
     
     static var habit2: FlHabit {
-        let habitData: HabitData =  ("물 2L 마시기💧".localized, Palette.Default.blue.color, 8, 0)
+        let habitData: HabitData = habitDatas[1]
         let habit = FlHabit(
             name: habitData.name, color: habitData.color, numberOfTimes:
                 habitData.numberOfTimes, requiredSec: habitData.requiredSec
@@ -42,19 +42,26 @@ extension FlHabit {
 extension FlRoutine {
     
     static var routine1: FlRoutine {
-        let temp = FlRoutine(UUID(), name: "After wake up".localized)
+        let temp = FlRoutine(UUID(), name: "Jogging Routine🏃‍♂️".localized)
         temp.list = [FlHabit.habit1, FlHabit.habit2]
         temp.time = Date()
         return temp
     }
     
     static var routine2: FlRoutine {
-        let temp = FlRoutine(UUID(), name: "Before bed".localized)
+        let temp = FlRoutine(UUID(), name: "Organize before bed😴".localized)
         temp.list = [FlHabit.habit1, FlHabit.habit2, FlHabit.habit1, FlHabit.habit2]
         return temp
     }
     
 }
+
+private let habitDatas: [(name: String, color: Color, numberOfTimes: Int, requiredSec: Int)] = [
+    ("Intermediate Stretching🙆‍♀️".localized, Palette.Default.red.color, 8, 10),
+    ("10-Minute Walk🚶".localized, Palette.Default.pink.color, 3, 600),
+    ("Drinking 2L Water💧".localized, Palette.Default.blue.color, 8, 0),
+    ("10 minutes of meditation🧘".localized, Palette.Default.green.color, 2, 0)
+]
 
 /// Xcode preview와 앱스토어 스크린샷을 위한 임시 manager들과 데이터들을 제공.
 /// - Note: 데이터가 중복으로 저장됨을 막기 위해 싱글톤 패턴 사용.
@@ -68,12 +75,6 @@ final class DataSample {
     static let shared = DataSample()
 
     private init() {
-        let habitDatas: [(name: String, color: Color, numberOfTimes: Int, requiredSec: Int)] = [
-            ("유산균 챙겨먹기🥛".localized, Palette.Default.green.color, 2, 0),
-            ("물 2L 마시기💧".localized, Palette.Default.blue.color, 8, 0),
-            ("10분 걷기🚶".localized, Palette.Default.red.color, 3, 600),
-            ("중간 스트레칭🙆‍♀️".localized, Palette.Default.pink.color, 8, 10)
-        ]
         var usedIds: [UUID] = []
         let habits: [FlHabit] = habitDatas.map { data in
             let id = UUID()
@@ -93,9 +94,9 @@ final class DataSample {
         
         summaryManager.append(.init(name: "Default", list: habitManager.contents.map(\.id)))
         
-        let routine1 = FlRoutine(UUID(), name: "After wake up".localized)
+        let routine1 = FlRoutine(UUID(), name: "Jogging Routine🏃‍♂️".localized)
         routine1.list = Array(habits[0...1])
-        let routine2 = FlRoutine(UUID(), name: "Before bed".localized)
+        let routine2 = FlRoutine(UUID(), name: "Organize before bed😴".localized)
         routine2.list = Array(habits[0...3])
         routineManager.append(routine1)
         routineManager.append(routine2)

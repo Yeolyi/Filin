@@ -33,7 +33,6 @@ struct SelectRoutineList: View {
                 }
             }
             .padding(.horizontal, 10)
-            
             MainRectButton(action: { presentationMode.wrappedValue.dismiss() }, str: "Done".localized)
                 .padding(.bottom, 30)
         }

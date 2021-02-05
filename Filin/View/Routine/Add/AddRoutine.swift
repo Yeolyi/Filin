@@ -73,7 +73,7 @@ struct AddRoutine: View {
                             Spacer()
                         }
                         .padding(.leading, 20)
-                        TextFieldWithEndButton("Morning wake up ☀️".localized, text: $newRoutine.name)
+                        TextFieldWithEndButton([FlRoutine.routine1, FlRoutine.routine2].randomElement()!.name, text: $newRoutine.name)
                             .flatRowBackground()
                     }
                     VStack(spacing: 8) {
