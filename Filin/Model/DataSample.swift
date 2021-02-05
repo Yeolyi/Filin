@@ -60,7 +60,7 @@ private let habitDatas: [(name: String, color: Color, numberOfTimes: Int, requir
     ("Intermediate Stretching🙆‍♀️".localized, Palette.Default.red.color, 8, 10),
     ("10-Minute Walk🚶".localized, Palette.Default.pink.color, 3, 600),
     ("Drinking 2L Water💧".localized, Palette.Default.blue.color, 8, 0),
-    ("10 minutes of meditation🧘".localized, Palette.Default.green.color, 2, 0)
+    ("10 minutes of meditation🧘".localized, Palette.Default.purple.color, 2, 0)
 ]
 
 /// Xcode preview와 앱스토어 스크린샷을 위한 임시 manager들과 데이터들을 제공.

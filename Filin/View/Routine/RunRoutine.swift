@@ -23,6 +23,7 @@ struct RunRoutine: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var appSetting: AppSetting
     
     var body: some View {
         ZStack {
@@ -84,7 +85,7 @@ struct RunRoutine: View {
                 self.timer.upstream.connect().cancel()
                 isCounting = false
                 withAnimation {
-                    routine.list[currentListIndex].achievement.set(at: Date()) { current, addUnit in
+                    routine.list[currentListIndex].achievement.set(at: appSetting.mainDate) { current, addUnit in
                         current + addUnit
                     }
                     routine.objectWillChange.send()
