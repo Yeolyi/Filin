@@ -89,11 +89,11 @@ struct RoutineView: View {
                 .sheet(item: $isAddSheet) { sheetType in
                     switch sheetType {
                     case RoutineSheet.add:
-                        AddRoutine()
+                        AddRoutine(habits: habitManager.contents)
                             .environmentObject(habitManager)
                             .environmentObject(routineManager)
                     case RoutineSheet.edit(let routine):
-                        EditRoutine(routine: routine)
+                        EditRoutine(routine: routine, habits: habitManager.contents)
                             .environmentObject(habitManager)
                             .environmentObject(routineManager)
                             .accentColor(ThemeColor.mainColor(colorScheme))
