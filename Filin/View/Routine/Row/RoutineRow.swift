@@ -61,6 +61,6 @@ struct RoutineRow: View {
 
 struct RoutineRow_Previews: PreviewProvider {
     static var previews: some View {
-        RoutineRow(routine: FlRoutine.routine1, isSheet: .constant(nil))
+        RoutineRow(routine: FlRoutine.sample(number: 0), isSheet: .constant(nil))
     }
 }

@@ -43,6 +43,6 @@ struct SelectRoutineList: View {
 struct SelectRoutineList_Previews: PreviewProvider {
     static var previews: some View {
         SelectRoutineList(cursorID: UUID())
-            .environmentObject(EditableList(values: DataSample.shared.habitManager.contents, save: {_ in}))
+            .environmentObject(EditableList(values: PreviewDataProvider.shared.habitManager.contents, save: {_ in}))
     }
 }

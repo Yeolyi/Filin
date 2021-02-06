@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-final class SummaryManager: DataBridge {
+final class SummaryManager: CoreDataBridge {
     
-    typealias Converted = TempSummary
-    typealias Target = FlSummary
+    typealias InAppType = TempSummary
+    typealias CoreDataType = FlSummary
     
     @Published var contents: [TempSummary] = []
     
@@ -19,24 +19,24 @@ final class SummaryManager: DataBridge {
     private init() {
         contents = fetched.map { TempSummary($0) }
         if contents.isEmpty {
-            contents.append(.init(name: "Default", list: []))
+            contents.append(.init())
         }
     }
     
     func save() {
         for flSummary in contents {
             if let index = fetched.firstIndex(where: {$0.id == flSummary.id}) {
-                flSummary.copyValues(to: fetched[index])
+                flSummary.coreDataTransfer(to: fetched[index])
             } else {
                 let newHabit = FlSummary(context: moc)
                 newHabit.id = flSummary.id
-                flSummary.copyValues(to: newHabit)
+                flSummary.coreDataTransfer(to: newHabit)
             }
         }
         mocSave()
     }
     
-    func append(_ object: Converted) {
+    func append(_ object: InAppType) {
         contents.append(object)
     }
     

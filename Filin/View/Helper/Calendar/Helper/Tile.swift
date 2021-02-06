@@ -23,7 +23,7 @@ struct Tile: View {
                         (date.month == selectedDate.month) || !isExpanded ?
                             habits[0].color : ThemeColor.inActive(colorScheme)
                     )
-                    .opacity(habits[0].achievement.progress(at: date) ?? 0)
+                    .opacity(habits[0].achievement.progress(at: date))
             }
             if date.month != selectedDate.month && isExpanded {
                 Text("\(date.day)")
@@ -45,7 +45,7 @@ struct Tile: View {
 
 struct Tile_Previews: PreviewProvider {
     static var previews: some View {
-        let dataSample = DataSample.shared
+        let dataSample = PreviewDataProvider.shared
         return Tile(
             date: Date(), selectedDate: Date(), isExpanded: false,
             habits: .init(contents: [dataSample.habitManager.contents[0]])

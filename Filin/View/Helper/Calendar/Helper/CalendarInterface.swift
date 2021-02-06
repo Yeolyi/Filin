@@ -161,7 +161,7 @@ struct CustomCalendar_Previews: PreviewProvider {
             HabitCalendar(
                 selectedDate: $selectedDate, isEmojiView: $isEmojiView,
                 isExpanded: $isExpanded,
-                habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
+                habits: .init(contents: [FlHabit.sample(number: 1), FlHabit.sample(number: 2)])
             )
             .environmentObject(AppSetting())
         }

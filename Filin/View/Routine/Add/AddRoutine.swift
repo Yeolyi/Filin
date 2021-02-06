@@ -19,7 +19,7 @@ struct AddRoutine: View {
     
     let dividerID: UUID
     
-    @ObservedObject var newRoutine = FlRoutine(UUID(), name: "")
+    @ObservedObject var newRoutine = FlRoutine(name: "")
     @ObservedObject var listData: EditableList<FlHabit>
     
     @Environment(\.presentationMode) var presentationMode
@@ -31,7 +31,7 @@ struct AddRoutine: View {
         #if DEBUG
         return true
         #else
-        return newRoutine.name != "" && newRoutine.dayOfWeek.isEmpty && !newRoutine.list.isEmpty
+        return newRoutine.name != "" && !newRoutine.dayOfWeek.isEmpty && !dataFiltered.isEmpty
         #endif
     }
     
@@ -73,7 +73,10 @@ struct AddRoutine: View {
                             Spacer()
                         }
                         .padding(.leading, 20)
-                        TextFieldWithEndButton([FlRoutine.routine1, FlRoutine.routine2].randomElement()!.name, text: $newRoutine.name)
+                        TextFieldWithEndButton(
+                            [FlRoutine.sample(number: 0), FlRoutine.sample(number: 1)].randomElement()!.name,
+                            text: $newRoutine.name
+                        )
                             .flatRowBackground()
                     }
                     VStack(spacing: 8) {
@@ -189,7 +192,7 @@ struct AddRoutine: View {
 
 struct AddRoutine_Previews: PreviewProvider {
     static var previews: some View {
-        let dataSample = DataSample.shared
+        let dataSample = PreviewDataProvider.shared
         return Group {
             AddRoutine(habits: dataSample.habitManager.contents)
         }

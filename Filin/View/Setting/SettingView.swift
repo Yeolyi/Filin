@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 
 struct SettingView: View {
     
@@ -15,13 +14,6 @@ struct SettingView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var appSetting: AppSetting
-    let appVersion: String
-    let build: String
-    
-    init() {
-        appVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
-        build = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? ""
-    }
     
     var body: some View {
         NavigationView {
@@ -107,16 +99,11 @@ struct SettingView: View {
                     }
                     .padding(.leading, 20)
                     .padding(.top, 20)
-                    Button(action: {
-                        _ = DataSample.shared
-                    }) {
+                    Button(action: { _ = PreviewDataProvider.shared }) {
                         HStack {
                             Text("샘플")
                                 .bodyText()
                             Spacer()
-                        }
-                        .onTapGesture {
-                            
                         }
                         .flatRowBackground()
                     }

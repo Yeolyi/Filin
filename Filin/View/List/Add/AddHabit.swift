@@ -48,7 +48,7 @@ struct AddHabit: View {
                         Spacer()
                     }
                     .padding(.leading, 20)
-                    TextFieldWithEndButton([FlHabit.habit1, FlHabit.habit2].randomElement()!.name, text: $tempHabit.name)
+                    TextFieldWithEndButton([FlHabit.sample(number: 0), FlHabit.sample(number: 1)].randomElement()!.name, text: $tempHabit.name)
                         .flatRowBackground()
                 }
                 VStack(spacing: 8) {
@@ -116,6 +116,6 @@ struct AddHabit_Previews: PreviewProvider {
     static var previews: some View {
         return AddHabit()
             .environmentObject(AppSetting())
-            .environmentObject(DataSample.shared.habitManager)
+            .environmentObject(PreviewDataProvider.shared.habitManager)
     }
 }

@@ -14,7 +14,9 @@ struct SummaryPreview: View {
     var body: some View {
         HabitCalendar(
             selectedDate: .constant(Date()), isEmojiView: .constant(false),
-            isExpanded: .constant(false), habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
+            isExpanded: .constant(false), habits: .init(contents: [
+                FlHabit.sample(number: 1), FlHabit.sample(number: 2)
+            ])
         )
         .opacity(0.5)
         .disabled(true)

@@ -67,7 +67,7 @@ struct TableCalendar: View {
                 Circle()
                     .frame(width: 20, height: 20)
                     .foregroundColor(habit.color)
-                    .opacity((habit.achievement.progress(at: date) ?? 0) + 0.1)
+                    .opacity(habit.achievement.progress(at: date) + 0.1)
             }
         }
         

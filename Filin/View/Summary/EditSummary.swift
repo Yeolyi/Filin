@@ -19,8 +19,7 @@ struct EditSummary: View {
         let separatorID = UUID()
         self.separatorID = separatorID
         let separatorHabit = FlHabit(
-            id: separatorID,
-            name: "⬆️ Goals to be displayed ⬆️".localized
+            id: separatorID, name: "⬆️ Goals to be displayed ⬆️".localized
         )
         separatorHabit.color = Color.gray
         var habitsWithSeparator = current
@@ -93,7 +92,7 @@ struct EditSummary: View {
 
 struct EditSummary_Previews: PreviewProvider {
     static var previews: some View {
-        let dataSample = DataSample.shared
+        let dataSample = PreviewDataProvider.shared
         return Text("")
             .sheet(isPresented: .constant(true)) {
                 EditSummary(habits: dataSample.habitManager.contents, current: [])

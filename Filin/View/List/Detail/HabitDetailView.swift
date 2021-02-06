@@ -29,7 +29,7 @@ struct HabitDetailView: View {
     @EnvironmentObject var summaryManager: SummaryManager
     
     init(habit: FlHabit) {
-        if !habit.isDaily {
+        if !(habit.dayOfWeek.count == 7) {
             _selectedDate = State(initialValue: Date().nearDayOfWeekDate((habit.dayOfWeek).map {Int($0)}))
         }
     }
@@ -98,11 +98,11 @@ struct HabitDetailView: View {
 
 struct HabitDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let dataSample = DataSample.shared
-        return HabitDetailView(habit: FlHabit.habit1)
+        let dataSample = PreviewDataProvider.shared
+        return HabitDetailView(habit: FlHabit.sample(number: 0))
             .environmentObject(dataSample.habitManager)
             .environmentObject(dataSample.summaryManager)
-            .environmentObject(FlHabit.habit1)
+            .environmentObject(FlHabit.sample(number: 0))
             .environmentObject(AppSetting())
     }
 }

@@ -54,7 +54,7 @@ struct EditRoutine: View {
     
     init(routine: FlRoutine, habits: [FlHabit]) {
         targetRoutine = routine
-        tempRoutine = FlRoutine(copyExceptID: routine)
+        tempRoutine = routine.copy
         if let time = routine.time {
             _useReminder = State(initialValue: true)
             let converted = time.dateToTimer()
@@ -62,7 +62,7 @@ struct EditRoutine: View {
             _minute = State(initialValue: converted.minute)
             _isAM = State(initialValue: converted.isAM)
         } else {
-            _useReminder = State(initialValue: true)
+            _useReminder = State(initialValue: false)
             _hour = State(initialValue: 10)
             _minute = State(initialValue: 0)
             _isAM = State(initialValue: true)
@@ -98,7 +98,7 @@ struct EditRoutine: View {
                         } else {
                             tempRoutine.time = nil
                         }
-                        targetRoutine.update(to: tempRoutine)
+                        targetRoutine.applyChanges(copy: tempRoutine)
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
@@ -228,8 +228,8 @@ struct EditRoutine: View {
 
 struct EditRoutine_Previews: PreviewProvider {
     static var previews: some View {
-        let coreDataPreview = DataSample.shared
-        EditRoutine(routine: FlRoutine.routine1, habits: coreDataPreview.habitManager.contents)
+        let coreDataPreview = PreviewDataProvider.shared
+        EditRoutine(routine: FlRoutine.sample(number: 0), habits: coreDataPreview.habitManager.contents)
             .environmentObject(coreDataPreview.routineManager)
             .environmentObject(coreDataPreview.habitManager)
     }

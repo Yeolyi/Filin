@@ -34,7 +34,7 @@ class AppSetting: ObservableObject {
                 }
                 let summaryManager = SummaryManager.shared
                 if summaryManager.contents.isEmpty {
-                    summaryManager.contents.append(.init(name: "Default", list: fetched.map(\.id)))
+                    summaryManager.contents.append(TempSummary.makeSample(usingIDs: fetched.map(\.id)))
                 } else {
                     var seen: Set<UUID> = []
                     let legacyFiltered = [fetched[0].first, fetched[0].second, fetched[0].third]

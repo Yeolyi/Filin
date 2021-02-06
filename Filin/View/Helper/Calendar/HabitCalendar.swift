@@ -142,7 +142,9 @@ struct HabitCalendar: View {
 struct HabitCalendar_Previews: PreviewProvider {
     static var previews: some View {
         HabitCalendar(selectedDate: .constant(Date()), isEmojiView: .constant(false),
-                      isExpanded: .constant(false), habits: .init(contents: [FlHabit.habit1, FlHabit.habit2])
+                      isExpanded: .constant(false), habits: .init(contents: [
+                        FlHabit.sample(number: 1), FlHabit.sample(number: 0)
+                      ])
         )
         .environmentObject(AppSetting())
     }

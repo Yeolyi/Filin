@@ -17,7 +17,7 @@ struct Ring: View {
     
     var isProgressEmpty: Bool {
         habits.count != 1 &&
-        habits.contents.filter({($0.achievement.progress(at: date) ?? 0) != 0}).isEmpty
+        habits.contents.filter({$0.achievement.progress(at: date) != 0}).isEmpty
     }
     
     var body: some View {
@@ -35,7 +35,7 @@ struct Ring: View {
                 }
                 ForEach(0..<min(3, habits.count), id: \.self) { index in
                     Circle()
-                        .trim(from: 0.0, to: CGFloat(habits[index].achievement.progress(at: date) ?? 0))
+                        .trim(from: 0.0, to: CGFloat(habits[index].achievement.progress(at: date)))
                         .stroke(style: StrokeStyle(lineWidth: 5.0 - CGFloat(index) * 0.5, lineCap: .round))
                         .if(selectedDate.month != date.month && isExpanded) {
                             $0.inactiveColor()
@@ -62,7 +62,7 @@ struct Ring: View {
 
 struct SingleRing_Previews: PreviewProvider {
     static var previews: some View {
-        let dataSample = DataSample.shared
+        let dataSample = PreviewDataProvider.shared
         return Ring(
             habits: .init(contents: [dataSample.habitManager.contents[0]]),
             date: Date(), selectedDate: Date(), isExpanded: false

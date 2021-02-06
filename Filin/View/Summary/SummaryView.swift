@@ -112,7 +112,7 @@ struct SummaryView: View {
 
 struct CalendarSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        let dataSample = DataSample.shared
+        let dataSample = PreviewDataProvider.shared
         return SummaryView()
             .environmentObject(dataSample.habitManager)
             .environmentObject(dataSample.summaryManager)

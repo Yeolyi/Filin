@@ -18,15 +18,15 @@ struct EditHabit: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var habitManager: HabitManager
     @EnvironmentObject var summaryManager: SummaryManager
+    @EnvironmentObject var routineManager: RoutineManager
     
     var isSaveAvailable: Bool {
-        tempHabit.name != "" && !tempHabit.dayOfWeek.isEmpty && tempHabit.achievement.numberOfTimes > 0
+        tempHabit.name != "" && !tempHabit.dayOfWeek.isEmpty && tempHabit.achievement.targetTimes > 0
     }
     
     init(targetHabit: FlHabit) {
         self.targetHabit = targetHabit
-        tempHabit = FlHabit(name: "Temp")
-        tempHabit.update(to: targetHabit)
+        tempHabit = targetHabit.copy
     }
     
     var body: some View {
@@ -104,7 +104,7 @@ struct EditHabit: View {
     var saveButton: some View {
         HeaderText("Save".localized) {
             guard isSaveAvailable else { return }
-            targetHabit.update(to: tempHabit)
+            targetHabit.applyChanges(copy: tempHabit)
             habitManager.objectWillChange.send()
             self.presentationMode.wrappedValue.dismiss()
         }
@@ -130,7 +130,9 @@ struct EditHabit: View {
                         profile.list.remove(at: index)
                     }
                 }
-                habitManager.remove(withID: targetHabit.id, summary: summaryManager.contents[0])
+                habitManager.remove(
+                    withID: targetHabit.id, summary: summaryManager.contents[0], routines: routineManager.contents
+                )
                 self.presentationMode.wrappedValue.dismiss()
             })
         )

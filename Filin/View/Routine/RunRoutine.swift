@@ -164,7 +164,7 @@ struct RunRoutine: View {
 
 struct RunRoutine_Previews: PreviewProvider {
     static var previews: some View {
-        let routine = FlRoutine(UUID(), name: "Test")
+        let routine = FlRoutine(name: "Test")
         routine.list = [FlHabit](repeating: FlHabit(name: "A"), count: 10)
         return RunRoutine(routine: routine).environmentObject(AppSetting())
     }

@@ -10,16 +10,16 @@ import CoreData
 
 final class TempSummary: CoreDataConvertable {
     
-    typealias Target = FlSummary
+    typealias MatchingCoreDataType = FlSummary
     
     let id: UUID
     @Published var name: String
     @Published var list: [UUID]
     
-    init(name: String, list: [UUID], id: UUID = UUID()) {
-        self.id = id
+    init(name: String = "Default") {
+        self.id = UUID()
         self.name = name
-        self.list = list
+        self.list = []
     }
     
     init(_ coreData: FlSummary) {
@@ -28,7 +28,7 @@ final class TempSummary: CoreDataConvertable {
         self.list = coreData.list
     }
     
-    func copyValues(to target: FlSummary) {
+    func coreDataTransfer(to target: FlSummary) {
         guard target.id == id else {
             assertionFailure()
             return
@@ -36,4 +36,11 @@ final class TempSummary: CoreDataConvertable {
         target.list = list
         target.name = name
     }
+    
+    static func makeSample(usingIDs idArr: [UUID]) -> TempSummary {
+        let sample = TempSummary()
+        sample.list = idArr
+        return sample
+    }
+    
 }

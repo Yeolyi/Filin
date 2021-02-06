@@ -16,7 +16,7 @@ struct HabitNumberSetting: View {
         Binding(get: { _isSet}, set: {
             _isSet = $0
             if $0 {
-                tempHabit.achievement.addUnit = tempHabit.achievement.numberOfTimes
+                tempHabit.achievement.addUnit = tempHabit.achievement.targetTimes
                 _setNum = 1
             } else {
                 tempHabit.achievement.addUnit = 1
@@ -28,14 +28,14 @@ struct HabitNumberSetting: View {
     var setNum: Binding<Int> {
         Binding(get: { _setNum }, set: {
             _setNum = $0
-            tempHabit.achievement.numberOfTimes = $0 * tempHabit.achievement.addUnit
+            tempHabit.achievement.targetTimes = $0 * tempHabit.achievement.addUnit
         })
     }
     
     var oneTapNum: Binding<Int> {
         Binding(get: {tempHabit.achievement.addUnit}, set: {
             tempHabit.achievement.addUnit = $0
-            tempHabit.achievement.numberOfTimes = _setNum * $0
+            tempHabit.achievement.targetTimes = _setNum * $0
         })
     }
     
@@ -43,7 +43,7 @@ struct HabitNumberSetting: View {
         self.tempHabit = targetHabit
         __setNum = State(
             initialValue: targetHabit.achievement.addUnit != 1 ?
-                targetHabit.achievement.numberOfTimes / targetHabit.achievement.addUnit : 1
+                targetHabit.achievement.targetTimes / targetHabit.achievement.addUnit : 1
         )
         __isSet = State(initialValue: targetHabit.achievement.addUnit != 1)
     }
@@ -59,7 +59,7 @@ struct HabitNumberSetting: View {
             Divider()
             if !isSet.wrappedValue {
                 PickerWithButton(
-                    str: "", size: 100, number: $tempHabit.achievement.numberOfTimes
+                    str: "", size: 100, number: $tempHabit.achievement.targetTimes
                 )
             } else {
                 HStack {
@@ -78,6 +78,6 @@ struct HabitNumberSetting: View {
 
 struct HabitNumberSetting_Previews: PreviewProvider {
     static var previews: some View {
-        HabitNumberSetting(DataSample.shared.habitManager.contents[0])
+        HabitNumberSetting(PreviewDataProvider.shared.habitManager.contents[0])
     }
 }

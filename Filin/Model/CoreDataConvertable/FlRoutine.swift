@@ -15,6 +15,22 @@ class FlRoutine: CoreDataConvertable {
     @Published var list: [FlHabit] = []
     @Published var time: Date?
     @Published var dayOfWeek: Set<Int> = [1, 2, 3, 4, 5, 6, 7]
+    var copyID: UUID?
+    
+    private static let sampleData: [(name: String, sampleHabitIndices: [Int])] = [
+        ("Jogging Routine🏃‍♂️".localized, [0, 1]), ("Organize before bed😴".localized, [1, 2, 3])
+    ]
+    
+    static func sample(number index: Int) -> FlRoutine {
+        guard index < sampleData.count else {
+            assertionFailure()
+            return sample(number: 0)
+        }
+        let data = sampleData[index]
+        let tempRoutine = FlRoutine(name: data.name)
+        tempRoutine.list = data.sampleHabitIndices.map { FlHabit.sample(number: $0) }
+        return tempRoutine
+    }
     
     init(_ routine: Routine, habitManager: HabitManager) {
         id = routine.id
@@ -28,30 +44,35 @@ class FlRoutine: CoreDataConvertable {
         dayOfWeek = Set(routine.dayOfWeek.map(Int.init))
     }
     
-    init(_ id: UUID, name: String) {
+    init(name: String, id: UUID = UUID()) {
         self.id = id
         self.name = name
-        dayOfWeek = [1, 2, 3, 4, 5, 6, 7]
     }
     
-    init(copyExceptID: FlRoutine) {
-        id = UUID()
-        name = copyExceptID.name
-        list = copyExceptID.list
-        time = copyExceptID.time
-        dayOfWeek = copyExceptID.dayOfWeek
+    var copy: FlRoutine {
+        copyID = UUID()
+        let copy = FlRoutine(name: name, id: copyID!)
+        copy.list = list
+        copy.time = time
+        copy.dayOfWeek = dayOfWeek
+        return copy
     }
     
-    func update(to routine: FlRoutine) {
+    func applyChanges(copy routine: FlRoutine) {
+        guard routine.id == copyID else {
+            assertionFailure()
+            return
+        }
         name = routine.name
         list = routine.list
         time = routine.time
         dayOfWeek = routine.dayOfWeek
         deleteNoti()
         addNoti(completion: {_ in})
+        copyID = nil
     }
     
-    func copyValues(to target: Routine) {
+    func coreDataTransfer(to target: Routine) {
         guard target.id == id else {
             assertionFailure()
             return
@@ -82,7 +103,7 @@ extension Date {
     init(hourAndMinuteStr: String) {
         let split = hourAndMinuteStr.split(separator: "-").map {Int($0)!}
         guard split.count == 2 else {
-            // assertionFailure()
+            assertionFailure()
             self = Date()
             return
         }

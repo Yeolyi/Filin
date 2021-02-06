@@ -72,9 +72,9 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(DataSample.shared.habitManager)
-            .environmentObject(DataSample.shared.summaryManager)
-            .environmentObject(DataSample.shared.routineManager)
+            .environmentObject(PreviewDataProvider.shared.habitManager)
+            .environmentObject(PreviewDataProvider.shared.summaryManager)
+            .environmentObject(PreviewDataProvider.shared.routineManager)
             .environmentObject(AppSetting())
     }
 }

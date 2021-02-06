@@ -23,18 +23,14 @@ struct HabitRow: View {
         self.date = date
     }
     
-    var subTitle: String {
-        var subTitleStr = ""
-        if !habit.isDaily {
-            for dayOfWeek in habit.dayOfWeek.sorted() {
-                subTitleStr += "\(Date.dayOfTheWeekStr(dayOfWeek)), "
-            }
-            _ = subTitleStr.popLast()
-            _ = subTitleStr.popLast()
+    var dayOfWeekDescription: String {
+        if habit.dayOfWeek.count == 7 {
+            return "Every day".localized
         } else {
-            subTitleStr = "Every day".localized
+            return habit.dayOfWeek.sorted().map {
+                Date.dayOfTheWeekShortStr($0)
+            }.joined(separator: ", ")
         }
-        return subTitleStr
     }
     
     var body: some View {
@@ -50,7 +46,7 @@ struct HabitRow: View {
                 HStack {
                     VStack {
                         HStack {
-                            Text(subTitle)
+                            Text(dayOfWeekDescription)
                                 .subColor()
                                 .bodyText()
                             Spacer()
@@ -65,20 +61,17 @@ struct HabitRow: View {
                     if habit.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek) {
                         VStack(spacing: 3) {
                             ZStack {
-                                Text("\(habit.achievement.content[date?.dictKey ?? appSetting.mainDate.dictKey] ?? 0)")
+                                Text("\(habit.achievement.numberDone(at: date ?? appSetting.mainDate))")
                                     .foregroundColor(habit.color)
                                     .bodyText()
                                     .offset(
-                                        x: min(75.0, -75.0 + 150.0 / CGFloat(habit.achievement.numberOfTimes) *
-                                            CGFloat(
-                                                habit.achievement.content[date?.dictKey ?? appSetting.mainDate.dictKey]
-                                                    ?? 0)
-                                            ),
+                                        x: min(75.0, -75.0 + 150.0 / CGFloat(habit.achievement.targetTimes) *
+                                            CGFloat(habit.achievement.numberDone(at: date ?? appSetting.mainDate))),
                                         y: -23
                                     )
                             LinearProgressBar(
                                 color: habit.color,
-                                progress: habit.achievement.progress(at: date ?? appSetting.mainDate) ?? 0
+                                progress: habit.achievement.progress(at: date ?? appSetting.mainDate) 
                             )
                             }
                         }
@@ -95,7 +88,7 @@ struct HabitRow: View {
 
 struct HabitRow_Previews: PreviewProvider {
     static var previews: some View {
-        let coredataPreview = DataSample.shared
+        let coredataPreview = PreviewDataProvider.shared
         HabitRow(habit: FlHabit(name: "10분 걷기"), showAdd: true)
             .environmentObject(coredataPreview.habitManager)
             .environmentObject(AppSetting())

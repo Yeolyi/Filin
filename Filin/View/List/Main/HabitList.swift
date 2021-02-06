@@ -65,7 +65,7 @@ struct HabitList: View {
 
 struct HabitList_Previews: PreviewProvider {
     static var previews: some View {
-        let coredataPreview = DataSample.shared
+        let coredataPreview = PreviewDataProvider.shared
         return HabitList()
             .environmentObject(AppSetting())
             .environmentObject(coredataPreview.habitManager)
