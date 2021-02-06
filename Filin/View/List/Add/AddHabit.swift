@@ -11,6 +11,8 @@ struct AddHabit: View {
     
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var tempHabit = FlHabit(name: "")
+    
+    @EnvironmentObject var summaryManager: SummaryManager
     @EnvironmentObject var habitManager: HabitManager
     @EnvironmentObject var appSetting: AppSetting
     @Environment(\.colorScheme) var colorScheme
@@ -46,7 +48,7 @@ struct AddHabit: View {
                         Spacer()
                     }
                     .padding(.leading, 20)
-                    TextFieldWithEndButton("Drink water".localized, text: $tempHabit.name)
+                    TextFieldWithEndButton([FlHabit.sample(number: 0), FlHabit.sample(number: 1)].randomElement()!.name, text: $tempHabit.name)
                         .flatRowBackground()
                 }
                 VStack(spacing: 8) {
@@ -104,7 +106,7 @@ struct AddHabit: View {
     }
     
     func saveAndQuit() {
-        HabitManager.shared.append(tempHabit)
+        HabitManager.shared.append(tempHabit, summaryManager: summaryManager)
         self.presentationMode.wrappedValue.dismiss()
     }
     
@@ -114,6 +116,6 @@ struct AddHabit_Previews: PreviewProvider {
     static var previews: some View {
         return AddHabit()
             .environmentObject(AppSetting())
-            .environmentObject(DataSample.shared.habitManager)
+            .environmentObject(PreviewDataProvider.shared.habitManager)
     }
 }

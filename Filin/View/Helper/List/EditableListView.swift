@@ -29,19 +29,25 @@ struct EditableListView<Value: Hashable, Content: View>: View {
                             Image(systemName: "pause")
                                 .rotationEffect(.degrees(-90))
                                 .subColor()
-                                .font(.system(size: 18, weight: .semibold))
+                                .font(.system(size: 24, weight: .semibold))
+                                .frame(width: 44, height: 40)
                                 .gesture(
                                     listData.rowDragGesture(id: listElement.id)
                                 )
                         }
+                        .padding(.horizontal, 15)
                         .frame(height: listData.rowHeight)
-                        .padding(.bottom, listData.padding)
+                        .compositingGroup()
                         .background(
                             Rectangle()
-                                .foregroundColor(colorScheme == .light ? .white : .black)
+                                .foregroundColor(
+                                    colorScheme == .light ?
+                                    (listElement.isTapped ? Color(hex: "#D0D0D0") : Color(hex: "#F0F0F0")) :
+                                        (listElement.isTapped ? Color(hex: "#1F1F1F") : Color(hex: "#0F0F0F"))
+                                )
+                                .cornerRadius(5)
                         )
-                        .compositingGroup()
-                        .shadow(radius: listElement.isTapped ? 2 : 0)
+                        .padding(.bottom, listData.padding)
                         .offset(y: listElement.position - geo.size.height / 2 + listData.rowHeight / 2)
                         .zIndex(listElement.isTapped ? 1 : 0)
                     }
@@ -49,17 +55,28 @@ struct EditableListView<Value: Hashable, Content: View>: View {
                 .gesture(
                     listData.rowScrollGesture(maxHeight: geo.size.height)
                 )
-                .offset(y: listData.listContentOffset)
                 .zIndex(1)
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: geo.size.width, height: geo.size.height)
+                Color.clear
+                    .contentShape(Rectangle())
                     .gesture(
                         listData.rowScrollGesture(maxHeight: geo.size.height)
                     )
                     .zIndex(0)
             }
+            .offset(y: listData.listContentOffset)
         }
+        .padding(.top, 20)
         .clipped()
+    }
+}
+
+struct EditableListView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            EditableListView(listData: EditableList(values: ["1", "2", "3"], save: {_ in})) { _ in
+                Text("1")
+            }.padding(.horizontal, 10)
+        }
+        .environment(\.colorScheme, .dark)
     }
 }

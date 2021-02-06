@@ -16,7 +16,7 @@ struct TimerManager {
     private static var isCounting: Bool
     
     @AutoSave("timeRemaining", defaultValue: 0)
-    private static var timeRemaining: Int
+    private static var timeRemaining: Double
     
     static func set(id: UUID) {
         timerHabitId = id
@@ -30,7 +30,7 @@ struct TimerManager {
         timerHabitId != nil
     }
     
-    static func save(isCounting: Bool, timeRemaining: Int) {
+    static func save(isCounting: Bool, timeRemaining: Double) {
         guard timerHabitId != nil else {
             assertionFailure()
             return
@@ -39,9 +39,9 @@ struct TimerManager {
         self.timeRemaining = timeRemaining
     }
     
-    static func sceneBack(_ appSetting: AppSetting) -> (timeRemaining: Int, isCounting: Bool) {
+    static func sceneBack(_ appSetting: AppSetting) -> (timeRemaining: Double, isCounting: Bool) {
         if isCounting {
-            let difference = Int(Date().timeIntervalSince(appSetting.sceneBackgroundTime ?? Date()))
+            let difference = Double(Date().timeIntervalSince(appSetting.sceneBackgroundTime ?? Date()))
             return (max(timeRemaining - difference, 0), isCounting)
         } else {
             return (timeRemaining, isCounting)

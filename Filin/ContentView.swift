@@ -9,12 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var currentTab: Int
+    @State var currentTab = 0
     @Environment(\.colorScheme) var colorScheme
-    
-    init(defaultTab: Int) {
-        _currentTab = State(initialValue: defaultTab)
-    }
     
     var body: some View {
         ZStack {
@@ -75,10 +71,10 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(defaultTab: 0)
-            .environmentObject(DataSample.shared.habitManager)
-            .environmentObject(DataSample.shared.summaryManager)
-            .environmentObject(DataSample.shared.routineManager)
+        ContentView()
+            .environmentObject(PreviewDataProvider.shared.habitManager)
+            .environmentObject(PreviewDataProvider.shared.summaryManager)
+            .environmentObject(PreviewDataProvider.shared.routineManager)
             .environmentObject(AppSetting())
     }
 }

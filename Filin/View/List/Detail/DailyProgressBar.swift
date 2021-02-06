@@ -15,29 +15,24 @@ struct DailyProgressBar: View {
     
     @EnvironmentObject var habit: FlHabit
     
-    var setAvailable: Bool {
-        return habit.achievement.addUnit != 1
-    }
-    
     var body: some View {
         VStack(spacing: 0) {
             HStack {
                 Text("""
-                    \(habit.achievement.content[selectedDate.dictKey] ?? 0)\(" times".localized)/\
-                    \(habit.achievement.numberOfTimes)\(" times".localized)
+                    \(habit.achievement.numberDone(at: selectedDate))\(" times".localized)/\
+                    \(habit.achievement.targetTimes)\(" times".localized)
                     """)
                     .foregroundColor(habit.color)
                     .headline()
                 Spacer()
-                if setAvailable {
+                if habit.achievement.isSet {
                     BasicTextButton(isSetMode ? "±\(habit.achievement.addUnit)" : "±1") { isSetMode.toggle() }
                 }
             }
             HStack {
                 LinearProgressBar(
                     color: habit.color,
-                    progress: Double(habit.achievement.content[selectedDate.dictKey] ?? 0)
-                        / Double(habit.achievement.numberOfTimes)
+                    progress: habit.achievement.progress(at: selectedDate)
                 )
                 moveButton(isAdd: false)
                 moveButton(isAdd: true)
@@ -58,9 +53,6 @@ struct DailyProgressBar: View {
                     }
                 })
                 habit.objectWillChange.send()
-            }
-            if habit.achievement.content[selectedDate.dictKey] == 0 {
-                habit.achievement.content[selectedDate.dictKey] = nil
             }
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         }

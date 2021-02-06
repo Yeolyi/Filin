@@ -15,9 +15,9 @@ struct DayOfWeekChart: View {
     
     init(habit: FlHabit, mainDate: Date) {
         self.habit = habit
-        self.dayOfWeekTrend = habit.dayOfWeekTrend(settingDate: mainDate)
+        self.dayOfWeekTrend = habit.achievement.dayOfWeekTrend(settingDate: mainDate)
         trendToGraphHeight = dayOfWeekTrend.map {
-            let realValue = CGFloat($0 * 120 / Double(habit.achievement.numberOfTimes))
+            let realValue = CGFloat($0 * 120 / Double(habit.achievement.targetTimes))
             return min(60, max(-60, realValue))
         }
     }
@@ -87,7 +87,7 @@ struct DayOfWeekChart: View {
 
 struct DayOfWeekChart_Previews: PreviewProvider {
     static var previews: some View {
-        DayOfWeekChart(habit: DataSample.shared.habitManager.contents[0], mainDate: Date())
+        DayOfWeekChart(habit: PreviewDataProvider.shared.habitManager.contents[0], mainDate: Date())
             .environmentObject(AppSetting())
     }
 }

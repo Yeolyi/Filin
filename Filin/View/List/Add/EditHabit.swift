@@ -18,33 +18,27 @@ struct EditHabit: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var habitManager: HabitManager
     @EnvironmentObject var summaryManager: SummaryManager
+    @EnvironmentObject var routineManager: RoutineManager
     
     var isSaveAvailable: Bool {
-        tempHabit.name != "" && !tempHabit.dayOfWeek.isEmpty && tempHabit.achievement.numberOfTimes > 0
+        tempHabit.name != "" && !tempHabit.dayOfWeek.isEmpty && tempHabit.achievement.targetTimes > 0
     }
     
     init(targetHabit: FlHabit) {
         self.targetHabit = targetHabit
-        tempHabit = FlHabit(name: "Temp")
-        tempHabit.update(to: targetHabit)
+        tempHabit = targetHabit.copy
     }
     
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                HStack {
-                    Text("\(tempHabit.name)")
-                        .headline()
-                    Spacer()
-                    saveButton
-                }
-                .compositingGroup()
-                .padding(20)
-                .background(Color.white)
-                Divider()
+        FlInlineNavigationBar(bar: {
+            HStack {
+                Text("\(tempHabit.name)")
+                    .headline()
                 Spacer()
+                saveButton
             }
-            .zIndex(1)
+            .padding(.horizontal, 20)
+        }) {
             ScrollView {
                 VStack(spacing: 30) {
                     VStack(spacing: 5) {
@@ -100,8 +94,8 @@ struct EditHabit: View {
                     Divider()
                     deleteButton
                 }
+                .padding(.top, 10)
             }
-            .padding(.top, 90)
         }
         .onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification)) { _ in
             presentationMode.wrappedValue.dismiss()
@@ -110,7 +104,7 @@ struct EditHabit: View {
     var saveButton: some View {
         HeaderText("Save".localized) {
             guard isSaveAvailable else { return }
-            targetHabit.update(to: tempHabit)
+            targetHabit.applyChanges(copy: tempHabit)
             habitManager.objectWillChange.send()
             self.presentationMode.wrappedValue.dismiss()
         }
@@ -132,11 +126,13 @@ struct EditHabit: View {
             primaryButton: .default(Text("Cancel".localized)),
             secondaryButton: .destructive(Text("Delete".localized), action: {
                 for profile in summaryManager.contents {
-                    if let index = profile.habitArray.firstIndex(where: {$0 == tempHabit.id}) {
-                        profile[index + 1] = nil
+                    if let index = profile.list.firstIndex(where: {$0 == tempHabit.id}) {
+                        profile.list.remove(at: index)
                     }
                 }
-                habitManager.remove(withID: targetHabit.id, summary: summaryManager.contents[0])
+                habitManager.remove(
+                    withID: targetHabit.id, summary: summaryManager.contents[0], routines: routineManager.contents
+                )
                 self.presentationMode.wrappedValue.dismiss()
             })
         )
@@ -146,5 +142,6 @@ struct EditHabit: View {
 struct EditHabit_Previews: PreviewProvider {
     static var previews: some View {
         EditHabit(targetHabit: FlHabit(name: "Asd"))
+            .environment(\.colorScheme, .dark)
     }
 }

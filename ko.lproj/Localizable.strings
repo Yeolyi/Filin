@@ -6,6 +6,14 @@
   
 */
 
+//예시
+"Intermediate Stretching🙆‍♀️" = "중간 스트레칭🙆‍♀️";
+"10-Minute Walk🚶" = "10분 걷기🚶";
+"Drinking 2L Water💧" = "물 2L 마시기💧";
+"10 minutes of meditation🧘" = "10분 명상🧘";
+"Organize before bed😴" = "자기 전 정리😴";
+"Jogging Routine🏃‍♂️" = "조깅 루틴🏃‍♂️";
+
 //공통
 "Done" = "완료";
 "Edit" = "편집";
@@ -32,16 +40,16 @@
 // 목표 추가
 "Make first goal" = "첫번째 목표 추가";
 "Make new goal" = "목표 추가하기";
-"What is the name of the goal?" = "🖊 목표의 이름을 알려주세요.";
+"What is the name of the goal?" = "목표의 이름을 알려주세요.";
 "Drink water" = "물 마시기";
 "Previous" = "이전";
 "Next" = "다음";
 "Repeat" = "반복";
-"Choose the day of the week to proceed with the goal." = "📅 매주 무슨 요일에 하실건가요?";
+"Choose the day of the week to proceed with the goal." = "매주 무슨 요일에 하실건가요?";
 "Number of times" = "횟수";
-"How many times do you want to achieve your goal in a day?" = "🔢 하루 몇 회가 목표이신가요?";
+"How many times do you want to achieve your goal in a day?" = "하루 몇 회가 목표이신가요?";
 "Timer" = "타이머";
-"Use a timer if you need a specific time to achieve your goal.\nE.g. two-minute plank." = "⏱ 타이머가 필요하신가요?";
+"Use a timer if you need a specific time to achieve your goal.\nE.g. two-minute plank." = "타이머가 필요하신가요?";
 "Use timer" = "타이머 사용";
 "Minute" = "분";
 "Second" = "초";
@@ -51,7 +59,7 @@
 "Stretching" = "스트레칭";
 "Set goals and execute them." = "목표를 세우고 실행하세요.";
 "Add new goal" = "새로운 목표 추가";
-"Select theme color." = "🎨 마지막으로, 테마색을 선택해주세요!";
+"Select theme color." = "마지막으로, 테마색을 선택해주세요!";
 "Split into sets" = "세트로 나누기";
 "How many times do you proceed in one set?" = "한 세트 당 몇 회씩 진행하실건가요?";
 "How many sets are there?" = "세트는 몇 개인가요?";
@@ -104,25 +112,29 @@
 "Summary" = "요약";
 "See information of goals at once." = "여러 목표들의 정보를 한눈에 보기.";
 "Select goals" = "목표 선택";
-"Summary Setting" = "요약 설정";
+"Edit Summary" = "요약 편집";
 "Habit 1(Outermost ring)" = "목표 1(바깥쪽 링)";
 "Habit 2" = "목표 2";
 "Habit 3(Innermost ring)" = "목표 3(안쪽 링)";
 "Empty" = "비어있음";
 "Habit List" = "습관 목록";
+"⬆️ Goals to be displayed ⬆️" = "⬆️ 표시할 목표들 ⬆️";
 
 // 루틴 추가
 "Routine" = "루틴";
+"Add Routine" = "루틴 추가하기";
+"What is the name of the routine?" = "루틴의 이름을 알려주세요.";
 "After wake up" = "기상 후";
 "Before bed" = "자기 전";
 "%d goals" = "%d개의 목표";
+"%d selected" = "%d개 선택됨";
 "Group and repeat goals to make them a habit." = "목표들을 모으고 반복해 습관으로 만드세요.";
 "Add routine" = "루틴 추가";
 "Added" = "추가됨";
 "Choose the day of the week to proceed with the routine." = "루틴을 진행할 요일을 설정합니다.";
 "Reminder" = "리마인더";
 "Receive notifications at a specific time." = "특정 시간에 알림을 받으세요.";
-"Use reminder" = "리마인더 사용";
+"Use Reminder" = "리마인더 사용";
 "Reminder time" = "리마인더 시간";
 "Add the desired goal to the routine. Duplicates are also possible." = "원하는 목표를 루틴에 추가하세요. 중복도 괜찮습니다.";
 "Routine List" = "루틴 목록";
@@ -132,6 +144,7 @@
 //루틴 수정
 "Change habit list" = "목표 목록 변경";
 "Consists of %d goals" = "%d개 목표로 구성됨";
+"⬆️ Goals to be added ⬆️" = "⬆️ 추가할 목표들 ⬆️";
 
 //설정
 "Setting" = "설정";

@@ -41,13 +41,14 @@ struct EmojiCalendarRow: View {
                                 ZStack {
                                     Circle()
                                         .inactiveColor()
-                                        .frame(width: 24, height: 24)
+                                        .frame(width: 20, height: 20)
                                     Text("😀")
                                         .headline()
                                         .hidden()
                                 }
                             }
                         }
+                        .frame(width: 24, height: 30)
                         .opacity((date.month != selectedDate.month && isExpanded) ? 0.3 : 1)
                     }
                 }

@@ -10,96 +10,191 @@ import SwiftUI
 /// 새로운 루틴을 추가하는 뷰
 struct AddRoutine: View {
     
-    let totalPage = 4
-    
-    @State var currentPage = 1
     @State var isReminder = true
-    @State var tempRoutineTime = Date()
     
-    @ObservedObject var newRoutine = FlRoutine(UUID(), name: "")
-    @ObservedObject var listData = EditableList<UUID>(values: [], save: {_ in })
+    @State var hour = 10
+    @State var minute = 0
+    @State var isAM = true
+    @State var useReminder = true
+    
+    let dividerID: UUID
+    
+    @ObservedObject var newRoutine = FlRoutine(name: "")
+    @ObservedObject var listData: EditableList<FlHabit>
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var routineManager: RoutineManager
     @EnvironmentObject var habitManager: HabitManager
+    @Environment(\.colorScheme) var colorScheme
     
-    var isNextAvailable: Bool {
-        if currentPage == 1 {
-            return newRoutine.name != ""
-        } else if currentPage == 2 {
-            return !listData.list.isEmpty
-        } else if currentPage == 3 {
-            return true
-        } else if currentPage == 4 {
-            return true
-        } else {
-            assertionFailure("페이지 범위를 벗어났습니다.")
-            return true
-        }
+    var isSaveAvailable: Bool {
+        #if DEBUG
+        return true
+        #else
+        return newRoutine.name != "" && !newRoutine.dayOfWeek.isEmpty && !dataFiltered.isEmpty
+        #endif
     }
-    var body: some View {
-        VStack(spacing: 0) {
-            if currentPage == 1 {
-                RoutineName(name: $newRoutine.name)
-            }
-            if currentPage == 2 {
-                RoutineSetList(listData: listData)
-            }
-            if currentPage == 3 {
-                RoutineDate(dayOfTheWeek: $newRoutine.dayOfWeek)
-            }
-            if currentPage == 4 {
-                RoutineTime(routineTime: $tempRoutineTime, isTimer: $isReminder)
-            }
-            Spacer()
-            HStack {
-                previousButton
-                Spacer()
-            }
-            nextButton
-        }
-        .padding(.bottom, 20)
+    
+    init(habits: [FlHabit]) {
+        dividerID = UUID()
+        var list = habits
+        list.insert(.init(id: dividerID, name: "⬆️ Goals to be displayed ⬆️".localized, color: .gray), at: 0)
+        listData = .init(values: list) { _ in }
     }
-    var previousButton: some View {
-        Button(action: {
-            withAnimation { self.currentPage = max(self.currentPage - 1, 1) }
-        }) {
-            Text("Previous".localized)
-                .bodyText()
-                .fixedSize()
-                .padding(.leading, 20)
-                .padding(.bottom, 8)
+    
+    var dataFiltered: [FlHabit] {
+        guard let dividerIndex = listData.allValues.firstIndex(where: {$0.id == dividerID}), dividerIndex != 0 else {
+            return []
         }
-        .if(currentPage == 1) {
-            $0.hidden()
-        }
-    }
-    var nextButton: some View {
-        MainRectButton(
-            action: {
-                if isNextAvailable == false { return }
-                if currentPage == totalPage {
-                    if isReminder {
-                        newRoutine.time = tempRoutineTime
-                    }
-                    newRoutine.list = listData.allValues.compactMap { id in
-                        habitManager.contents.first(where: {id == $0.id})
-                    }
-                    routineManager.append(newRoutine)
-                    presentationMode.wrappedValue.dismiss()
-                    return
-                }
-                withAnimation { self.currentPage += 1 }
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            },
-            str: currentPage == totalPage ? "Done".localized: "\("Next".localized) (\(currentPage)/\(totalPage))"
+        return Array(
+            listData.list[0..<dividerIndex].map(\.value)
         )
-        .opacity(isNextAvailable ? 1.0 : 0.5)
     }
+    
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 30) {
+                    VStack(spacing: 0) {
+                        LottieView(filename: "lottieStack")
+                            .frame(width: 120, height: 120)
+                            .if(colorScheme == .dark) {
+                                $0.colorInvert()
+                            }
+                        Text("Add Routine".localized)
+                            .title()
+                    }
+                    .padding(.top, 21)
+                    .padding(.bottom, 35)
+                    VStack(spacing: 3) {
+                        HStack {
+                            Text("What is the name of the routine?".localized)
+                                .bodyText()
+                            Spacer()
+                        }
+                        .padding(.leading, 20)
+                        TextFieldWithEndButton(
+                            [FlRoutine.sample(number: 0), FlRoutine.sample(number: 1)].randomElement()!.name,
+                            text: $newRoutine.name
+                        )
+                            .flatRowBackground()
+                    }
+                    VStack(spacing: 8) {
+                        HStack {
+                            Text("Choose the day of the week to proceed with the routine.".localized)
+                                .bodyText()
+                                .fixedSize(horizontal: false, vertical: true)
+                            Spacer()
+                        }
+                        .padding(.leading, 20)
+                        DayOfWeekSelector(dayOfTheWeek: $newRoutine.dayOfWeek)
+                            .frame(maxWidth: .infinity)
+                            .flatRowBackground()
+                    }
+                    VStack(spacing: 8) {
+                        HStack {
+                            Text("Select goals")
+                                .bodyText()
+                                .fixedSize(horizontal: false, vertical: true)
+                            Spacer()
+                        }
+                        .padding(.leading, 20)
+                        NavigationLink(destination:
+                                        SelectRoutineList(cursorID: dividerID)
+                            .environmentObject(listData)
+                        ) {
+                            HStack {
+                                Text(String(format: NSLocalizedString("%d selected", comment: ""), dataFiltered.count))
+                                    .bodyText()
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 20))
+                                    .subColor()
+                            }
+                            .flatRowBackground()
+                        }
+                    }
+                    VStack(spacing: 8) {
+                        HStack {
+                            Text("Reminder")
+                                .bodyText()
+                                .fixedSize(horizontal: false, vertical: true)
+                            Spacer()
+                        }
+                        .padding(.leading, 20)
+                        VStack(spacing: 4) {
+                            HStack {
+                                Text("Use Reminder")
+                                    .bodyText()
+                                Spacer()
+                                PaperToggle($useReminder)
+                            }
+                            .flatRowBackground()
+                            if useReminder {
+                                HStack {
+                                    Picker(selection: $hour, label: EmptyView(), content: {
+                                        ForEach(1...12, id: \.self) { hour in
+                                            Text(String(hour))
+                                                .bodyText()
+                                        }
+                                    })
+                                    .frame(width: 100, height: 150)
+                                    .clipped()
+                                    Picker(selection: $minute, label: EmptyView(), content: {
+                                        ForEach(0...59, id: \.self) { minute in
+                                            Text(String(minute))
+                                                .bodyText()
+                                        }
+                                    })
+                                    .frame(width: 100, height: 150)
+                                    .clipped()
+                                    Picker(selection: $isAM, label: EmptyView(), content: {
+                                        ForEach([true, false], id: \.self) { isAM in
+                                            Text(isAM ? "AM" : "PM")
+                                                .bodyText()
+                                        }
+                                    })
+                                    .frame(width: 100, height: 150)
+                                    .clipped()
+                                }
+                                .frame(maxWidth: .infinity)
+                                .flatRowBackground()
+                            }
+                        }
+                    }
+                    MainRectButton(action: save, str: "Done".localized)
+                        .padding(.vertical, 30)
+                        .opacity(isSaveAvailable ? 1 : 0.3)
+                        .disabled(!isSaveAvailable)
+                }
+            }
+            .padding(.top, 1)
+            .navigationBarHidden(true)
+        }
+    }
+    
+    func save() {
+        guard isSaveAvailable else { return }
+        if isReminder {
+            var components = DateComponents()
+            components.hour = isAM ? hour : hour + 12
+            components.minute = minute
+            let date = Calendar.current.date(from: components)
+            newRoutine.time = date
+        }
+        newRoutine.list = dataFiltered
+        routineManager.append(newRoutine)
+        presentationMode.wrappedValue.dismiss()
+        return
+    }
+    
 }
 
 struct AddRoutine_Previews: PreviewProvider {
     static var previews: some View {
-        AddRoutine()
+        let dataSample = PreviewDataProvider.shared
+        return Group {
+            AddRoutine(habits: dataSample.habitManager.contents)
+        }
     }
 }

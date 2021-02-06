@@ -22,7 +22,7 @@ struct HabitStatistics: View {
                         .bodyText()
                     Spacer()
                 }
-                textWithChevron(value: habit.weeklyTrend(mainDate: appSetting.mainDate))
+                textWithChevron(value: habit.achievement.weeklyTrend(mainDate: appSetting.mainDate))
             }
             VStack(spacing: 0) {
                 HStack {
@@ -30,7 +30,7 @@ struct HabitStatistics: View {
                         .bodyText()
                     Spacer()
                 }
-                textWithChevron(value: habit.monthlyTrend(mainDate: appSetting.mainDate))
+                textWithChevron(value: habit.achievement.monthlyTrend(mainDate: appSetting.mainDate))
             }
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
@@ -38,7 +38,7 @@ struct HabitStatistics: View {
                         .bodyText()
                     Spacer()
                 }
-                Text("\(habit.continousAchievementCount(appSetting.mainDate))\(" days".localized)")
+                Text("\(habit.achievement.continousAchievementCount(appSetting.mainDate))\(" days".localized)")
                     .foregroundColor(habit.color)
                     .headline()
             }
@@ -49,12 +49,12 @@ struct HabitStatistics: View {
                             .bodyText()
                         Spacer()
                     }
-                    Text("\(habit.continousInachievementCount(appSetting.mainDate))\(" days".localized)")
+                    Text("\(habit.achievement.continousInachievementCount(appSetting.mainDate))\(" days".localized)")
                         .foregroundColor(habit.color)
                         .headline()
                 }
                 DayOfWeekChart(habit: habit, mainDate: appSetting.mainDate)
-                if habit.firstDay != nil {
+                if habit.achievement.firstDay != nil {
                     VStack(spacing: 0) {
                         HStack {
                             Text("Since".localized)
@@ -62,7 +62,7 @@ struct HabitStatistics: View {
                             Spacer()
                         }
                         HStack {
-                            Text(habit.firstDay!.localizedYearMonthDay)
+                            Text(habit.achievement.firstDay!.localizedYearMonthDay)
                                 .foregroundColor(habit.color)
                                 .headline()
                             Spacer()
@@ -123,6 +123,6 @@ struct HabitStatistics: View {
 struct HabitStatistics_Previews: PreviewProvider {
     static var previews: some View {
         HabitStatistics()
-            .environmentObject(FlHabit.habit1)
+            .environmentObject(FlHabit.sample(number: 0))
     }
 }

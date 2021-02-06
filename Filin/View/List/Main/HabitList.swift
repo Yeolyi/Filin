@@ -10,8 +10,10 @@ import SwiftUI
 struct HabitList: View {
     
     @State var isSheet = false
+    
     @EnvironmentObject var habitManager: HabitManager
     @EnvironmentObject var appSetting: AppSetting
+    @EnvironmentObject var summaryManager: SummaryManager
     @Environment(\.colorScheme) var colorScheme
     @State var timerReopen = false
     
@@ -30,13 +32,7 @@ struct HabitList: View {
                 }
                 .hidden()
                 .zIndex(0)
-                Group {
-                    if habitManager.contents.isEmpty {
-                        ListPreview(isAddSheet: $isSheet)
-                    } else {
-                        HabitScrollView()
-                    }
-                }
+                HabitScrollView()
                 .zIndex(1)
             }
             .navigationBarTitle(appSetting.mainDate.localizedMonthDay)
@@ -50,6 +46,7 @@ struct HabitList: View {
                 AddHabit()
                     .environmentObject(appSetting)
                     .environmentObject(habitManager)
+                    .environmentObject(summaryManager)
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
@@ -68,7 +65,7 @@ struct HabitList: View {
 
 struct HabitList_Previews: PreviewProvider {
     static var previews: some View {
-        let coredataPreview = DataSample.shared
+        let coredataPreview = PreviewDataProvider.shared
         return HabitList()
             .environmentObject(AppSetting())
             .environmentObject(coredataPreview.habitManager)

@@ -16,7 +16,7 @@ struct MainRectButton: View {
             HStack {
                 Spacer()
                 Text(str)
-                    .foregroundColor(.white)
+                    .foregroundColor(colorScheme == .light ? .white : .black)
                     .bodyText()
                     .padding(13)
                 Spacer()
@@ -25,13 +25,18 @@ struct MainRectButton: View {
         .background(
             Rectangle()
                 .foregroundColor(ThemeColor.mainColor(colorScheme))
+                .cornerRadius(5)
         )
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 10)
     }
 }
 
 struct ListEmptyButton_Previews: PreviewProvider {
     static var previews: some View {
-        MainRectButton(action: {}, str: "Add new calendar")
+        VStack {
+            MainRectButton(action: {}, str: "Add new calendar")
+            MainRectButton(action: {}, str: "Add new calendar")
+                .environment(\.colorScheme, .dark)
+        }
     }
 }

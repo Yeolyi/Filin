@@ -9,6 +9,6 @@ import SwiftUI
 import CoreData
 
 protocol CoreDataConvertable: ObservableObject, Identifiable {
-    associatedtype Target: NSManagedObject, Identifiable
-    func copyValues(to target: Target)
+    associatedtype MatchingCoreDataType: NSManagedObject, Identifiable
+    func coreDataTransfer(to target: MatchingCoreDataType)
 }

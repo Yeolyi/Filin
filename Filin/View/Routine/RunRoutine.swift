@@ -23,15 +23,16 @@ struct RunRoutine: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var appSetting: AppSetting
     
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
                 HabitRow(habit: routine.list[currentListIndex], showAdd: false)
                     .disabled(true)
-                if currentListIndex < routine.list.count - 1 {
+                if currentListIndex + 1 <= routine.list.count - 1 {
                     VStack(spacing: 0) {
-                        ForEach(currentListIndex + 1...routine.list.count - 1, id: \.self) { index in
+                        ForEach(currentListIndex + 1...min(currentListIndex + 5, routine.list.count - 1), id: \.self) { index in
                             HabitRow(habit: routine.list[index], showAdd: false)
                                 .opacity(0.2)
                                 .disabled(true)
@@ -84,7 +85,7 @@ struct RunRoutine: View {
                 self.timer.upstream.connect().cancel()
                 isCounting = false
                 withAnimation {
-                    routine.list[currentListIndex].achievement.set(at: Date()) { current, addUnit in
+                    routine.list[currentListIndex].achievement.set(at: appSetting.mainDate) { current, addUnit in
                         current + addUnit
                     }
                     routine.objectWillChange.send()
@@ -163,6 +164,8 @@ struct RunRoutine: View {
 
 struct RunRoutine_Previews: PreviewProvider {
     static var previews: some View {
-        RunRoutine(routine: FlRoutine.routine1)
+        let routine = FlRoutine(name: "Test")
+        routine.list = [FlHabit](repeating: FlHabit(name: "A"), count: 10)
+        return RunRoutine(routine: routine).environmentObject(AppSetting())
     }
 }

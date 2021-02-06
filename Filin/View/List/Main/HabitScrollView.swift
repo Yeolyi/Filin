@@ -30,34 +30,48 @@ struct HabitScrollView: View {
                 .subColor()
             Spacer()
         }
-        .rowBackground()
+        .flatRowBackground()
     }
     
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                Text("Today".localized)
-                    .sectionText()
-                if !isTodayEmpty {
-                    ForEach(
-                        habitManager.contents.filter { $0.isTodo(at: appSetting.mainDate.dayOfTheWeek) }
-                    ) { habitInfo in
-                        HabitRow(habit: habitInfo, showAdd: true)
-                            .environmentObject(habitInfo)
+                if habitManager.contents.isEmpty {
+                    ForEach([FlHabit.sample(number: 1), FlHabit.sample(number: 2)], id: \.self) { habit in
+                        HabitRow(habit: habit, showAdd: true)
+                            .environmentObject(habit)
+                            .opacity(0.5)
+                            .disabled(true)
                     }
                 } else {
-                    emptyIndicatingRow
-                }
-                Text("Others".localized)
-                    .sectionText()
-                if !isGeneralEmpty {
-                    ForEach(
-                        habitManager.contents.filter({!$0.isTodo(at: appSetting.mainDate.dayOfTheWeek)})
-                    ) { habitInfo in
-                        HabitRow(habit: habitInfo, showAdd: false)
+                    Text("Today".localized)
+                        .sectionText()
+                    if !isTodayEmpty {
+                        ForEach(
+                            habitManager.contents.filter {
+                                $0.isTodo(at: appSetting.mainDate.dayOfTheWeek)
+                            }.sorted(by: { habit1, habit2 in
+                                habit1.achievement.progress(at: appSetting.mainDate) <
+                                    habit2.achievement.progress(at: appSetting.mainDate)
+                            })
+                        ) { habitInfo in
+                            HabitRow(habit: habitInfo, showAdd: true)
+                                .environmentObject(habitInfo)
+                        }
+                    } else {
+                        emptyIndicatingRow
                     }
-                } else {
-                    emptyIndicatingRow
+                    Text("Others".localized)
+                        .sectionText()
+                    if !isGeneralEmpty {
+                        ForEach(
+                            habitManager.contents.filter({!$0.isTodo(at: appSetting.mainDate.dayOfTheWeek)})
+                        ) { habitInfo in
+                            HabitRow(habit: habitInfo, showAdd: false)
+                        }
+                    } else {
+                        emptyIndicatingRow
+                    }
                 }
                 
             }
@@ -68,7 +82,7 @@ struct HabitScrollView: View {
 
 struct MainList_Previews: PreviewProvider {
     static var previews: some View {
-        let coredataPreview = DataSample.shared
+        let coredataPreview = PreviewDataProvider.shared
         return
             NavigationView {
                 HabitScrollView()

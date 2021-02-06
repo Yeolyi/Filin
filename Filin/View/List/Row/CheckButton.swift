@@ -18,7 +18,7 @@ struct CheckButton: View {
     @EnvironmentObject var appSetting: AppSetting
     
     var body: some View {
-        if habit.isTimer {
+        if habit.isTimerUsed {
             NavigationLink(
                 destination:
                     HabitTimer(date: date, habit: habit)
