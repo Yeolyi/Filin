@@ -13,7 +13,7 @@ struct EditRoutine: View {
     let dividerID: UUID
     
     @ObservedObject var tempRoutine: FlRoutine
-    @ObservedObject var listData: EditableList<FlHabit>
+    @ObservedObject var listData: FlListModel<FlHabit>
     
     @State var useReminder: Bool
     @State var hour: Int

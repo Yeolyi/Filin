@@ -59,9 +59,14 @@ struct HabitNumberSetting: View {
             }
             Divider()
             if !isSet.wrappedValue {
-                PickerWithButton(
-                    str: "", size: 100, number: $tempHabit.achievement.targetTimes
-                )
+                Picker("", selection: setNum) {
+                    ForEach(1...100, id: \.self) { num in
+                        Text(String(num))
+                            .bodyText()
+                    }
+                }
+                .frame(width: 150, height: 150)
+                .clipped()
             } else {
                 HStack {
                     VStack {

@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct EditableListView<Value: Hashable, Content: View>: View {
+struct FlList<Value: Hashable, Content: View>: View {
     
-    @ObservedObject var listData: EditableList<Value>
+    @ObservedObject var listData: FlListModel<Value>
     @Environment(\.colorScheme) var colorScheme
     let idToRow: (UUID) -> Content
     
-    init(listData: EditableList<Value>, view: @escaping (UUID) -> Content) {
+    init(listData: FlListModel<Value>, view: @escaping (UUID) -> Content) {
         self.listData = listData
         self.idToRow = view
     }
@@ -73,7 +73,7 @@ struct EditableListView<Value: Hashable, Content: View>: View {
 struct EditableListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            EditableListView(listData: EditableList(values: ["1", "2", "3"], save: {_ in})) { _ in
+            FlList(listData: FlListModel(values: ["1", "2", "3"], save: {_ in})) { _ in
                 Text("1")
             }.padding(.horizontal, 10)
         }

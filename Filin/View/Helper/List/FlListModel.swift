@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class EditableList<Value: Hashable>: ObservableObject {
+class FlListModel<Value: Hashable>: ObservableObject {
     
     @Published var list: [RowData<Value>] = []
     @Published private var dragGestureLength: CGFloat = 0

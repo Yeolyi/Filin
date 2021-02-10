@@ -17,7 +17,7 @@ class AppSetting: ObservableObject {
                 guard let data = previousUserDefaults.object(forKey: key) as? Data else {
                     return
                 }
-                UserDefaults.snuYum.set(data, forKey: key)
+                UserDefaults.filin.set(data, forKey: key)
             }
             appGroupUpdated = true
             return

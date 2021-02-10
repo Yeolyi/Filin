@@ -56,7 +56,7 @@ struct HabitTimerSetting: View {
             }
             .flatRowBackground()
             if isRequiredTime.wrappedValue {
-                TimerPicker(minute: minute, second: second)
+                FlTimePicker(minute: minute, second: second)
                 .frame(maxWidth: .infinity)
                     .flatRowBackground()
             }

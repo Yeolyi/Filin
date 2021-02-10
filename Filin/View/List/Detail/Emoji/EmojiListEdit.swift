@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmojiListEdit: View {
     
-    @State var listData: EditableList<String> = EditableList(values: [], save: {_ in})
+    @State var listData: FlListModel<String> = FlListModel(values: [], save: {_ in})
     @State var newEmoji = ""
     
     var body: some View {
@@ -48,7 +48,7 @@ struct EmojiListEdit: View {
                 }
             }
             .rowBackground()
-            EditableListView(listData: listData) { emoji in
+            FlList(listData: listData) { emoji in
                 HStack(spacing: 10) {
                     Button(action: {
                         listData.remove(emoji)
@@ -63,7 +63,7 @@ struct EmojiListEdit: View {
             .padding(.horizontal, 20)
         }
         .onAppear {
-            self.listData = EditableList(values: emojiManager.emojiList, save: { _ in
+            self.listData = FlListModel(values: emojiManager.emojiList, save: { _ in
             })
         }
         .onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification)) { _ in

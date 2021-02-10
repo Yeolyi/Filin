@@ -20,7 +20,7 @@ struct AddRoutine: View {
     let dividerID: UUID
     
     @ObservedObject var newRoutine = FlRoutine(name: "")
-    @ObservedObject var listData: EditableList<FlHabit>
+    @ObservedObject var listData: FlListModel<FlHabit>
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var routineManager: RoutineManager

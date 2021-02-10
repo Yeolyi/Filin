@@ -10,7 +10,7 @@ import SwiftUI
 struct EditSummary: View {
     
     @EnvironmentObject var summaryManager: SummaryManager
-    @ObservedObject var listData: EditableList<FlHabit>
+    @ObservedObject var listData: FlListModel<FlHabit>
     let separatorID: UUID
     
     @Environment(\.presentationMode) var presentationMode
@@ -27,7 +27,7 @@ struct EditSummary: View {
         for habit in habits where !habitsWithSeparator.contains(habit) {
             habitsWithSeparator.append(habit)
         }
-        listData = EditableList(values: habitsWithSeparator, save: { habits in
+        listData = FlListModel(values: habitsWithSeparator, save: { habits in
             var saved = [FlHabit]()
             for habit in habits {
                 if habit.id == separatorID { break }
@@ -55,7 +55,7 @@ struct EditSummary: View {
             .padding(.horizontal, 20)
         }) {
             VStack(spacing: 0) {
-                EditableListView(listData: listData) { id in
+                FlList(listData: listData) { id in
                     Text(listData.value(of: id).name)
                         .foregroundColor(listData.value(of: id).color)
                         .font(.custom("GodoB", size: 16))

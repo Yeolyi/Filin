@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TimerPicker: View {
+struct FlTimePicker: View {
     
     @Binding var minute: Int
     @Binding var second: Int
@@ -51,7 +51,7 @@ struct TimerPicker_Previews: PreviewProvider {
         @State var minute = 0
         @State var second = 0
         var body: some View {
-            TimerPicker(minute: $minute, second: $second)
+            FlTimePicker(minute: $minute, second: $second)
         }
     }
     

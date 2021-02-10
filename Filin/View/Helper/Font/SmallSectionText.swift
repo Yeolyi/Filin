@@ -2,7 +2,7 @@
 //  SmallSectionText.swift
 //  Filin
 //
-//  Created by SEONG YEOL YI on 2021/02/07.
+//  Created by SEONG YEOL YI on 2021/02/10.
 //
 
 import SwiftUI
