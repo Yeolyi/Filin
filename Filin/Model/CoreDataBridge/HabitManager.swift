@@ -96,4 +96,12 @@ final class HabitManager: CoreDataBridge {
         }
         summaryManager.contents[0].list.append(contentsOf: object.map(\.id))
     }
+    
+    func reset() {
+        #if DEBUG
+        contents = []
+        #else
+        fatalError()
+        #endif
+    }
 }

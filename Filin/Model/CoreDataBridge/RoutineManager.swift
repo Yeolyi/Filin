@@ -62,4 +62,12 @@ class RoutineManager: CoreDataBridge {
             moc.delete(savedRoutine)
         }
     }
+    
+    func reset() {
+        #if DEBUG
+        contents = []
+        #else
+        fatalError()
+        #endif
+    }
 }

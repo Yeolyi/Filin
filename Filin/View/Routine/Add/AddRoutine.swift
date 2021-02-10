@@ -100,7 +100,7 @@ struct AddRoutine: View {
                             .environmentObject(listData)
                         ) {
                             HStack {
-                                Text(String(format: NSLocalizedString("%d goals selected", comment: ""), dataFiltered.count))
+                                Text(String(format: NSLocalizedString("%d Goals Selected", comment: ""), dataFiltered.count))
                                     .bodyText()
                                 Spacer()
                                 Image(systemName: "chevron.right")
@@ -158,7 +158,7 @@ struct AddRoutine: View {
                             }
                         }
                     }
-                    MainRectButton(action: save, str: "Create a new routine".localized)
+                    MainRectButton(action: save, str: "Create a New Routine".localized)
                         .padding(.vertical, 30)
                         .opacity(isSaveAvailable ? 1 : 0.3)
                         .disabled(!isSaveAvailable)

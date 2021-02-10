@@ -65,7 +65,7 @@ struct HabitNumberSetting: View {
             } else {
                 HStack {
                     VStack {
-                        Picker("Number of sets".localized, selection: setNum) {
+                        Picker("Number of Sets".localized, selection: setNum) {
                             ForEach(1...30, id: \.self) { num in
                                 Text(String(num))
                                     .bodyText()
@@ -74,12 +74,12 @@ struct HabitNumberSetting: View {
                         .frame(width: 150, height: 150)
                         .clipped()
                         .accessibility(identifier: "numberOfSets")
-                        Text("Number of sets".localized)
+                        Text("Number of Sets".localized)
                             .subColor()
                             .bodyText()
                     }
                     VStack {
-                        Picker("Number of times per set".localized, selection: oneTapNum) {
+                        Picker("Number of Times per Set".localized, selection: oneTapNum) {
                             ForEach(1...200, id: \.self) { num in
                                 Text(String(num))
                                     .bodyText()
@@ -88,7 +88,7 @@ struct HabitNumberSetting: View {
                         .frame(width: 150, height: 150)
                         .clipped()
                         .accessibility(identifier: "numberOfTimesPerSet")
-                        Text("Number of times per set".localized)
+                        Text("Number of Times per Set".localized)
                             .subColor()
                             .bodyText()
                     }

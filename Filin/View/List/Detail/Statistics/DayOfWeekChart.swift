@@ -28,7 +28,7 @@ struct DayOfWeekChart: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                Text("Trends by Day of the week".localized)
+                Text("Trends by Day of the Week".localized)
                     .bodyText()
                 Spacer()
             }

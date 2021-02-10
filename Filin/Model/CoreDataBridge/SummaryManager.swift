@@ -36,4 +36,12 @@ final class SummaryManager: CoreDataBridge {
         }
         mocSave()
     }
+    
+    func reset() {
+        #if DEBUG
+        contents = []
+        #else
+        fatalError()
+        #endif
+    }
 }

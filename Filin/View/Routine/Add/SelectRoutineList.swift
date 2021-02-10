@@ -33,7 +33,7 @@ struct SelectRoutineList: View {
                 }
             }
             .padding(.horizontal, 10)
-            MainRectButton(action: { presentationMode.wrappedValue.dismiss() }, str: "Goal selection complete".localized)
+            MainRectButton(action: { presentationMode.wrappedValue.dismiss() }, str: "Goal Selection Complete".localized)
                 .padding(.bottom, 30)
         }
         .navigationBarHidden(true)

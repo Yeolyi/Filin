@@ -53,7 +53,7 @@ struct EditHabit: View {
                     }
                     VStack(spacing: 5) {
                         HStack {
-                            Text("Color".localized)
+                            Text("Theme".localized)
                                 .bodyText()
                             Spacer()
                         }
@@ -64,7 +64,7 @@ struct EditHabit: View {
                     }
                     VStack(spacing: 5) {
                         HStack {
-                            Text("Day of the week".localized)
+                            Text("Repeat".localized)
                                 .bodyText()
                             Spacer()
                         }
@@ -75,7 +75,7 @@ struct EditHabit: View {
                     }
                     VStack(spacing: 5) {
                         HStack {
-                            Text("Number of times".localized)
+                            Text("Number of Times".localized)
                                 .bodyText()
                             Spacer()
                         }
@@ -121,10 +121,10 @@ struct EditHabit: View {
     }
     var deleteAlert: Alert {
         Alert(
-            title: Text(String(format: NSLocalizedString("Delete %@?", comment: ""), tempHabit.name)),
+            title: Text(String(format: NSLocalizedString("Are you sure you want to delete %@?", comment: ""), tempHabit.name)),
             message: nil,
-            primaryButton: .default(Text("Cancel".localized)),
-            secondaryButton: .destructive(Text("Delete".localized), action: {
+            primaryButton: .default(Text("No, I'll leave it.".localized)),
+            secondaryButton: .destructive(Text("Yes, I'll delete it.".localized), action: {
                 for profile in summaryManager.contents {
                     if let index = profile.list.firstIndex(where: {$0 == tempHabit.id}) {
                         profile.list.remove(at: index)

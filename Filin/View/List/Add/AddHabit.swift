@@ -73,7 +73,7 @@ struct AddHabit: View {
                 }
                 VStack(spacing: 8) {
                     HStack {
-                        Text("Do you want me to prepare a timer when the goal starts?".localized)
+                        Text("Should I prepare a timer when you perform this goal?".localized)
                             .bodyText()
                         Spacer()
                     }

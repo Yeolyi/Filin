@@ -44,7 +44,7 @@ struct EditRoutine: View {
         }
         dividerID = UUID()
         var tempListData = routine.list
-        tempListData.append(.init(id: dividerID, name: "⬆️ Goals to be added ⬆️".localized, color: .gray))
+        tempListData.append(.init(id: dividerID, name: "⬆️ Goals to be displayed ⬆️".localized, color: .gray))
         tempListData.append(contentsOf: habits.filter {
             !(tempListData.contains($0))
         })
@@ -105,7 +105,7 @@ struct EditRoutine: View {
                             ) {
                                 HStack {
                                     Text(String(
-                                            format: NSLocalizedString("%d goals selected", comment: ""),
+                                            format: NSLocalizedString("%d Goals Selected", comment: ""),
                                             filteredList.count
                                     ))
                                         .bodyText()

@@ -90,7 +90,7 @@ struct HabitShare<TargetView: View>: View {
                         share(items: [image])
                     }
                 }) {
-                    settingRow("Save or share the image above".localized) {
+                    settingRow("Save/Share the Image Above".localized) {
                         Image(systemName: "square.and.arrow.down")
                             .font(.system(size: 25))
                             .padding(.trailing, 10)

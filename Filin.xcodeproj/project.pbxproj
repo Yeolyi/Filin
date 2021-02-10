@@ -31,13 +31,11 @@
 		252885AD25C1E754005BD4F5 /* AutoSaveWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2557F93E2586721100697C48 /* AutoSaveWrapper.swift */; };
 		252885B425C24E5D005BD4F5 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2528858625C1DAF2005BD4F5 /* WidgetData.swift */; };
 		252885B825C24E68005BD4F5 /* AutoSaveWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2557F93E2586721100697C48 /* AutoSaveWrapper.swift */; };
-		252A0E5625A9FAEB00A41525 /* HabitStatisticsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252A0E5525A9FAEA00A41525 /* HabitStatisticsExtension.swift */; };
 		252A0E5B25AA504400A41525 /* HabitCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252A0E5A25AA504400A41525 /* HabitCalendar.swift */; };
 		2530711525BBD4A9002AC0C6 /* CoreDataConvertableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530711425BBD4A9002AC0C6 /* CoreDataConvertableProtocol.swift */; };
 		2530711925BBE57D002AC0C6 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530711825BBE57D002AC0C6 /* Achievement.swift */; };
 		2532DC7F2598F70B006DBA25 /* RoutineNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2532DC7E2598F70B006DBA25 /* RoutineNotification.swift */; };
 		253CA92B25D3A879006340B8 /* SubIndicatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253CA92A25D3A879006340B8 /* SubIndicatingRow.swift */; };
-		253CA97325D3AACC006340B8 /* FilinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253CA97225D3AACC006340B8 /* FilinTests.swift */; };
 		25498A4D25BC045700283E71 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25498A4C25BC045700283E71 /* Palette.swift */; };
 		25498A5125BC048800283E71 /* PaletteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25498A5025BC048800283E71 /* PaletteProtocol.swift */; };
 		25522D5625BC117900243C18 /* RowPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25522D5525BC117900243C18 /* RowPadding.swift */; };
@@ -124,6 +122,7 @@
 		25E163672599CBAA0082A87A /* EmojiListEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E163662599CBAA0082A87A /* EmojiListEdit.swift */; };
 		25E6154B25A1968B007A469B /* HabitStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E6154A25A1968B007A469B /* HabitStatistics.swift */; };
 		25EBC00425CA522B00D4FF97 /* EditSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EBC00325CA522B00D4FF97 /* EditSummary.swift */; };
+		25ED3FF325D3AC6E00AC1ECC /* FilinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED3FF225D3AC6E00AC1ECC /* FilinTests.swift */; };
 		25F04EF42594995C000BA9C5 /* EditableListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F04EF32594995C000BA9C5 /* EditableListView.swift */; };
 		25F212762591B97400E259EC /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F212752591B97400E259EC /* SettingView.swift */; };
 		25F2127A2591E90B00E259EC /* SharingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F212792591E90B00E259EC /* SharingHandler.swift */; };
@@ -207,7 +206,6 @@
 		25277CE4258E1BB70026B8F3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		2528858625C1DAF2005BD4F5 /* WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetData.swift; sourceTree = "<group>"; };
 		2528858B25C1DD68005BD4F5 /* WidgetIntentsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetIntentsExtension.entitlements; sourceTree = "<group>"; };
-		252A0E5525A9FAEA00A41525 /* HabitStatisticsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatisticsExtension.swift; sourceTree = "<group>"; };
 		252A0E5A25AA504400A41525 /* HabitCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCalendar.swift; sourceTree = "<group>"; };
 		2530711425BBD4A9002AC0C6 /* CoreDataConvertableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataConvertableProtocol.swift; sourceTree = "<group>"; };
 		2530711825BBE57D002AC0C6 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 		253CA92A25D3A879006340B8 /* SubIndicatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubIndicatingRow.swift; sourceTree = "<group>"; };
 		253CA96425D3AAAC006340B8 /* FilinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		253CA96825D3AAAC006340B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		253CA97225D3AACC006340B8 /* FilinTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilinTests.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/Filin-old/FilinTests/FilinTests.swift"; sourceTree = "<group>"; };
 		25498A4C25BC045700283E71 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		25498A5025BC048800283E71 /* PaletteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteProtocol.swift; sourceTree = "<group>"; };
 		25522D5525BC117900243C18 /* RowPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowPadding.swift; sourceTree = "<group>"; };
@@ -246,7 +243,7 @@
 		258B6AF3258289240004BFE7 /* HabitScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitScrollView.swift; sourceTree = "<group>"; };
 		258B6AF7258289C80004BFE7 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		258B6B0625828CC70004BFE7 /* HabitRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRow.swift; sourceTree = "<group>"; };
-		258B6B11258295660004BFE7 /* EditHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabit.swift; sourceTree = "<group>"; };
+		258B6B11258295660004BFE7 /* EditHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditHabit.swift; path = ../Add/EditHabit.swift; sourceTree = "<group>"; };
 		258B6B142582965F0004BFE7 /* ModalAllowAutoDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalAllowAutoDismiss.swift; sourceTree = "<group>"; };
 		258B6B222583573B0004BFE7 /* ColorHorizontalPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHorizontalPicker.swift; sourceTree = "<group>"; };
 		258DD4F725A9ADBA00A2C20E /* CoreDataBridgeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBridgeProtocol.swift; sourceTree = "<group>"; };
@@ -295,6 +292,7 @@
 		25E163662599CBAA0082A87A /* EmojiListEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiListEdit.swift; sourceTree = "<group>"; };
 		25E6154A25A1968B007A469B /* HabitStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatistics.swift; sourceTree = "<group>"; };
 		25EBC00325CA522B00D4FF97 /* EditSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSummary.swift; sourceTree = "<group>"; };
+		25ED3FF225D3AC6E00AC1ECC /* FilinTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilinTests.swift; sourceTree = "<group>"; };
 		25F04EF32594995C000BA9C5 /* EditableListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableListView.swift; sourceTree = "<group>"; };
 		25F212752591B97400E259EC /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		25F212792591E90B00E259EC /* SharingHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingHandler.swift; sourceTree = "<group>"; };
@@ -401,7 +399,7 @@
 		253CA96525D3AAAC006340B8 /* FilinTests */ = {
 			isa = PBXGroup;
 			children = (
-				253CA97225D3AACC006340B8 /* FilinTests.swift */,
+				25ED3FF225D3AC6E00AC1ECC /* FilinTests.swift */,
 				253CA96825D3AAAC006340B8 /* Info.plist */,
 			);
 			path = FilinTests;
@@ -646,7 +644,6 @@
 		25E6154725A190AA007A469B /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
-				252A0E5525A9FAEA00A41525 /* HabitStatisticsExtension.swift */,
 				2578FEED25A1F8C1001884C8 /* DayOfWeekChart.swift */,
 				25E6154A25A1968B007A469B /* HabitStatistics.swift */,
 			);
@@ -658,6 +655,7 @@
 			children = (
 				2563B4F82582826900731635 /* HabitList.swift */,
 				258B6AF3258289240004BFE7 /* HabitScrollView.swift */,
+				258B6B11258295660004BFE7 /* EditHabit.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -792,7 +790,6 @@
 				25FC6033258615EE006BCFBA /* AddHabit.swift */,
 				2580999725C94B63003E8E59 /* HabitNumberSetting.swift */,
 				2580999C25C94D7A003E8E59 /* HabitTimerSetting.swift */,
-				258B6B11258295660004BFE7 /* EditHabit.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -928,6 +925,7 @@
 				TargetAttributes = {
 					253CA96325D3AAAC006340B8 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 						TestTargetID = 2563B4F02582826800731635;
 					};
 					2563B4F02582826800731635 = {
@@ -1068,7 +1066,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				253CA97325D3AACC006340B8 /* FilinTests.swift in Sources */,
+				25ED3FF325D3AC6E00AC1ECC /* FilinTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1092,7 +1090,6 @@
 				25C5A56725837A0200E864A5 /* AppSetting.swift in Sources */,
 				25498A5125BC048800283E71 /* PaletteProtocol.swift in Sources */,
 				25C574FE2583D3BD004BF07D /* Habit+CoreDataProperties.swift in Sources */,
-				252A0E5625A9FAEB00A41525 /* HabitStatisticsExtension.swift in Sources */,
 				2593A6E125A9D2710077077E /* FlRoutine.swift in Sources */,
 				2578FEEE25A1F8C1001884C8 /* DayOfWeekChart.swift in Sources */,
 				258B6B12258295660004BFE7 /* EditHabit.swift in Sources */,
@@ -1270,6 +1267,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4954Z45396;
 				INFOPLIST_FILE = FilinTests/Info.plist;
@@ -1281,6 +1279,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = WannaSleep.FilinTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Filin.app/Filin";
@@ -1291,6 +1290,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4954Z45396;
 				INFOPLIST_FILE = FilinTests/Info.plist;
