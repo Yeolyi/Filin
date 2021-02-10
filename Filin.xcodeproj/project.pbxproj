@@ -76,6 +76,7 @@
 		258E02F9258E1150006DAFAC /* Headline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E02F8258E1150006DAFAC /* Headline.swift */; };
 		258F063D25D3A54B00FE26D0 /* FlTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F063C25D3A54B00FE26D0 /* FlTimer.swift */; };
 		258F064225D3A55B00FE26D0 /* SmallSectionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F064125D3A55B00FE26D0 /* SmallSectionText.swift */; };
+		258F064A25D3A58800FE26D0 /* SubIndicatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F064925D3A58800FE26D0 /* SubIndicatingRow.swift */; };
 		2593A6E125A9D2710077077E /* FlRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6E025A9D2710077077E /* FlRoutine.swift */; };
 		259E62FA2594CBE700F29FDD /* DefaultTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E62F92594CBE700F29FDD /* DefaultTap.swift */; };
 		259F7DDB25CA63BA00408A1D /* FlInlineNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259F7DDA25CA63BA00408A1D /* FlInlineNavigationBar.swift */; };
@@ -245,6 +246,7 @@
 		258E02F8258E1150006DAFAC /* Headline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headline.swift; sourceTree = "<group>"; };
 		258F063C25D3A54B00FE26D0 /* FlTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlTimer.swift; sourceTree = "<group>"; };
 		258F064125D3A55B00FE26D0 /* SmallSectionText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SmallSectionText.swift; path = ../SmallSectionText.swift; sourceTree = "<group>"; };
+		258F064925D3A58800FE26D0 /* SubIndicatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubIndicatingRow.swift; path = "../../../../../Filin/Filin-old/Filin/View/Helper/Buttons/SubIndicatingRow.swift"; sourceTree = "<group>"; };
 		2593A6E025A9D2710077077E /* FlRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlRoutine.swift; sourceTree = "<group>"; };
 		259E62F92594CBE700F29FDD /* DefaultTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTap.swift; sourceTree = "<group>"; };
 		259F7DDA25CA63BA00408A1D /* FlInlineNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlInlineNavigationBar.swift; sourceTree = "<group>"; };
