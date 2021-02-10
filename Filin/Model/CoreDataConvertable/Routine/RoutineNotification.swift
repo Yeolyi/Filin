@@ -28,7 +28,7 @@ extension FlRoutine {
             dateComponents.hour = time.hour
             dateComponents.minute = time.minute
             
-            for dayOfWeekComp in self.dayOfWeek {
+            for dayOfWeekComp in self.repeatDay {
                 // identifier
                 let uuidString = self.notiIDStr(withDayOfWeek: dayOfWeekComp)
                 // trigger

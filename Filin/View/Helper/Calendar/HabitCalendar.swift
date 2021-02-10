@@ -55,7 +55,7 @@ struct HabitCalendar: View {
     var body: some View {
         CalendarInterface(
             selectedDate: $selectedDate,
-            color: habits[0].color,
+            color: (habits[0]?.color ?? Color.gray),
             isExpanded: $isExpanded,
             isEmojiView: $isEmojiView, habits: habits, isCapture: isCapture
         ) {
@@ -70,7 +70,7 @@ struct HabitCalendar: View {
                     weekExpandWrapper { week in
                         EmojiCalendarRow(
                             week: week, isExpanded: isExpanded,
-                            selectedDate: $selectedDate, habit: habits[0]
+                            selectedDate: $selectedDate, habit: habits[0] ?? FlHabit(name: "")
                         )
                     }
                 } else {

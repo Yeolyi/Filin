@@ -12,6 +12,10 @@ import CoreData
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     let appSetting = AppSetting()
+    let habitManager = HabitManager()
+    let summaryManager = SummaryManager()
+    let routineManager = RoutineManager()
+    
     var window: UIWindow?
     func scene(
         _ scene: UIScene,
@@ -29,16 +33,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             fatalError()
         }
         appSetting.runCount += 1
-        appSetting.summaryConvert(moc: context)
+        appSetting.summaryConvert(moc: context, summaryManager: summaryManager)
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let contentView =
             ContentView()
             .environment(\.managedObjectContext, context)
             .environmentObject(appSetting)
-            .environmentObject(HabitManager.shared)
-            .environmentObject(SummaryManager.shared)
-            .environmentObject(RoutineManager.shared)
+            .environmentObject(habitManager)
+            .environmentObject(summaryManager)
+            .environmentObject(routineManager)
         
         /*
         for family in UIFont.familyNames.sorted() {
@@ -62,9 +66,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later,
         // as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
-        HabitManager.shared.save()
-        SummaryManager.shared.save()
-        RoutineManager.shared.save()
+        habitManager.save()
+        summaryManager.save()
+        routineManager.save()
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -88,9 +92,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
 
         // Save changes in the application's managed object context when the application transitions to the background.
-        HabitManager.shared.save()
-        SummaryManager.shared.save()
-        RoutineManager.shared.save()
+        habitManager.save()
+        summaryManager.save()
+        routineManager.save()
         appSetting.sceneBackgroundTime = Date()
     }
 }

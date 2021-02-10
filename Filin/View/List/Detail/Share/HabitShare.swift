@@ -90,7 +90,7 @@ struct HabitShare<TargetView: View>: View {
                         share(items: [image])
                     }
                 }) {
-                    settingRow("Save/Share".localized) {
+                    settingRow("Save or share the image above".localized) {
                         Image(systemName: "square.and.arrow.down")
                             .font(.system(size: 25))
                             .padding(.trailing, 10)
@@ -102,7 +102,7 @@ struct HabitShare<TargetView: View>: View {
                         SharingHandler.instagramStory(imageData: image.pngData()!, colorScheme: colorScheme)
                     }
                 }) {
-                    settingRow("Instagram Story".localized) {
+                    settingRow("Share to Instagram Story".localized) {
                         Image("Instagram_AppIcon")
                             .resizable()
                             .frame(width: 25, height: 25)

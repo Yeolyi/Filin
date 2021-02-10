@@ -35,12 +35,12 @@ struct Ring: View {
                 }
                 ForEach(0..<min(3, habits.count), id: \.self) { index in
                     Circle()
-                        .trim(from: 0.0, to: CGFloat(habits[index].achievement.progress(at: date)))
+                        .trim(from: 0.0, to: CGFloat(habits[index]?.achievement.progress(at: date) ?? 0))
                         .stroke(style: StrokeStyle(lineWidth: 5.0 - CGFloat(index) * 0.5, lineCap: .round))
                         .if(selectedDate.month != date.month && isExpanded) {
                             $0.inactiveColor()
                         }
-                        .foregroundColor(habits[index].color)
+                        .foregroundColor(habits[index]?.color ?? Color.gray)
                         .rotationEffect(Angle(degrees: -90))
                         .frame(width: 40 - CGFloat(index * 12), height: 40 - CGFloat(index * 12))
                 }
@@ -50,7 +50,7 @@ struct Ring: View {
                             $0.inactiveColor()
                         }
                         .if(selectedDate.dictKey == date.dictKey) {
-                            $0.foregroundColor(habits[0].color)
+                            $0.foregroundColor(habits[0]?.color ?? Color.gray)
                         }
                         .bodyText()
                 }

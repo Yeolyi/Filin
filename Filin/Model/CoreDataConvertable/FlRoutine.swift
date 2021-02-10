@@ -14,12 +14,14 @@ class FlRoutine: CoreDataConvertable {
     @Published var name: String
     @Published var list: [FlHabit] = []
     @Published var time: Date?
-    @Published var dayOfWeek: Set<Int> = [1, 2, 3, 4, 5, 6, 7]
+    @Published var repeatDay: Set<Int> = [1, 2, 3, 4, 5, 6, 7]
     var copyID: UUID?
     
     private static let sampleData: [(name: String, sampleHabitIndices: [Int])] = [
         ("Jogging Routine🏃‍♂️".localized, [0, 1]), ("Organize before bed😴".localized, [1, 2, 3])
     ]
+    
+    static var sampleCount: Int { sampleData.count }
     
     static func sample(number index: Int) -> FlRoutine {
         guard index < sampleData.count else {
@@ -41,7 +43,7 @@ class FlRoutine: CoreDataConvertable {
         if let timeStr = routine.time {
             time = Date(hourAndMinuteStr: timeStr)
         }
-        dayOfWeek = Set(routine.dayOfWeek.map(Int.init))
+        repeatDay = Set(routine.dayOfWeek.map(Int.init))
     }
     
     init(name: String, id: UUID = UUID()) {
@@ -49,12 +51,16 @@ class FlRoutine: CoreDataConvertable {
         self.name = name
     }
     
+    func isTodo(at dayOfWeek: Int) -> Bool {
+        self.repeatDay.contains(dayOfWeek)
+    }
+    
     var copy: FlRoutine {
         copyID = UUID()
         let copy = FlRoutine(name: name, id: copyID!)
         copy.list = list
         copy.time = time
-        copy.dayOfWeek = dayOfWeek
+        copy.repeatDay = repeatDay
         return copy
     }
     
@@ -66,7 +72,7 @@ class FlRoutine: CoreDataConvertable {
         name = routine.name
         list = routine.list
         time = routine.time
-        dayOfWeek = routine.dayOfWeek
+        repeatDay = routine.repeatDay
         deleteNoti()
         addNoti(completion: {_ in})
         copyID = nil
@@ -80,13 +86,16 @@ class FlRoutine: CoreDataConvertable {
         target.name = name
         target.list = list.map(\.id)
         target.time = time?.hourAndMinuteStr
-        target.dayOfWeek = Array(dayOfWeek).map(Int16.init)
+        target.dayOfWeek = Array(repeatDay).map(Int16.init)
     }
 }
 
 extension FlRoutine: Identifiable {
     static func == (lhs: FlRoutine, rhs: FlRoutine) -> Bool {
-        lhs.id == rhs.id
+        lhs.name == rhs.name &&
+            lhs.list == rhs.list &&
+            lhs.repeatDay == rhs.repeatDay &&
+            lhs.time == rhs.time
     }
 }
 

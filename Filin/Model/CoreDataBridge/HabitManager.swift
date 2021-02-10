@@ -13,10 +13,7 @@ final class HabitManager: CoreDataBridge {
     typealias CoreDataType = Habit
     typealias InAppType = FlHabit
     
-    static var shared = HabitManager()
-    private var deletedIDs: [UUID] = []
-    
-    @Published var contents: [FlHabit] = []
+    @Published private(set) var contents: [FlHabit] = []
     
     @AutoSave("addUnit", defaultValue: [:])
     var addUnit: [UUID: Int] {
@@ -25,7 +22,7 @@ final class HabitManager: CoreDataBridge {
         }
     }
     
-    private init() {
+    init() {
         contents = fetched.map { habit in
             if let unit = addUnit.first(where: {(key, _) in key == habit.id})?.value {
                 return FlHabit.init(habit, addUnit: unit)
@@ -35,7 +32,6 @@ final class HabitManager: CoreDataBridge {
             }
         }
     }
-    
     func save() {
         var widgetDataList: [HabitWidgetData] = []
         for flHabit in contents {
@@ -47,6 +43,7 @@ final class HabitManager: CoreDataBridge {
                 newHabit.id = flHabit.id
                 flHabit.coreDataTransfer(to: newHabit)
             }
+            mocSave()
             widgetDataList.append(
                 .init(
                     id: flHabit.id, name: flHabit.name,
@@ -60,11 +57,8 @@ final class HabitManager: CoreDataBridge {
         if #available(iOS 14.0, *) {
             WidgetCenter.shared.reloadAllTimelines()
         }
-        mocSave()
-        for id in deletedIDs {
-            if let habit = fetched.first(where: {$0.id == id}) {
-                moc.delete(habit)
-            }
+        for savedHabit in fetched where !contents.contains(where: {$0.id == savedHabit.id}) {
+            moc.delete(savedHabit)
         }
     }
     
@@ -75,14 +69,13 @@ final class HabitManager: CoreDataBridge {
             return
         }
         contents.remove(at: index)
-        deletedIDs.append(withID)
         if let index = summary.list.firstIndex(where: {$0 == withID}) {
             summary.list.remove(at: index)
         }
         for routine in routines {
-            if let index = routine.list.firstIndex(where: {withID == $0.id}) {
-                routine.list.remove(at: index)
-            }
+            routine.list.removeAll(where: {
+                withID == $0.id
+            })
         }
     }
     

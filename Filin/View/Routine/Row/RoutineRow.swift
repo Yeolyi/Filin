@@ -11,6 +11,7 @@ struct RoutineRow: View {
     
     @ObservedObject var routine: FlRoutine
     @Binding var isSheet: RoutineSheet?
+    @EnvironmentObject var appSetting: AppSetting
     
     var subTitle: String {
         var subTitleStr = ""
@@ -31,7 +32,7 @@ struct RoutineRow: View {
                     }
                 } else {
                     HStack {
-                        Text(String(format: NSLocalizedString("%d goals", comment: ""), routine.list.count))
+                        Text(String(format: NSLocalizedString("Consists of %d goals", comment: ""), routine.list.count))
                             .bodyText()
                         Spacer()
                     }
@@ -45,9 +46,7 @@ struct RoutineRow: View {
             .contentShape(Rectangle())
             .onTapGesture { isSheet = .edit(routine) }
             Spacer()
-            NavigationLink(destination:
-                        RunRoutine(routine: routine)
-            ) {
+            NavigationLink(destination: RunRoutine(routine: routine)) {
                 Image(systemName: "play")
                     .font(.system(size: 22, weight: .semibold))
                     .mainColor()

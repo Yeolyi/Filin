@@ -13,7 +13,6 @@
 		2511363325B5DF3600BE5F10 /* lottiePlus.json in Resources */ = {isa = PBXBuildFile; fileRef = 2511363225B5DF3600BE5F10 /* lottiePlus.json */; };
 		2512767725C84A08000466B4 /* DailyProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512767625C84A08000466B4 /* DailyProgressBar.swift */; };
 		2512767F25C8F27C000466B4 /* CalendarMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512767E25C8F27C000466B4 /* CalendarMode.swift */; };
-		2512768325C8F46A000466B4 /* lottieStack.json in Resources */ = {isa = PBXBuildFile; fileRef = 25FC34EA25A03A66000B5844 /* lottieStack.json */; };
 		2514EF6625C1030F00633146 /* FlatRowBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514EF6525C1030F00633146 /* FlatRowBackground.swift */; };
 		2519664F25BC52530054BAF4 /* RowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519664E25BC52530054BAF4 /* RowData.swift */; };
 		251EFC67259E4DD300748917 /* Summary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251EFC63259E4DD300748917 /* Summary+CoreDataClass.swift */; };
@@ -74,6 +73,9 @@
 		258E02F1258E111E006DAFAC /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E02F0258E111E006DAFAC /* Title.swift */; };
 		258E02F6258E1139006DAFAC /* SectionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E02F5258E1139006DAFAC /* SectionText.swift */; };
 		258E02F9258E1150006DAFAC /* Headline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E02F8258E1150006DAFAC /* Headline.swift */; };
+		258F063D25D3A54B00FE26D0 /* FlTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F063C25D3A54B00FE26D0 /* FlTimer.swift */; };
+		258F064225D3A55B00FE26D0 /* SmallSectionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F064125D3A55B00FE26D0 /* SmallSectionText.swift */; };
+		258F064A25D3A58800FE26D0 /* SubIndicatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F064925D3A58800FE26D0 /* SubIndicatingRow.swift */; };
 		2593A6E125A9D2710077077E /* FlRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6E025A9D2710077077E /* FlRoutine.swift */; };
 		259E62FA2594CBE700F29FDD /* DefaultTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E62F92594CBE700F29FDD /* DefaultTap.swift */; };
 		259F7DDB25CA63BA00408A1D /* FlInlineNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259F7DDA25CA63BA00408A1D /* FlInlineNavigationBar.swift */; };
@@ -241,6 +243,9 @@
 		258E02F0258E111E006DAFAC /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
 		258E02F5258E1139006DAFAC /* SectionText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionText.swift; sourceTree = "<group>"; };
 		258E02F8258E1150006DAFAC /* Headline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headline.swift; sourceTree = "<group>"; };
+		258F063C25D3A54B00FE26D0 /* FlTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlTimer.swift; sourceTree = "<group>"; };
+		258F064125D3A55B00FE26D0 /* SmallSectionText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SmallSectionText.swift; path = ../SmallSectionText.swift; sourceTree = "<group>"; };
+		258F064925D3A58800FE26D0 /* SubIndicatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubIndicatingRow.swift; path = "../../../../../Filin/Filin-old/Filin/View/Helper/Buttons/SubIndicatingRow.swift"; sourceTree = "<group>"; };
 		2593A6E025A9D2710077077E /* FlRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlRoutine.swift; sourceTree = "<group>"; };
 		259E62F92594CBE700F29FDD /* DefaultTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTap.swift; sourceTree = "<group>"; };
 		259F7DDA25CA63BA00408A1D /* FlInlineNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlInlineNavigationBar.swift; sourceTree = "<group>"; };
@@ -503,6 +508,7 @@
 				25AF7E8B25975F090097BF4D /* MainRectButton.swift */,
 				255C1170258F373600E0F740 /* HeaderButton.swift */,
 				25FC34F225A04559000B5844 /* PaperToggle.swift */,
+				258F064925D3A58800FE26D0 /* SubIndicatingRow.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -555,6 +561,7 @@
 		25B7327F258B443C003D9FD8 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				258F064125D3A55B00FE26D0 /* SmallSectionText.swift */,
 				25C0F38625AB3FCE00235560 /* GodoB.ttf */,
 				258E02F0258E111E006DAFAC /* Title.swift */,
 				258E02F5258E1139006DAFAC /* SectionText.swift */,
@@ -630,6 +637,7 @@
 			isa = PBXGroup;
 			children = (
 				2553521525BB3CC700255045 /* PreviewDataProvider.swift */,
+				258F063C25D3A54B00FE26D0 /* FlTimer.swift */,
 				25B2A34D25CDB32100CBB3A0 /* CoreDataConvertable */,
 				25B2A34C25CDB30800CBB3A0 /* CoreDataBridge */,
 				25E23E0225BB4EC200768768 /* AppSetting */,
@@ -911,7 +919,6 @@
 				25C0F38725AB3FCE00235560 /* GodoB.ttf in Resources */,
 				2563B5042582826B00731635 /* LaunchScreen.storyboard in Resources */,
 				2563B5012582826B00731635 /* Preview Assets.xcassets in Resources */,
-				2512768325C8F46A000466B4 /* lottieStack.json in Resources */,
 				25277CE5258E1BB70026B8F3 /* .swiftlint.yml in Resources */,
 				2511363325B5DF3600BE5F10 /* lottiePlus.json in Resources */,
 				25A564E725904F9D00239CF6 /* Localizable.strings in Resources */,
@@ -1039,6 +1046,7 @@
 				259F7DEA25CA723000408A1D /* TempSummary.swift in Sources */,
 				25F2127A2591E90B00E259EC /* SharingHandler.swift in Sources */,
 				2563B4F72582826900731635 /* SceneDelegate.swift in Sources */,
+				258F064A25D3A58800FE26D0 /* SubIndicatingRow.swift in Sources */,
 				25C574FD2583D3BD004BF07D /* Habit+CoreDataClass.swift in Sources */,
 				25F887F62595091B00BC2D6A /* RoutineView.swift in Sources */,
 				2519664F25BC52530054BAF4 /* RowData.swift in Sources */,
@@ -1059,6 +1067,7 @@
 				251EFC71259E4E4B00748917 /* Summary+CoreDataProperties.swift in Sources */,
 				258E02F6258E1139006DAFAC /* SectionText.swift in Sources */,
 				258B6B152582965F0004BFE7 /* ModalAllowAutoDismiss.swift in Sources */,
+				258F063D25D3A54B00FE26D0 /* FlTimer.swift in Sources */,
 				257F7CE625A3284B00F846A1 /* TagCloud.swift in Sources */,
 				258B6AF4258289240004BFE7 /* HabitScrollView.swift in Sources */,
 				259F7DE525CA720500408A1D /* FSummary+CoreDataClass.swift in Sources */,
@@ -1100,6 +1109,7 @@
 				252A0E5B25AA504400A41525 /* HabitCalendar.swift in Sources */,
 				258B6B232583573B0004BFE7 /* ColorHorizontalPicker.swift in Sources */,
 				25C9FA2625907C4F0046C523 /* ViewToImage.swift in Sources */,
+				258F064225D3A55B00FE26D0 /* SmallSectionText.swift in Sources */,
 				2530711525BBD4A9002AC0C6 /* CoreDataConvertableProtocol.swift in Sources */,
 				2532DC7F2598F70B006DBA25 /* RoutineNotification.swift in Sources */,
 				2563B4F92582826900731635 /* HabitList.swift in Sources */,

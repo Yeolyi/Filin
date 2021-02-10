@@ -23,7 +23,8 @@ struct TimerPicker: View {
                 })
                 .frame(width: 150, height: 150)
                 .clipped()
-                Text("Minute")
+                .accessibility(identifier: "minute")
+                Text("Minute".localized)
                     .bodyText()
             }
             VStack {
@@ -34,8 +35,9 @@ struct TimerPicker: View {
                     }
                 })
                 .frame(width: 150, height: 150)
+                .accessibility(identifier: "second")
                 .clipped()
-                Text("Second")
+                Text("Second".localized)
                     .bodyText()
             }
         }

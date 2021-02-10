@@ -18,12 +18,8 @@ struct AddHabit: View {
     @Environment(\.colorScheme) var colorScheme
     
     var isSaveAvailable: Bool {
-        #if DEBUG
-        return true
-        #else
-        return tempHabit.name != "" && !tempHabit.dayOfWeek.isEmpty
-            && tempHabit.achievement.numberOfTimes != 0
-        #endif
+        tempHabit.name != "" && !tempHabit.dayOfWeek.isEmpty
+            && tempHabit.achievement.targetTimes != 0
     }
     
     var body: some View {
@@ -43,17 +39,18 @@ struct AddHabit: View {
                 .padding(.bottom, 35)
                 VStack(spacing: 3) {
                     HStack {
-                        Text("What is the name of the goal?".localized)
+                        Text("Tell me the name of the goal.".localized)
                             .bodyText()
                         Spacer()
                     }
                     .padding(.leading, 20)
                     TextFieldWithEndButton([FlHabit.sample(number: 0), FlHabit.sample(number: 1)].randomElement()!.name, text: $tempHabit.name)
                         .flatRowBackground()
+                        .accessibility(identifier: "habitName")
                 }
                 VStack(spacing: 8) {
                     HStack {
-                        Text("Choose the day of the week to proceed with the goal.".localized)
+                        Text("Choose the day of the week to repeat your goal.".localized)
                             .bodyText()
                             .fixedSize(horizontal: false, vertical: true)
                         Spacer()
@@ -62,10 +59,11 @@ struct AddHabit: View {
                     DayOfWeekSelector(dayOfTheWeek: $tempHabit.dayOfWeek)
                         .frame(maxWidth: .infinity)
                         .flatRowBackground()
+                        .accessibility(identifier: "dayOfWeek")
                 }
                 VStack(spacing: 8) {
                     HStack {
-                        Text("How many times do you want to achieve your goal in a day?".localized)
+                        Text("How many times a day will you do it?".localized)
                             .bodyText()
                             .fixedSize(horizontal: false, vertical: true)
                         Spacer()
@@ -75,10 +73,7 @@ struct AddHabit: View {
                 }
                 VStack(spacing: 8) {
                     HStack {
-                        Text("""
-                            Use a timer if you need a specific time to \
-                            achieve your goal.\nE.g. two-minute plank.
-                            """.localized)
+                        Text("Do you want me to prepare a timer when the goal starts?".localized)
                             .bodyText()
                         Spacer()
                     }
@@ -87,7 +82,7 @@ struct AddHabit: View {
                 }
                 VStack(spacing: 8) {
                     HStack {
-                        Text("Select theme color.".localized)
+                        Text("Choose a color that matches your goal.".localized)
                             .bodyText()
                         Spacer()
                     }
@@ -96,17 +91,19 @@ struct AddHabit: View {
                         .frame(maxWidth: .infinity)
                         .flatRowBackground()
                 }
-                MainRectButton(action: saveAndQuit, str: "Done".localized)
+                MainRectButton(action: saveAndQuit, str: "Create a new goal".localized)
                     .padding(.vertical, 30)
                     .opacity(isSaveAvailable ? 1 : 0.3)
                     .disabled(!isSaveAvailable)
+                    .accessibility(identifier: "createGoal")
             }
             .padding(.top, 1)
         }
+        .accessibility(identifier: "habitAddView")
     }
     
     func saveAndQuit() {
-        HabitManager.shared.append(tempHabit, summaryManager: summaryManager)
+        habitManager.append(tempHabit, summaryManager: summaryManager)
         self.presentationMode.wrappedValue.dismiss()
     }
     
