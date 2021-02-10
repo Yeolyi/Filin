@@ -37,6 +37,7 @@
 		2530711925BBE57D002AC0C6 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530711825BBE57D002AC0C6 /* Achievement.swift */; };
 		2532DC7F2598F70B006DBA25 /* RoutineNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2532DC7E2598F70B006DBA25 /* RoutineNotification.swift */; };
 		253CA92B25D3A879006340B8 /* SubIndicatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253CA92A25D3A879006340B8 /* SubIndicatingRow.swift */; };
+		253CA97325D3AACC006340B8 /* FilinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253CA97225D3AACC006340B8 /* FilinTests.swift */; };
 		25498A4D25BC045700283E71 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25498A4C25BC045700283E71 /* Palette.swift */; };
 		25498A5125BC048800283E71 /* PaletteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25498A5025BC048800283E71 /* PaletteProtocol.swift */; };
 		25522D5625BC117900243C18 /* RowPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25522D5525BC117900243C18 /* RowPadding.swift */; };
@@ -76,7 +77,6 @@
 		258E02F9258E1150006DAFAC /* Headline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E02F8258E1150006DAFAC /* Headline.swift */; };
 		258F063D25D3A54B00FE26D0 /* FlTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F063C25D3A54B00FE26D0 /* FlTimer.swift */; };
 		258F064225D3A55B00FE26D0 /* SmallSectionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F064125D3A55B00FE26D0 /* SmallSectionText.swift */; };
-		258F064A25D3A58800FE26D0 /* SubIndicatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F064925D3A58800FE26D0 /* SubIndicatingRow.swift */; };
 		2593A6E125A9D2710077077E /* FlRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6E025A9D2710077077E /* FlRoutine.swift */; };
 		259E62FA2594CBE700F29FDD /* DefaultTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E62F92594CBE700F29FDD /* DefaultTap.swift */; };
 		259F7DDB25CA63BA00408A1D /* FlInlineNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259F7DDA25CA63BA00408A1D /* FlInlineNavigationBar.swift */; };
@@ -151,6 +151,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		253CA96925D3AAAC006340B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2563B4E92582826800731635 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2563B4F02582826800731635;
+			remoteInfo = Filin;
+		};
 		25B8027825C1C81E0033B5D9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2563B4E92582826800731635 /* Project object */;
@@ -206,6 +213,9 @@
 		2530711825BBE57D002AC0C6 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		2532DC7E2598F70B006DBA25 /* RoutineNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineNotification.swift; sourceTree = "<group>"; };
 		253CA92A25D3A879006340B8 /* SubIndicatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubIndicatingRow.swift; sourceTree = "<group>"; };
+		253CA96425D3AAAC006340B8 /* FilinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		253CA96825D3AAAC006340B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		253CA97225D3AACC006340B8 /* FilinTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilinTests.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/Filin-old/FilinTests/FilinTests.swift"; sourceTree = "<group>"; };
 		25498A4C25BC045700283E71 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		25498A5025BC048800283E71 /* PaletteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteProtocol.swift; sourceTree = "<group>"; };
 		25522D5525BC117900243C18 /* RowPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowPadding.swift; sourceTree = "<group>"; };
@@ -246,7 +256,6 @@
 		258E02F8258E1150006DAFAC /* Headline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headline.swift; sourceTree = "<group>"; };
 		258F063C25D3A54B00FE26D0 /* FlTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlTimer.swift; sourceTree = "<group>"; };
 		258F064125D3A55B00FE26D0 /* SmallSectionText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SmallSectionText.swift; path = ../SmallSectionText.swift; sourceTree = "<group>"; };
-		258F064925D3A58800FE26D0 /* SubIndicatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubIndicatingRow.swift; path = "../../../../../Filin/Filin-old/Filin/View/Helper/Buttons/SubIndicatingRow.swift"; sourceTree = "<group>"; };
 		2593A6E025A9D2710077077E /* FlRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlRoutine.swift; sourceTree = "<group>"; };
 		259E62F92594CBE700F29FDD /* DefaultTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTap.swift; sourceTree = "<group>"; };
 		259F7DDA25CA63BA00408A1D /* FlInlineNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlInlineNavigationBar.swift; sourceTree = "<group>"; };
@@ -319,6 +328,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		253CA96125D3AAAC006340B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2563B4EE2582826800731635 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -382,6 +398,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		253CA96525D3AAAC006340B8 /* FilinTests */ = {
+			isa = PBXGroup;
+			children = (
+				253CA97225D3AACC006340B8 /* FilinTests.swift */,
+				253CA96825D3AAAC006340B8 /* Info.plist */,
+			);
+			path = FilinTests;
+			sourceTree = "<group>";
+		};
 		25498A4A25BC042600283E71 /* Color */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,6 +465,7 @@
 				2563B4F32582826900731635 /* Filin */,
 				25FDE07625C1BA5400548212 /* HabitWidget */,
 				25B8027425C1C81E0033B5D9 /* WidgetIntentsExtension */,
+				253CA96525D3AAAC006340B8 /* FilinTests */,
 				2563B4F22582826900731635 /* Products */,
 				0088DECB28B7E9D095AC214A /* Pods */,
 				2BAF220B6E9E4FD444D8592C /* Frameworks */,
@@ -452,6 +478,7 @@
 				2563B4F12582826900731635 /* Filin.app */,
 				25FDE07325C1BA5400548212 /* HabitWidgetExtension.appex */,
 				25B8027225C1C81E0033B5D9 /* WidgetIntentsExtension.appex */,
+				253CA96425D3AAAC006340B8 /* FilinTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -815,6 +842,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		253CA96325D3AAAC006340B8 /* FilinTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 253CA96D25D3AAAC006340B8 /* Build configuration list for PBXNativeTarget "FilinTests" */;
+			buildPhases = (
+				253CA96025D3AAAC006340B8 /* Sources */,
+				253CA96125D3AAAC006340B8 /* Frameworks */,
+				253CA96225D3AAAC006340B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				253CA96A25D3AAAC006340B8 /* PBXTargetDependency */,
+			);
+			name = FilinTests;
+			productName = FilinTests;
+			productReference = 253CA96425D3AAAC006340B8 /* FilinTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		2563B4F02582826800731635 /* Filin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2563B5082582826B00731635 /* Build configuration list for PBXNativeTarget "Filin" */;
@@ -881,6 +926,10 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
+					253CA96325D3AAAC006340B8 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 2563B4F02582826800731635;
+					};
 					2563B4F02582826800731635 = {
 						CreatedOnToolsVersion = 12.2;
 					};
@@ -909,11 +958,19 @@
 				2563B4F02582826800731635 /* Filin */,
 				25FDE07225C1BA5400548212 /* HabitWidgetExtension */,
 				25B8027125C1C81E0033B5D9 /* WidgetIntentsExtension */,
+				253CA96325D3AAAC006340B8 /* FilinTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		253CA96225D3AAAC006340B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2563B4EF2582826800731635 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1007,6 +1064,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		253CA96025D3AAAC006340B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				253CA97325D3AACC006340B8 /* FilinTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2563B4ED2582826800731635 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1155,6 +1220,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		253CA96A25D3AAAC006340B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2563B4F02582826800731635 /* Filin */;
+			targetProxy = 253CA96925D3AAAC006340B8 /* PBXContainerItemProxy */;
+		};
 		25B8027925C1C81E0033B5D9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 25B8027125C1C81E0033B5D9 /* WidgetIntentsExtension */;
@@ -1196,6 +1266,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		253CA96B25D3AAAC006340B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4954Z45396;
+				INFOPLIST_FILE = FilinTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = WannaSleep.FilinTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Filin.app/Filin";
+			};
+			name = Debug;
+		};
+		253CA96C25D3AAAC006340B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4954Z45396;
+				INFOPLIST_FILE = FilinTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = WannaSleep.FilinTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Filin.app/Filin";
+			};
+			name = Release;
+		};
 		2563B5062582826B00731635 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1469,6 +1581,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		253CA96D25D3AAAC006340B8 /* Build configuration list for PBXNativeTarget "FilinTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				253CA96B25D3AAAC006340B8 /* Debug */,
+				253CA96C25D3AAAC006340B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2563B4EC2582826800731635 /* Build configuration list for PBXProject "Filin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
