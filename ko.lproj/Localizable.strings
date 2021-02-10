@@ -1,0 +1,167 @@
+/* 
+  Localizable.strings
+  habitdiary
+
+  Created by SEONG YEOL YI on 2020/12/21.
+  
+*/
+
+//예시
+"Intermediate Stretching🙆‍♀️" = "중간 스트레칭🙆‍♀️";
+"10-Minute Walk🚶" = "10분 걷기🚶";
+"Drinking 2L Water💧" = "물 2L 마시기💧";
+"10 minutes of meditation🧘" = "10분 명상🧘";
+"Organize before bed😴" = "자기 전 정리😴";
+"Jogging Routine🏃‍♂️" = "조깅 루틴🏃‍♂️";
+
+//공통
+"Done" = "완료";
+"Edit" = "편집";
+"Delete" = "삭제";
+"Save" = "저장";
+"Cancel" = "취소";
+"Delete %@?" = "%@를 삭제하시겠습니까?";
+"On" = "켜짐";
+"Off" = "꺼짐";
+"Share" = "공유하기";
+"Instagram Story" = "인스타그램 스토리";
+"Emoji" = "이모지";
+"Date" = "날짜";
+"Day of the week" = "요일";
+"Total" = "총";
+
+// 리스트 탭
+"List" = "목록";
+"Today" = "오늘";
+"Others" = "기타";
+" times" = "회";
+"Every day" = "매일";
+
+// 목표 추가
+"Make first goal" = "첫번째 목표 추가";
+"Make new goal" = "목표 추가하기";
+"What is the name of the goal?" = "목표의 이름을 알려주세요.";
+"Drink water" = "물 마시기";
+"Previous" = "이전";
+"Next" = "다음";
+"Repeat" = "반복";
+"Choose the day of the week to proceed with the goal." = "매주 무슨 요일에 하실건가요?";
+"Number of times" = "횟수";
+"How many times do you want to achieve your goal in a day?" = "하루 몇 회가 목표이신가요?";
+"Timer" = "타이머";
+"Use a timer if you need a specific time to achieve your goal.\nE.g. two-minute plank." = "타이머가 필요하신가요?";
+"Use timer" = "타이머 사용";
+"Minute" = "분";
+"Second" = "초";
+"Theme" = "테마";
+"Color" = "색";
+"A ten-minute walk" = "10분 걷기";
+"Stretching" = "스트레칭";
+"Set goals and execute them." = "목표를 세우고 실행하세요.";
+"Add new goal" = "새로운 목표 추가";
+"Select theme color." = "마지막으로, 테마색을 선택해주세요!";
+"Split into sets" = "세트로 나누기";
+"How many times do you proceed in one set?" = "한 세트 당 몇 회씩 진행하실건가요?";
+"How many sets are there?" = "세트는 몇 개인가요?";
+"Number of times per set" = "세트 당 횟수";
+"Number of sets" = "세트 개수";
+"Vitamins" = "비타민";
+"Morning jogging" = "아침 조깅";
+"Reading" = "독서";
+"Push-up" = "팔굽혀펴기";
+"Eating vitamins" = "비타민 먹기";
+"Foreign language" = "외국어";
+"Yoga" = "요가";
+"Diet" = "다이어트";
+"Get Certified" = "자격증 따기";
+"Playing musical instruments" = "악기 연습";
+
+// 목표 자세히 보기
+"Calendar" = "달력";
+"Data" = "정보";
+"Today" = "오늘";
+"Feeling" = "느낌";
+"Edit emoji" = "이모지 설정";
+"Enter a emoji to add" = "추가할 이모지를 입력";
+"Summarize day." = "오늘 하루는 어떠셨나요?";
+"Trend(week)" = "추세(주)";
+"Trend(month)" = "추세(월)";
+"Trend(day of the week)" = "추세(요일)";
+"Since" = "시작일";
+"Trends are based on how your metrics have moved over the last specific days as compared to the last 100 days." = "추세는 지난 100일과 비교하여 특정 기간동안 수치가 어떻게 변화했는지를 바탕으로 측정됩니다.";
+"Needs more data" = "데이터가 더 필요함";
+"Show Emoji" = "이모지 보기";
+"Select Date" = "날짜 선택";
+"Show progress" = "달성량 보기";
+"Image Save/Share" = "사진 저장/공유";
+"Preview" = "미리보기";
+"Free" = "자유";
+"Square" = "정방형";
+" days" = "일";
+"Continuous Achievement" = "연속 달성일";
+"Continuous Blank" = "연속 공백일";
+"Save/Share" = "저장/공유";
+
+//목표 수정
+"Name" = "이름";
+"Times" = "횟수";
+"Expand" = "펼치기";
+"Fold" = "접기";
+
+// 요약 탭
+"Summary" = "요약";
+"See information of goals at once." = "여러 목표들의 정보를 한눈에 보기.";
+"Select goals" = "목표 선택";
+"Edit Summary" = "요약 편집";
+"Habit 1(Outermost ring)" = "목표 1(바깥쪽 링)";
+"Habit 2" = "목표 2";
+"Habit 3(Innermost ring)" = "목표 3(안쪽 링)";
+"Empty" = "비어있음";
+"Habit List" = "습관 목록";
+"⬆️ Goals to be displayed ⬆️" = "⬆️ 표시할 목표들 ⬆️";
+
+// 루틴 추가
+"Routine" = "루틴";
+"Add Routine" = "루틴 추가하기";
+"What is the name of the routine?" = "루틴의 이름을 알려주세요.";
+"After wake up" = "기상 후";
+"Before bed" = "자기 전";
+"%d goals" = "%d개의 목표";
+"%d selected" = "%d개 선택됨";
+"Group and repeat goals to make them a habit." = "목표들을 모으고 반복해 습관으로 만드세요.";
+"Add routine" = "루틴 추가";
+"Added" = "추가됨";
+"Choose the day of the week to proceed with the routine." = "루틴을 진행할 요일을 설정합니다.";
+"Reminder" = "리마인더";
+"Receive notifications at a specific time." = "특정 시간에 알림을 받으세요.";
+"Use Reminder" = "리마인더 사용";
+"Reminder time" = "리마인더 시간";
+"Add the desired goal to the routine. Duplicates are also possible." = "원하는 목표를 루틴에 추가하세요. 중복도 괜찮습니다.";
+"Routine List" = "루틴 목록";
+"Time" = "시간";
+"Time to start routine." = "루틴을 시작할 시간입니다.";
+
+//루틴 수정
+"Change habit list" = "목표 목록 변경";
+"Consists of %d goals" = "%d개 목표로 구성됨";
+"⬆️ Goals to be added ⬆️" = "⬆️ 추가할 목표들 ⬆️";
+
+//설정
+"Setting" = "설정";
+"General" = "일반";
+"Change Default Tab" = "기본 탭 변경";
+"Display" = "표시";
+"Change List Order" = "목록 순서 변경";
+"Info" = "정보";
+"App Version" = "앱 버전";
+"Build" = "빌드";
+"Start week on Monday" = "한 주의 시작을 월요일로";
+"The End of the Day" = "하루가 끝나는 시간";
+"Choose time to initialize info." = "정보를 초기화할 시간을 선택하세요";
+"Run Timer in Background" = "타이머를 백그라운드에서도 작동";
+"Calendar Theme" = "달력 테마";
+
+//위젯
+"Long press and hold the widget to select your goal." = "위젯을 길게 눌러 \n목표를 선택하세요.";
+"Today's goal" = "오늘의 목표";
+"Check the progress of the goal at a glance." = "목표의 진행사항을 한눈에 확인하세요.";
