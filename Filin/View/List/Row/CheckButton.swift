@@ -21,7 +21,7 @@ struct CheckButton: View {
         if habit.isTimerUsed {
             NavigationLink(
                 destination:
-                    HabitTimer(date: date, habit: habit)
+                    HabitTimer(date: date, habit: habit, offlineTime: appSetting.sceneBackgroundTime)
             ) {
                 Image(systemName: showCheck ? "clock.fill" : "clock")
                     .font(.system(size: 24, weight: .semibold))

@@ -14,34 +14,26 @@ final class SummaryManager: CoreDataBridge {
     
     @Published var contents: [TempSummary] = []
     
-    static var shared = SummaryManager()
-    
-    private init() {
+    init() {
         contents = fetched.map { TempSummary($0) }
         if contents.isEmpty {
             contents.append(.init())
         }
     }
     
+    func setList(_ list: [UUID]) {
+        contents[0].list = list
+    }
+    
     func save() {
-        for flSummary in contents {
-            if let index = fetched.firstIndex(where: {$0.id == flSummary.id}) {
-                flSummary.coreDataTransfer(to: fetched[index])
-            } else {
-                let newHabit = FlSummary(context: moc)
-                newHabit.id = flSummary.id
-                flSummary.coreDataTransfer(to: newHabit)
-            }
+        let flSummary = contents[0]
+        if let index = fetched.firstIndex(where: {$0.id == flSummary.id}) {
+            flSummary.coreDataTransfer(to: fetched[index])
+        } else {
+            let newHabit = FlSummary(context: moc)
+            newHabit.id = flSummary.id
+            flSummary.coreDataTransfer(to: newHabit)
         }
         mocSave()
     }
-    
-    func append(_ object: InAppType) {
-        contents.append(object)
-    }
-    
-    func remove(withID: UUID) {
-        assertionFailure()
-    }
-    
 }

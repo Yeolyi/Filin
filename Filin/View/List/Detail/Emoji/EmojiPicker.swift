@@ -33,11 +33,6 @@ struct EmojiPicker: View {
                 }
                 Spacer()
             }
-            HStack {
-                Text("Summarize day.".localized)
-                    .bodyText()
-                Spacer()
-            }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
                     ForEach(emojiManager.emojiList, id: \.self) { emoji in

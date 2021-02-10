@@ -30,53 +30,31 @@ struct RoutineView: View {
     @EnvironmentObject var appSetting: AppSetting
     @EnvironmentObject var routineManager: RoutineManager
     
-    var emptyIndicatingRow: some View {
-        HStack {
-            Spacer()
-            Text("Empty".localized)
-                .subColor()
-            Spacer()
-        }
-        .flatRowBackground()
-    }
-    
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 0) {
                     Text("Today".localized)
                         .sectionText()
-                    if !routineManager.contents.filter({
-                        $0.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek)
-                    }).isEmpty {
+                    if !routineManager.todoRoutines(at: appSetting.mainDate.dayOfTheWeek).isEmpty {
                         VStack(spacing: 0) {
-                            ForEach(
-                                routineManager.contents.filter {
-                                    $0.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek)
-                                }
-                            ) { routine in
+                            ForEach(routineManager.todoRoutines(at: appSetting.mainDate.dayOfTheWeek)) { routine in
                                 RoutineRow(routine: routine, isSheet: $isAddSheet)
                             }
                         }
                     } else {
-                        emptyIndicatingRow
+                        SubIndicatingRow(label: "There is no planned routine today.".localized)
                     }
                     Text("Others".localized)
                         .sectionText()
-                    if !routineManager.contents.filter({
-                        !$0.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek)
-                    }).isEmpty {
+                    if !routineManager.otherRoutines(at: appSetting.mainDate.dayOfTheWeek).isEmpty {
                         VStack(spacing: 0) {
-                            ForEach(
-                                routineManager.contents.filter {
-                                    !$0.dayOfWeek.contains(appSetting.mainDate.dayOfTheWeek)
-                                }
-                            ) { routine in
+                            ForEach(routineManager.otherRoutines(at: appSetting.mainDate.dayOfTheWeek)) { routine in
                                 RoutineRow(routine: routine, isSheet: $isAddSheet)
                             }
                         }
                     } else {
-                        emptyIndicatingRow
+                        SubIndicatingRow(label: "There is no routine on other days.".localized)
                     }
                 }
                 .navigationBarTitle("Routine".localized)
@@ -103,5 +81,15 @@ struct RoutineView: View {
         }
         .accentColor(ThemeColor.mainColor(colorScheme))
         .navigationViewStyle(StackNavigationViewStyle())
+    }
+}
+
+struct RoutineView_Previews: PreviewProvider {
+    static var previews: some View {
+        let dataSample = PreviewDataProvider.shared
+        RoutineView()
+            .environmentObject(dataSample.habitManager)
+            .environmentObject(dataSample.routineManager)
+            .environmentObject(AppSetting())
     }
 }

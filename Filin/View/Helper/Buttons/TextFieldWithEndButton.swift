@@ -35,6 +35,7 @@ struct TextFieldWithEndButton: View {
                     Text("Done".localized)
                         .foregroundColor(ThemeColor.mainColor(colorScheme))
                 }
+                .accessibility(identifier: "closeKeyboard")
             }
         }
     }

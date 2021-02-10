@@ -15,32 +15,17 @@ struct HabitList: View {
     @EnvironmentObject var appSetting: AppSetting
     @EnvironmentObject var summaryManager: SummaryManager
     @Environment(\.colorScheme) var colorScheme
-    @State var timerReopen = false
     
     var body: some View {
         NavigationView {
-            ZStack {
-                NavigationLink(
-                    destination:
-                        HabitTimer(
-                            date: appSetting.mainDate,
-                            habit: TimerManager.habit(habitManager) ?? FlHabit(name: "A")
-                        ),
-                    isActive: $timerReopen
-                ) {
-                    EmptyView()
-                }
-                .hidden()
-                .zIndex(0)
-                HabitScrollView()
-                .zIndex(1)
-            }
+            HabitScrollView()
             .navigationBarTitle(appSetting.mainDate.localizedMonthDay)
             .navigationBarItems(
                 trailing:
                     HeaderButton("plus") {
                         self.isSheet = true
                     }
+                    .accessibility(identifier: "habitPlus")
             )
             .sheet(isPresented: $isSheet) {
                 AddHabit()
@@ -53,9 +38,6 @@ struct HabitList: View {
         .onAppear {
             if appSetting.isFirstRun && habitManager.contents.isEmpty {
                 isSheet = true
-            }
-            if TimerManager.isRunning {
-                timerReopen = true
             }
         }
         .accentColor(ThemeColor.mainColor(colorScheme))

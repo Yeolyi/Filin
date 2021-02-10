@@ -28,11 +28,7 @@ struct AddRoutine: View {
     @Environment(\.colorScheme) var colorScheme
     
     var isSaveAvailable: Bool {
-        #if DEBUG
-        return true
-        #else
-        return newRoutine.name != "" && !newRoutine.dayOfWeek.isEmpty && !dataFiltered.isEmpty
-        #endif
+        (newRoutine.name != "" && !newRoutine.repeatDay.isEmpty && !dataFiltered.isEmpty)
     }
     
     init(habits: [FlHabit]) {
@@ -81,19 +77,19 @@ struct AddRoutine: View {
                     }
                     VStack(spacing: 8) {
                         HStack {
-                            Text("Choose the day of the week to proceed with the routine.".localized)
+                            Text("Select the day of the week to repeat the routine.".localized)
                                 .bodyText()
                                 .fixedSize(horizontal: false, vertical: true)
                             Spacer()
                         }
                         .padding(.leading, 20)
-                        DayOfWeekSelector(dayOfTheWeek: $newRoutine.dayOfWeek)
+                        DayOfWeekSelector(dayOfTheWeek: $newRoutine.repeatDay)
                             .frame(maxWidth: .infinity)
                             .flatRowBackground()
                     }
                     VStack(spacing: 8) {
                         HStack {
-                            Text("Select goals")
+                            Text("Choose your goals.".localized)
                                 .bodyText()
                                 .fixedSize(horizontal: false, vertical: true)
                             Spacer()
@@ -104,7 +100,7 @@ struct AddRoutine: View {
                             .environmentObject(listData)
                         ) {
                             HStack {
-                                Text(String(format: NSLocalizedString("%d selected", comment: ""), dataFiltered.count))
+                                Text(String(format: NSLocalizedString("%d goals selected", comment: ""), dataFiltered.count))
                                     .bodyText()
                                 Spacer()
                                 Image(systemName: "chevron.right")
@@ -116,7 +112,7 @@ struct AddRoutine: View {
                     }
                     VStack(spacing: 8) {
                         HStack {
-                            Text("Reminder")
+                            Text("Reminder".localized)
                                 .bodyText()
                                 .fixedSize(horizontal: false, vertical: true)
                             Spacer()
@@ -124,7 +120,7 @@ struct AddRoutine: View {
                         .padding(.leading, 20)
                         VStack(spacing: 4) {
                             HStack {
-                                Text("Use Reminder")
+                                Text(useReminder ? "On".localized : "Off".localized)
                                     .bodyText()
                                 Spacer()
                                 PaperToggle($useReminder)
@@ -162,7 +158,7 @@ struct AddRoutine: View {
                             }
                         }
                     }
-                    MainRectButton(action: save, str: "Done".localized)
+                    MainRectButton(action: save, str: "Create a new routine".localized)
                         .padding(.vertical, 30)
                         .opacity(isSaveAvailable ? 1 : 0.3)
                         .disabled(!isSaveAvailable)

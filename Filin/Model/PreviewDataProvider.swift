@@ -14,9 +14,9 @@ import CoreData
 /// - Todo: 싱글톤 패턴을 꼭 사용해야되는지 생각해보기. 의존성 주입이 뭔지 공부하기.
 final class PreviewDataProvider {
     
-    let habitManager = HabitManager.shared
-    let summaryManager = SummaryManager.shared
-    let routineManager = RoutineManager.shared
+    let habitManager = HabitManager()
+    let summaryManager = SummaryManager()
+    let routineManager = RoutineManager()
     
     static let shared = PreviewDataProvider()
 
@@ -24,15 +24,37 @@ final class PreviewDataProvider {
         #if DEBUG
         let habits: [FlHabit] = [0, 1, 2, 3].map { FlHabit.sample(number: $0) }
         habitManager.append(contentsOf: habits, summaryManager: summaryManager)
-        let routine1 = FlRoutine(name: "Jogging Routine🏃‍♂️".localized)
-        routine1.list = Array(habits[0...1])
-        let routine2 = FlRoutine(name: "Organize before bed😴".localized)
-        routine2.list = Array(habits[1...3])
-        routineManager.append(routine1)
-        routineManager.append(routine2)
+        routineManager.append(FlRoutine.sample(number: 0))
+        routineManager.append(FlRoutine.sample(number: 1))
+        habitManager.save()
+        routineManager.save()
         #else
         print("PreviewDataProvider가 디버그 환경이 아닐 때 초기화가 시도되었습니다.")
         #endif
+    }
+
+}
+
+class CheckVersionCompatability {
+
+    static func addSample(habitManager: HabitManager, summaryManager: SummaryManager, routineManager: RoutineManager) {
+        let habits: [FlHabit] = [0, 1, 2, 3].map { FlHabit.sample(number: $0) }
+        habitManager.append(contentsOf: habits, summaryManager: summaryManager)
+        routineManager.append(FlRoutine.sample(number: 0))
+        routineManager.append(FlRoutine.sample(number: 1))
+        habitManager.save()
+        routineManager.save()
+    }
+
+    static func isDataPreservedOnVersionChange(habitManager: HabitManager, routineManager: RoutineManager) -> Bool {
+        FlHabit.sampleCount == habitManager.contents.count &&
+            FlRoutine.sampleCount == routineManager.contents.count &&
+        habitManager.contents.enumerated().allSatisfy { index, value in
+            FlHabit.sample(number: index) == value
+        } &&
+        routineManager.contents.enumerated().allSatisfy { index, value in
+            FlRoutine.sample(number: index) == value
+        }
     }
 
 }

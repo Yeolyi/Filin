@@ -16,7 +16,7 @@ protocol CoreDataBridge: ObservableObject {
     associatedtype CoreDataType: NSManagedObject, Identifiable
     associatedtype InAppType: Identifiable
     
-    var contents: [InAppType] { get set }
+    // var contents: [InAppType] { get set }
     var moc: NSManagedObjectContext { get }
     var fetched: [CoreDataType] { get }
     

@@ -14,18 +14,29 @@ class RoutineManager: CoreDataBridge {
     
     @Published var contents: [FlRoutine] = []
     
-    private init() {
-        contents = fetched.map({FlRoutine($0, habitManager: HabitManager.shared)})
+    init() {
+        contents = fetched.map({FlRoutine($0, habitManager: HabitManager())})
     }
 
-    static var shared = RoutineManager()
+    func todoRoutines(at dayOfWeek: Int) -> [FlRoutine] {
+        contents.filter({$0.isTodo(at: dayOfWeek)})
+    }
+    
+    func otherRoutines(at dayOfWeek: Int) -> [FlRoutine] {
+        contents.filter({!$0.isTodo(at: dayOfWeek)})
+    }
     
     func append(_ object: InAppType) {
         contents.append(object)
         object.addNoti { _ in }
     }
     
-    private var deleteID: [UUID] = []
+    func append(contentsOf routines: [FlRoutine]) {
+        for routine in routines {
+            contents.append(routine)
+            routine.addNoti { _ in }
+        }
+    }
     
     func remove(withID: UUID) {
         guard let index = contents.firstIndex(where: {$0.id == withID}) else {
@@ -34,12 +45,6 @@ class RoutineManager: CoreDataBridge {
         }
         contents[index].deleteNoti()
         contents.remove(at: index)
-        deleteID.append(withID)
-        for id in deleteID {
-            if let habit = fetched.first(where: {$0.id == id}) {
-                moc.delete(habit)
-            }
-        }
     }
     
     func save() {
@@ -51,7 +56,10 @@ class RoutineManager: CoreDataBridge {
                 newRoutine.id = flRoutine.id
                 flRoutine.coreDataTransfer(to: newRoutine)
             }
+            mocSave()
         }
-        mocSave()
+        for savedRoutine in fetched where !contents.contains(where: {$0.id == savedRoutine.id}) {
+            moc.delete(savedRoutine)
+        }
     }
 }

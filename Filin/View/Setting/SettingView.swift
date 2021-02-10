@@ -14,18 +14,31 @@ struct SettingView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var appSetting: AppSetting
+    @EnvironmentObject var habitManager: HabitManager
+    @EnvironmentObject var summaryManager: SummaryManager
+    @EnvironmentObject var routineManager: RoutineManager
+    
+    var endOfDayActionSheet: ActionSheet {
+        ActionSheet(
+            title: Text("Select the time to initialize the goal.".localized),
+            buttons: [
+                (0, "24:00"), (1, "01:00"),
+                (2, "02:00"), (3, "03:00"),
+                (4, "04:00"), (5, "05:00")
+            ].map { tuple in
+                Alert.Button.default(Text(tuple.1)) {
+                    appSetting.dayResetTime = tuple.0
+                }
+            } + [Alert.Button.cancel()]
+        )
+    }
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 0) {
-                    HStack {
-                        Text("General".localized)
-                            .bodyText()
-                        Spacer()
-                    }
-                    .padding(.leading, 20)
-                    .padding(.top, 20)
+                    Text("General".localized)
+                        .smallSectionText()
                     HStack {
                         Text("The End of the Day".localized)
                             .bodyText()
@@ -36,30 +49,19 @@ struct SettingView: View {
                     }
                     .flatRowBackground()
                     .onTapGesture { isEndOfDaySetting = true }
-                    .actionSheet(isPresented: $isEndOfDaySetting) {
-                        ActionSheet(
-                            title: Text("The End of the Day".localized),
-                            message: Text("Choose time to initialize info.".localized),
-                            buttons: [
-                                (0, "24:00"), (1, "01:00"),
-                                (2, "02:00"), (3, "03:00"),
-                                (4, "04:00"), (5, "05:00")
-                            ].map { tuple in
-                                Alert.Button.default(Text(tuple.1)) {
-                                    appSetting.dayResetTime = tuple.0
-                                }
-                            } + [Alert.Button.cancel()]
-                        )
-                    }
+                    .actionSheet(isPresented: $isEndOfDaySetting) { endOfDayActionSheet }
+                    Text("""
+                        If you go to bed late, consider setting it after 24:00.
+                        """.localized)
+                        .subColor()
+                        .font(.system(size: 14))
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
+                    Text("Calendar".localized)
+                        .smallSectionText()
                     HStack {
-                        Text("Calendar".localized)
-                            .bodyText()
-                        Spacer()
-                    }
-                    .padding(.leading, 20)
-                    .padding(.top, 20)
-                    HStack {
-                        Text("Start week on Monday".localized)
+                        Text("Set Start of the Week to Monday".localized)
                             .bodyText()
                         Spacer()
                         PaperToggle($appSetting.isMondayStart)
@@ -92,14 +94,11 @@ struct SettingView: View {
                     }
                     .flatRowBackground()
                     #if DEBUG
-                    HStack {
-                        Text("DEBUG".localized)
-                            .bodyText()
-                        Spacer()
-                    }
-                    .padding(.leading, 20)
-                    .padding(.top, 20)
-                    Button(action: { _ = PreviewDataProvider.shared }) {
+                    Text("디버그 전용".localized)
+                        .smallSectionText()
+                    Button(action: { CheckVersionCompatability.addSample(
+                            habitManager: habitManager, summaryManager: summaryManager, routineManager: routineManager
+                    ) }) {
                         HStack {
                             Text("샘플")
                                 .bodyText()
@@ -107,6 +106,15 @@ struct SettingView: View {
                         }
                         .flatRowBackground()
                     }
+                    HStack {
+                        Text("데이터 보존")
+                            .bodyText()
+                        Spacer()
+                        Text(String(CheckVersionCompatability.isDataPreservedOnVersionChange(
+                                        habitManager: habitManager, routineManager: routineManager)
+                        ))
+                    }
+                    .flatRowBackground()
                     #endif
                 }
             }

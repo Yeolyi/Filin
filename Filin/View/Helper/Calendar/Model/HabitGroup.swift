@@ -10,11 +10,6 @@ import SwiftUI
 class HabitGroup: ObservableObject {
     @Published var contents: [FlHabit]
     init(contents: [FlHabit]) {
-        guard !contents.isEmpty else {
-            assertionFailure()
-            self.contents = []
-            return
-        }
         self.contents = contents
     }
     var count: Int {
@@ -23,7 +18,10 @@ class HabitGroup: ObservableObject {
     var isEmpty: Bool {
         contents.isEmpty
     }
-    subscript(index: Int) -> FlHabit {
-        contents[index]
+    subscript(index: Int) -> FlHabit? {
+        guard index < contents.count else {
+            return nil
+        }
+        return contents[index]
     }
 }

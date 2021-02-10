@@ -24,7 +24,7 @@ class AppSetting: ObservableObject {
         }
     }
     
-    func summaryConvert(moc: NSManagedObjectContext) {
+    func summaryConvert(moc: NSManagedObjectContext, summaryManager: SummaryManager) {
         guard summaryUpdated else {
             let entityName = String(describing: Summary.self)
             let fetchRequest = NSFetchRequest<Summary>(entityName: entityName)
@@ -32,7 +32,7 @@ class AppSetting: ObservableObject {
                 guard !fetched.isEmpty else {
                     return
                 }
-                let summaryManager = SummaryManager.shared
+                let summaryManager = summaryManager
                 if summaryManager.contents.isEmpty {
                     summaryManager.contents.append(TempSummary.makeSample(usingIDs: fetched.map(\.id)))
                 } else {

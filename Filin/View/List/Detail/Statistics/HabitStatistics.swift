@@ -18,7 +18,7 @@ struct HabitStatistics: View {
         VStack(spacing: 15) {
             VStack(spacing: 0) {
                 HStack {
-                    Text("Trend(week)".localized)
+                    Text("Weekly Trends".localized)
                         .bodyText()
                     Spacer()
                 }
@@ -26,7 +26,7 @@ struct HabitStatistics: View {
             }
             VStack(spacing: 0) {
                 HStack {
-                    Text("Trend(month)".localized)
+                    Text("Monthly Trends".localized)
                         .bodyText()
                     Spacer()
                 }
@@ -70,10 +70,7 @@ struct HabitStatistics: View {
                     }
                 }
             }
-            Text("""
-                Trends are based on how your metrics have moved over the \
-                last specific days as compared to the last 100 days.
-                """)
+            Text("Trend compares the achievements of a particular period to the average of the last 100 days.".localized)
                 .subColor()
                 .bodyText()
                 .padding(.top, 8)

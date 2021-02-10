@@ -49,7 +49,7 @@ struct CalendarInterface<Content: View>: View {
                             if habits.contents.count > 1  && isRing {
                                 habitLegend
                             } else {
-                                Text(habits[0].name)
+                                Text(habits[0]?.name ?? "")
                                     .foregroundColor(color)
                                     .headline()
                             }

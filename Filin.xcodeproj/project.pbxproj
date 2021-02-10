@@ -13,7 +13,6 @@
 		2511363325B5DF3600BE5F10 /* lottiePlus.json in Resources */ = {isa = PBXBuildFile; fileRef = 2511363225B5DF3600BE5F10 /* lottiePlus.json */; };
 		2512767725C84A08000466B4 /* DailyProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512767625C84A08000466B4 /* DailyProgressBar.swift */; };
 		2512767F25C8F27C000466B4 /* CalendarMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512767E25C8F27C000466B4 /* CalendarMode.swift */; };
-		2512768325C8F46A000466B4 /* lottieStack.json in Resources */ = {isa = PBXBuildFile; fileRef = 25FC34EA25A03A66000B5844 /* lottieStack.json */; };
 		2514EF6625C1030F00633146 /* FlatRowBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514EF6525C1030F00633146 /* FlatRowBackground.swift */; };
 		2519664F25BC52530054BAF4 /* RowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519664E25BC52530054BAF4 /* RowData.swift */; };
 		251EFC67259E4DD300748917 /* Summary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251EFC63259E4DD300748917 /* Summary+CoreDataClass.swift */; };
@@ -37,6 +36,7 @@
 		2530711525BBD4A9002AC0C6 /* CoreDataConvertableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530711425BBD4A9002AC0C6 /* CoreDataConvertableProtocol.swift */; };
 		2530711925BBE57D002AC0C6 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530711825BBE57D002AC0C6 /* Achievement.swift */; };
 		2532DC7F2598F70B006DBA25 /* RoutineNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2532DC7E2598F70B006DBA25 /* RoutineNotification.swift */; };
+		253CA92B25D3A879006340B8 /* SubIndicatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253CA92A25D3A879006340B8 /* SubIndicatingRow.swift */; };
 		25498A4D25BC045700283E71 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25498A4C25BC045700283E71 /* Palette.swift */; };
 		25498A5125BC048800283E71 /* PaletteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25498A5025BC048800283E71 /* PaletteProtocol.swift */; };
 		25522D5625BC117900243C18 /* RowPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25522D5525BC117900243C18 /* RowPadding.swift */; };
@@ -74,6 +74,8 @@
 		258E02F1258E111E006DAFAC /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E02F0258E111E006DAFAC /* Title.swift */; };
 		258E02F6258E1139006DAFAC /* SectionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E02F5258E1139006DAFAC /* SectionText.swift */; };
 		258E02F9258E1150006DAFAC /* Headline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E02F8258E1150006DAFAC /* Headline.swift */; };
+		258F063D25D3A54B00FE26D0 /* FlTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F063C25D3A54B00FE26D0 /* FlTimer.swift */; };
+		258F064225D3A55B00FE26D0 /* SmallSectionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F064125D3A55B00FE26D0 /* SmallSectionText.swift */; };
 		2593A6E125A9D2710077077E /* FlRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6E025A9D2710077077E /* FlRoutine.swift */; };
 		259E62FA2594CBE700F29FDD /* DefaultTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E62F92594CBE700F29FDD /* DefaultTap.swift */; };
 		259F7DDB25CA63BA00408A1D /* FlInlineNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259F7DDA25CA63BA00408A1D /* FlInlineNavigationBar.swift */; };
@@ -144,7 +146,7 @@
 		25FE74E625C82E410030EB0A /* Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FE74E525C82E410030EB0A /* Ring.swift */; };
 		25FE74EE25C82F590030EB0A /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FE74ED25C82F590030EB0A /* Tile.swift */; };
 		25FE74FB25C830370030EB0A /* HabitGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FE74FA25C830370030EB0A /* HabitGroup.swift */; };
-		B49899B64E1F53F2A2E50847 /* Pods_Filin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7AB074C2B284E2C7D270C65 /* Pods_Filin.framework */; };
+		781682DDD3AD833DFAB1D2E4 /* Pods_Filin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9446A2381A2287E0EA81A839 /* Pods_Filin.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,7 +182,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		22982EB62F6C7135814D83FA /* Pods-Filin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filin.release.xcconfig"; path = "Target Support Files/Pods-Filin/Pods-Filin.release.xcconfig"; sourceTree = "<group>"; };
 		2501653725CD0C7100A43818 /* SelectRoutineList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoutineList.swift; sourceTree = "<group>"; };
 		250823C42583F93A0005D7CE /* KeyboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 		250823E32584E33A0005D7CE /* LinearProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressBar.swift; sourceTree = "<group>"; };
@@ -203,6 +204,7 @@
 		2530711425BBD4A9002AC0C6 /* CoreDataConvertableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataConvertableProtocol.swift; sourceTree = "<group>"; };
 		2530711825BBE57D002AC0C6 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		2532DC7E2598F70B006DBA25 /* RoutineNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineNotification.swift; sourceTree = "<group>"; };
+		253CA92A25D3A879006340B8 /* SubIndicatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubIndicatingRow.swift; sourceTree = "<group>"; };
 		25498A4C25BC045700283E71 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		25498A5025BC048800283E71 /* PaletteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteProtocol.swift; sourceTree = "<group>"; };
 		25522D5525BC117900243C18 /* RowPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowPadding.swift; sourceTree = "<group>"; };
@@ -241,6 +243,8 @@
 		258E02F0258E111E006DAFAC /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
 		258E02F5258E1139006DAFAC /* SectionText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionText.swift; sourceTree = "<group>"; };
 		258E02F8258E1150006DAFAC /* Headline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headline.swift; sourceTree = "<group>"; };
+		258F063C25D3A54B00FE26D0 /* FlTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlTimer.swift; sourceTree = "<group>"; };
+		258F064125D3A55B00FE26D0 /* SmallSectionText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SmallSectionText.swift; path = ../SmallSectionText.swift; sourceTree = "<group>"; };
 		2593A6E025A9D2710077077E /* FlRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlRoutine.swift; sourceTree = "<group>"; };
 		259E62F92594CBE700F29FDD /* DefaultTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTap.swift; sourceTree = "<group>"; };
 		259F7DDA25CA63BA00408A1D /* FlInlineNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlInlineNavigationBar.swift; sourceTree = "<group>"; };
@@ -307,8 +311,9 @@
 		25FE74E525C82E410030EB0A /* Ring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ring.swift; sourceTree = "<group>"; };
 		25FE74ED25C82F590030EB0A /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		25FE74FA25C830370030EB0A /* HabitGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitGroup.swift; sourceTree = "<group>"; };
-		68F2C734650349B742CC96AA /* Pods-Filin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filin.debug.xcconfig"; path = "Target Support Files/Pods-Filin/Pods-Filin.debug.xcconfig"; sourceTree = "<group>"; };
-		F7AB074C2B284E2C7D270C65 /* Pods_Filin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Filin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		26F2BA04FE7AC79348110411 /* Pods-Filin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filin.debug.xcconfig"; path = "Target Support Files/Pods-Filin/Pods-Filin.debug.xcconfig"; sourceTree = "<group>"; };
+		2AD2A5407435614047A05B62 /* Pods-Filin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filin.release.xcconfig"; path = "Target Support Files/Pods-Filin/Pods-Filin.release.xcconfig"; sourceTree = "<group>"; };
+		9446A2381A2287E0EA81A839 /* Pods_Filin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Filin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,7 +321,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B49899B64E1F53F2A2E50847 /* Pods_Filin.framework in Frameworks */,
+				781682DDD3AD833DFAB1D2E4 /* Pods_Filin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,8 +348,8 @@
 		0088DECB28B7E9D095AC214A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				68F2C734650349B742CC96AA /* Pods-Filin.debug.xcconfig */,
-				22982EB62F6C7135814D83FA /* Pods-Filin.release.xcconfig */,
+				26F2BA04FE7AC79348110411 /* Pods-Filin.debug.xcconfig */,
+				2AD2A5407435614047A05B62 /* Pods-Filin.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -503,6 +508,7 @@
 				25AF7E8B25975F090097BF4D /* MainRectButton.swift */,
 				255C1170258F373600E0F740 /* HeaderButton.swift */,
 				25FC34F225A04559000B5844 /* PaperToggle.swift */,
+				253CA92A25D3A879006340B8 /* SubIndicatingRow.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -555,6 +561,7 @@
 		25B7327F258B443C003D9FD8 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				258F064125D3A55B00FE26D0 /* SmallSectionText.swift */,
 				25C0F38625AB3FCE00235560 /* GodoB.ttf */,
 				258E02F0258E111E006DAFAC /* Title.swift */,
 				258E02F5258E1139006DAFAC /* SectionText.swift */,
@@ -630,6 +637,7 @@
 			isa = PBXGroup;
 			children = (
 				2553521525BB3CC700255045 /* PreviewDataProvider.swift */,
+				258F063C25D3A54B00FE26D0 /* FlTimer.swift */,
 				25B2A34D25CDB32100CBB3A0 /* CoreDataConvertable */,
 				25B2A34C25CDB30800CBB3A0 /* CoreDataBridge */,
 				25E23E0225BB4EC200768768 /* AppSetting */,
@@ -794,10 +802,10 @@
 		2BAF220B6E9E4FD444D8592C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F7AB074C2B284E2C7D270C65 /* Pods_Filin.framework */,
 				25FDE00925C1A11C00548212 /* WidgetKit.framework */,
 				25FDE00B25C1A11C00548212 /* SwiftUI.framework */,
 				25FDE05025C1B61000548212 /* Intents.framework */,
+				9446A2381A2287E0EA81A839 /* Pods_Filin.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -809,13 +817,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2563B5082582826B00731635 /* Build configuration list for PBXNativeTarget "Filin" */;
 			buildPhases = (
-				66909C6455D78CD98B799498 /* [CP] Check Pods Manifest.lock */,
+				F5AB7E85A6D117B18544A63E /* [CP] Check Pods Manifest.lock */,
 				2563B4ED2582826800731635 /* Sources */,
 				2563B4EE2582826800731635 /* Frameworks */,
 				2563B4EF2582826800731635 /* Resources */,
 				25277CDB258E1B3A0026B8F3 /* ShellScript */,
-				624ABAACDEE03265E0BE0823 /* [CP] Embed Pods Frameworks */,
 				25FDE01C25C1A11E00548212 /* Embed App Extensions */,
+				C21312B27BB83AE5803D22A4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -911,7 +919,6 @@
 				25C0F38725AB3FCE00235560 /* GodoB.ttf in Resources */,
 				2563B5042582826B00731635 /* LaunchScreen.storyboard in Resources */,
 				2563B5012582826B00731635 /* Preview Assets.xcassets in Resources */,
-				2512768325C8F46A000466B4 /* lottieStack.json in Resources */,
 				25277CE5258E1BB70026B8F3 /* .swiftlint.yml in Resources */,
 				2511363325B5DF3600BE5F10 /* lottiePlus.json in Resources */,
 				25A564E725904F9D00239CF6 /* Localizable.strings in Resources */,
@@ -956,7 +963,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
-		624ABAACDEE03265E0BE0823 /* [CP] Embed Pods Frameworks */ = {
+		C21312B27BB83AE5803D22A4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -973,7 +980,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Filin/Pods-Filin-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		66909C6455D78CD98B799498 /* [CP] Check Pods Manifest.lock */ = {
+		F5AB7E85A6D117B18544A63E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1039,6 +1046,7 @@
 				259F7DEA25CA723000408A1D /* TempSummary.swift in Sources */,
 				25F2127A2591E90B00E259EC /* SharingHandler.swift in Sources */,
 				2563B4F72582826900731635 /* SceneDelegate.swift in Sources */,
+				253CA92B25D3A879006340B8 /* SubIndicatingRow.swift in Sources */,
 				25C574FD2583D3BD004BF07D /* Habit+CoreDataClass.swift in Sources */,
 				25F887F62595091B00BC2D6A /* RoutineView.swift in Sources */,
 				2519664F25BC52530054BAF4 /* RowData.swift in Sources */,
@@ -1059,6 +1067,7 @@
 				251EFC71259E4E4B00748917 /* Summary+CoreDataProperties.swift in Sources */,
 				258E02F6258E1139006DAFAC /* SectionText.swift in Sources */,
 				258B6B152582965F0004BFE7 /* ModalAllowAutoDismiss.swift in Sources */,
+				258F063D25D3A54B00FE26D0 /* FlTimer.swift in Sources */,
 				257F7CE625A3284B00F846A1 /* TagCloud.swift in Sources */,
 				258B6AF4258289240004BFE7 /* HabitScrollView.swift in Sources */,
 				259F7DE525CA720500408A1D /* FSummary+CoreDataClass.swift in Sources */,
@@ -1100,6 +1109,7 @@
 				252A0E5B25AA504400A41525 /* HabitCalendar.swift in Sources */,
 				258B6B232583573B0004BFE7 /* ColorHorizontalPicker.swift in Sources */,
 				25C9FA2625907C4F0046C523 /* ViewToImage.swift in Sources */,
+				258F064225D3A55B00FE26D0 /* SmallSectionText.swift in Sources */,
 				2530711525BBD4A9002AC0C6 /* CoreDataConvertableProtocol.swift in Sources */,
 				2532DC7F2598F70B006DBA25 /* RoutineNotification.swift in Sources */,
 				2563B4F92582826900731635 /* HabitList.swift in Sources */,
@@ -1304,7 +1314,7 @@
 		};
 		2563B5092582826B00731635 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68F2C734650349B742CC96AA /* Pods-Filin.debug.xcconfig */;
+			baseConfigurationReference = 26F2BA04FE7AC79348110411 /* Pods-Filin.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1332,7 +1342,7 @@
 		};
 		2563B50A2582826B00731635 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22982EB62F6C7135814D83FA /* Pods-Filin.release.xcconfig */;
+			baseConfigurationReference = 2AD2A5407435614047A05B62 /* Pods-Filin.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

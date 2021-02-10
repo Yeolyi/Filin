@@ -51,10 +51,11 @@ struct HabitNumberSetting: View {
     var body: some View {
         VStack(spacing: 15) {
             HStack {
-                Text("Split into sets".localized)
+                Text("Split into Sets".localized)
                     .bodyText()
                 Spacer()
                 PaperToggle(isSet)
+                    .accessibility(identifier: "isSetToggle")
             }
             Divider()
             if !isSet.wrappedValue {
@@ -63,12 +64,34 @@ struct HabitNumberSetting: View {
                 )
             } else {
                 HStack {
-                    PickerWithButton(
-                        str: "Number of sets".localized, size: 30, number: setNum
-                    )
-                    PickerWithButton(
-                        str: "Number of times per set".localized, size: 100, number: oneTapNum
-                    )
+                    VStack {
+                        Picker("Number of sets".localized, selection: setNum) {
+                            ForEach(1...30, id: \.self) { num in
+                                Text(String(num))
+                                    .bodyText()
+                            }
+                        }
+                        .frame(width: 150, height: 150)
+                        .clipped()
+                        .accessibility(identifier: "numberOfSets")
+                        Text("Number of sets".localized)
+                            .subColor()
+                            .bodyText()
+                    }
+                    VStack {
+                        Picker("Number of times per set".localized, selection: oneTapNum) {
+                            ForEach(1...200, id: \.self) { num in
+                                Text(String(num))
+                                    .bodyText()
+                            }
+                        }
+                        .frame(width: 150, height: 150)
+                        .clipped()
+                        .accessibility(identifier: "numberOfTimesPerSet")
+                        Text("Number of times per set".localized)
+                            .subColor()
+                            .bodyText()
+                    }
                 }
             }
         }

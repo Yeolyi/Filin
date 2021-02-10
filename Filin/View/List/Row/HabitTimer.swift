@@ -12,27 +12,30 @@ struct HabitTimer: View {
     let date: Date
     let habit: FlHabit
     
-    @State var timeRemaining = 0.0
-    @State var isCounting = false
-    @State var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
-    
+    @ObservedObject var timer: FlTimer
     @EnvironmentObject var appSetting: AppSetting
     
     var hour: Int {
         Int(
-            (timeRemaining - Double(minute*60 + second)) / 3600
+            (timer.timeRemaining - Double(minute*60 + second)) / 3600
         )
     }
     
     var minute: Int {
         Int(
-            (timeRemaining - Double(second))
+            (timer.timeRemaining - Double(second))
                 .truncatingRemainder(dividingBy: 3600) / 60
         )
     }
     
     var second: Int {
-        Int(timeRemaining.truncatingRemainder(dividingBy: 60))
+        Int(timer.timeRemaining.truncatingRemainder(dividingBy: 60))
+    }
+    
+    init(date: Date, habit: FlHabit, offlineTime: Date?) {
+        self.date = date
+        self.habit = habit
+        self.timer = FlTimer(habit: habit)
     }
     
     var body: some View {
@@ -41,11 +44,7 @@ struct HabitTimer: View {
                 VStack(spacing: 40) {
                     ZStack {
                         Circle()
-                            .trim(
-                                from: 0.0,
-                                to: (CGFloat(habit.requiredSec)
-                                        - CGFloat(timeRemaining))/CGFloat(habit.requiredSec)
-                            )
+                            .trim(from: 0.0, to: 1 - CGFloat(timer.progress))
                             .stroke(style: StrokeStyle(lineWidth: 25, lineCap: .round))
                             .frame(width: geo.size.width - 100, height: geo.size.width - 100)
                             .foregroundColor(habit.color)
@@ -59,55 +58,48 @@ struct HabitTimer: View {
                             .zIndex(0)
                         Text(
                             (hour != 0 ? "\(String(format: "%02d", hour)) : " : "")
-                            +
-                            String(format: "%02d", minute) +
-                            " : " +
-                            String(format: "%02d", second)
+                                +
+                                String(format: "%02d", minute) +
+                                " : " +
+                                String(format: "%02d", second)
                         )
-                            .foregroundColor(habit.color)
-                            .title()
-                            .onReceive(timer) { _ in
-                                guard isCounting else { return }
-                                self.timeRemaining = max(0, self.timeRemaining - 0.1)
-                            }
-                            .onReceive(
-                                NotificationCenter.default.publisher(
-                                    for: UIApplication.willResignActiveNotification
-                                )
-                            ) { _ in
-                                TimerManager.save(isCounting: isCounting, timeRemaining: timeRemaining)
-                            }
-                            .onReceive(
-                                NotificationCenter.default.publisher(
-                                    for: UIApplication.willEnterForegroundNotification
-                                )
-                            ) { _ in
-                                (timeRemaining, isCounting) = TimerManager.sceneBack(appSetting)
-                            }
+                        .foregroundColor(habit.color)
+                        .title()
+                        .onReceive(
+                            NotificationCenter.default.publisher(
+                                for: UIApplication.willResignActiveNotification
+                            )
+                        ) { _ in
+                            timer.backup()
+                        }
+                        .onReceive(
+                            NotificationCenter.default.publisher(
+                                for: UIApplication.willEnterForegroundNotification
+                            )
+                        ) { _ in
+                            timer.restore()
+                        }
                     }
                     .padding(20)
                     .rowBackground()
                     HStack(alignment: .center, spacing: 60) {
-                        Button(action: clearTimer) {
+                        Button(action: timer.stop) {
                             Image(systemName: "arrow.triangle.2.circlepath")
                                 .mainColor()
                                 .headline()
                         }
                         .frame(width: 50)
                         Button(action: {
-                            if timeRemaining == 0 {
-                                withAnimation {
-                                    habit.achievement.set(at: date) { current, addUnit in
-                                        current + addUnit
-                                    }
-                                }
-                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                                clearTimer()
+                            guard timer.isComplete else {
+                                timer.toggle()
                                 return
                             }
-                            toggleTimer()
+                            withAnimation { habit.achievement.set(at: date) { $0 + $1 } }
+                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                            timer.stop()
+                            return
                         }) {
-                            Image(systemName: timeRemaining <= 0 ? "plus" : (isCounting ? "pause" : "play"))
+                            Image(systemName: timer.isComplete ? "plus" : (timer.isCounting ? "pause" : "play"))
                                 .mainColor()
                                 .headline()
                         }
@@ -120,48 +112,20 @@ struct HabitTimer: View {
             .padding(.top, 1)
             .offset(x: 5)
             .navigationBarTitle(Text(habit.name))
-        }
-        .onAppear {
-            if TimerManager.isRunning {
-                (timeRemaining, isCounting) = TimerManager.sceneBack(appSetting)
-            } else {
-                timeRemaining = Double(habit.requiredSec)
+            .onDisappear {
+                timer.backup()
             }
-            TimerManager.set(id: habit.id)
-        }
-        .onDisappear {
-            TimerManager.clear()
-        }
-    }
-    
-    func startTimer() {
-        timer = Timer.publish(every: 0.1, on: .current, in: .common).autoconnect()
-        isCounting = true
-    }
-    func stopTimer() {
-        self.timer.upstream.connect().cancel()
-        isCounting = false
-    }
-    func clearTimer() {
-        self.timer.upstream.connect().cancel()
-        isCounting = false
-        timeRemaining = Double(habit.requiredSec)
-    }
-    
-    func toggleTimer() {
-        if isCounting {
-            stopTimer()
-        } else {
-            startTimer()
+            .onAppear {
+                timer.restore()
+            }
         }
     }
-    
 }
 
 struct HabitTimer_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            HabitTimer(date: Date(), habit: FlHabit(name: "Test", color: .blue, requiredSec: 10000), timeRemaining: 3)
+            HabitTimer(date: Date(), habit: FlHabit(name: "Test", color: .blue, requiredSec: 100), offlineTime: nil)
                 .environmentObject(AppSetting())
         }
     }

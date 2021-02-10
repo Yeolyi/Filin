@@ -7,31 +7,6 @@
 
 import SwiftUI
 
-extension Date {
-    init(hour: Int, minute: Int, isAM: Bool) {
-        var components = DateComponents()
-        let hour24: Int
-        if isAM {
-            hour24 = hour == 12 ? 0 : hour
-        } else {
-            hour24 = hour == 12 ? hour : hour + 12
-        }
-        components.hour = hour24
-        components.minute = minute
-        self = Calendar.current.date(from: components)!
-    }
-    func dateToTimer() -> (hour: Int, minute: Int, isAM: Bool) {
-        let isAM = self.hour < 12
-        let hour: Int
-        if isAM {
-            hour = self.hour == 0 ? 12 : self.hour
-        } else {
-            hour = self.hour - 12 == 0 ? 12 : self.hour - 12
-        }
-        return (hour, self.minute, isAM)
-    }
-}
-
 struct EditRoutine: View {
     
     let targetRoutine: FlRoutine
@@ -113,7 +88,7 @@ struct EditRoutine: View {
                                 Spacer()
                             }
                             .padding(.leading, 20)
-                            TextFieldWithEndButton("Drink water".localized, text: $tempRoutine.name)
+                            TextFieldWithEndButton(FlRoutine.sample(number: 0).name, text: $tempRoutine.name)
                                 .flatRowBackground()
                         }
                         .padding(.top, 10)
@@ -129,7 +104,10 @@ struct EditRoutine: View {
                                     .environmentObject(listData)
                             ) {
                                 HStack {
-                                    Text(String(format: NSLocalizedString("%d selected", comment: ""), filteredList.count))
+                                    Text(String(
+                                            format: NSLocalizedString("%d goals selected", comment: ""),
+                                            filteredList.count
+                                    ))
                                         .bodyText()
                                     Spacer()
                                     Image(systemName: "chevron.right")
@@ -145,13 +123,13 @@ struct EditRoutine: View {
                                 Spacer()
                             }
                             .padding(.leading, 20)
-                            DayOfWeekSelector(dayOfTheWeek: $tempRoutine.dayOfWeek)
+                            DayOfWeekSelector(dayOfTheWeek: $tempRoutine.repeatDay)
                                 .frame(maxWidth: .infinity)
                             .flatRowBackground()
                         }
                         VStack(spacing: 5) {
                             HStack {
-                                Text("Reminder")
+                                Text("Reminder".localized)
                                     .bodyText()
                                     .fixedSize(horizontal: false, vertical: true)
                                 Spacer()
@@ -159,7 +137,7 @@ struct EditRoutine: View {
                             .padding(.leading, 20)
                             VStack(spacing: 4) {
                                 HStack {
-                                    Text("Use Reminder")
+                                    Text(useReminder ? "On".localized : "Off".localized)
                                         .bodyText()
                                     Spacer()
                                     PaperToggle($useReminder)
@@ -216,10 +194,10 @@ struct EditRoutine: View {
     
     var deleteAlert: Alert {
         Alert(
-            title: Text(String(format: NSLocalizedString("Delete %@?", comment: ""), tempRoutine.name)),
+            title: Text(String(format: NSLocalizedString("Are you sure you want to delete %@?", comment: ""), tempRoutine.name)),
             message: nil,
-            primaryButton: .default(Text("Cancel".localized)),
-            secondaryButton: .destructive(Text("Delete".localized), action: {
+            primaryButton: .default(Text("No, I'll leave it.".localized)),
+            secondaryButton: .destructive(Text("Yes, I'll delete it.".localized), action: {
                 routineManager.remove(withID: targetRoutine.id)
                 presentationMode.wrappedValue.dismiss()
             }))
@@ -232,5 +210,30 @@ struct EditRoutine_Previews: PreviewProvider {
         EditRoutine(routine: FlRoutine.sample(number: 0), habits: coreDataPreview.habitManager.contents)
             .environmentObject(coreDataPreview.routineManager)
             .environmentObject(coreDataPreview.habitManager)
+    }
+}
+
+extension Date {
+    init(hour: Int, minute: Int, isAM: Bool) {
+        var components = DateComponents()
+        let hour24: Int
+        if isAM {
+            hour24 = hour == 12 ? 0 : hour
+        } else {
+            hour24 = hour == 12 ? hour : hour + 12
+        }
+        components.hour = hour24
+        components.minute = minute
+        self = Calendar.current.date(from: components)!
+    }
+    func dateToTimer() -> (hour: Int, minute: Int, isAM: Bool) {
+        let isAM = self.hour < 12
+        let hour: Int
+        if isAM {
+            hour = self.hour == 0 ? 12 : self.hour
+        } else {
+            hour = self.hour - 12 == 0 ? 12 : self.hour - 12
+        }
+        return (hour, self.minute, isAM)
     }
 }
