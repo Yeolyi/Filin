@@ -52,7 +52,7 @@ struct HabitTimerSetting: View {
                 Text(isRequiredTime.wrappedValue ? "On".localized : "Off".localized)
                     .bodyText()
                 Spacer()
-                PaperToggle(isRequiredTime)
+                FlToggle(isRequiredTime)
             }
             .flatRowBackground()
             if isRequiredTime.wrappedValue {

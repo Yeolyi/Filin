@@ -140,7 +140,7 @@ struct EditRoutine: View {
                                     Text(useReminder ? "On".localized : "Off".localized)
                                         .bodyText()
                                     Spacer()
-                                    PaperToggle($useReminder)
+                                    FlToggle($useReminder)
                                 }
                                 .flatRowBackground()
                                 if useReminder {

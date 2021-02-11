@@ -13,6 +13,7 @@
 		2511363325B5DF3600BE5F10 /* lottiePlus.json in Resources */ = {isa = PBXBuildFile; fileRef = 2511363225B5DF3600BE5F10 /* lottiePlus.json */; };
 		2512767725C84A08000466B4 /* DailyProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512767625C84A08000466B4 /* DailyProgressBar.swift */; };
 		2512767F25C8F27C000466B4 /* CalendarMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512767E25C8F27C000466B4 /* CalendarMode.swift */; };
+		2514A93D25D438B40044F593 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514A93C25D438B40044F593 /* AppIcon.swift */; };
 		2514EF6625C1030F00633146 /* FlatRowBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514EF6525C1030F00633146 /* FlatRowBackground.swift */; };
 		2519664F25BC52530054BAF4 /* RowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519664E25BC52530054BAF4 /* RowData.swift */; };
 		251EFC67259E4DD300748917 /* Summary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251EFC63259E4DD300748917 /* Summary+CoreDataClass.swift */; };
@@ -109,7 +110,6 @@
 		25C5A56725837A0200E864A5 /* AppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C5A56625837A0200E864A5 /* AppSetting.swift */; };
 		25C9FA2625907C4F0046C523 /* ViewToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C9FA2525907C4F0046C523 /* ViewToImage.swift */; };
 		25C9FA2925907CEA0046C523 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C9FA2825907CE90046C523 /* ImageSaver.swift */; };
-		25CD88562597CBBC002270E9 /* ColoredToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CD88552597CBBC002270E9 /* ColoredToggle.swift */; };
 		25D0405725C4FA66004814B4 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0405625C4FA66004814B4 /* TimerManager.swift */; };
 		25D0C99E259F96C80018273E /* EmojiCalendarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0C99D259F96C80018273E /* EmojiCalendarRow.swift */; };
 		25D0C9A1259F981B0018273E /* SummaryPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0C9A0259F981B0018273E /* SummaryPreview.swift */; };
@@ -135,7 +135,7 @@
 		25F887FA259509B300BC2D6A /* AddRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F887F9259509B300BC2D6A /* AddRoutine.swift */; };
 		25F92F4325CC0F4F0071B6F0 /* ImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F92F4225CC0F4F0071B6F0 /* ImageMaker.swift */; };
 		25FAA533259F7DEF0042E8A5 /* FlListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FAA532259F7DEF0042E8A5 /* FlListModel.swift */; };
-		25FC34F325A04559000B5844 /* PaperToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FC34F225A04559000B5844 /* PaperToggle.swift */; };
+		25FC34F325A04559000B5844 /* FlToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FC34F225A04559000B5844 /* FlToggle.swift */; };
 		25FC34FA25A067C9000B5844 /* FlTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FC34F925A067C9000B5844 /* FlTimePicker.swift */; };
 		25FC6034258615EE006BCFBA /* AddHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FC6033258615EE006BCFBA /* AddHabit.swift */; };
 		25FDE07425C1BA5400548212 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25FDE00925C1A11C00548212 /* WidgetKit.framework */; };
@@ -195,6 +195,7 @@
 		2511363225B5DF3600BE5F10 /* lottiePlus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottiePlus.json; sourceTree = "<group>"; };
 		2512767625C84A08000466B4 /* DailyProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyProgressBar.swift; sourceTree = "<group>"; };
 		2512767E25C8F27C000466B4 /* CalendarMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMode.swift; sourceTree = "<group>"; };
+		2514A93C25D438B40044F593 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		2514EF6525C1030F00633146 /* FlatRowBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatRowBackground.swift; sourceTree = "<group>"; };
 		2519664E25BC52530054BAF4 /* RowData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowData.swift; sourceTree = "<group>"; };
 		251EFC63259E4DD300748917 /* Summary+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Summary+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -279,7 +280,6 @@
 		25C5A56625837A0200E864A5 /* AppSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetting.swift; sourceTree = "<group>"; };
 		25C9FA2525907C4F0046C523 /* ViewToImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewToImage.swift; sourceTree = "<group>"; };
 		25C9FA2825907CE90046C523 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
-		25CD88552597CBBC002270E9 /* ColoredToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredToggle.swift; sourceTree = "<group>"; };
 		25D0405625C4FA66004814B4 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		25D0C99D259F96C80018273E /* EmojiCalendarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCalendarRow.swift; sourceTree = "<group>"; };
 		25D0C9A0259F981B0018273E /* SummaryPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryPreview.swift; sourceTree = "<group>"; };
@@ -307,7 +307,7 @@
 		25F92F4225CC0F4F0071B6F0 /* ImageMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMaker.swift; sourceTree = "<group>"; };
 		25FAA532259F7DEF0042E8A5 /* FlListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlListModel.swift; sourceTree = "<group>"; };
 		25FC34EA25A03A66000B5844 /* lottieStack.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = lottieStack.json; path = /Users/seongyeolyi/Desktop/Filin/Filin/Filin/View/Helper/View/lottieStack.json; sourceTree = "<absolute>"; };
-		25FC34F225A04559000B5844 /* PaperToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperToggle.swift; sourceTree = "<group>"; };
+		25FC34F225A04559000B5844 /* FlToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlToggle.swift; sourceTree = "<group>"; };
 		25FC34F925A067C9000B5844 /* FlTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlTimePicker.swift; sourceTree = "<group>"; };
 		25FC6033258615EE006BCFBA /* AddHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabit.swift; sourceTree = "<group>"; };
 		25FDE00925C1A11C00548212 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -516,8 +516,7 @@
 			isa = PBXGroup;
 			children = (
 				25A564D5258F90D100239CF6 /* TextFieldWithEndButton.swift */,
-				25CD88552597CBBC002270E9 /* ColoredToggle.swift */,
-				25FC34F225A04559000B5844 /* PaperToggle.swift */,
+				25FC34F225A04559000B5844 /* FlToggle.swift */,
 				25AF7E8B25975F090097BF4D /* MainRectButton.swift */,
 				255C1170258F373600E0F740 /* HeaderButton.swift */,
 				253CA92A25D3A879006340B8 /* SubIndicatingRow.swift */,
@@ -755,6 +754,7 @@
 				25FAA535259F7E3A0042E8A5 /* List */,
 				2526686B259E53CF00C435D6 /* Calendar */,
 				258E0301258E12F6006DAFAC /* Buttons */,
+				2514A93C25D438B40044F593 /* AppIcon.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1099,7 +1099,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2553521625BB3CC700255045 /* PreviewDataProvider.swift in Sources */,
-				25CD88562597CBBC002270E9 /* ColoredToggle.swift in Sources */,
 				258388332597241F008A8F99 /* RunRoutine.swift in Sources */,
 				252885AD25C1E754005BD4F5 /* AutoSaveWrapper.swift in Sources */,
 				25C5A564258376BE00E864A5 /* HabitDetailView.swift in Sources */,
@@ -1107,7 +1106,7 @@
 				25F21280259201E600E259EC /* CheckButton.swift in Sources */,
 				25AF7E8C25975F090097BF4D /* MainRectButton.swift in Sources */,
 				255C116B258F2E2500E0F740 /* HabitAddBadgeView.swift in Sources */,
-				25FC34F325A04559000B5844 /* PaperToggle.swift in Sources */,
+				25FC34F325A04559000B5844 /* FlToggle.swift in Sources */,
 				25F92F4325CC0F4F0071B6F0 /* ImageMaker.swift in Sources */,
 				2563B4FC2582826900731635 /* habitdiary.xcdatamodeld in Sources */,
 				259F7DE025CA720100408A1D /* FlSummary+CoreDataProperties.swift in Sources */,
@@ -1175,6 +1174,7 @@
 				25C4C387259F49560043C334 /* LottieHandler.swift in Sources */,
 				258E02F9258E1150006DAFAC /* Headline.swift in Sources */,
 				25ED404B25D3BE7100AC1ECC /* SmallSectionText.swift in Sources */,
+				2514A93D25D438B40044F593 /* AppIcon.swift in Sources */,
 				259E62FA2594CBE700F29FDD /* DefaultTap.swift in Sources */,
 				25A564EE2590503400239CF6 /* Localizing.swift in Sources */,
 				25F04EF42594995C000BA9C5 /* FlList.swift in Sources */,

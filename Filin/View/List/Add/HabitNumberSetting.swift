@@ -54,7 +54,7 @@ struct HabitNumberSetting: View {
                 Text("Split into Sets".localized)
                     .bodyText()
                 Spacer()
-                PaperToggle(isSet)
+                FlToggle(isSet)
                     .accessibility(identifier: "isSetToggle")
             }
             Divider()

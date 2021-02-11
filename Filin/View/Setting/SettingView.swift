@@ -64,7 +64,7 @@ struct SettingView: View {
                         Text("Set Start of the Week to Monday".localized)
                             .bodyText()
                         Spacer()
-                        PaperToggle($appSetting.isMondayStart)
+                        FlToggle($appSetting.isMondayStart)
                     }
                     .flatRowBackground()
                     HStack(spacing: 20) {
