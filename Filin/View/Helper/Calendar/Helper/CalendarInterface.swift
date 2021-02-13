@@ -61,7 +61,7 @@ struct CalendarInterface<Content: View>: View {
                         .padding(.bottom, 20)
                     }
                 } else {
-                    HStack {
+                    HStack(spacing: 0) {
                         dateIndicator
                         Spacer()
                         calendarModeButton
@@ -72,7 +72,7 @@ struct CalendarInterface<Content: View>: View {
                 content
                 ZStack {
                     if !isCapture {
-                        BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
+                        IconButton(imageName: isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
                             withAnimation { self.isExpanded.toggle() }
                         }
                     }
@@ -106,24 +106,16 @@ struct CalendarInterface<Content: View>: View {
     
     @ViewBuilder
     var dateIndicator: some View {
-        Button(action: {
+        IconButton(imageName: "chevron.left") {
             if isExpanded { selectedDate = selectedDate.addMonth(-1)
             } else { selectedDate = selectedDate.addDate(-7)! }
-        }) {
-            Image(systemName: "chevron.left")
-                .font(.system(size: 20, weight: .semibold))
-                .subColor()
         }
         Text(isExpanded ? selectedDate.localizedYearMonth : selectedDate.localizedMonthDay)
             .foregroundColor(color)
             .font(.system(size: 20, weight: .semibold))
-        Button(action: {
+        IconButton(imageName: "chevron.right") {
             if isExpanded { selectedDate = selectedDate.addMonth(1)
             } else { selectedDate = selectedDate.addDate(7)! }
-        }) {
-            Image(systemName: "chevron.right")
-                .font(.system(size: 20, weight: .bold))
-                .subColor()
         }
     }
     

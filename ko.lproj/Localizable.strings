@@ -21,6 +21,9 @@
 "Yes, I'll delete it." = "네, 삭제할게요.";
 "Save" = "저장";
 "Done" = "완료";
+"Goal" = "목표";
+"Previous" = "이전";
+"To the Next Level" = "다음 단계로";
 
 // 샘플 목표
 "Intermediate Stretching🙆‍♀️" = "중간 스트레칭🙆‍♀️";
@@ -39,8 +42,7 @@
 "There is no goal on other days." = "다른 요일에 목표가 없어요.";
 
 // 목표 추가
-"Make first goal" = "첫 목표 만들기";
-"Make new goal" = "새로운 목표 만들기";
+"Getting Started\nwith a new Goal" = "새로운 목표 \n시작하기";
 "Tell me the name of the goal." = "목표의 이름을 알려주세요.";
 "Choose the day of the week to repeat your goal." = "목표를 반복할 요일을 골라주세요.";
 "How many times a day will you do it?" = "하루에 몇 번 하실건가요?";
@@ -49,7 +51,7 @@
 "Number of Times per Set" = "세트 당 횟수";
 "Should I prepare a timer when you perform this goal?" = "목표를 수행할 때 타이머를 준비할까요?";
 "Choose a color that matches your goal." = "목표에 어울리는 색을 골라보세요.";
-"Create a new goal" = "새로운 목표 만들기";
+"Create a New Goal" = "새로운 목표 만들기";
 
 // 목표 자세히 보기
 " times" = "회";
@@ -61,6 +63,14 @@
 "Since" = "시작일";
 "Trend compares the achievements of a particular period to the average of the last 100 days."
 = "추세는 지난 100일의 성취를 특정 기간의 것과 비교하여 나타냅니다.";
+" days" = "일";
+"Add Achievement" = "달성량 추가";
+"Achievement" = "달성";
+"Feeling" = "감정";
+"Statistics" = "통계";
+"Needs More Data" = "정보가 더 필요합니다";
+"Edit Emoji" = "이모지 편집";
+"Enter an emoji to add" = "추가할 이모지를 입력하세요";
 
 // 목표 편집
 "Name" = "이름";
@@ -91,10 +101,10 @@
 "There is no planned routine today." = "오늘은 계획된 루틴이 없어요.";
 "There is no routine on other days." = "다른 요일에 루틴이 없어요.";
 
-// 루틴 추기
-"Add Routine" = "루틴 추가하기";
-"What is the name of the routine?" = "루틴의 이름을 알려주세요.";
-"Select the day of the week to repeat the routine." = "루틴을 반복할 요일을 선택해주세요.";
+// 루틴 추가
+"Getting Started\nwith a new Routine" = "새로운 루틴\n시작하기";
+"Tell me the name of the routine." = "루틴의 이름을 알려주세요.";
+"Choose the day of the week to repeat your routine." = "루틴을 반복할 요일을 선택해주세요.";
 "Choose your goals." = "목표들을 선택해주세요.";
 "Reminder" = "리마인더";
 "%d Goals Selected" = "%d개 목표 선택됨";
@@ -115,3 +125,7 @@
 "Set Start of the Week to Monday" = "달력의 시작을 월요일로 설정";
 "Calendar Theme" = "달력 테마";
 
+// 위젯 ------------------------------------------------------------------------
+"Today's goal" = "오늘의 목표";
+"Check the progress of the goal at a glance." = "오늘의 달성량을 한눈에 확인하세요.";
+"Press and hold to select the goal to display." = "길게 눌러 표시할 목표를 선택하세요.";

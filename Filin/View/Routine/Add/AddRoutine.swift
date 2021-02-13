@@ -49,123 +49,131 @@ struct AddRoutine: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(spacing: 30) {
-                    VStack(spacing: 0) {
-                        LottieView(filename: "lottieStack")
-                            .frame(width: 120, height: 120)
-                            .if(colorScheme == .dark) {
-                                $0.colorInvert()
-                            }
-                        Text("Add Routine".localized)
-                            .title()
+            ZStack {
+                VStack {
+                    Spacer()
+                    PrimaryButton(label: "Create a New Routine".localized, isActive: isSaveAvailable) {
+                        save()
                     }
-                    .padding(.top, 21)
-                    .padding(.bottom, 35)
-                    VStack(spacing: 3) {
-                        HStack {
-                            Text("What is the name of the routine?".localized)
-                                .bodyText()
-                            Spacer()
-                        }
-                        .padding(.leading, 20)
-                        TextFieldWithEndButton(
-                            [FlRoutine.sample(number: 0), FlRoutine.sample(number: 1)].randomElement()!.name,
-                            text: $newRoutine.name
-                        )
-                            .flatRowBackground()
-                    }
-                    VStack(spacing: 8) {
-                        HStack {
-                            Text("Select the day of the week to repeat the routine.".localized)
-                                .bodyText()
-                                .fixedSize(horizontal: false, vertical: true)
-                            Spacer()
-                        }
-                        .padding(.leading, 20)
-                        DayOfWeekSelector(dayOfTheWeek: $newRoutine.repeatDay)
-                            .frame(maxWidth: .infinity)
-                            .flatRowBackground()
-                    }
-                    VStack(spacing: 8) {
-                        HStack {
-                            Text("Choose your goals.".localized)
-                                .bodyText()
-                                .fixedSize(horizontal: false, vertical: true)
-                            Spacer()
-                        }
-                        .padding(.leading, 20)
-                        NavigationLink(destination:
-                                        SelectRoutineList(cursorID: dividerID)
-                            .environmentObject(listData)
-                        ) {
-                            HStack {
-                                Text(String(format: NSLocalizedString("%d Goals Selected", comment: ""), dataFiltered.count))
-                                    .bodyText()
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 20))
-                                    .subColor()
-                            }
-                            .flatRowBackground()
-                        }
-                    }
-                    VStack(spacing: 8) {
-                        HStack {
-                            Text("Reminder".localized)
-                                .bodyText()
-                                .fixedSize(horizontal: false, vertical: true)
-                            Spacer()
-                        }
-                        .padding(.leading, 20)
-                        VStack(spacing: 4) {
-                            HStack {
-                                Text(useReminder ? "On".localized : "Off".localized)
-                                    .bodyText()
-                                Spacer()
-                                FlToggle($useReminder)
-                            }
-                            .flatRowBackground()
-                            if useReminder {
-                                HStack {
-                                    Picker(selection: $hour, label: EmptyView(), content: {
-                                        ForEach(1...12, id: \.self) { hour in
-                                            Text(String(hour))
-                                                .bodyText()
-                                        }
-                                    })
-                                    .frame(width: 100, height: 150)
-                                    .clipped()
-                                    Picker(selection: $minute, label: EmptyView(), content: {
-                                        ForEach(0...59, id: \.self) { minute in
-                                            Text(String(minute))
-                                                .bodyText()
-                                        }
-                                    })
-                                    .frame(width: 100, height: 150)
-                                    .clipped()
-                                    Picker(selection: $isAM, label: EmptyView(), content: {
-                                        ForEach([true, false], id: \.self) { isAM in
-                                            Text(isAM ? "AM" : "PM")
-                                                .bodyText()
-                                        }
-                                    })
-                                    .frame(width: 100, height: 150)
-                                    .clipped()
+                    .padding(.bottom, 20)
+                    .padding(.horizontal, 10)
+                }
+                .zIndex(1)
+                ScrollView {
+                    VStack(spacing: 30) {
+                        VStack(spacing: 0) {
+                            LottieView(filename: "lottieStack")
+                                .frame(width: 120, height: 120)
+                                .if(colorScheme == .dark) {
+                                    $0.colorInvert()
                                 }
+                            Text("Add Routine".localized)
+                                .title()
+                        }
+                        .padding(.top, 21)
+                        .padding(.bottom, 35)
+                        VStack(spacing: 3) {
+                            HStack {
+                                Text("What is the name of the routine?".localized)
+                                    .bodyText()
+                                Spacer()
+                            }
+                            .padding(.leading, 20)
+                            TextFieldWithEndButton(
+                                [FlRoutine.sample(number: 0), FlRoutine.sample(number: 1)].randomElement()!.name,
+                                text: $newRoutine.name
+                            )
+                                .flatRowBackground()
+                        }
+                        VStack(spacing: 8) {
+                            HStack {
+                                Text("Select the day of the week to repeat the routine.".localized)
+                                    .bodyText()
+                                    .fixedSize(horizontal: false, vertical: true)
+                                Spacer()
+                            }
+                            .padding(.leading, 20)
+                            DayOfWeekSelector(dayOfTheWeek: $newRoutine.repeatDay)
                                 .frame(maxWidth: .infinity)
+                                .flatRowBackground()
+                        }
+                        VStack(spacing: 8) {
+                            HStack {
+                                Text("Choose your goals.".localized)
+                                    .bodyText()
+                                    .fixedSize(horizontal: false, vertical: true)
+                                Spacer()
+                            }
+                            .padding(.leading, 20)
+                            NavigationLink(destination:
+                                            SelectRoutineList(cursorID: dividerID)
+                                .environmentObject(listData)
+                            ) {
+                                HStack {
+                                    Text(String(format: NSLocalizedString("%d Goals Selected", comment: ""), dataFiltered.count))
+                                        .bodyText()
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(.system(size: 20))
+                                        .subColor()
+                                }
                                 .flatRowBackground()
                             }
                         }
+                        VStack(spacing: 8) {
+                            HStack {
+                                Text("Reminder".localized)
+                                    .bodyText()
+                                    .fixedSize(horizontal: false, vertical: true)
+                                Spacer()
+                            }
+                            .padding(.leading, 20)
+                            VStack(spacing: 4) {
+                                HStack {
+                                    Text(useReminder ? "On".localized : "Off".localized)
+                                        .bodyText()
+                                    Spacer()
+                                    FlToggle($useReminder)
+                                }
+                                .flatRowBackground()
+                                if useReminder {
+                                    HStack {
+                                        Picker(selection: $hour, label: EmptyView(), content: {
+                                            ForEach(1...12, id: \.self) { hour in
+                                                Text(String(hour))
+                                                    .bodyText()
+                                            }
+                                        })
+                                        .frame(width: 100, height: 150)
+                                        .clipped()
+                                        Picker(selection: $minute, label: EmptyView(), content: {
+                                            ForEach(0...59, id: \.self) { minute in
+                                                Text(String(minute))
+                                                    .bodyText()
+                                            }
+                                        })
+                                        .frame(width: 100, height: 150)
+                                        .clipped()
+                                        Picker(selection: $isAM, label: EmptyView(), content: {
+                                            ForEach([true, false], id: \.self) { isAM in
+                                                Text(isAM ? "AM" : "PM")
+                                                    .bodyText()
+                                            }
+                                        })
+                                        .frame(width: 100, height: 150)
+                                        .clipped()
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .flatRowBackground()
+                                }
+                            }
+                            .padding(.bottom, 80)
+                        }
                     }
-                    MainRectButton(action: save, str: "Create a New Routine".localized)
-                        .padding(.vertical, 30)
-                        .opacity(isSaveAvailable ? 1 : 0.3)
-                        .disabled(!isSaveAvailable)
                 }
+                .padding(.top, 1)
+                .navigationBarHidden(true)
             }
-            .padding(.top, 1)
-            .navigationBarHidden(true)
         }
     }
     

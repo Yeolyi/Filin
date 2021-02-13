@@ -36,11 +36,11 @@ struct Provider: IntentTimelineProvider {
             let id = UUID()
             WidgetBridge.todayAchievements = [
                 HabitWidgetData(
-                    id: id, name: "Stretching".localized,
+                    id: id, name: "Drinking 2L Water💧".localized,
                     numberOfTimes: 10, current: 6, colorHex: ThemeColor.colorList[0].hex, day: 1
                 )
             ]
-            let habitCompact = HabitCompact(identifier: id.uuidString, display: "Stretching".localized)
+            let habitCompact = HabitCompact(identifier: id.uuidString, display: "Drinking 2L Water💧".localized)
             intent.habit = habitCompact
         }
         let entry = SimpleEntry(date: Date(), configuration: intent)
@@ -78,7 +78,7 @@ struct HabitWidget: Widget {
         }
         .supportedFamilies([.systemSmall])
         .configurationDisplayName("Today's goal".localized)
-        .description("Check the progress of the goal at a glance.")
+        .description("Check the progress of the goal at a glance.".localized)
     }
 }
 

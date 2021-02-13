@@ -47,7 +47,7 @@ struct Ring: View {
                 if habits.count == 1 {
                     Text("\(date.day)")
                         .if(selectedDate.month != date.month && isExpanded) {
-                            $0.inactiveColor()
+                            $0.subColor()
                         }
                         .if(selectedDate.dictKey == date.dictKey) {
                             $0.foregroundColor(habits[0]?.color ?? Color.gray)

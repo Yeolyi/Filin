@@ -27,6 +27,7 @@ struct HabitDetailView: View {
     @EnvironmentObject var habitManager: HabitManager
     @EnvironmentObject var appSetting: AppSetting
     @EnvironmentObject var summaryManager: SummaryManager
+    @EnvironmentObject var routineManager: RoutineManager
     
     init(habit: FlHabit) {
         if !(habit.dayOfWeek.count == 7) {
@@ -35,15 +36,15 @@ struct HabitDetailView: View {
     }
     var body: some View {
         ScrollView {
-            VStack(spacing: 0) {
+            VStack(spacing: 5) {
                 HabitCalendar(
                     selectedDate: $selectedDate, isEmojiView: $isEmojiView,
                     isExpanded: $isCalendarExpanded, habits: .init(contents: [habit])
                 )
                 DailyProgressBar(selectedDate: selectedDate, isEmojiMode: $isEmojiView)
                 EmojiPicker(
-                    selectedDate: $selectedDate, isEmojiView: $isEmojiView,
-                    habit: habit, emojiManager: emojiManager, activeSheet: $activeSheet
+                    habit: habit, emojiManager: emojiManager, selectedDate: $selectedDate,
+                    isEmojiView: $isEmojiView, activeSheet: $activeSheet
                 )
                 HabitStatistics()
                 Text("")
@@ -54,11 +55,11 @@ struct HabitDetailView: View {
         .navigationBarTitle(Text(habit.name))
         .navigationBarItems(
             trailing:
-                HStack {
-                    HeaderButton("square.and.arrow.up") {
+                HStack(spacing: 10) {
+                    IconButton(imageName: "square.and.arrow.up") {
                         activeSheet = DetailViewActiveSheet.share
                     }
-                    HeaderText("Edit".localized) {
+                    TextButton(content: { Text("Edit".localized) }) {
                         activeSheet = DetailViewActiveSheet.edit
                     }
                 }
@@ -66,9 +67,12 @@ struct HabitDetailView: View {
         .sheet(item: $activeSheet) { item in
             switch item {
             case .edit:
-                EditHabit(targetHabit: habit)
+                EditHabitCard(targetHabit: habit)
                     .environmentObject(habitManager)
                     .environmentObject(summaryManager)
+                    .environmentObject(routineManager)
+                    .environmentObject(appSetting)
+                    
             case .emoji:
                 EmojiListEdit()
                     .environmentObject(emojiManager)

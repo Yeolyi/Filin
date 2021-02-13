@@ -12,55 +12,56 @@ struct EmojiListEdit: View {
     @State var listData: FlListModel<String> = FlListModel(values: [], save: {_ in})
     @State var newEmoji = ""
     
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var emojiManager: EmojiManager
+    
     var body: some View {
-        VStack {
-            VStack {
-                HStack {
-                    Text("Edit emoji".localized)
-                        .headline()
-                    Spacer()
-                    Button(action: {
-                        emojiManager.emojiList = listData.allValues
-                        self.presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Text("Save".localized)
-                            .mainColor()
-                    }
-                }
-                .padding(.horizontal, 20)
-                Divider()
-            }
-            .padding(.top, 20)
+        FlInlineNavigationBar(bar: {
             HStack {
-                TextFieldWithEndButton("Enter a emoji to add".localized, text: $newEmoji)
-                    .frame(height: 30)
-                Button(action: {
-                    if let emoji = newEmoji.first?.description {
-                        listData.append(emoji)
-                        newEmoji = ""
-                    }
-                    UIApplication.shared.endEditing()
+                Text("Edit emoji".localized)
+                    .headline()
+                Spacer()
+                TextButton(content: {
+                    Text("Save".localized)
                 }) {
-                    Image(systemName: "plus")
-                        .font(.system(size: 20))
-                        .mainColor()
-                        .padding(.trailing, 10)
-                }
-            }
-            .rowBackground()
-            FlList(listData: listData) { emoji in
-                HStack(spacing: 10) {
-                    Button(action: {
-                        listData.remove(emoji)
-                    }) {
-                        Image(systemName: "minus.circle")
-                            .font(.system(size: 20))
-                            .mainColor()
-                    }
-                    Text(listData.value(of: emoji))
+                    emojiManager.emojiList = listData.allValues
+                    self.presentationMode.wrappedValue.dismiss()
                 }
             }
             .padding(.horizontal, 20)
+        }) {
+            VStack(spacing: 0) {
+                HStack {
+                    TextFieldWithEndButton("Enter an emoji to add".localized, text: $newEmoji)
+                        .frame(height: 30)
+                    Button(action: {
+                        if let emoji = newEmoji.first?.description {
+                            listData.append(emoji)
+                            newEmoji = ""
+                        }
+                        UIApplication.shared.endEditing()
+                    }) {
+                        Image(systemName: "plus")
+                            .font(.system(size: 20))
+                            .mainColor()
+                            .padding(.trailing, 10)
+                    }
+                }
+                .flatRowBackground()
+                .padding(.top, 10)
+                FlList(listData: listData) { emoji in
+                    HStack(spacing: 5) {
+                        IconButton(imageName: "minus.circle") {
+                            withAnimation {
+                                listData.remove(emoji)
+                            }
+                        }
+                        Text(listData.value(of: emoji))
+                            .headline()
+                    }
+                }
+                .padding(.horizontal, 10)
+            }
         }
         .onAppear {
             self.listData = FlListModel(values: emojiManager.emojiList, save: { _ in
@@ -68,11 +69,8 @@ struct EmojiListEdit: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification)) { _ in
             presentationMode.wrappedValue.dismiss()
-         }
+        }
     }
-    
-    @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var emojiManager: EmojiManager
     
 }
 

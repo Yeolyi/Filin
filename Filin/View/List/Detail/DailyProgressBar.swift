@@ -16,7 +16,7 @@ struct DailyProgressBar: View {
     @EnvironmentObject var habit: FlHabit
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 3) {
             HStack {
                 Text("""
                     \(habit.achievement.numberDone(at: selectedDate))\(" times".localized)/\
@@ -25,37 +25,62 @@ struct DailyProgressBar: View {
                     .foregroundColor(habit.color)
                     .headline()
                 Spacer()
-                if habit.achievement.isSet {
-                    BasicTextButton(isSetMode ? "±\(habit.achievement.addUnit)" : "±1") { isSetMode.toggle() }
+            }
+            LinearProgressBar(
+                color: habit.color,
+                progress: habit.achievement.progress(at: selectedDate)
+            )
+            Divider()
+                .padding(.vertical, 8)
+            HStack(spacing: 15) {
+                IconButton(imageName: "minus") {
+                    move(isAdd: false)
                 }
-            }
-            HStack {
-                LinearProgressBar(
-                    color: habit.color,
-                    progress: habit.achievement.progress(at: selectedDate)
-                )
-                moveButton(isAdd: false)
-                moveButton(isAdd: true)
-            }
-        }
-        .rowBackground()
-    }
-    
-    func moveButton(isAdd: Bool) -> some View {
-        BasicButton(isAdd ? "plus" : "minus") {
-            withAnimation {
-                isEmojiMode = false
-                habit.achievement.set(at: selectedDate, using: { val, addUnit in
-                    if isAdd {
-                        return val + (isSetMode ? addUnit : 1)
-                    } else {
-                        return max(0, val - (isSetMode ? addUnit : 1))
+                if habit.achievement.isSet {
+                    Divider()
+                        .frame(height: ButtonSize.small.rawValue)
+                    TextButton(content: {
+                        Text(isSetMode ? "±\(habit.achievement.addUnit)" : "±1")
+                    }) {
+                        isSetMode.toggle()
                     }
+                }
+                Divider()
+                    .frame(height: ButtonSize.small.rawValue)
+                TertiaryButton(content: {
+                    HStack {
+                        Image(systemName: "plus")
+                        Text("Add Achievement")
+                    }
+                }, action: {
+                    move(isAdd: true)
                 })
-                habit.objectWillChange.send()
             }
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            .padding(.bottom, 5)
         }
+        .rowBackground(innerBottomPadding: false)
     }
     
+    func move(isAdd: Bool) {
+        withAnimation {
+            isEmojiMode = false
+            habit.achievement.set(at: selectedDate, using: { val, addUnit in
+                if isAdd {
+                    return val + (isSetMode ? addUnit : 1)
+                } else {
+                    return max(0, val - (isSetMode ? addUnit : 1))
+                }
+            })
+            habit.objectWillChange.send()
+        }
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+    }
+    
+}
+
+struct DailyProgressBar_Previews: PreviewProvider {
+    static var previews: some View {
+        DailyProgressBar(selectedDate: Date(), isEmojiMode: .constant(false))
+            .environmentObject(FlHabit.sample(number: 0))
+    }
 }

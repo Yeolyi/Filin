@@ -29,39 +29,58 @@ struct ContentView: View {
                 Spacer()
                 Divider()
                 HStack {
-                    Image(systemName: currentTab == 0 ? "rectangle.grid.1x2.fill" : "rectangle.grid.1x2")
-                        .font(.system(size: 20))
-                        .mainColor()
-                        .frame(width: 75, height: 55)
-                        .onTapGesture {
-                            currentTab = 0
-                        }
+                    VStack(spacing: 0) {
+                        Image(systemName: currentTab == 0 ? "rectangle.grid.1x2.fill" : "rectangle.grid.1x2")
+                            .font(.system(size: 20))
+                            .onTapGesture {
+                                currentTab = 0
+                            }
+                            .frame(width: 50, height: 32)
+                        Text("Goal".localized)
+                            .font(.system(size: FontSize.micro.rawValue, weight: .semibold))
+                    }
+                    .foregroundColor(currentTab == 0 ? ThemeColor.brand : ThemeColor.mainColor(colorScheme))
+                    
                     Spacer()
-                    Image(systemName: currentTab == 1 ? "pin.fill" : "pin")
-                        .font(.system(size: 20))
-                        .mainColor()
-                        .frame(width: 75, height: 55)
-                        .onTapGesture {
-                            currentTab = 1
-                        }
+                    VStack(spacing: 0) {
+                        Image(systemName: currentTab == 1 ? "pin.fill" : "pin")
+                            .font(.system(size: 20))
+                            .frame(width: 50, height: 32)
+                            .onTapGesture {
+                                currentTab = 1
+                            }
+                        Text("Summary".localized)
+                            .font(.system(size: FontSize.micro.rawValue, weight: .semibold))
+                    }
+                    .foregroundColor(currentTab == 1 ? ThemeColor.brand : ThemeColor.mainColor(colorScheme))
                     Spacer()
-                    Image(systemName: currentTab == 2 ? "alarm.fill" : "alarm")
-                        .font(.system(size: 20))
-                        .mainColor()
-                        .frame(width: 75, height: 55)
-                        .onTapGesture {
-                            currentTab = 2
-                        }
+                    VStack(spacing: 0) {
+                        Image(systemName: currentTab == 2 ? "alarm.fill" : "alarm")
+                            .font(.system(size: 20))
+                            .frame(width: 50, height: 32)
+                            .onTapGesture {
+                                currentTab = 2
+                            }
+                        Text("Routine".localized)
+                            .font(.system(size: FontSize.micro.rawValue, weight: .semibold))
+                    }
+                    .foregroundColor(currentTab == 2 ? ThemeColor.brand : ThemeColor.mainColor(colorScheme))
                     Spacer()
-                    Image(systemName: currentTab == 3 ? "gearshape.fill" : "gearshape")
-                        .font(.system(size: 20))
-                        .mainColor()
-                        .frame(width: 75, height: 55)
-                        .onTapGesture {
-                            currentTab = 3
-                        }
+                    VStack(spacing: 0) {
+                        Image(systemName: currentTab == 3 ? "gearshape.fill" : "gearshape")
+                            .font(.system(size: 20))
+                            .frame(width: 50, height: 32)
+                            .onTapGesture {
+                                currentTab = 3
+                            }
+                        Text("Setting".localized)
+                            .font(.system(size: FontSize.micro.rawValue, weight: .semibold))
+                    }
+                    .foregroundColor(currentTab == 3 ? ThemeColor.brand : ThemeColor.mainColor(colorScheme))
                 }
-                .padding(.horizontal, 15)
+                .padding(.horizontal, 25)
+                .padding(.top, 5)
+                .padding(.bottom, 1)
                 .edgesIgnoringSafeArea([.bottom, .horizontal])
                 .background(colorScheme == .light ? Color.white : .black)
             }

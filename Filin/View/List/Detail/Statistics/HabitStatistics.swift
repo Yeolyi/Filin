@@ -74,7 +74,7 @@ struct HabitStatistics: View {
                 .subColor()
                 .bodyText()
                 .padding(.top, 8)
-            BasicButton(isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
+            IconButton(imageName: isExpanded ? "chevron.compact.up" : "chevron.compact.down") {
                 withAnimation {
                     self.isExpanded.toggle()
                 }
@@ -98,7 +98,7 @@ struct HabitStatistics: View {
     func textWithChevron(value: Double?) -> some View {
         if value == nil {
             HStack {
-                Text("Needs more data".localized)
+                Text("Needs More Data".localized)
                     .subColor()
                     .headline()
                 Spacer()

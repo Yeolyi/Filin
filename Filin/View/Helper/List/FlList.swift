@@ -26,57 +26,41 @@ struct FlList<Value: Hashable, Content: View>: View {
                         HStack(spacing: 0) {
                             idToRow(listElement.id)
                             Spacer()
-                            Image(systemName: "pause")
-                                .rotationEffect(.degrees(-90))
-                                .subColor()
-                                .font(.system(size: 24, weight: .semibold))
-                                .frame(width: 44, height: 40)
-                                .gesture(
-                                    listData.rowDragGesture(id: listElement.id)
-                                )
+                            IconButtonWithoutGesture(imageName: "pause") { }
+                            .rotationEffect(.degrees(-90))
+                            .highPriorityGesture(
+                                listData.rowDragGesture(id: listElement.id)
+                            )
                         }
-                        .padding(.horizontal, 15)
+                        .padding(.horizontal, 10)
                         .frame(height: listData.rowHeight)
-                        .compositingGroup()
-                        .background(
-                            Rectangle()
-                                .foregroundColor(
-                                    colorScheme == .light ?
-                                    (listElement.isTapped ? Color(hex: "#D0D0D0") : Color(hex: "#F0F0F0")) :
-                                        (listElement.isTapped ? Color(hex: "#1F1F1F") : Color(hex: "#0F0F0F"))
-                                )
-                                .cornerRadius(5)
-                        )
+                        .background(ThemeColor.inActive(colorScheme))
+                        .cornerRadius(8)
                         .padding(.bottom, listData.padding)
                         .offset(y: listElement.position - geo.size.height / 2 + listData.rowHeight / 2)
                         .zIndex(listElement.isTapped ? 1 : 0)
                     }
                 }
-                .gesture(
-                    listData.rowScrollGesture(maxHeight: geo.size.height)
-                )
-                .zIndex(1)
-                Color.clear
-                    .contentShape(Rectangle())
-                    .gesture(
-                        listData.rowScrollGesture(maxHeight: geo.size.height)
-                    )
-                    .zIndex(0)
+                .offset(y: listData.listContentOffset)
             }
-            .offset(y: listData.listContentOffset)
+            .padding(.top, 20)
+            .frame(height: geo.size.height)
+            .contentShape(Rectangle())
+            .gesture(
+                listData.rowScrollGesture(maxHeight: geo.size.height)
+            )
+            .clipped()
         }
-        .padding(.top, 20)
-        .clipped()
     }
 }
 
 struct EditableListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FlList(listData: FlListModel(values: ["1", "2", "3"], save: {_ in})) { _ in
-                Text("1")
+            FlList(listData: FlListModel(values: ["1", "2", "3", "4", "5", "6", "7", "8"], save: {_ in})) { id in
+                Text(id.uuidString)
             }.padding(.horizontal, 10)
+            .frame(height: 400)
         }
-        .environment(\.colorScheme, .dark)
     }
 }

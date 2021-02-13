@@ -43,21 +43,13 @@ struct HabitNumberSetting: View {
         self.tempHabit = targetHabit
         __setNum = State(
             initialValue: targetHabit.achievement.addUnit != 1 ?
-                targetHabit.achievement.targetTimes / targetHabit.achievement.addUnit : 1
+                targetHabit.achievement.targetTimes / targetHabit.achievement.addUnit : targetHabit.achievement.targetTimes
         )
         __isSet = State(initialValue: targetHabit.achievement.addUnit != 1)
     }
     
     var body: some View {
         VStack(spacing: 15) {
-            HStack {
-                Text("Split into Sets".localized)
-                    .bodyText()
-                Spacer()
-                FlToggle(isSet)
-                    .accessibility(identifier: "isSetToggle")
-            }
-            Divider()
             if !isSet.wrappedValue {
                 Picker("", selection: setNum) {
                     ForEach(1...100, id: \.self) { num in
@@ -70,7 +62,7 @@ struct HabitNumberSetting: View {
             } else {
                 HStack {
                     VStack {
-                        Picker("Number of Sets".localized, selection: setNum) {
+                        Picker("", selection: setNum) {
                             ForEach(1...30, id: \.self) { num in
                                 Text(String(num))
                                     .bodyText()
@@ -81,10 +73,11 @@ struct HabitNumberSetting: View {
                         .accessibility(identifier: "numberOfSets")
                         Text("Number of Sets".localized)
                             .subColor()
-                            .bodyText()
+                            .font(.system(size: FontSize.caption.rawValue, weight: .semibold))
                     }
+                    .frame(width: 150, height: 200, alignment: .top)
                     VStack {
-                        Picker("Number of Times per Set".localized, selection: oneTapNum) {
+                        Picker("".localized, selection: oneTapNum) {
                             ForEach(1...200, id: \.self) { num in
                                 Text(String(num))
                                     .bodyText()
@@ -92,12 +85,20 @@ struct HabitNumberSetting: View {
                         }
                         .frame(width: 150, height: 150)
                         .clipped()
-                        .accessibility(identifier: "numberOfTimesPerSet")
                         Text("Number of Times per Set".localized)
                             .subColor()
-                            .bodyText()
+                            .font(.system(size: FontSize.caption.rawValue, weight: .semibold))
                     }
+                    .frame(width: 150, height: 200, alignment: .top)
                 }
+            }
+            Divider()
+            HStack {
+                Text("Split into Sets".localized)
+                    .bodyText()
+                Spacer()
+                FlToggle(isSet)
+                    .accessibility(identifier: "isSetToggle")
             }
         }
         .flatRowBackground()

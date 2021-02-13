@@ -91,7 +91,7 @@ struct HabitWidgetEntryView: View {
     struct EmptyPlaceholder: View {
         @Environment(\.colorScheme) var colorScheme
         var body: some View {
-            Text("Long press and hold the widget to select your goal.".localized)
+            Text("Press and hold to select the goal to display.".localized)
                 .bodyText()
                 .padding(15)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

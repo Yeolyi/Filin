@@ -10,17 +10,22 @@ import CoreData
 
 struct EmojiPicker: View {
     
-    @Binding var selectedDate: Date
-    @Binding var isEmojiView: Bool
-    @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject var habit: FlHabit
     @ObservedObject var emojiManager: EmojiManager
+    
+    @Binding var selectedDate: Date
+    @Binding var isEmojiView: Bool
     @Binding var activeSheet: DetailViewActiveSheet?
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.colorScheme) var colorScheme
+    
     var emoji: String? {
         habit.dailyEmoji[selectedDate.dictKey]
     }
+    
     var body: some View {
-        VStack(spacing: 8) {
+        ZStack {
             HStack {
                 if emoji != nil {
                     Text(emoji!)
@@ -28,13 +33,13 @@ struct EmojiPicker: View {
                 } else {
                     Circle()
                         .frame(width: 72, height: 72)
-                        .subColor()
-                        .opacity(0.3)
+                        .inactiveColor()
                 }
                 Spacer()
             }
+            .zIndex(1)
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 20) {
+                HStack(spacing: 0) {
                     ForEach(emojiManager.emojiList, id: \.self) { emoji in
                         Button(action: {
                             withAnimation {
@@ -44,8 +49,9 @@ struct EmojiPicker: View {
                             save()
                         }) {
                             Text(emoji)
-                                .font(.system(size: 25))
-                                .opacity(habit.dailyEmoji[selectedDate.dictKey] == emoji ? 1 : 0.5)
+                                .font(.system(size: FontSize.subHeadline.rawValue))
+                                .opacity(habit.dailyEmoji[selectedDate.dictKey] == emoji ? 1 : 0.3)
+                                .frame(width: 44, height: 30)
                         }
                     }
                     Button(action: {
@@ -56,19 +62,26 @@ struct EmojiPicker: View {
                         save()
                     }) {
                         Image(systemName: "xmark.circle")
-                            .font(.system(size: 25))
+                            .font(.system(size: FontSize.subHeadline.rawValue))
                             .subColor()
-                            .opacity(habit.dailyEmoji[selectedDate.dictKey] == nil ? 1 : 0.5)
+                            .frame(width: 44, height: 30)
                     }
                     Button(action: {
                         activeSheet = DetailViewActiveSheet.emoji
                     }) {
                         Image(systemName: "gearshape")
-                            .font(.system(size: 25))
+                            .font(.system(size: FontSize.subHeadline.rawValue))
                             .subColor()
+                            .frame(width: 44, height: 30)
                     }
                 }
+                .frame(height: ButtonSize.large.rawValue)
+                .padding(.horizontal, 10)
+                .background(ThemeColor.inActive(colorScheme))
+                .cornerRadius(8)
+                .padding(.leading, 60)
             }
+            .padding(.leading, 30)
         }
         .rowBackground()
     }
@@ -79,5 +92,14 @@ struct EmojiPicker: View {
         } catch {
             print("Error saving managed object context: \(error)")
         }
+    }
+}
+
+struct EmojiPicker_Previews: PreviewProvider {
+    static var previews: some View {
+        EmojiPicker(
+            habit: FlHabit.sample(number: 0), emojiManager: EmojiManager(), selectedDate: .constant(Date()),
+            isEmojiView: .constant(true), activeSheet: .constant(nil)
+        )
     }
 }

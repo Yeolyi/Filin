@@ -16,11 +16,11 @@ struct FlatRowBackground: ViewModifier {
             content
                 .padding(.vertical, 20)
                 .padding(.horizontal, 10)
-                .background(ThemeColor.inActive(colorScheme).opacity(colorScheme == .light ? 0.5 : 1))
+                .background(ThemeColor.inActive(colorScheme))
         }
-        .cornerRadius(5)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 4)
+        .cornerRadius(8)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 4)
     }
 }
 

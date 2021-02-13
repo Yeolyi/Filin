@@ -59,16 +59,17 @@ struct RoutineView: View {
                 }
                 .navigationBarTitle("Routine".localized)
                 .navigationBarItems(
-                    trailing: HeaderButton("plus") {
+                    trailing: IconButton(imageName: "plus") {
                         self.isAddSheet = .add
                     }
                 )
                 .sheet(item: $isAddSheet) { sheetType in
                     switch sheetType {
                     case RoutineSheet.add:
-                        AddRoutine(habits: habitManager.contents)
+                        AddRoutineCard(habits: habitManager.contents)
                             .environmentObject(habitManager)
                             .environmentObject(routineManager)
+                            .environmentObject(appSetting)
                     case RoutineSheet.edit(let routine):
                         EditRoutine(routine: routine, habits: habitManager.contents)
                             .environmentObject(habitManager)
@@ -89,6 +90,7 @@ struct RoutineView_Previews: PreviewProvider {
         let dataSample = PreviewDataProvider.shared
         RoutineView()
             .environmentObject(dataSample.habitManager)
+            .environmentObject(dataSample.summaryManager)
             .environmentObject(dataSample.routineManager)
             .environmentObject(AppSetting())
     }

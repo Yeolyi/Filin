@@ -22,13 +22,13 @@ struct HabitList: View {
             .navigationBarTitle(appSetting.mainDate.localizedMonthDay)
             .navigationBarItems(
                 trailing:
-                    HeaderButton("plus") {
+                    IconButton(imageName: "plus") {
                         self.isSheet = true
                     }
                     .accessibility(identifier: "habitPlus")
             )
             .sheet(isPresented: $isSheet) {
-                AddHabit()
+                AddHabitCard()
                     .environmentObject(appSetting)
                     .environmentObject(habitManager)
                     .environmentObject(summaryManager)

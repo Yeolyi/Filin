@@ -62,13 +62,13 @@ struct SummaryView: View {
             .navigationBarTitle("Summary".localized)
             .navigationBarItems(
                 trailing:
-                    HStack {
-                        HeaderButton("square.and.arrow.up") {
+                    HStack(spacing: 10) {
+                        IconButton(imageName: "square.and.arrow.up") {
                             activeSheet = SummaryViewActiveSheet.share
                         }
                         .opacity(isEmpty ? 0.5 : 1)
                         .disabled(isEmpty)
-                        HeaderText("Edit".localized) {
+                        TextButton(content: { Text("Edit".localized) }) {
                             activeSheet = SummaryViewActiveSheet.edit
                         }
                     }

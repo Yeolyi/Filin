@@ -14,6 +14,8 @@
 		2512767725C84A08000466B4 /* DailyProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512767625C84A08000466B4 /* DailyProgressBar.swift */; };
 		2512767F25C8F27C000466B4 /* CalendarMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512767E25C8F27C000466B4 /* CalendarMode.swift */; };
 		2514A93D25D438B40044F593 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514A93C25D438B40044F593 /* AppIcon.swift */; };
+		2514A94325D568140044F593 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514A94225D568140044F593 /* PrimaryButton.swift */; };
+		2514A95025D569C70044F593 /* FontSizeUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514A94F25D569C70044F593 /* FontSizeUnit.swift */; };
 		2514EF6625C1030F00633146 /* FlatRowBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514EF6525C1030F00633146 /* FlatRowBackground.swift */; };
 		2519664F25BC52530054BAF4 /* RowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519664E25BC52530054BAF4 /* RowData.swift */; };
 		251EFC67259E4DD300748917 /* Summary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251EFC63259E4DD300748917 /* Summary+CoreDataClass.swift */; };
@@ -36,6 +38,7 @@
 		2530711525BBD4A9002AC0C6 /* CoreDataConvertableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530711425BBD4A9002AC0C6 /* CoreDataConvertableProtocol.swift */; };
 		2530711925BBE57D002AC0C6 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530711825BBE57D002AC0C6 /* Achievement.swift */; };
 		2532DC7F2598F70B006DBA25 /* RoutineNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2532DC7E2598F70B006DBA25 /* RoutineNotification.swift */; };
+		2538BE5425D7B52F00B4F1E5 /* AddRoutineCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EAF16D25D7B127003D9BB6 /* AddRoutineCard.swift */; };
 		253CA92B25D3A879006340B8 /* SubIndicatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253CA92A25D3A879006340B8 /* SubIndicatingRow.swift */; };
 		25498A4D25BC045700283E71 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25498A4C25BC045700283E71 /* Palette.swift */; };
 		25498A5125BC048800283E71 /* PaletteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25498A5025BC048800283E71 /* PaletteProtocol.swift */; };
@@ -46,7 +49,6 @@
 		2555455025CDB3D700C50470 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530711825BBE57D002AC0C6 /* Achievement.swift */; };
 		2555455E25CDB67600C50470 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B6AF7258289C80004BFE7 /* DateExtension.swift */; };
 		255C116B258F2E2500E0F740 /* HabitAddBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C116A258F2E2500E0F740 /* HabitAddBadgeView.swift */; };
-		255C1171258F373600E0F740 /* HeaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C1170258F373600E0F740 /* HeaderButton.swift */; };
 		255C1174258F38E200E0F740 /* DayOfWeekSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C1173258F38E200E0F740 /* DayOfWeekSelector.swift */; };
 		2563B4F52582826900731635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563B4F42582826900731635 /* AppDelegate.swift */; };
 		2563B4F72582826900731635 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2563B4F62582826900731635 /* SceneDelegate.swift */; };
@@ -55,6 +57,7 @@
 		2563B4FE2582826B00731635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2563B4FD2582826B00731635 /* Assets.xcassets */; };
 		2563B5012582826B00731635 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2563B5002582826B00731635 /* Preview Assets.xcassets */; };
 		2563B5042582826B00731635 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2563B5022582826B00731635 /* LaunchScreen.storyboard */; };
+		25741FC525D6E261009EFBCA /* AddHabitCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25741FC425D6E261009EFBCA /* AddHabitCard.swift */; };
 		2578FEEE25A1F8C1001884C8 /* DayOfWeekChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578FEED25A1F8C1001884C8 /* DayOfWeekChart.swift */; };
 		257D94AD25852EA6007D4CF1 /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257D94AC25852EA6007D4CF1 /* ConditionalModifier.swift */; };
 		257F7CE625A3284B00F846A1 /* TagCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F7CE525A3284B00F846A1 /* TagCloud.swift */; };
@@ -65,7 +68,6 @@
 		258B6AF4258289240004BFE7 /* HabitScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B6AF3258289240004BFE7 /* HabitScrollView.swift */; };
 		258B6AF8258289C80004BFE7 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B6AF7258289C80004BFE7 /* DateExtension.swift */; };
 		258B6B0725828CC70004BFE7 /* HabitRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B6B0625828CC70004BFE7 /* HabitRow.swift */; };
-		258B6B12258295660004BFE7 /* EditHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B6B11258295660004BFE7 /* EditHabit.swift */; };
 		258B6B152582965F0004BFE7 /* ModalAllowAutoDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B6B142582965F0004BFE7 /* ModalAllowAutoDismiss.swift */; };
 		258B6B232583573B0004BFE7 /* ColorHorizontalPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B6B222583573B0004BFE7 /* ColorHorizontalPicker.swift */; };
 		258DD4F825A9ADBA00A2C20E /* CoreDataBridgeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258DD4F725A9ADBA00A2C20E /* CoreDataBridgeProtocol.swift */; };
@@ -86,7 +88,6 @@
 		25A564DF258F982200239CF6 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A564DE258F982200239CF6 /* SummaryView.swift */; };
 		25A564E725904F9D00239CF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 25A564E925904F9D00239CF6 /* Localizable.strings */; };
 		25A564EE2590503400239CF6 /* Localizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A564ED2590503400239CF6 /* Localizing.swift */; };
-		25AF7E8C25975F090097BF4D /* MainRectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AF7E8B25975F090097BF4D /* MainRectButton.swift */; };
 		25B15ADE25C27CDA00A89C12 /* SmallWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B15AD225C27CA400A89C12 /* SmallWidget.swift */; };
 		25B15AE225C27DAA00A89C12 /* GodoB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25C0F38625AB3FCE00235560 /* GodoB.ttf */; };
 		25B15AEA25C2834100A89C12 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2522916C258384A900869C51 /* ThemeColor.swift */; };
@@ -102,6 +103,9 @@
 		25B8027325C1C81E0033B5D9 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25FDE05025C1B61000548212 /* Intents.framework */; };
 		25B8027625C1C81E0033B5D9 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B8027525C1C81E0033B5D9 /* IntentHandler.swift */; };
 		25B8027A25C1C81E0033B5D9 /* WidgetIntentsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25B8027225C1C81E0033B5D9 /* WidgetIntentsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		25BB55FE25D60D2F005978AF /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB55FD25D60D2F005978AF /* TextButton.swift */; };
+		25BB560525D60D43005978AF /* LongPressDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB560425D60D43005978AF /* LongPressDetector.swift */; };
+		25BB560F25D61042005978AF /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB560E25D61042005978AF /* IconButton.swift */; };
 		25C0F38725AB3FCE00235560 /* GodoB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25C0F38625AB3FCE00235560 /* GodoB.ttf */; };
 		25C4C387259F49560043C334 /* LottieHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C4C386259F49560043C334 /* LottieHandler.swift */; };
 		25C574FD2583D3BD004BF07D /* Habit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C574FB2583D3BD004BF07D /* Habit+CoreDataClass.swift */; };
@@ -110,10 +114,17 @@
 		25C5A56725837A0200E864A5 /* AppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C5A56625837A0200E864A5 /* AppSetting.swift */; };
 		25C9FA2625907C4F0046C523 /* ViewToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C9FA2525907C4F0046C523 /* ViewToImage.swift */; };
 		25C9FA2925907CEA0046C523 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C9FA2825907CE90046C523 /* ImageSaver.swift */; };
+		25CC2EEC25D79DCA0046E852 /* EditHabitCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CC2EEB25D79DCA0046E852 /* EditHabitCard.swift */; };
 		25D0405725C4FA66004814B4 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0405625C4FA66004814B4 /* TimerManager.swift */; };
 		25D0C99E259F96C80018273E /* EmojiCalendarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0C99D259F96C80018273E /* EmojiCalendarRow.swift */; };
 		25D0C9A1259F981B0018273E /* SummaryPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0C9A0259F981B0018273E /* SummaryPreview.swift */; };
 		25D39BC725CA98EC0023E504 /* TableCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D39BC625CA98EC0023E504 /* TableCalendar.swift */; };
+		25D59C9F25D65E8400D21056 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D59C9E25D65E8400D21056 /* ColorExtension.swift */; };
+		25D59CAF25D65F5000D21056 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D59C9E25D65E8400D21056 /* ColorExtension.swift */; };
+		25D59CB525D6634A00D21056 /* ButtonSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D59CB425D6634A00D21056 /* ButtonSize.swift */; };
+		25D59CBB25D664C600D21056 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D59CBA25D664C600D21056 /* SecondaryButton.swift */; };
+		25D59CC525D669FF00D21056 /* TertiaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D59CC425D669FF00D21056 /* TertiaryButton.swift */; };
+		25D59CD525D6BA6700D21056 /* FlTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D59CD425D6BA6700D21056 /* FlTabView.swift */; };
 		25E16354259920990082A87A /* CalendarInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E16353259920990082A87A /* CalendarInterface.swift */; };
 		25E1635A259929E70082A87A /* EmojiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E16359259929E70082A87A /* EmojiPicker.swift */; };
 		25E163632599C0F80082A87A /* EmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E163622599C0F80082A87A /* EmojiManager.swift */; };
@@ -137,7 +148,6 @@
 		25FAA533259F7DEF0042E8A5 /* FlListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FAA532259F7DEF0042E8A5 /* FlListModel.swift */; };
 		25FC34F325A04559000B5844 /* FlToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FC34F225A04559000B5844 /* FlToggle.swift */; };
 		25FC34FA25A067C9000B5844 /* FlTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FC34F925A067C9000B5844 /* FlTimePicker.swift */; };
-		25FC6034258615EE006BCFBA /* AddHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FC6033258615EE006BCFBA /* AddHabit.swift */; };
 		25FDE07425C1BA5400548212 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25FDE00925C1A11C00548212 /* WidgetKit.framework */; };
 		25FDE07525C1BA5400548212 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25FDE00B25C1A11C00548212 /* SwiftUI.framework */; };
 		25FDE07825C1BA5400548212 /* HabitWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FDE07725C1BA5400548212 /* HabitWidget.swift */; };
@@ -196,6 +206,8 @@
 		2512767625C84A08000466B4 /* DailyProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyProgressBar.swift; sourceTree = "<group>"; };
 		2512767E25C8F27C000466B4 /* CalendarMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMode.swift; sourceTree = "<group>"; };
 		2514A93C25D438B40044F593 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
+		2514A94225D568140044F593 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		2514A94F25D569C70044F593 /* FontSizeUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSizeUnit.swift; sourceTree = "<group>"; };
 		2514EF6525C1030F00633146 /* FlatRowBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatRowBackground.swift; sourceTree = "<group>"; };
 		2519664E25BC52530054BAF4 /* RowData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowData.swift; sourceTree = "<group>"; };
 		251EFC63259E4DD300748917 /* Summary+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Summary+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -222,7 +234,6 @@
 		2553522725BB4D3200255045 /* SummaryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryManager.swift; sourceTree = "<group>"; };
 		2557F93E2586721100697C48 /* AutoSaveWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSaveWrapper.swift; sourceTree = "<group>"; };
 		255C116A258F2E2500E0F740 /* HabitAddBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAddBadgeView.swift; sourceTree = "<group>"; };
-		255C1170258F373600E0F740 /* HeaderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderButton.swift; sourceTree = "<group>"; };
 		255C1173258F38E200E0F740 /* DayOfWeekSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekSelector.swift; sourceTree = "<group>"; };
 		2563B4F12582826900731635 /* Filin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2563B4F42582826900731635 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -233,6 +244,7 @@
 		2563B5002582826B00731635 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2563B5032582826B00731635 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2563B5052582826B00731635 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25741FC425D6E261009EFBCA /* AddHabitCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitCard.swift; sourceTree = "<group>"; };
 		2578FEED25A1F8C1001884C8 /* DayOfWeekChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekChart.swift; sourceTree = "<group>"; };
 		257D94AC25852EA6007D4CF1 /* ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifier.swift; sourceTree = "<group>"; };
 		257F7CE525A3284B00F846A1 /* TagCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCloud.swift; sourceTree = "<group>"; };
@@ -243,7 +255,6 @@
 		258B6AF3258289240004BFE7 /* HabitScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitScrollView.swift; sourceTree = "<group>"; };
 		258B6AF7258289C80004BFE7 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		258B6B0625828CC70004BFE7 /* HabitRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRow.swift; sourceTree = "<group>"; };
-		258B6B11258295660004BFE7 /* EditHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditHabit.swift; path = ../Add/EditHabit.swift; sourceTree = "<group>"; };
 		258B6B142582965F0004BFE7 /* ModalAllowAutoDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalAllowAutoDismiss.swift; sourceTree = "<group>"; };
 		258B6B222583573B0004BFE7 /* ColorHorizontalPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHorizontalPicker.swift; sourceTree = "<group>"; };
 		258DD4F725A9ADBA00A2C20E /* CoreDataBridgeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBridgeProtocol.swift; sourceTree = "<group>"; };
@@ -264,7 +275,6 @@
 		25A564DE258F982200239CF6 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		25A564EB25904FD300239CF6 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		25A564ED2590503400239CF6 /* Localizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizing.swift; sourceTree = "<group>"; };
-		25AF7E8B25975F090097BF4D /* MainRectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRectButton.swift; sourceTree = "<group>"; };
 		25B15AD225C27CA400A89C12 /* SmallWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidget.swift; sourceTree = "<group>"; };
 		25B15BAB25C2DA4900A89C12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/HabitWidget.intentdefinition; sourceTree = "<group>"; };
 		25B15BB625C2DA7C00A89C12 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/HabitWidget.strings; sourceTree = "<group>"; };
@@ -272,6 +282,9 @@
 		25B8027225C1C81E0033B5D9 /* WidgetIntentsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetIntentsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		25B8027525C1C81E0033B5D9 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		25B8027725C1C81E0033B5D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25BB55FD25D60D2F005978AF /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
+		25BB560425D60D43005978AF /* LongPressDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressDetector.swift; sourceTree = "<group>"; };
+		25BB560E25D61042005978AF /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		25C0F38625AB3FCE00235560 /* GodoB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GodoB.ttf; sourceTree = "<group>"; };
 		25C4C386259F49560043C334 /* LottieHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieHandler.swift; sourceTree = "<group>"; };
 		25C574FB2583D3BD004BF07D /* Habit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Habit+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -280,15 +293,22 @@
 		25C5A56625837A0200E864A5 /* AppSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetting.swift; sourceTree = "<group>"; };
 		25C9FA2525907C4F0046C523 /* ViewToImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewToImage.swift; sourceTree = "<group>"; };
 		25C9FA2825907CE90046C523 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
+		25CC2EEB25D79DCA0046E852 /* EditHabitCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitCard.swift; sourceTree = "<group>"; };
 		25D0405625C4FA66004814B4 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		25D0C99D259F96C80018273E /* EmojiCalendarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCalendarRow.swift; sourceTree = "<group>"; };
 		25D0C9A0259F981B0018273E /* SummaryPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryPreview.swift; sourceTree = "<group>"; };
 		25D39BC625CA98EC0023E504 /* TableCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCalendar.swift; sourceTree = "<group>"; };
+		25D59C9E25D65E8400D21056 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		25D59CB425D6634A00D21056 /* ButtonSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSize.swift; sourceTree = "<group>"; };
+		25D59CBA25D664C600D21056 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		25D59CC425D669FF00D21056 /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
+		25D59CD425D6BA6700D21056 /* FlTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlTabView.swift; sourceTree = "<group>"; };
 		25E16353259920990082A87A /* CalendarInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInterface.swift; sourceTree = "<group>"; };
 		25E16359259929E70082A87A /* EmojiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPicker.swift; sourceTree = "<group>"; };
 		25E163622599C0F80082A87A /* EmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiManager.swift; sourceTree = "<group>"; };
 		25E163662599CBAA0082A87A /* EmojiListEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiListEdit.swift; sourceTree = "<group>"; };
 		25E6154A25A1968B007A469B /* HabitStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatistics.swift; sourceTree = "<group>"; };
+		25EAF16D25D7B127003D9BB6 /* AddRoutineCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoutineCard.swift; sourceTree = "<group>"; };
 		25EBC00325CA522B00D4FF97 /* EditSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSummary.swift; sourceTree = "<group>"; };
 		25ED3FF225D3AC6E00AC1ECC /* FilinTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilinTests.swift; sourceTree = "<group>"; };
 		25ED400025D3BCBF00AC1ECC /* CompatibilityTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibilityTest.swift; sourceTree = "<group>"; };
@@ -309,7 +329,6 @@
 		25FC34EA25A03A66000B5844 /* lottieStack.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = lottieStack.json; path = /Users/seongyeolyi/Desktop/Filin/Filin/Filin/View/Helper/View/lottieStack.json; sourceTree = "<absolute>"; };
 		25FC34F225A04559000B5844 /* FlToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlToggle.swift; sourceTree = "<group>"; };
 		25FC34F925A067C9000B5844 /* FlTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlTimePicker.swift; sourceTree = "<group>"; };
-		25FC6033258615EE006BCFBA /* AddHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabit.swift; sourceTree = "<group>"; };
 		25FDE00925C1A11C00548212 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		25FDE00B25C1A11C00548212 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		25FDE05025C1B61000548212 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
@@ -390,6 +409,7 @@
 				259F7DDA25CA63BA00408A1D /* FlInlineNavigationBar.swift */,
 				2514EF6525C1030F00633146 /* FlatRowBackground.swift */,
 				252291692583849100869C51 /* RowBackground.swift */,
+				253CA92A25D3A879006340B8 /* SubIndicatingRow.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -406,6 +426,7 @@
 		25498A4A25BC042600283E71 /* Color */ = {
 			isa = PBXGroup;
 			children = (
+				25D59C9D25D65E7900D21056 /* Helper */,
 				2522916C258384A900869C51 /* ThemeColor.swift */,
 				25498A5025BC048800283E71 /* PaletteProtocol.swift */,
 				25498A4C25BC045700283E71 /* Palette.swift */,
@@ -515,11 +536,14 @@
 		258E0301258E12F6006DAFAC /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				25BB560325D60D34005978AF /* Helper */,
 				25A564D5258F90D100239CF6 /* TextFieldWithEndButton.swift */,
 				25FC34F225A04559000B5844 /* FlToggle.swift */,
-				25AF7E8B25975F090097BF4D /* MainRectButton.swift */,
-				255C1170258F373600E0F740 /* HeaderButton.swift */,
-				253CA92A25D3A879006340B8 /* SubIndicatingRow.swift */,
+				2514A94225D568140044F593 /* PrimaryButton.swift */,
+				25D59CBA25D664C600D21056 /* SecondaryButton.swift */,
+				25D59CC425D669FF00D21056 /* TertiaryButton.swift */,
+				25BB55FD25D60D2F005978AF /* TextButton.swift */,
+				25BB560E25D61042005978AF /* IconButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -580,6 +604,7 @@
 				258E02F8258E1150006DAFAC /* Headline.swift */,
 				25B73281258B460A003D9FD8 /* BodyText.swift */,
 				25ED404A25D3BE7100AC1ECC /* SmallSectionText.swift */,
+				2514A94F25D569C70044F593 /* FontSizeUnit.swift */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -595,6 +620,15 @@
 			path = WidgetIntentsExtension;
 			sourceTree = "<group>";
 		};
+		25BB560325D60D34005978AF /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				25BB560425D60D43005978AF /* LongPressDetector.swift */,
+				25D59CB425D6634A00D21056 /* ButtonSize.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		25C5A5622583766200E864A5 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -605,6 +639,14 @@
 				2512767625C84A08000466B4 /* DailyProgressBar.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		25D59C9D25D65E7900D21056 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				25D59C9E25D65E8400D21056 /* ColorExtension.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		25E163612599C0EE0082A87A /* Emoji */ = {
@@ -641,7 +683,7 @@
 			children = (
 				2563B4F82582826900731635 /* HabitList.swift */,
 				258B6AF3258289240004BFE7 /* HabitScrollView.swift */,
-				258B6B11258295660004BFE7 /* EditHabit.swift */,
+				25CC2EEB25D79DCA0046E852 /* EditHabitCard.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -782,6 +824,7 @@
 		25F888232596200300BC2D6A /* Add */ = {
 			isa = PBXGroup;
 			children = (
+				25EAF16D25D7B127003D9BB6 /* AddRoutineCard.swift */,
 				25F887F9259509B300BC2D6A /* AddRoutine.swift */,
 				2501653725CD0C7100A43818 /* SelectRoutineList.swift */,
 			);
@@ -805,6 +848,7 @@
 				258B6B222583573B0004BFE7 /* ColorHorizontalPicker.swift */,
 				255C1173258F38E200E0F740 /* DayOfWeekSelector.swift */,
 				25FC34F925A067C9000B5844 /* FlTimePicker.swift */,
+				25D59CD425D6BA6700D21056 /* FlTabView.swift */,
 			);
 			path = Picker;
 			sourceTree = "<group>";
@@ -812,7 +856,7 @@
 		25FC602A2586153B006BCFBA /* Add */ = {
 			isa = PBXGroup;
 			children = (
-				25FC6033258615EE006BCFBA /* AddHabit.swift */,
+				25741FC425D6E261009EFBCA /* AddHabitCard.swift */,
 				2580999725C94B63003E8E59 /* HabitNumberSetting.swift */,
 				2580999C25C94D7A003E8E59 /* HabitTimerSetting.swift */,
 			);
@@ -1104,7 +1148,6 @@
 				25C5A564258376BE00E864A5 /* HabitDetailView.swift in Sources */,
 				259F7DDB25CA63BA00408A1D /* FlInlineNavigationBar.swift in Sources */,
 				25F21280259201E600E259EC /* CheckButton.swift in Sources */,
-				25AF7E8C25975F090097BF4D /* MainRectButton.swift in Sources */,
 				255C116B258F2E2500E0F740 /* HabitAddBadgeView.swift in Sources */,
 				25FC34F325A04559000B5844 /* FlToggle.swift in Sources */,
 				25F92F4325CC0F4F0071B6F0 /* ImageMaker.swift in Sources */,
@@ -1115,12 +1158,13 @@
 				25C574FE2583D3BD004BF07D /* Habit+CoreDataProperties.swift in Sources */,
 				2593A6E125A9D2710077077E /* FlRoutine.swift in Sources */,
 				2578FEEE25A1F8C1001884C8 /* DayOfWeekChart.swift in Sources */,
-				258B6B12258295660004BFE7 /* EditHabit.swift in Sources */,
 				2522916D258384A900869C51 /* ThemeColor.swift in Sources */,
 				25B73282258B460A003D9FD8 /* BodyText.swift in Sources */,
 				25FE74FB25C830370030EB0A /* HabitGroup.swift in Sources */,
 				25D0C9A1259F981B0018273E /* SummaryPreview.swift in Sources */,
 				2553522825BB4D3200255045 /* SummaryManager.swift in Sources */,
+				25D59CBB25D664C600D21056 /* SecondaryButton.swift in Sources */,
+				25BB560F25D61042005978AF /* IconButton.swift in Sources */,
 				25D0C99E259F96C80018273E /* EmojiCalendarRow.swift in Sources */,
 				25E163672599CBAA0082A87A /* EmojiListEdit.swift in Sources */,
 				25498A4D25BC045700283E71 /* Palette.swift in Sources */,
@@ -1137,6 +1181,8 @@
 				25C574FD2583D3BD004BF07D /* Habit+CoreDataClass.swift in Sources */,
 				25F887F62595091B00BC2D6A /* RoutineView.swift in Sources */,
 				2519664F25BC52530054BAF4 /* RowData.swift in Sources */,
+				25741FC525D6E261009EFBCA /* AddHabitCard.swift in Sources */,
+				2538BE5425D7B52F00B4F1E5 /* AddRoutineCard.swift in Sources */,
 				25FC34FA25A067C9000B5844 /* FlTimePicker.swift in Sources */,
 				25A386F62590CF2B00B1626D /* Colorscheme.swift in Sources */,
 				2501653825CD0C7100A43818 /* SelectRoutineList.swift in Sources */,
@@ -1152,6 +1198,7 @@
 				2553522125BB4CFA00255045 /* HabitManager.swift in Sources */,
 				250823C52583F93A0005D7CE /* KeyboardController.swift in Sources */,
 				251EFC71259E4E4B00748917 /* Summary+CoreDataProperties.swift in Sources */,
+				25D59CB525D6634A00D21056 /* ButtonSize.swift in Sources */,
 				258E02F6258E1139006DAFAC /* SectionText.swift in Sources */,
 				258B6B152582965F0004BFE7 /* ModalAllowAutoDismiss.swift in Sources */,
 				258F063D25D3A54B00FE26D0 /* FlTimer.swift in Sources */,
@@ -1162,12 +1209,13 @@
 				258B6AF8258289C80004BFE7 /* DateExtension.swift in Sources */,
 				251EFC69259E4DD300748917 /* Routine+CoreDataProperties.swift in Sources */,
 				25F212762591B97400E259EC /* SettingView.swift in Sources */,
-				25FC6034258615EE006BCFBA /* AddHabit.swift in Sources */,
 				25ED401825D3BD9300AC1ECC /* TimerStateSaver.swift in Sources */,
 				2522916A2583849100869C51 /* RowBackground.swift in Sources */,
-				255C1171258F373600E0F740 /* HeaderButton.swift in Sources */,
+				25D59C9F25D65E8400D21056 /* ColorExtension.swift in Sources */,
 				25ED400125D3BCBF00AC1ECC /* CompatibilityTest.swift in Sources */,
 				251EFC67259E4DD300748917 /* Summary+CoreDataClass.swift in Sources */,
+				25BB55FE25D60D2F005978AF /* TextButton.swift in Sources */,
+				2514A94325D568140044F593 /* PrimaryButton.swift in Sources */,
 				25A564D6258F90D100239CF6 /* TextFieldWithEndButton.swift in Sources */,
 				2528858725C1DAF2005BD4F5 /* WidgetData.swift in Sources */,
 				2512767725C84A08000466B4 /* DailyProgressBar.swift in Sources */,
@@ -1179,19 +1227,24 @@
 				25A564EE2590503400239CF6 /* Localizing.swift in Sources */,
 				25F04EF42594995C000BA9C5 /* FlList.swift in Sources */,
 				2586FD1425B6F10800416868 /* HabitShare.swift in Sources */,
+				25D59CC525D669FF00D21056 /* TertiaryButton.swift in Sources */,
 				258DD4F825A9ADBA00A2C20E /* CoreDataBridgeProtocol.swift in Sources */,
+				2514A95025D569C70044F593 /* FontSizeUnit.swift in Sources */,
 				258E02F1258E111E006DAFAC /* Title.swift in Sources */,
 				2553522525BB4D2400255045 /* RoutineManager.swift in Sources */,
 				258B6B0725828CC70004BFE7 /* HabitRow.swift in Sources */,
 				25FE74EE25C82F590030EB0A /* Tile.swift in Sources */,
 				25F4F4882597030D007E5BCF /* RoutineRow.swift in Sources */,
 				257D94AD25852EA6007D4CF1 /* ConditionalModifier.swift in Sources */,
+				25D59CD525D6BA6700D21056 /* FlTabView.swift in Sources */,
 				25E16354259920990082A87A /* CalendarInterface.swift in Sources */,
+				25BB560525D60D43005978AF /* LongPressDetector.swift in Sources */,
 				25E163632599C0F80082A87A /* EmojiManager.swift in Sources */,
 				25C9FA2925907CEA0046C523 /* ImageSaver.swift in Sources */,
 				258DD4FC25A9ADE300A2C20E /* FlHabit.swift in Sources */,
 				255C1174258F38E200E0F740 /* DayOfWeekSelector.swift in Sources */,
 				2580999825C94B64003E8E59 /* HabitNumberSetting.swift in Sources */,
+				25CC2EEC25D79DCA0046E852 /* EditHabitCard.swift in Sources */,
 				2512767F25C8F27C000466B4 /* CalendarMode.swift in Sources */,
 				25D0405725C4FA66004814B4 /* TimerManager.swift in Sources */,
 				251EFC68259E4DD300748917 /* Routine+CoreDataClass.swift in Sources */,
@@ -1227,6 +1280,7 @@
 				25B15ADE25C27CDA00A89C12 /* SmallWidget.swift in Sources */,
 				25FDE07825C1BA5400548212 /* HabitWidget.swift in Sources */,
 				252885B825C24E68005BD4F5 /* AutoSaveWrapper.swift in Sources */,
+				25D59CAF25D65F5000D21056 /* ColorExtension.swift in Sources */,
 				25B15AEE25C2838200A89C12 /* PaletteProtocol.swift in Sources */,
 				25B15AFA25C287A700A89C12 /* BodyText.swift in Sources */,
 				25B15BA425C2DA3D00A89C12 /* HabitWidget.intentdefinition in Sources */,

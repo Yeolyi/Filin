@@ -66,7 +66,7 @@ struct EditRoutine: View {
                     Text("\(tempRoutine.name)")
                         .headline()
                     Spacer()
-                    HeaderText("Save".localized) {
+                    TextButton(content: { Text("Save".localized) }) {
                         tempRoutine.list = filteredList
                         if useReminder {
                             tempRoutine.time = Date(hour: hour, minute: minute, isAM: isAM)

@@ -22,13 +22,22 @@ struct RowBackground: ViewModifier {
             .padding(.bottom, isInnerBottomPadding ? 18 : 0)
             .padding(.horizontal, 15)
             .background(
-                Rectangle()
-                    .foregroundColor(colorScheme == .light ? .white : Color(hex: "#151515"))
-                    .cornerRadius(8)
-                    .shadow(
-                        color: (colorScheme == .light ? Color.gray.opacity(0.6) : .clear),
-                        radius: 1.8, y: 1.28
-                    )
+                RoundedRectangle(cornerRadius: 8)
+                    .if(colorScheme == .light) {
+                        $0.foregroundColor(.white)
+                            .shadow(
+                                color: Color.gray.opacity(0.6),
+                                radius: 1.8, y: 1.28
+                            )
+                    }
+                    .if(colorScheme == .dark) {
+                        $0.foregroundColor(.black)
+                            .shadow(
+                                color: Color.white.opacity(0.5),
+                                radius: 1
+                            )
+                    }
+                    
             )
             .padding(.horizontal, 10)
             .padding(.vertical, 8)

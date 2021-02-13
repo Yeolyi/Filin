@@ -48,9 +48,9 @@ class FlListModel<Value: Hashable>: ObservableObject {
     }
     
     func rowScrollGesture(maxHeight: CGFloat) -> some Gesture {
-        DragGesture()
+        DragGesture(minimumDistance: 10, coordinateSpace: .global)
             .onChanged { value in
-                self.dragGestureLength += value.translation.height / 2
+                self.dragGestureLength = value.translation.height
             }
             .onEnded { _ in
                 withAnimation {
@@ -69,7 +69,7 @@ class FlListModel<Value: Hashable>: ObservableObject {
     }
     
     func rowDragGesture(id: UUID) -> some Gesture {
-        DragGesture()
+        DragGesture(minimumDistance: 10, coordinateSpace: .global)
             .onChanged { [self] dragData in
                 // 진동을 울릴지 확인
                 let supposeReordered = list.sorted(by: {$0.position < $1.position}).map(\.id)
@@ -79,7 +79,7 @@ class FlListModel<Value: Hashable>: ObservableObject {
                 self.previousList = supposeReordered
                 // 드래그되는 row 이동
                 let targetRow = list[index(of: id)]
-                targetRow.offset += dragData.translation.height
+                targetRow.offset = dragData.translation.height
                 targetRow.isTapped = true
                 // 다른 row의 위치 수정
                 changeOffsetWhileDrag(dragged: targetRow.id)

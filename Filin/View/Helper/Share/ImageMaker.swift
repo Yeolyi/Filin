@@ -65,10 +65,9 @@ struct ImageMaker<Content: View>: View {
             content
             HStack(spacing: 4) {
                 Spacer()
-                Image(colorScheme == .light ? "Icon1024" : "icon_dark")
+                Image("icon_border")
                     .resizable()
                     .frame(width: 16, height: 16)
-                    .cornerRadius(4)
                 Text("FILIN")
                     .font(.system(size: 14, weight: .semibold))
             }
