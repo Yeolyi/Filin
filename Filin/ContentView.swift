@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State var currentTab = 0
+    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -17,12 +18,16 @@ struct ContentView: View {
             Group {
                 HabitList()
                     .opacity(currentTab == 0 ? 1 : 0)
+                    .zIndex(currentTab == 0 ? 2 : 1)
                 SummaryView()
                     .opacity(currentTab == 1 ? 1 : 0)
+                    .zIndex(currentTab == 1 ? 2 : 1)
                 RoutineView()
                     .opacity(currentTab == 2 ? 1 : 0)
+                    .zIndex(currentTab == 2 ? 2 : 1)
                 SettingView()
                     .opacity(currentTab == 3 ? 1 : 0)
+                    .zIndex(currentTab == 3 ? 2 : 1)
             }
             .padding(.bottom, 55)
             VStack(spacing: 0) {

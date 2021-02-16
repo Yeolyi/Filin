@@ -25,9 +25,8 @@ struct HabitList: View {
                     IconButton(imageName: "plus") {
                         self.isSheet = true
                     }
-                    .accessibility(identifier: "habitPlus")
             )
-            .sheet(isPresented: $isSheet) {
+            .fullScreenCover(isPresented: $isSheet) {
                 AddHabitCard()
                     .environmentObject(appSetting)
                     .environmentObject(habitManager)

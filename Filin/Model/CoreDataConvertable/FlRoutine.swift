@@ -64,8 +64,8 @@ class FlRoutine: CoreDataConvertable {
         return copy
     }
     
-    func applyChanges(copy routine: FlRoutine) {
-        guard routine.id == copyID else {
+    func applyChanges(copy routine: FlRoutine, stateObjectException: Bool = false) {
+        guard routine.id == copyID || stateObjectException else {
             assertionFailure()
             return
         }

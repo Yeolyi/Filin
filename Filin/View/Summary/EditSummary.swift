@@ -10,51 +10,40 @@ import SwiftUI
 struct EditSummary: View {
     
     @EnvironmentObject var summaryManager: SummaryManager
-    @ObservedObject var listData: FlListModel<FlHabit>
-    let separatorID: UUID
+    @EnvironmentObject var habitManager: HabitManager
+    
+    @StateObject var listData = FlListModel<FlHabit>(values: [], save: {_ in })
+    let separatorID = UUID()
     
     @Environment(\.presentationMode) var presentationMode
     
-    init(habits: [FlHabit], current: [FlHabit]) {
-        let separatorID = UUID()
-        self.separatorID = separatorID
-        let separatorHabit = FlHabit(
-            id: separatorID, name: "⬆️ Goals to be displayed ⬆️".localized
-        )
-        separatorHabit.color = Color.gray
-        var habitsWithSeparator = current
-        habitsWithSeparator.append(separatorHabit)
-        for habit in habits where !habitsWithSeparator.contains(habit) {
-            habitsWithSeparator.append(habit)
-        }
-        listData = FlListModel(values: habitsWithSeparator, save: { habits in
-            var saved = [FlHabit]()
-            for habit in habits {
-                if habit.id == separatorID { break }
-                saved.append(habit)
-            }
-        })
-    }
-    
-    var orderedHabit: [FlHabit] {
-        var saved = [FlHabit]()
-        for habit in listData.allValues {
-            if habit.id == separatorID { break }
-            saved.append(habit)
-        }
-        return saved
-    }
-    
     var body: some View {
-        FlInlineNavigationBar(bar: {
-            HStack {
-                Text("Edit Summary".localized)
-                    .headline()
-                Spacer()
-            }
-            .padding(.horizontal, 20)
-        }) {
             VStack(spacing: 0) {
+                ZStack {
+                    IconButton(imageName: "xmark") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    Text("Edit Summary".localized)
+                        .bodyText()
+                    TextButton(content: {
+                        Text("Complete".localized)
+                    }) {
+                        if let index = listData.allValues.firstIndex(where: { $0.id == separatorID }) {
+                            if index == 0 {
+                                summaryManager.contents[0].list = []
+                                presentationMode.wrappedValue.dismiss()
+                                return
+                            }
+                            summaryManager.contents[0].list = Array(listData.allValues[0..<index].map(\.id))
+                            summaryManager.objectWillChange.send()
+                        }
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .padding(.horizontal, 15)
+                .padding(.vertical, 8)
                 FlList(listData: listData) { id in
                     Text(listData.value(of: id).name)
                         .foregroundColor(listData.value(of: id).color)
@@ -75,17 +64,27 @@ struct EditSummary: View {
                     .frame(maxWidth: .infinity)
                     .flatRowBackground()
  */
-                Spacer()
             }
-        }
         .onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification)) { _ in
-            summaryManager.contents[0].list = orderedHabit.map(\.id)
-            summaryManager.objectWillChange.send()
             presentationMode.wrappedValue.dismiss()
         }
-        .onDisappear {
-            summaryManager.contents[0].list = orderedHabit.map(\.id)
-            summaryManager.objectWillChange.send()
+        .onAppear {
+            if listData.list.isEmpty {
+                let separatorHabit = FlHabit(
+                    id: separatorID, name: "⬆️ Goals to be displayed ⬆️".localized
+                )
+                separatorHabit.color = Color.gray
+                var habitsWithSeparator = summaryManager.contents[0].list.compactMap { habitID in
+                    habitManager.contents.first(where: { $0.id == habitID })
+                }
+                habitsWithSeparator.append(separatorHabit)
+                for habit in habitManager.contents where !habitsWithSeparator.contains(habit) {
+                    habitsWithSeparator.append(habit)
+                }
+                for habit in habitsWithSeparator {
+                    listData.append(habit)
+                }
+            }
         }
     }
 }
@@ -95,7 +94,7 @@ struct EditSummary_Previews: PreviewProvider {
         let dataSample = PreviewDataProvider.shared
         return Text("")
             .sheet(isPresented: .constant(true)) {
-                EditSummary(habits: dataSample.habitManager.contents, current: [])
+                EditSummary()
                     .environmentObject(dataSample.summaryManager)
             }
     }

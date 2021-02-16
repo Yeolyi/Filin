@@ -16,7 +16,7 @@ enum DetailViewActiveSheet: Identifiable {
 
 struct HabitDetailView: View {
     
-    @ObservedObject var emojiManager = EmojiManager()
+    @StateObject var emojiManager = EmojiManager()
     
     @State var activeSheet: DetailViewActiveSheet?
     @State var selectedDate = Date()
@@ -64,7 +64,7 @@ struct HabitDetailView: View {
                     }
                 }
         )
-        .sheet(item: $activeSheet) { item in
+        .fullScreenCover(item: $activeSheet) { item in
             switch item {
             case .edit:
                 EditHabitCard(targetHabit: habit)
@@ -72,7 +72,6 @@ struct HabitDetailView: View {
                     .environmentObject(summaryManager)
                     .environmentObject(routineManager)
                     .environmentObject(appSetting)
-                    
             case .emoji:
                 EmojiListEdit()
                     .environmentObject(emojiManager)

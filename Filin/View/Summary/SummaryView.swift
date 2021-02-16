@@ -75,12 +75,12 @@ struct SummaryView: View {
             )
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .sheet(item: $activeSheet) { item in
+        .fullScreenCover(item: $activeSheet) { item in
             switch item {
             case .edit:
-                EditSummary(habits: habitManager.contents, current: habits)
-                    .accentColor(ThemeColor.mainColor(colorScheme))
+                EditSummary()
                     .environmentObject(summaryManager)
+                    .environmentObject(habitManager)
             case .share:
                 HabitShare(
                     target: { imageAspect in
@@ -103,10 +103,10 @@ struct SummaryView: View {
                 )
             }
         }
-        .accentColor(ThemeColor.mainColor(colorScheme))
         .onAppear {
             selectedDate = appSetting.mainDate
         }
+        
     }
 }
 

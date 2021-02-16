@@ -63,7 +63,7 @@ struct RoutineView: View {
                         self.isAddSheet = .add
                     }
                 )
-                .sheet(item: $isAddSheet) { sheetType in
+                .fullScreenCover(item: $isAddSheet) { sheetType in
                     switch sheetType {
                     case RoutineSheet.add:
                         AddRoutineCard(habits: habitManager.contents)
@@ -71,10 +71,10 @@ struct RoutineView: View {
                             .environmentObject(routineManager)
                             .environmentObject(appSetting)
                     case RoutineSheet.edit(let routine):
-                        EditRoutine(routine: routine, habits: habitManager.contents)
+                        EditRoutineCard(targetRoutine: routine, habits: habitManager.contents)
                             .environmentObject(habitManager)
                             .environmentObject(routineManager)
-                            .accentColor(ThemeColor.mainColor(colorScheme))
+                            .environmentObject(appSetting)
                     }
                 }
             }

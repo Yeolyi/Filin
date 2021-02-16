@@ -25,7 +25,7 @@ struct IconButton: View {
     
     var color: Color {
         if !isActive {
-            return ThemeColor.subColor(colorScheme)
+            return ThemeColor.subColor(colorScheme).opacity(0.3)
         }
         return isPressed ? ThemeColor.mainColor(colorScheme) : ThemeColor.subColor(colorScheme)
     }

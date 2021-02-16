@@ -64,6 +64,7 @@ struct HabitTimer: View {
                                 String(format: "%02d", second)
                         )
                         .foregroundColor(habit.color)
+                        .animation(nil)
                         .title()
                         .onReceive(
                             NotificationCenter.default.publisher(

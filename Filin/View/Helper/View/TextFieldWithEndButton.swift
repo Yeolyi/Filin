@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct TextFieldWithEndButton: View {
+    
     let titleKey: String
     @State var isEditing = false
     @Binding var text: String
     @Environment(\.colorScheme) var colorScheme
+    
     init(_ titleKey: String, text: Binding<String>) {
         self.titleKey = titleKey
         self._text = text
     }
+    
     var body: some View {
         HStack {
             TextField(titleKey, text: $text, onEditingChanged: { (changed) in
@@ -35,7 +38,6 @@ struct TextFieldWithEndButton: View {
                     Text("Done".localized)
                         .foregroundColor(ThemeColor.mainColor(colorScheme))
                 }
-                .accessibility(identifier: "closeKeyboard")
             }
         }
     }

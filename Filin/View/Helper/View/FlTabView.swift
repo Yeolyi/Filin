@@ -7,16 +7,19 @@
 
 import SwiftUI
 
+
 struct FlTabView<Content: View>: View {
     
-    let content: Content
+    let content: () -> Content
     let viewWidth: CGFloat
     let viewNum: Int
     let padding: CGFloat = 20
     
-    @Binding var index: Int
     var lock: Bool
+    
     @State var scrollOffset: CGFloat = 0
+    
+    @Binding var index: Int
     
     var totalWidth: CGFloat {
         viewWidth * CGFloat(viewNum) + padding * (CGFloat(viewNum) - 1)
@@ -26,7 +29,7 @@ struct FlTabView<Content: View>: View {
         if viewNum == 1 {
             return scrollOffset
         }
-        let origin = totalWidth / 2 - (viewWidth + padding) / 2
+        let origin = totalWidth / 2 - viewWidth / 2
         return origin - CGFloat(index) * (viewWidth + padding) + scrollOffset
     }
     
@@ -44,12 +47,12 @@ struct FlTabView<Content: View>: View {
         self.lock = lock
         self.viewWidth = viewWidth
         self.viewNum = viewNum
-        self.content = content()
+        self.content = content
     }
     
     var body: some View {
-        HStack(spacing: padding) {
-            content
+        LazyHStack(spacing: padding) {
+            content()
         }
         .animation(Animation.spring().speed(1.5))
         .gesture(
@@ -68,9 +71,9 @@ struct FlTabView<Content: View>: View {
                         return
                     }
                     withAnimation {
-                        if calOffset - getOffset(of: index) > viewWidth / 4 {
+                        if calOffset - getOffset(of: index) > 30 {
                             index = max(0, self.index - 1)
-                        } else if calOffset - getOffset(of: index) < -viewWidth / 4 {
+                        } else if calOffset - getOffset(of: index) < -30 {
                             index = min(viewNum - 1, self.index + 1)
                         }
                         scrollOffset = 0

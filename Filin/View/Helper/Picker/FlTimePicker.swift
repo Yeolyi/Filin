@@ -9,13 +9,36 @@ import SwiftUI
 
 struct FlTimePicker: View {
     
-    @Binding var minute: Int
-    @Binding var second: Int
+    @Binding var requiredSec: Int
+    
+    var minute: Binding<Int> {
+        Binding(
+            get: {
+                requiredSec / 60
+            }, set: {
+                requiredSec = $0 * 60 + second.wrappedValue
+            }
+        )
+    }
+    
+    var second: Binding<Int> {
+        Binding(
+            get: {
+                requiredSec % 60
+            }, set: {
+                requiredSec = minute.wrappedValue * 60 + $0
+            }
+        )
+    }
+    
+    init(requiredSec: Binding<Int>) {
+        self._requiredSec = requiredSec
+    }
     
     var body: some View {
         HStack {
             VStack {
-                Picker(selection: $minute, label: EmptyView(), content: {
+                Picker(selection: minute, label: EmptyView(), content: {
                     ForEach(0...500, id: \.self) { minute in
                         Text(String(minute))
                             .bodyText()
@@ -23,19 +46,17 @@ struct FlTimePicker: View {
                 })
                 .frame(width: 150, height: 150)
                 .clipped()
-                .accessibility(identifier: "minute")
                 Text("Minute".localized)
                     .bodyText()
             }
             VStack {
-                Picker(selection: $second, label: EmptyView(), content: {
+                Picker(selection: second, label: EmptyView(), content: {
                     ForEach(0...59, id: \.self) { second in
                         Text(String(second))
                             .bodyText()
                     }
                 })
                 .frame(width: 150, height: 150)
-                .accessibility(identifier: "second")
                 .clipped()
                 Text("Second".localized)
                     .bodyText()
@@ -48,10 +69,9 @@ struct FlTimePicker: View {
 struct TimerPicker_Previews: PreviewProvider {
     
     struct StateWrapper: View {
-        @State var minute = 0
-        @State var second = 0
+        @State var requiredSec = 0
         var body: some View {
-            FlTimePicker(minute: $minute, second: $second)
+            FlTimePicker(requiredSec: $requiredSec)
         }
     }
     

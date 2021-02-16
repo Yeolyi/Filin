@@ -39,9 +39,9 @@ struct AddRoutineCard: View {
         case 1:
             return !newRoutine.repeatDay.isEmpty
         case 2:
-            return !listData.allValues.isEmpty
+            return !selectedList.isEmpty
         case 3:
-            return newRoutine.name != "" && !newRoutine.repeatDay.isEmpty && !listData.allValues.isEmpty
+            return newRoutine.name != "" && !newRoutine.repeatDay.isEmpty && !selectedList.isEmpty
         default:
             assertionFailure()
             return true
@@ -56,58 +56,69 @@ struct AddRoutineCard: View {
         }
     }
     
+    var selectedList: [FlHabit] {
+        guard let index = listData.allValues.firstIndex(where: { $0.id == dividerID }), index > 0 else {
+            return []
+        }
+        return Array(listData.allValues[0..<index])
+    }
+    
     func save() {
         guard isSaveAvailable else { return }
-        guard let index = listData.allValues.firstIndex(where: { $0.id == dividerID }), index != 0 else {
+        guard let index = listData.allValues.firstIndex(where: { $0.id == dividerID }), index > 0 else {
             assertionFailure()
             return
         }
-        newRoutine.list = Array(listData.allValues[0..<index])
+        newRoutine.list = selectedList
         routineManager.append(newRoutine)
-         presentationMode.wrappedValue.dismiss()
+        presentationMode.wrappedValue.dismiss()
         return
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            IconButton(imageName: "xmark") {
-                presentationMode.wrappedValue.dismiss()
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding([.top, .leading], 20)
-            Spacer()
-            FlTabView(index: $index, viewWidth: 350, viewNum: 4, lock: !isSaveAvailable) {
-                Group {
-                    NameSection(name: $newRoutine.name)
-                    RepeatSection(dayOfWeek: $newRoutine.repeatDay)
-                    ListSection(listData: listData, dividerID: dividerID)
-                    TimerSection(timer: $newRoutine.time)
+            VStack(spacing: 0) {
+                ZStack {
+                    IconButton(imageName: "xmark") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    Text("Add Routine".localized)
+                        .bodyText()
                 }
-                .frame(width: 330, height: 450)
-                .rowBackground()
-                .frame(width: 350)
-            }
-            .frame(width: 380)
-            .padding(.bottom, 20)
-            Spacer()
-            TextButton(content: {
-                Text("Previous".localized)
-            }) {
-                index = max(0, index - 1)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 20)
-            .padding(.bottom, 8)
-            PrimaryButton(label: buttonLabel, isActive: isSaveAvailable) {
-                if index == 3 && isSaveAvailable {
-                    save()
-                    return
+                .padding(.horizontal, 15)
+                .padding(.vertical, 8)
+                FlTabView(index: $index, viewWidth: 350, viewNum: 4, lock: !isSaveAvailable) {
+                    Group {
+                        NameSection(name: $newRoutine.name, cardMode: .detail(pageIndicator: "1/4"))
+                        RepeatSection(cardMode: .detail(pageIndicator: "2/4"), dayOfWeek: $newRoutine.repeatDay)
+                        ListSection(listData: listData, dividerID: dividerID, cardMode: .detail(pageIndicator: ""))
+                        ReminderSection(timer: $newRoutine.time, cardMode: .detail(pageIndicator: "4/4"))
+                    }
+                    .frame(width: 330, height: 440)
+                    .rowBackground()
+                    .frame(width: 350)
                 }
-                index = min(3, index + 1)
+                .frame(width: 370)
+                Spacer()
+                TextButton(content: {
+                    Text("Previous".localized)
+                }) {
+                    index = max(0, index - 1)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 20)
+                .padding(.bottom, 8)
+                PrimaryButton(label: buttonLabel, isActive: isSaveAvailable) {
+                    UIApplication.shared.endEditing()
+                    if index == 3 && isSaveAvailable {
+                        save()
+                        return
+                    }
+                    index = min(3, index + 1)
+                }
+                .padding(.bottom, 20)
+                .padding(.horizontal, 10)
             }
-            .padding(.bottom, 20)
-            .padding(.horizontal, 10)
-        }
         .if(colorScheme == .light) {
             $0.background(
                 Rectangle()
@@ -122,89 +133,59 @@ struct AddRoutineCard: View {
 private struct NameSection: View {
     
     @Binding var name: String
+    let cardMode: CardMode
     
     var body: some View {
         VStack(spacing: 3) {
-            VStack(alignment: .leading, spacing: 5) {
+            if case .detail = cardMode {
                 Text("Getting Started\nwith a new Routine".localized)
                     .foregroundColor(ThemeColor.brand)
                     .headline()
                     .lineSpacing(5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding([.top, .leading], 10)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding([.top, .leading], 10)
             Spacer()
-            Text("Tell me the name of the routine.".localized)
-                .smallSectionText()
+            Group {
+                if case .detail = cardMode {
+                    Text("Tell me the name of the routine.".localized)
+                } else {
+                    Text("Name".localized)
+                }
+            }
+            .smallSectionText()
             TextFieldWithEndButton(FlRoutine.sample(number: 0).name, text: $name)
                 .flatRowBackground()
             Spacer()
-            Text("1/4")
-                .bodyText()
-        }
-    }
-}
-
-private struct RepeatSection: View {
-    
-    @Binding var dayOfWeek: Set<Int>
-    @EnvironmentObject var appSetting: AppSetting
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            Spacer()
-            Text("Choose the day of the week to repeat your routine.".localized)
-                .bodyText()
-                .lineLimit(nil)
-                .padding(.bottom, 30)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            VStack(spacing: 10) {
-                ForEach(
-                    appSetting.isMondayStart ? [2, 3, 4, 5, 6, 7, 1] : [1, 2, 3, 4, 5, 6, 7],
-                    id: \.self
-                ) { dayOfWeekInt in
-                    TextButton(content: {
-                        HStack {
-                            Text(Date.dayOfTheWeekStr(dayOfWeekInt))
-                            Spacer()
-                            if dayOfWeek.contains(dayOfWeekInt) {
-                                Image(systemName: "checkmark")
-                            }
-                        }
-                    }) {
-                        if dayOfWeek.contains(dayOfWeekInt) {
-                            dayOfWeek.remove(dayOfWeekInt)
-                        } else {
-                            dayOfWeek.insert(dayOfWeekInt)
-                        }
-                    }
-                    Divider()
-                }
+            if case .detail(let pageIndicator) = cardMode {
+                Text(pageIndicator)
+                    .bodyText()
             }
-            Spacer()
-            Text("2/4")
-                .bodyText()
         }
     }
 }
 
-private struct ListSection: View {
+struct ListSection: View {
     
     @ObservedObject var listData: FlListModel<FlHabit>
     
     let dividerID: UUID
+    let cardMode: CardMode
     
-    init(listData: FlListModel<FlHabit>, dividerID: UUID) {
+    init(listData: FlListModel<FlHabit>, dividerID: UUID, cardMode: CardMode) {
         self.listData = listData
         self.dividerID = dividerID
+        self.cardMode = cardMode
     }
     
     var body: some View {
         VStack(spacing: 5) {
-            Text("Choose your goals.".localized)
-                .bodyText()
-                .lineLimit(nil)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            if case .detail = cardMode {
+                Text("Choose your goals.".localized)
+                    .bodyText()
+                    .lineLimit(nil)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
             FlList(listData: listData) { id in
                 HStack(spacing: 0) {
                     if listData.value(of: id).id != dividerID {
@@ -221,22 +202,19 @@ private struct ListSection: View {
     }
 }
 
-private struct TimerSection: View {
+struct ReminderSection: View {
     
-    @State var _useReminder = false
-    @State var _isAM: Bool = true
-    @State var _hour: Int = 10
-    @State var _minute: Int = 0
-    
+    let cardMode: CardMode
     @Binding var timer: Date?
     
     var useReminder: Binding<Bool> {
         Binding(
-            get: { _useReminder },
+            get: { timer != nil },
             set: {
-                _useReminder = $0
-                if !$0 { timer = nil } else {
-                    timer = Date(hour: _hour, minute: _minute, isAM: _isAM)
+                if $0 {
+                    timer = Date()
+                } else {
+                    timer = nil
                 }
             }
         )
@@ -244,57 +222,59 @@ private struct TimerSection: View {
     
     var isAM: Binding<Bool> {
         Binding(
-            get: { _isAM },
+            get: {
+                (timer ?? Date()).dateToTimer().isAM
+            },
             set: {
-                _isAM = $0
-                timer = Date(hour: _hour, minute: _minute, isAM: $0)
+                timer = Date(hour: hour.wrappedValue, minute: minute.wrappedValue, isAM: $0)
             }
         )
     }
     
     var hour: Binding<Int> {
         Binding(
-            get: { _hour },
+            get: { (timer ?? Date()).dateToTimer().hour  },
             set: {
-                _hour = $0
-                timer = Date(hour: $0, minute: _minute, isAM: _isAM)
+                timer = Date(hour: $0, minute: minute.wrappedValue, isAM: isAM.wrappedValue)
             }
         )
     }
     
     var minute: Binding<Int> {
         Binding(
-            get: { _minute },
+            get: { (timer ?? Date()).dateToTimer().minute },
             set: {
-                _minute = $0
-                timer = Date(hour: _hour, minute: $0, isAM: _isAM)
+                timer = Date(hour: hour.wrappedValue, minute: $0, isAM: isAM.wrappedValue)
             }
         )
     }
     
-    init(timer: Binding<Date?>) {
+    init(timer: Binding<Date?>, cardMode: CardMode) {
         self._timer = timer
+        self.cardMode = cardMode
     }
     
     var body: some View {
         VStack(spacing: 8) {
             Spacer()
-            HStack {
-                Text("Reminder".localized)
-                    .bodyText()
-                    .fixedSize(horizontal: false, vertical: true)
-                Spacer()
+            if case .detail = cardMode {
+                HStack {
+                    Text("Do you want me to tell you the time to start the routine?".localized)
+                        .bodyText()
+                        .fixedSize(horizontal: false, vertical: true)
+                    Spacer()
+                }
+                .padding(.leading, 20)
             }
-            .padding(.leading, 20)
             VStack(spacing: 4) {
                 HStack {
-                    Text(_useReminder ? "On".localized : "Off".localized)
+                    Text(useReminder.wrappedValue ? "On".localized : "Off".localized)
                         .bodyText()
                     Spacer()
                     FlToggle(useReminder)
                 }
                 .flatRowBackground()
-                if _useReminder {
+                if useReminder.wrappedValue {
                     HStack {
                         Picker(selection: hour, label: EmptyView(), content: {
                             ForEach(1...12, id: \.self) { hour in
@@ -326,8 +306,10 @@ private struct TimerSection: View {
                 }
             }
             Spacer()
-            Text("4/4")
-                .bodyText()
+            if case .detail(let pageIndicator) = cardMode {
+                Text(pageIndicator)
+                    .bodyText()
+            }
         }
     }
 }

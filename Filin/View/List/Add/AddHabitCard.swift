@@ -40,29 +40,32 @@ struct AddHabitCard: View {
             return "To the Next Level".localized
         }
     }
-    
+
     var body: some View {
-        VStack(spacing: 0) {
-            IconButton(imageName: "xmark") {
-                presentationMode.wrappedValue.dismiss()
+        VStack {
+            ZStack {
+                IconButton(imageName: "xmark") {
+                    presentationMode.wrappedValue.dismiss()
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                Text("Start Habit".localized)
+                    .bodyText()
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding([.top, .leading], 20)
-            Spacer()
+            .padding(.horizontal, 15)
+            .padding(.vertical, 8)
             FlTabView(index: $index, viewWidth: 350, viewNum: 5, lock: !isSaveAvailable) {
                 Group {
-                    NameSection(name: $tempHabit.name)
-                    ColorSection(color: $tempHabit.color)
-                    RepeatSection(dayOfWeek: $tempHabit.dayOfWeek)
-                    CountSection(tempHabit: tempHabit)
-                    TimerSection(requiredSec: $tempHabit.requiredSec)
+                    HabitNameSection(name: $tempHabit.name, cardMode: .detail(pageIndicator: "1/5"))
+                    ColorSection(color: $tempHabit.color, cardMode: .detail(pageIndicator: "2/5"))
+                    RepeatSection(cardMode: .detail(pageIndicator: "3/5"), dayOfWeek: $tempHabit.dayOfWeek)
+                    HabitCountSection(tempHabit: tempHabit, cardMode: .detail(pageIndicator: "4/5"))
+                    HabitTimerSection(requiredSec: $tempHabit.requiredSec, cardMode: .detail(pageIndicator: "5/5"))
                 }
-                .frame(width: 330, height: 450)
+                .frame(width: 330, height: 440)
                 .rowBackground()
                 .frame(width: 350)
             }
-            .frame(width: 380)
-            .padding(.bottom, 20)
+            .frame(width: 370)
             Spacer()
             TextButton(content: {
                 Text("Previous".localized)
@@ -73,6 +76,7 @@ struct AddHabitCard: View {
             .padding(.leading, 20)
             .padding(.bottom, 8)
             PrimaryButton(label: buttonLabel, isActive: isSaveAvailable) {
+                UIApplication.shared.endEditing()
                 if index == 4 && isSaveAvailable {
                     habitManager.append(tempHabit, summaryManager: summaryManager)
                     self.presentationMode.wrappedValue.dismiss()
@@ -80,7 +84,7 @@ struct AddHabitCard: View {
                     index += 1
                 }
             }
-            .padding(.bottom, 20)
+            .padding(.bottom, 10)
             .padding(.horizontal, 10)
         }
         .if(colorScheme == .light) {
@@ -89,137 +93,6 @@ struct AddHabitCard: View {
                     .inactiveColor()
                     .edgesIgnoringSafeArea(.all)
             )
-        }
-    }
-}
-
-private struct NameSection: View {
-    
-    @Binding var name: String
-    
-    var body: some View {
-        VStack(spacing: 3) {
-            VStack(alignment: .leading, spacing: 5) {
-                Text("Getting Started\nwith a new Goal")
-                    .foregroundColor(ThemeColor.brand)
-                    .headline()
-                    .lineSpacing(5)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding([.top, .leading], 10)
-            Spacer()
-            Text("Tell me the name of the goal.".localized)
-                .smallSectionText()
-            TextFieldWithEndButton(FlHabit.sample(number: 0).name, text: $name)
-                .flatRowBackground()
-            Spacer()
-            Text("1/5")
-                .bodyText()
-        }
-    }
-}
-
-private struct ColorSection: View {
-    
-    @Binding var color: Color
-    
-    var body: some View {
-        VStack(spacing: 3) {
-            Spacer()
-            Text("Choose a color that matches your goal.".localized)
-                .smallSectionText()
-            ColorHorizontalPicker(selectedColor: $color)
-                .frame(maxWidth: .infinity)
-                .flatRowBackground()
-            Spacer()
-            Text("2/5")
-                .bodyText()
-        }
-    }
-}
-
-private struct RepeatSection: View {
-    
-    @Binding var dayOfWeek: Set<Int>
-    @EnvironmentObject var appSetting: AppSetting
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            Spacer()
-            Text("Choose the day of the week to repeat your goal.".localized)
-                .bodyText()
-                .lineLimit(nil)
-                .padding(.bottom, 30)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            VStack(spacing: 10) {
-                ForEach(
-                    appSetting.isMondayStart ? [2, 3, 4, 5, 6, 7, 1] : [1, 2, 3, 4, 5, 6, 7],
-                    id: \.self
-                ) { dayOfWeekInt in
-                    TextButton(content: {
-                        HStack {
-                            Text(Date.dayOfTheWeekStr(dayOfWeekInt))
-                            Spacer()
-                            if dayOfWeek.contains(dayOfWeekInt) {
-                                Image(systemName: "checkmark")
-                            }
-                        }
-                    }) {
-                        if dayOfWeek.contains(dayOfWeekInt) {
-                            dayOfWeek.remove(dayOfWeekInt)
-                        } else {
-                            dayOfWeek.insert(dayOfWeekInt)
-                        }
-                    }
-                    Divider()
-                }
-            }
-            Spacer()
-            Text("3/5")
-                .bodyText()
-        }
-    }
-}
-
-private struct CountSection: View {
-    
-    @ObservedObject var tempHabit: FlHabit
-    
-    var body: some View {
-        VStack(spacing: 8) {
-            Spacer()
-            HStack {
-                Text("How many times a day will you do it?".localized)
-                    .bodyText()
-                    .fixedSize(horizontal: false, vertical: true)
-                Spacer()
-            }
-            .padding(.leading, 20)
-            HabitNumberSetting(tempHabit)
-            Spacer()
-            Text("4/5")
-                .bodyText()
-        }
-    }
-}
-
-private struct TimerSection: View {
-    
-    @Binding var requiredSec: Int
-    
-    var body: some View {
-        VStack(spacing: 8) {
-            Spacer()
-            HStack {
-                Text("Should I prepare a timer when you perform this goal?".localized)
-                    .bodyText()
-                Spacer()
-            }
-            .padding(.leading, 20)
-            HabitTimerSetting(requiredSec: $requiredSec)
-            Spacer()
-            Text("5/5")
-                .bodyText()
         }
     }
 }

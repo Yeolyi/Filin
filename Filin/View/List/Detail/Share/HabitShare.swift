@@ -62,73 +62,78 @@ struct HabitShare<TargetView: View>: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 10) {
-                Text("Share".localized)
-                    .sectionText()
-                Divider()
-                    .padding(.bottom, 15)
-                if calendarImage != nil {
-                    Image(uiImage: calendarImage!)
-                        .resizable()
-                        .scaledToFit()
-                        .animation(nil)
-                        .rowBackground()
+        VStack(spacing: 0) {
+            ZStack {
+                IconButton(imageName: "xmark") {
+                    presentationMode.wrappedValue.dismiss()
                 }
-                HStack(spacing: 10) {
-                    imageSizeSelectButton(.free)
-                    imageSizeSelectButton(.square)
-                    imageSizeSelectButton(.fourThree)
-                    imageSizeSelectButton(.fourFive)
-                    Spacer()
-                }
-                .padding(.leading, 10)
-                Divider()
-                    .padding(.top, 20)
-                Button(action: {
-                    if let image = calendarImage {
-                        share(items: [image])
+                .frame(maxWidth: .infinity, alignment: .leading)
+                Text("Share Image")
+                    .bodyText()
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+            .padding(.horizontal, 15)
+            .padding(.vertical, 8)
+                ScrollView {
+                    VStack(spacing: 10) {
+                        if calendarImage != nil {
+                            Image(uiImage: calendarImage!)
+                                .resizable()
+                                .scaledToFit()
+                                .animation(nil)
+                                .rowBackground()
+                        }
+                        HStack(spacing: 10) {
+                            imageSizeSelectButton(.free)
+                            imageSizeSelectButton(.square)
+                            imageSizeSelectButton(.fourThree)
+                            imageSizeSelectButton(.fourFive)
+                            Spacer()
+                        }
+                        .padding(.leading, 10)
+                        Divider()
+                            .padding(.top, 20)
+                        Button(action: {
+                            if let image = calendarImage {
+                                share(items: [image])
+                            }
+                        }) {
+                            settingRow("Save/Share the Image Above".localized) {
+                                Image(systemName: "square.and.arrow.down")
+                                    .font(.system(size: 25))
+                                    .padding(.trailing, 10)
+                                    .mainColor()
+                            }
+                        }
+                        Button(action: {
+                            if let image = calendarImage {
+                                SharingHandler.instagramStory(imageData: image.pngData()!, colorScheme: colorScheme)
+                            }
+                        }) {
+                            settingRow("Share to Instagram Story".localized) {
+                                Image("Instagram_AppIcon")
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
+                                    .padding(.trailing, 10)
+                            }
+                        }
                     }
-                }) {
-                    settingRow("Save/Share the Image Above".localized) {
-                        Image(systemName: "square.and.arrow.down")
-                            .font(.system(size: 25))
-                            .padding(.trailing, 10)
-                            .mainColor()
-                    }
-                }
-                Button(action: {
-                    if let image = calendarImage {
-                        SharingHandler.instagramStory(imageData: image.pngData()!, colorScheme: colorScheme)
-                    }
-                }) {
-                    settingRow("Share to Instagram Story".localized) {
-                        Image("Instagram_AppIcon")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .padding(.trailing, 10)
-                    }
+                    .padding(.bottom, 20)
                 }
             }
-            .padding(.bottom, 20)
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification)) { _ in
-            presentationMode.wrappedValue.dismiss()
-        }
-        .onAppear {
-            updateImage()
-        }
+            .onAppear {
+                updateImage()
+            }
     }
 }
 
-/*
 struct HabitShare_Previews: PreviewProvider {
     static var previews: some View {
-        let dataSample = DataSample.shared
-        return HabitShare(target: <#T##_#>, aspectPolicy: <#T##(ImageSize) -> Bool#>)
+        HabitShare(target: { _ in
+            Text("Hello")
+        }, aspectPolicy: {_ in true})
     }
 }
-*/
 
 @discardableResult
 func share(

@@ -10,48 +10,60 @@ import SwiftUI
 struct HabitNumberSetting: View {
     
     @ObservedObject var tempHabit: FlHabit
-    @State var _isSet = false
+    /*
+     if value {
+     tempHabit.achievement.addUnit = oneTapNum
+     tempHabit.achievement.targetTimes = oneTapNum * setNum
+     } else {
+     tempHabit.achievement.addUnit = 1
+     tempHabit.achievement.targetTimes = oneTapNum
+     }
+     */
     
     var isSet: Binding<Bool> {
-        Binding(get: { _isSet}, set: {
-            _isSet = $0
-            if $0 {
-                tempHabit.achievement.addUnit = tempHabit.achievement.targetTimes
-                _setNum = 1
-            } else {
-                tempHabit.achievement.addUnit = 1
+        Binding(
+            get: {
+                tempHabit.achievement.isSet
+            }, set: {
+                if $0 {
+                    tempHabit.achievement.addUnit = setNum.wrappedValue == 1 ? 2 : setNum.wrappedValue
+                    tempHabit.achievement.targetTimes = oneTapNum.wrappedValue * setNum.wrappedValue
+                } else {
+                    tempHabit.achievement.addUnit = 1
+                    tempHabit.achievement.targetTimes = oneTapNum.wrappedValue
+                }
             }
-        })
+        )
     }
-    
-    @State var _setNum = 1
     var setNum: Binding<Int> {
-        Binding(get: { _setNum }, set: {
-            _setNum = $0
-            tempHabit.achievement.targetTimes = $0 * tempHabit.achievement.addUnit
-        })
+        Binding(
+            get: {
+                tempHabit.achievement.addUnit
+            }, set: {
+                let backup = oneTapNum.wrappedValue
+                tempHabit.achievement.addUnit = $0
+                tempHabit.achievement.targetTimes = $0 * backup
+            }
+        )
     }
     
     var oneTapNum: Binding<Int> {
-        Binding(get: {tempHabit.achievement.addUnit}, set: {
-            tempHabit.achievement.addUnit = $0
-            tempHabit.achievement.targetTimes = _setNum * $0
-        })
+        Binding(
+            get: {
+                tempHabit.achievement.targetTimes / tempHabit.achievement.addUnit
+            }, set: {
+                tempHabit.achievement.targetTimes = $0 * self.setNum.wrappedValue
+            })
     }
     
-    init(_ targetHabit: FlHabit) {
-        self.tempHabit = targetHabit
-        __setNum = State(
-            initialValue: targetHabit.achievement.addUnit != 1 ?
-                targetHabit.achievement.targetTimes / targetHabit.achievement.addUnit : targetHabit.achievement.targetTimes
-        )
-        __isSet = State(initialValue: targetHabit.achievement.addUnit != 1)
+    init(_ tempHabit: FlHabit) {
+        self.tempHabit = tempHabit
     }
     
     var body: some View {
         VStack(spacing: 15) {
             if !isSet.wrappedValue {
-                Picker("", selection: setNum) {
+                Picker("", selection: oneTapNum) {
                     ForEach(1...100, id: \.self) { num in
                         Text(String(num))
                             .bodyText()
@@ -62,7 +74,7 @@ struct HabitNumberSetting: View {
             } else {
                 HStack {
                     VStack {
-                        Picker("", selection: setNum) {
+                        Picker("", selection: oneTapNum) {
                             ForEach(1...30, id: \.self) { num in
                                 Text(String(num))
                                     .bodyText()
@@ -70,14 +82,14 @@ struct HabitNumberSetting: View {
                         }
                         .frame(width: 150, height: 150)
                         .clipped()
-                        .accessibility(identifier: "numberOfSets")
+                        
                         Text("Number of Sets".localized)
                             .subColor()
                             .font(.system(size: FontSize.caption.rawValue, weight: .semibold))
                     }
                     .frame(width: 150, height: 200, alignment: .top)
                     VStack {
-                        Picker("".localized, selection: oneTapNum) {
+                        Picker("".localized, selection: setNum) {
                             ForEach(1...200, id: \.self) { num in
                                 Text(String(num))
                                     .bodyText()
@@ -98,7 +110,6 @@ struct HabitNumberSetting: View {
                     .bodyText()
                 Spacer()
                 FlToggle(isSet)
-                    .accessibility(identifier: "isSetToggle")
             }
         }
         .flatRowBackground()

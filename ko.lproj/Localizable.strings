@@ -24,6 +24,8 @@
 "Goal" = "목표";
 "Previous" = "이전";
 "To the Next Level" = "다음 단계로";
+"Complete" = "완료";
+"Edit %@" = "%@ 편집";
 
 // 샘플 목표
 "Intermediate Stretching🙆‍♀️" = "중간 스트레칭🙆‍♀️";
@@ -64,7 +66,7 @@
 "Trend compares the achievements of a particular period to the average of the last 100 days."
 = "추세는 지난 100일의 성취를 특정 기간의 것과 비교하여 나타냅니다.";
 " days" = "일";
-"Add Achievement" = "달성량 추가";
+"Add Achievement" = "달성량 추가하기";
 "Achievement" = "달성";
 "Feeling" = "감정";
 "Statistics" = "통계";
@@ -78,6 +80,7 @@
 "Repeat" = "반복";
 "Number of Times" = "횟수";
 "Timer" = "타이머";
+"Others" = "기타";
 
 // 요약 ------------------------------------------------------------------------
 
@@ -92,6 +95,7 @@
 "Square" = "정방형";
 "Save/Share the Image Above" = "위 이미지 저장/공유";
 "Share to Instagram Story" = "인스타 스토리에 공유";
+"Share Image" = "사진 공유하기";
 
 // 루틴 ------------------------------------------------------------------------
 
@@ -102,6 +106,7 @@
 "There is no routine on other days." = "다른 요일에 루틴이 없어요.";
 
 // 루틴 추가
+"Start Habit" = "목표 시작하기";
 "Getting Started\nwith a new Routine" = "새로운 루틴\n시작하기";
 "Tell me the name of the routine." = "루틴의 이름을 알려주세요.";
 "Choose the day of the week to repeat your routine." = "루틴을 반복할 요일을 선택해주세요.";
@@ -110,9 +115,14 @@
 "%d Goals Selected" = "%d개 목표 선택됨";
 "Goal Selection Complete" = "목표 선택 완료";
 "Create a New Routine" = "새로운 루틴 만들기";
+"Do you want me to tell you the time to start the routine?" = "루틴을 시작할 시간을 알려드릴까요?";
+"Add Routine" = "루틴 추가";
 
 // 루틴 편집
 "List" = "목록";
+
+// 알림
+"Time to start routine." = "루틴을 시작할 시간이에요.";
 
 
 // 설정 ------------------------------------------------------------------------

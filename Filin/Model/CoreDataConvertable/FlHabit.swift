@@ -113,8 +113,8 @@ class FlHabit: CoreDataConvertable {
         )
     }
     
-    func applyChanges(copy habit: FlHabit) {
-        guard copyID == habit.id else {
+    func applyChanges(copy habit: FlHabit, stateObjectException: Bool = false) {
+        guard copyID == habit.id || stateObjectException else {
             assertionFailure()
             return
         }

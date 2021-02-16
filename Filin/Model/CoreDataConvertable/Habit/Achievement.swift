@@ -79,8 +79,6 @@ struct Achievement: Equatable {
         #if DEBUG
         self.content = content
         #else
-        print("DEBUG 상태가 아닐 때 achievement content에 접근 시도")
-        fatalError()
         #endif
     }
     
