@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct ContentView: View {
     
     @State var currentTab = 0
     
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var appSetting: AppSetting
     
     var body: some View {
         ZStack {
@@ -88,6 +90,14 @@ struct ContentView: View {
                 .padding(.bottom, 1)
                 .edgesIgnoringSafeArea([.bottom, .horizontal])
                 .background(colorScheme == .light ? Color.white : .black)
+            }
+        }
+        .onAppear {
+            if appSetting.runCount > 20 {
+                if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive })
+                    as? UIWindowScene {
+                    SKStoreReviewController.requestReview(in: scene)
+                }
             }
         }
     }

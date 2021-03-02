@@ -12,20 +12,65 @@ struct ColorHorizontalPicker: View {
     @Binding var selectedColor: Color
     
     var body: some View {
-        HStack {
-            ForEach(ThemeColor.colorList, id: \.self) { color in
-                Button(action: { self.selectedColor = color }) {
-                    ZStack {
-                        Circle()
-                            .foregroundColor(color)
-                            .frame(width: 40, height: 40)
-                            .zIndex(0)
-                        if selectedColor == color {
-                            Image(systemName: "checkmark")
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(color)
-                                .brightness(0.2)
-                                .zIndex(1)
+        VStack(spacing: 20) {
+            HStack(spacing: 30) {
+                Circle()
+                    .trim(from: 0.0, to: 0.7)
+                    .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round))
+                    .foregroundColor(selectedColor)
+                    .rotationEffect(Angle(degrees: -90))
+                    .frame(width: 100, height: 100)
+                ZStack {
+                    Circle()
+                        .frame(width: 50, height: 50)
+                        .foregroundColor(selectedColor)
+                        .opacity(0.33)
+                        .offset(x: -30, y: 25)
+                    Circle()
+                        .frame(width: 50, height: 50)
+                        .foregroundColor(selectedColor)
+                        .opacity(0.66)
+                        .offset(x: 30, y: 25)
+                    Circle()
+                        .frame(width: 50, height: 50)
+                        .foregroundColor(selectedColor)
+                        .offset(y: -27)
+                }
+                .frame(width: 120, height: 120)
+            }
+            .frame(width: 300)
+            Divider()
+            VStack(spacing: 15) {
+                ForEach(Palette.allCases, id: \.name) { theme in
+                    VStack(spacing: 3) {
+                        Text(theme.name)
+                            .bodyText()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.bottom, 3)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(theme.colors, id: \.self) { color in
+                                    Button(action: {
+                                        withAnimation {
+                                            self.selectedColor = color
+                                        }
+                                    }) {
+                                        ZStack {
+                                            Circle()
+                                                .foregroundColor(color)
+                                                .frame(width: 40, height: 40)
+                                                .zIndex(0)
+                                            if selectedColor == color {
+                                                Image(systemName: "checkmark")
+                                                    .font(.system(size: 20, weight: .bold))
+                                                    .foregroundColor(color)
+                                                    .brightness(0.2)
+                                                    .zIndex(1)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -35,7 +80,14 @@ struct ColorHorizontalPicker: View {
 }
 
 struct ColorHorizontalPicker_Previews: PreviewProvider {
+    private struct ColorHorizontalPickerWrapper: View {
+        @State var selectedColor = Palette.allCases[0].colors[0]
+        var body: some View {
+            ColorHorizontalPicker(selectedColor: $selectedColor)
+                .rowBackground()
+        }
+    }
     static var previews: some View {
-        ColorHorizontalPicker(selectedColor: .constant(.blue))
+        ColorHorizontalPickerWrapper()
     }
 }

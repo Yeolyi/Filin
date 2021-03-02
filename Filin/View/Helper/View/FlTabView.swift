@@ -55,6 +55,7 @@ struct FlTabView<Content: View>: View {
             content()
         }
         .animation(Animation.spring().speed(1.5))
+        /*
         .gesture(
             DragGesture()
                 .onChanged { value in
@@ -80,6 +81,7 @@ struct FlTabView<Content: View>: View {
                     }
                 }
         )
+ */
         .offset(x: calOffset)
     }
 }

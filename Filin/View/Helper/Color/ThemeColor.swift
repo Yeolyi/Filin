@@ -24,8 +24,6 @@ class ThemeColor: ObservableObject {
         colorScheme == .light ? buttonInactiveLight : buttonInactiveDark
     }
     
-    static var colorList: [Color] = Palette.Default.allCases.map(\.color)
-    
     static var brand = Color(hex: "#00629C")
     static var brandPressed = Color(hex: "#003A5C")
     

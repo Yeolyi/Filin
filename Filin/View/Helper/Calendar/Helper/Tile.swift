@@ -16,15 +16,7 @@ struct Tile: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        ZStack {
-            ZStack {
-                Circle()
-                    .foregroundColor(
-                        (date.month == selectedDate.month) || !isExpanded ?
-                            (habits[0]?.color ?? .gray) : ThemeColor.inActive(colorScheme)
-                    )
-                    .opacity(habits[0]?.achievement.progress(at: date) ?? 0)
-            }
+        VStack(spacing: 2) {
             if date.month != selectedDate.month && isExpanded {
                 Text("\(date.day)")
                     .inactiveColor()
@@ -37,8 +29,16 @@ struct Tile: View {
                     .bodyText()
                     .opacity(0.8)
             }
+            ZStack {
+                Circle()
+                    .foregroundColor(
+                        (date.month == selectedDate.month) || !isExpanded ?
+                            (habits[0]?.color ?? .gray) : ThemeColor.inActive(colorScheme)
+                    )
+                    .opacity(habits[0]?.achievement.progress(at: date) ?? 0)
+            }
+            .frame(width: 40, height: 40)
         }
-        .frame(width: 40, height: 40)
         .animation(.default)
     }
 }

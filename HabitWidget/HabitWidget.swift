@@ -37,7 +37,7 @@ struct Provider: IntentTimelineProvider {
             WidgetBridge.todayAchievements = [
                 HabitWidgetData(
                     id: id, name: "Drinking 2L Water💧".localized,
-                    numberOfTimes: 10, current: 6, colorHex: ThemeColor.colorList[0].hex, day: 1
+                    numberOfTimes: 10, current: 6, colorHex: Palette.allCases[0].colors[0].hex, day: 1
                 )
             ]
             let habitCompact = HabitCompact(identifier: id.uuidString, display: "Drinking 2L Water💧".localized)

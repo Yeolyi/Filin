@@ -113,7 +113,7 @@ struct HabitWidget_Previews: PreviewProvider {
         WidgetBridge.todayAchievements =  [
             HabitWidgetData(
                 id: id, name: "테스트", numberOfTimes: 10,
-                current: 4, colorHex: ThemeColor.colorList[0].hex, day: Date().day
+                current: 4, colorHex: Palette.allCases[0].colors[3].hex, day: Date().day
             )
         ]
         intent.habit = HabitCompact(identifier: id.uuidString, display: "테스트")
