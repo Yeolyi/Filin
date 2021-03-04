@@ -26,18 +26,20 @@ struct Tile: View {
                     .if(date.dictKey == selectedDate.dictKey) {
                         $0.font(.system(size: 16, weight: .heavy))
                     }
+                    .foregroundColor(
+                        date.dictKey == selectedDate.dictKey ?
+                            (habits[0]?.color ?? .gray) : ThemeColor.subColor(colorScheme)
+                    )
                     .bodyText()
                     .opacity(0.8)
             }
-            ZStack {
-                Circle()
-                    .foregroundColor(
-                        (date.month == selectedDate.month) || !isExpanded ?
-                            (habits[0]?.color ?? .gray) : ThemeColor.inActive(colorScheme)
-                    )
-                    .opacity(habits[0]?.achievement.progress(at: date) ?? 0)
-            }
-            .frame(width: 40, height: 40)
+            Circle()
+                .foregroundColor(
+                    (date.month == selectedDate.month) || !isExpanded ?
+                        (habits[0]?.color ?? .gray) : ThemeColor.inActive(colorScheme)
+                )
+                .opacity(habits[0]?.achievement.progress(at: date) ?? 0)
+            .frame(width: 30, height: 30)
         }
         .animation(.default)
     }
