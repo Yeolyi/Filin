@@ -6,6 +6,7 @@ target 'Filin' do
   use_frameworks!
   pod 'SwiftLint'
   pod 'lottie-ios'
+  pod 'Google-Mobile-Ads-SDK'
   # Pods for Filin
 
 end

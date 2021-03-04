@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Filin
+
+  Created by SEONG YEOL YI on 2021/03/04.
+  
+*/
+
+NSUserTrackingUsageDescription = "This identifier will be used to deliver personalized ads to you.";
+NSPhotoLibraryAddUsageDescription = "Requires permission to store calendar images.";

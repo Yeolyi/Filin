@@ -7,6 +7,8 @@
 
 import UIKit
 import CoreData
+import GoogleMobileAds
+import AppTrackingTransparency
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         // Override point for customization after application launch.
+        ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in
+            // Tracking authorization completed. Start loading ads here.
+            GADMobileAds.sharedInstance().start(completionHandler: nil)
+        })
         return true
     }
 

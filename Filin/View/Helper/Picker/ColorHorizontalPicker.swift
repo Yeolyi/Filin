@@ -13,32 +13,15 @@ struct ColorHorizontalPicker: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            HStack(spacing: 30) {
-                Circle()
-                    .trim(from: 0.0, to: 0.7)
-                    .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round))
-                    .foregroundColor(selectedColor)
-                    .rotationEffect(Angle(degrees: -90))
-                    .frame(width: 100, height: 100)
-                ZStack {
-                    Circle()
-                        .frame(width: 50, height: 50)
-                        .foregroundColor(selectedColor)
-                        .opacity(0.33)
-                        .offset(x: -30, y: 25)
-                    Circle()
-                        .frame(width: 50, height: 50)
-                        .foregroundColor(selectedColor)
-                        .opacity(0.66)
-                        .offset(x: 30, y: 25)
-                    Circle()
-                        .frame(width: 50, height: 50)
-                        .foregroundColor(selectedColor)
-                        .offset(y: -27)
-                }
-                .frame(width: 120, height: 120)
-            }
-            .frame(width: 300)
+            Text("Preview".localized)
+                .bodyText()
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Circle()
+                .trim(from: 0.0, to: 0.7)
+                .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round))
+                .foregroundColor(selectedColor)
+                .rotationEffect(Angle(degrees: -90))
+                .frame(width: 100, height: 100)
             Divider()
             VStack(spacing: 15) {
                 ForEach(Palette.allCases, id: \.name) { theme in

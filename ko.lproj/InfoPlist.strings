@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Filin
+
+  Created by SEONG YEOL YI on 2021/03/04.
+  
+*/
+
+NSUserTrackingUsageDescription = "맞춤형 광고를 제공하기 위해 필요합니다.";
+NSPhotoLibraryAddUsageDescription = "달력 이미지를 저장하기 위해 권한이 필요합니다.";

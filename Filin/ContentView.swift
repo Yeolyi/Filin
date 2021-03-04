@@ -7,6 +7,7 @@
 
 import SwiftUI
 import StoreKit
+import GoogleMobileAds
 
 struct ContentView: View {
     
@@ -31,9 +32,10 @@ struct ContentView: View {
                     .opacity(currentTab == 3 ? 1 : 0)
                     .zIndex(currentTab == 3 ? 2 : 1)
             }
-            .padding(.bottom, 55)
+            .padding(.bottom, 100)
             VStack(spacing: 0) {
                 Spacer()
+                adSection()
                 Divider()
                 HStack {
                     VStack(spacing: 0) {
@@ -99,6 +101,16 @@ struct ContentView: View {
                     SKStoreReviewController.requestReview(in: scene)
                 }
             }
+        }
+    }
+    
+    private func adSection() -> some View {
+        HStack {
+            let size = GADBannerViewController.getAdBannerSize()
+            Spacer()
+            GADBannerViewController()
+                .frame(width: size.size.width, height: size.size.height)
+            Spacer()
         }
     }
 }
