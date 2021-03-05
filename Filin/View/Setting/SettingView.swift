@@ -93,6 +93,7 @@ struct SettingView: View {
                         }
                     }
                     .flatRowBackground()
+                    .padding(.bottom, 120)
                     #if DEBUG
                     Text("디버그 전용".localized)
                         .smallSectionText()
@@ -115,6 +116,7 @@ struct SettingView: View {
                         ))
                     }
                     .flatRowBackground()
+                    .padding(.bottom, 120)
                     #endif
                 }
             }

@@ -57,6 +57,7 @@ struct SummaryView: View {
                         )
                     }
                 }
+                .padding(.bottom, 120)
             }
             .padding(.top, 1)
             .navigationBarTitle("Summary".localized)

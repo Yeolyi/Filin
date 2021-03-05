@@ -13,9 +13,8 @@ struct GADBannerViewController: UIViewControllerRepresentable {
     @State private var banner: GADBannerView = GADBannerView(adSize: kGADAdSizeBanner)
     
     func makeUIViewController(context: Context) -> UIViewController {
-        let bannerSize = GADBannerViewController.getAdBannerSize()
         let viewController = UIViewController()
-        banner.adSize = bannerSize
+        banner.adSize = kGADAdSizeBanner
         #if DEBUG
         banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         #else
@@ -23,23 +22,12 @@ struct GADBannerViewController: UIViewControllerRepresentable {
         #endif
         banner.rootViewController = viewController
         viewController.view.addSubview(banner)
-        viewController.view.frame = CGRect(origin: .zero, size: bannerSize.size)
+        viewController.view.frame = CGRect(origin: .zero, size: kGADAdSizeBanner.size)
         banner.load(GADRequest())
         return viewController
     }
     
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-        let bannerSize = GADBannerViewController.getAdBannerSize()
-        banner.frame = CGRect(origin: .zero, size: bannerSize.size)
-        banner.load(GADRequest())
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
     }
-    
-    static func getAdBannerSize() -> GADAdSize {
-        if let rootView = UIApplication.shared.windows.first?.rootViewController?.view {
-            let frame = rootView.frame.inset(by: rootView.safeAreaInsets)
-            return GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(frame.width)
-        }
-        //No root VC, use 320x50 ad banner
-        return kGADAdSizeBanner
-    }
+
 }

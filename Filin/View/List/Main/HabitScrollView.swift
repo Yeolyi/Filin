@@ -55,6 +55,7 @@ struct HabitScrollView: View {
                     SubIndicatingRow(label: "There is no goal on other days.".localized)
                 }
             }
+            .padding(.bottom, 120)
         }
         .padding(.top, 1)
     }

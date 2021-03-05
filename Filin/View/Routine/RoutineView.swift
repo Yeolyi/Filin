@@ -77,6 +77,7 @@ struct RoutineView: View {
                             .environmentObject(appSetting)
                     }
                 }
+                .padding(.bottom, 120)
             }
             .padding(.top, 1)
         }
